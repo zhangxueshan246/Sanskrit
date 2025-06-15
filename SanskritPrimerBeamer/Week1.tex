@@ -1,0 +1,151 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法
+
+\usepackage[UTF8,fontset=windows]{ctex}
+%\setCJKmainfont{SimHei}
+%----------------------------------------------------设置中文字体：默认黑体，可用
+%\usepackage{xeCJK}
+%\setCJKmainfont{Source Han Sans SC VF}
+%----------------------------------------------------设置中文字体：思源黑体粗体
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+%------------------------------自定义命令
+
+
+\title[课程介绍与字母]{{梵语入门}}
+\subtitle{1. 课程介绍与字母}
+\author[张雪杉]{文学院~~张雪杉 \\ \texttt{zhangxueshan@sdnu.edu.cn}}
+\date{}
+%\institute{}
+
+
+
+\begin{document}	
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \tableofcontents
+\end{frame}
+
+\section{课程介绍}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{课程平台}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item
+      课程网站：超星学习通\\ =信息门户慧课慧学
+    \item
+      课程号：
+  \end{itemize}
+\end{frame}
+
+\subsection{教材与参考资料}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item
+      教材： The Cambridge Introduction to Sanskrit
+    \item
+      中文参考书：梵文基础读本
+    \item
+      资料：课件、教材勘误表、习题参考答案等，共享文件夹查看更多
+  \end{itemize}
+\end{frame}
+
+\subsection{考核方式}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item
+      平时20：课后问卷\\ 上课需轮流做作业题~~但不好算分
+    \item
+      期中30：默写字母表\\第八周随堂测试~~现场提交
+    \item
+      期末50：教材第16课练习1\\学习通作业~~截止时间xxx
+  \end{itemize}
+\end{frame}
+
+\section{梵语字母}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{元音字母}
+
+\begin{frame}{\insertsubsection }
+  %\small
+    \begin{tabular}{@{}llllllll@{}} % 7 columns: type, length/type, and 5 vowels
+    %\toprule
+    %\multicolumn{2}{c}{Item} \\ \cmidrule(r){1-2}
+    %类别 & 长短/类型 &  & 1 & 2 & 3 \\
+    %\midrule
+    简单 & 短  & \skttrans{a} & \skttrans{i} & \skttrans{u} & \skttrans{ṛ} & \skttrans{ḷ}   \\
+    元音  & 长  & \skttrans{ā} & \skttrans{ī} & \skttrans{ū} & \skttrans{ṝ} &  \\
+    %  & 短  & & \skttrans{ṛ} & \skttrans{ḷ}  \\
+    %  & 长  & & \skttrans{ṝ} &  \\
+    复合 &    & & \skttrans{e} & \skttrans{o} & & \\
+    元音  &   &  & \skttrans{ai} & \skttrans{au} & & \\
+    %\bottomrule
+    \end{tabular}
+\end{frame}
+
+\subsection{辅音}
+
+\begin{frame}{\insertsubsection }
+  \small
+    \begin{tabular}{@{}llllll@{}} % 6 columns: type, length/type, and 4 vowels
+    %\toprule
+    %\multicolumn{2}{c}{Item} \\ \cmidrule(r){1-2}
+    %类别 & 长短/类型 &  & 1 & 2 & 3 \\
+    %\midrule
+     & 不送气  & 送气 & 不送气 & 送气 &   \\
+     & 清音  & 清音 & 浊音 & 浊音 & 鼻音  \\
+    喉音  & \skttrans{ka}  & \skttrans{kha} & \skttrans{ga} & \skttrans{gha} & \skttrans{ṅa} \\
+    腭音  & \skttrans{ca}  & \skttrans{cha} & \skttrans{ja} & \skttrans{jha} & \skttrans{ña} \\
+    顶音  & \skttrans{ṭa}  & \skttrans{ṭha} & \skttrans{ḍa} & \skttrans{ḍha} & \skttrans{ṇa} \\
+    齿音  & \skttrans{ta}  & \skttrans{tha} & \skttrans{da} & \skttrans{dha} & \skttrans{na} \\
+    唇音  & \skttrans{pa}  & \skttrans{pha} & \skttrans{ba} & \skttrans{bha} & \skttrans{ma} \\
+      &  & &  & &   \\
+    半元音  & \skttrans{ya}  & \skttrans{ra} & \skttrans{la} & \skttrans{va} &  \\
+    咝音  & \skttrans{śa}  & \skttrans{ṣa} & \skttrans{sa} &  & \skttrans{ha} \\
+    %\bottomrule
+    \end{tabular}
+\end{frame}
+
+\begin{frame}
+\end{frame} % to enforce entries in the table of contents
+
+\end{document}	

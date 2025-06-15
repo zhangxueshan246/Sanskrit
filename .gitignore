@@ -5,4 +5,19 @@
 *.out
 *.toc
 *.dvi
+*.snm
+*.vrb
+*.synctex.gz
+*.nav
+*.fdb_latexmk
+*.fls
+*.xdv
 *.pdf
+
+# Sync and cache files
+.anyshare.cache/
+.sync/
+old/
+
+# Allow source files
+!SanskritPrimerBeamer/  # Allow the Beamer project folder
