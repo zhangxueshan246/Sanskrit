@@ -1,0 +1,113 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
+\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
+%---------------------------------------------------------------词根
+
+\title{{梵语提高}}
+\subtitle{2. 连声复习}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \tableofcontents
+\end{frame}
+
+\section{连声总则}
+
+\begin{frame}{\insertsection }
+  \small
+  \begin{itemize}
+    \item 词间连声
+    
+    词与词之间，pada-ending
+    \item 词内连声
+    
+    词根或词干与词缀之间
+  \end{itemize}
+\end{frame}
+
+\section{词间连声}
+
+\begin{frame}{落尾辅音}  
+  \centering
+  \includegraphics[width=0.5\textwidth]{consonantending.png} %
+\end{frame}
+
+\begin{frame}{元音连声}  
+  \centering
+  \includegraphics[width=0.9\textwidth]{vowelsandhi.png} %
+\end{frame}
+
+\begin{frame}{辅音和visarga连声}  
+  \centering
+  \includegraphics[width=\textwidth]{consonantsandhi.png} %
+\end{frame}
+
+\section{词内连声}
+
+
+
+
+
+\section{下节预告}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第十七、十八章复习
+    
+  \end{itemize}
+\end{frame}  
+
+\end{document}	

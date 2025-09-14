@@ -1,0 +1,406 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
+\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
+%---------------------------------------------------------------词根
+
+\title{{梵语入门}}
+\subtitle{19. 不带插入元音的动词语干（续） }
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第十八章练习3}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{1) pāpāḥ puraṃ dagdhuṃ na śaknuvantīti kṣatriyā vidanti ।} \\
+    \skt{2) api janairdviṣṭaṃ kṣatriyaṃ \textcolor{red}{vetsīti} pṛṣṭvā naro mitreṇa sahāpaiti ।} \\
+    \skt{3) puramāptuṃ na śaknuva iti bālau cintayataḥ ।} \\
+    \skt{4) kanyā gṛhametuṃ na śaknuvanti bibhyati ca ।} \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第十八章练习3}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{5) vane vyāghraṃ viditvā narau bibhītaḥ ।} \\
+    \skt{6) paurā īśvarasya dānāni bhuñjantīti kumāro vetti ।} \\
+    \skt{7) api vane vastuṃ bhunakṣīti bālā naramapṛcchan ।} \\
+    \skt{8) apyannaṃ bhuṅktheti bālānapṛccham । na bhuñjma iti pratyavadan । apyannaṃ bhunakṣīti bālāmapṛccham । annaṃ bhunajmīti bālā pratyavadat ।}
+  \end{verse}
+\end{frame}
+
+
+\section{不带插入元音的动词语干}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{Athematic Verbs  语干变化}
+  \small
+  \raggedright
+  \begin{itemize}
+    \item 第二类：词根直接加词尾
+    \item 第三类：重复语干加词尾
+    \item 第五类：强语干加\nobreakdash-no\nobreakdash-，弱语干加\nobreakdash-nu\nobreakdash-
+    \item 第七类：强加\nobreakdash-na\nobreakdash-弱加\nobreakdash-n\nobreakdash-，
+    
+    \hspace*{4em}加在落尾辅音前
+    \item 第八类：强语干加\nobreakdash-o\nobreakdash-，弱语干加\nobreakdash-u\nobreakdash-
+    \item 第九类：强语干加\nobreakdash-nā\nobreakdash-，弱语干加\nobreakdash-nī\nobreakdash-/\nobreakdash-n\nobreakdash-
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{现在时语尾}
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    & 单数  & 双数  & 复数 \\
+    第一人称 & -mi & -vaḥ  & -maḥ  \\
+    第二人称 & -si & -thaḥ & -tha  \\
+    第三人称 & -ti & -taḥ & -\textcolor{red}{a}nti  \\
+  \end{tabular}   
+\end{frame}
+
+\subsection{派生语尾}
+\begin{frame}{\insertsubsection}
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    & 单数  & 双数  & 复数 \\
+    第一人称 & -\textcolor{red}{a}m & -va  & -ma  \\
+    第二人称 & -\textcolor{blue}{ḥ} & -tam & -ta  \\
+    第三人称 & -\textcolor{blue}{t} & -tām & -\textcolor{red}{a}n/-\textcolor{OliveGreen}{uḥ}  \\
+  \end{tabular}   
+\end{frame}
+
+\subsection{未完成时}
+\begin{frame}{\insertsubsection}
+  \small
+  \raggedright  
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    \verbroot{}hu & 单数  & 双数  & 复数 \\
+    第一人称 & \cellcolor{light-gray}ajuh\textcolor{red}{av}am & ajuhuva  & ajuhuma  \\
+    第二人称 & \cellcolor{light-gray}ajuhoḥ & ajuhutam & ajuhuta  \\
+    第三人称 & \cellcolor{light-gray}ajuhot & ajuhutām & ajuh\textcolor{red}{v}an  \\
+  \end{tabular} 
+  \bigskip
+    
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    \verbroot{}dviṣ & 单数  & 双数  & 复数 \\
+    第一人称 & \cellcolor{light-gray}adveṣam & adviṣva & adviṣma \\
+    第二人称 & \cellcolor{light-gray}adve\textcolor{blue}{ṭ} & adviṣṭam & adviṣṭa \\
+    第三人称 & \cellcolor{light-gray}adve\textcolor{blue}{ṭ} & adviṣṭām & adviṣ\textcolor{OliveGreen}{an}/adviṣ\textcolor{OliveGreen}{ur} \\
+  \end{tabular}   
+\end{frame}
+
+\subsection{祈愿语气}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 全部弱语干，词尾前加 \nobreakdash-yā\nobreakdash-
+    \item 第三人称单数是 \nobreakdash-yuḥ
+  \end{itemize}
+  \centering
+  \begin{tabular}{@{}lllll@{}} % 5 columns
+    & 一单  & 二单 & 三单 & 三复 \\
+    二 & iyām & iyāḥ & iyāt  & iyuḥ  \\
+    三 & juhuyām & juhuyāḥ & juhuyāt & juhuyuḥ  \\
+    五 & sunuyām & sunuyāḥ & sunuyāt & sunuyuḥ  \\
+    七 & rundhyām & rundhyāḥ & rundhyāt & rundhyuḥ  \\
+    八 & tanuyām & tanuyāḥ & tanuyāt & tanuyuḥ  \\
+    九 & vṛṇīyām & vṛṇīyāḥ & vṛṇīyāt & vṛṇīyuḥ  \\
+  \end{tabular}   
+\end{frame}
+
+
+\section{常用不规则动词}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{\verbroot{}as (II) 是}
+  %\small
+  \begin{itemize}
+    \item 现在时：强语干as\nobreakdash-，弱语干s\nobreakdash-
+  \end{itemize}
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    &   \multicolumn{3}{c}{现在时}  \\
+    & 单  & 双 & 复 \\
+    1st & \cellcolor{light-gray}asmi & svaḥ & smaḥ  \\
+    2nd & \cellcolor{light-gray}a\textcolor{red}{s}i & sthaḥ & stha \\
+    3rd & \cellcolor{light-gray}asti & staḥ & santi \\
+  \end{tabular}   
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\verbroot{}as (II) 是}
+  \small
+  \begin{itemize}
+    \item 未完成时：全都是ās\nobreakdash-，二单三单加\nobreakdash-ī\nobreakdash-
+    \item 祈愿语气：全都是弱语干s\nobreakdash-
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{lllllll}
+    \CodeBefore
+      \rectanglecolor{light-gray}{3-2}{5-4}
+    \Body % 7 columns
+    &   \multicolumn{3}{c}{未完成时} & \multicolumn{3}{c}{祈愿语气} \\
+    & 单  & 双 & 复 & 单  & 双 & 复 \\
+    1st & āsam & āsva & āsma & syām & syāva & syāma\\
+    2nd & ās\textcolor{red}{ī}ḥ  & āstam & āsta & syāḥ  & syātam & syāta \\
+    3rd & ās\textcolor{red}{ī}t & āstām & āsan & syāt & syātām & syuḥ \\
+  \end{NiceTabular}   
+\end{frame}
+
+\begin{frame}{\verbroot{}i (II) 走}
+  %\small
+  \begin{itemize}
+    \item 未完成时：全都是ai\nobreakdash-
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{@{}llll@{}} % 4 columns
+    \CodeBefore
+      \rectanglecolor{light-gray}{3-2}{5-4}
+    \Body 
+    &   \multicolumn{3}{c}{未完成时}  \\
+    & 单  & 双 & 复 \\
+    1st & āyam & aiva & aima  \\
+    2nd & aiḥ & aitam & aita \\
+    3rd & ait & aitām & āyan \\
+  \end{NiceTabular}   
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\verbroot{}han (II) 杀}
+  \small
+  \begin{itemize}
+    \item 单数和第一人称都是强语干han\nobreakdash-
+    \item 弱语干：辅音前是ha\nobreakdash-，元音前是ghn\nobreakdash-
+  \end{itemize}
+  \centering
+  \footnotesize
+  \begin{NiceTabular}{lllllll}
+    \CodeBefore
+      \rectanglecolor{light-gray}{3-2}{3-7}
+      \rectanglecolor{light-gray}{4-2}{5-2}
+      \rectanglecolor{light-gray}{4-5}{5-5}
+    \Body % 7 columns
+    &   \multicolumn{3}{c}{现在时} & \multicolumn{3}{c}{未完成时} \\
+    & 单  & 双 & 复 & 单  & 双 & 复 \\
+    1 & hanmi & hanvaḥ & hanmaḥ & ahanam & ahanva & ahanma\\
+    2 & haṃsi  & hathaḥ & hatha & ahan  & ahatam & ahata \\
+    3 & hanti & hataḥ & ghnanti & ahan & ahatām & aghnan \\
+  \end{NiceTabular}   
+\end{frame}
+
+\begin{frame}%[fragile]
+  \frametitle{\verbroot{}brū (II) 说}
+  \small
+  \begin{itemize}
+    \item 强语干辅音语尾前加\nobreakdash-ī\nobreakdash-
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{llll}
+    \CodeBefore
+      \rectanglecolor{light-gray}{3-2}{5-2}
+      \rectanglecolor{light-gray}{8-2}{10-2}
+    \Body % 7 columns
+    &   \multicolumn{3}{c}{现在时}  \\
+    & 单  & 双 & 复  \\
+    1 & bravīmi & brūvah & brūmaḥ \\
+    2 & bravīsi  & brūthaḥ & brutha \\
+    3 & bravīti & brūtaḥ & bruvanti  \\
+    \bigskip \\
+    &    \multicolumn{3}{c}{未完成时} \\
+    1  & abravam & abrūva & abrūma\\
+    2 & abravīḥ  & abrūtam & abrūta \\
+    3  & abravīt & abrūtām & abruvan \\
+  \end{NiceTabular}   
+\end{frame}
+
+\begin{frame}%[fragile]
+  \frametitle{\verbroot{}dā (III) 给，\verbroot{}dhā (III) 放 }
+  \small
+  \begin{itemize}
+    \item 弱语干去掉\nobreakdash-ā\nobreakdash-，三单语尾是\nobreakdash-ati
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{llll}
+    \CodeBefore
+      \rectanglecolor{light-gray}{3-2}{5-2}
+      \rectanglecolor{light-gray}{7-2}{9-2}
+    \Body % 7 columns
+    &   \multicolumn{3}{c}{现在时}  \\
+    \verbroot{}dā & 单  & 双 & 复  \\
+    1 & dadāmi & dadvaḥ & dadmaḥ \\
+    2 & dadāsi  & datthaḥ & dhattha \\
+    3 & dadāti & dattaḥ & dadati \\
+    \verbroot{}dhā & 单  & 双 & 复  \\
+    1  & dadhāmi & dadhvaḥ & dadhmaḥ \\
+    2 & dadhāsi  & dhatthaḥ & dhattha \\
+    3  & dadhāti & dhattaḥ & dadhati \\
+  \end{NiceTabular}   
+\end{frame}
+
+\begin{frame}%[fragile]
+  \frametitle{\verbroot{}kṛ (VIII) 做}
+  \small
+  \begin{itemize}
+    \item 强语干karo\nobreakdash-，弱语干kuru\nobreakdash-
+    \item 弱语干的\nobreakdash-u\nobreakdash-在语尾的\nobreakdash-v\nobreakdash-和\nobreakdash-m\nobreakdash-前消失
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{llll}
+    \CodeBefore
+      \rectanglecolor{light-gray}{3-2}{5-2}
+      \rectanglecolor{light-gray}{8-2}{10-2}
+    \Body % 7 columns
+    &   \multicolumn{3}{c}{现在时}  \\
+    & 单  & 双 & 复  \\
+    1 & karomi & kurvaḥ & kurmaḥ \\
+    2 & karoṣi & kuruthaḥ & kurutha \\
+    3 & karoti & kurutaḥ & kurvanti  \\
+    &    \multicolumn{3}{c}{未完成时} \\
+    1 & akaravam & akurva & akurma\\
+    2 & akaroḥ  & akurutam & akuruta \\
+    3 & akarot & akurutām & akurvan \\
+  \end{NiceTabular}   
+\end{frame}
+
+\begin{frame}{\verbroot{}stu (II) 赞颂}
+  %\small
+  \begin{itemize}
+    \item 强语干三合
+  \end{itemize}
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    &   \multicolumn{3}{c}{现在时}  \\
+    & 单  & 双 & 复 \\
+    1st & \cellcolor{light-gray}staumi & stuvaḥ & stumaḥ  \\
+    2nd & \cellcolor{light-gray}stausi & stuthaḥ & stutha \\
+    3rd & \cellcolor{light-gray}stauti & stutaḥ & stuvanti \\
+  \end{tabular}   
+\end{frame}
+
+\begin{frame}%[fragile]
+  \frametitle{第二类不分强弱语干动词}
+  \small
+  \begin{itemize}
+    \item 以 \nobreakdash-ā 结尾的动词，如 \verbroot{}yā (II) 去
+    \item \verbroot{}svap (II) 睡：辅音语尾前加 \nobreakdash-i\nobreakdash-
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{llll}
+    \CodeBefore
+      %\rectanglecolor{light-gray}{3-2}{5-2}
+      %\rectanglecolor{light-gray}{7-2}{9-2}
+    \Body % 7 columns
+    %&   \multicolumn{3}{c}{现在时}  \\
+    \verbroot{}yā & 单  & 双 & 复  \\
+    1 & yāmi & yāvaḥ & yāmaḥ \\
+    2 & yāsi  & yāthaḥ & yātha \\
+    3 & yāti & yātaḥ & yānti \\
+    \verbroot{}svap &  & &  \\
+    1  & svapimi & svapivaḥ & svapimaḥ \\
+    2 & svapiṣi  & svapithaḥ & svapitha \\
+    3  & svapiti & svapitaḥ & svapanti \\
+  \end{NiceTabular}   
+\end{frame}
+
+\begin{frame}%[fragile]
+  \frametitle{注意连声}
+  \small
+  \centering
+  \begin{itemize}
+    \item \verbroot{}vac (II) 说 ~~ \verbroot{}dviṣ (II) 恨
+  \end{itemize}
+  \begin{NiceTabular}{llll}
+    \CodeBefore
+      %\rectanglecolor{light-gray}{3-2}{5-2}
+      %\rectanglecolor{light-gray}{7-2}{9-2}
+    \Body % 7 columns 
+    &   \multicolumn{3}{c}{现在时}  \\
+    \verbroot{}vac & 单  & 双 & 复  \\
+    1 & vacmi & vacvaḥ & vacmaḥ \\
+    2 & vakṣi  & vakthaḥ & vaktha \\
+    3 & vakti & vaktaḥ & vacanti \\
+    \verbroot{}dviṣ &   &  &  \\
+    1  & dveṣmi & dviṣvaḥ & dviṣmaḥ \\
+    2 & dvekṣi  & dviṣṭhaḥ & dviṣṭhaṣ̄ \\
+    3  & dveṣṭi & dviṣṭaḥ & dviṣanti \\
+  \end{NiceTabular}   
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第十九章练习3
+    \item
+      勘误：第3题括号后加\skt{nṛpāya}
+    \bigskip
+    %\item
+    %  现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}  
+
+\end{document}	

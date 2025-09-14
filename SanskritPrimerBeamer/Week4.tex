@@ -1,0 +1,277 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage{xcolor}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
+\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
+%---------------------------------------------------------------词根
+
+\title{{梵语入门}}
+\subtitle{4. 现在时}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+
+
+\begin{document}	
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第二章练习2}
+  \small
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    a） & \skt{gacchati}  & \skt{tataḥ}  & \skt{gṛham} & \skt{kṣatriyaḥ}   \\
+    & \skt{jñānam} & \skt{snihyati}  & \skt{yuddham}  & \skt{tiṣṭhati}  \\
+    & \skt{pṛcchati} & &   &   \\
+    b）& \skt{tuṣyati}  & \skt{dravati}  & \skt{rājñī} & \skt{kṛtsnam} \\
+    & \skt{candraḥ} & \skt{vidyut}  & \skt{kṛtvā}  & \skt{suhṛt} \\
+    & \skt{kṣudra} & \skt{adya} &  &  \\
+    c） & \skt{krodhaḥ}  & \skt{aśvaḥ}  & \skt{śrī} & \skt{śaknoti}  \\
+    & \skt{vṛṇoti} & \skt{dveṣṭi}  & \skt{gṛhṇāti}  & \skt{viśva}  \\
+    & \skt{anyonya} & \skt{śrutvā} &  &   \\
+  \end{tabular}
+\end{frame}            
+
+\begin{frame}{第二章练习2}
+  \small
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    d） & \skt{bandhuḥ}  & \skt{buddhiḥ}  & \skt{śatruḥ} & \skt{dṛṣṭiḥ} \\
+    & \skt{aśru} & \skt{kīrtiḥ}  & \skt{snānam}  & \skt{antarikṣagaḥ}  \\
+    & \skt{hṛcchayaḥ} & \skt{pṛthivī} &   &   \\
+  \end{tabular}
+  \bigskip
+  
+  e） \skt{jitendriya anantaratnaprabhava} 
+
+  \bigskip
+
+  \skt{balahākacchedavibhaktarāgā lāṅgūlavikṣepavisarpiśobha} 
+\end{frame} 
+
+\subsection{数字与标点}
+
+\begin{frame}{第三章练习1}
+  \small
+  \centering
+  \begin{tabular}{@{}ll@{}} % 6 columns
+    \skt{1) gacchati viśati ca ।} & \skt{7) api gacchati viśati vā ।} \\
+    \skt{2) kim icchati ।} & \skt{8) na smarati na ca bodhati ।}  \\
+    \skt{3) punar likhati ।} & \skt{9) na smarati na bodhati ca ।}  \\
+    \skt{4) atra tatra ca } & \skt{10) api na bodhati ।}  \\
+    \skt{5) na gacchati ।} & \skt{11) kim harati ।}  \\
+    \skt{6) smarati likhati ca ।} &  \\
+  \end{tabular}
+  \bigskip
+
+  数字与标点： \skt{1 2 3 4 5 6 7 8 9 0 ~~~~। ॥} 
+\end{frame} 
+
+
+
+\section[动词 \\ ~~现在时]{动词现在时}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{现在时语尾}
+\begin{frame}{\insertsubsection ~~主动语态}
+  \small
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    & 单数  & 双数  & 复数 \\
+    第一人称 & \skttrans{-mi} & \skttrans{-vaḥ}  & \skttrans{-maḥ}  \\
+    第二人称 & \skttrans{-si} & \skttrans{-thaḥ} & \skttrans{-tha}   \\
+    第三人称 & \skttrans{-ti} & \skttrans{-taḥ} & \skttrans{-nti}  \\
+  \end{tabular}   
+\end{frame}
+
+\subsection{现在时语干}
+\begin{frame}{\insertsubsection ~~动词分类}
+  \begin{itemize}
+    \item
+      带插入元音a的：
+      
+      第一、四、六、\textcolor{blue}{十}类动词
+    \item
+      不带插入元音的：
+      
+      第二、三、五、七、八、九类动词
+    \item
+      使用现在时语干的时态：
+      
+      现在时、未完成时、命令语气和祈愿语气
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~第一类动词}
+  \small
+  \begin{itemize}
+    \item
+      词根元音前加\nobreakdash-a\nobreakdash-，词根后加\nobreakdash-a\nobreakdash-。
+  \end{itemize} 
+
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    词根 & 过程 & 语干  \\
+    \skttransroot{bhṛ} & \textcolor{gray}{*bh-a-ṛ-a-} & \skttrans{bhara-}  \\
+    \skttransroot{budh} & \textcolor{gray}{*b-a-udh-a-} & \skttrans{bodha-}  \\
+  \end{tabular}
+
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~第四类动词}
+  \small
+  \begin{itemize}
+    \item
+      词根不变，后加\nobreakdash-ya\nobreakdash-。
+  \end{itemize} 
+
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    词根 & 过程 & 语干  \\
+    \skttransroot{hṛṣ} & \textcolor{gray}{*hṛṣ-ya-} & \skttrans{hṛṣya-}  \\
+  \end{tabular}
+
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~第六类动词}
+  \small
+  \begin{enumerate}
+    \item
+      词根不变，后加\nobreakdash-a\nobreakdash-。
+
+      \begin{tabular}{@{}llllll@{}} % 6 columns
+        词根 & 过程 & 语干  \\
+        \skttransroot{viś} & \textcolor{gray}{*viś-a-} & \skttrans{viśa-}  \\
+      \end{tabular}
+   
+    \item
+      词根末尾辅音前加鼻音，后加\nobreakdash-a\nobreakdash-。
+  \end{enumerate} 
+
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    %词根 & 过程 & 语干  \\
+    \skttransroot{muc} & \textcolor{gray}{*mu-ñ-c-a-} & \skttrans{muñca-}  \\
+    \skttransroot{vid} & \textcolor{gray}{*vi-n-d-a-} & \skttrans{vinda-}  \\
+    \skttransroot{lup} & \textcolor{gray}{*lu-m-p-a-} & \skttrans{lumpa-}  \\
+  \end{tabular}
+
+\end{frame}
+
+\subsection{完整形式}
+
+\begin{frame}{\insertsubsection }
+  \footnotesize
+  词根 ~\skttransroot{bhṛ} ~~现在时语干 ~ {\skt{bhara-}} bhara\nobreakdash-
+
+  \centering
+  \textcolor{gray}{
+    \begin{tabular}{@{}llll@{}} % 4 columns
+      %\multicolumn{2}{l}{词根 ~\skttransroot{bhṛ}} & \multicolumn{2}{l}{现在时语干~\skttrans{bhara-}} \\
+      & 单数  & 双数  & 复数 \\
+      第一人称 & \skttrans{-mi} & \skttrans{-vaḥ}  & \skttrans{-maḥ}  \\
+      第二人称 & \skttrans{-si} & \skttrans{-thaḥ} & \skttrans{-tha}   \\
+      第三人称 & \skttrans{-ti} & \skttrans{-taḥ} & \skttrans{-nti}  \\
+    \end{tabular}
+  }
+  \bigskip
+  
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}llll@{}} % 4 columns
+      & 单  & 双  & 复 \\
+      1st & \skt{bharāmi}~{bhar\textcolor{red}{ā}mi} & \skt{bharāvaḥ}~{bhar\textcolor{red}{ā}vaḥ}  & \skt{bharāmaḥ}~{bhar\textcolor{red}{ā}maḥ}  \\
+      2nd & \skttrans{bharasi} & \skttrans{bharathaḥ} & \skttrans{bharatha}   \\
+      3rd & \skttrans{bharati} & \skttrans{bharataḥ} & \skttrans{bharanti}  \\
+    \end{tabular}
+  }
+  
+  \begin{itemize}
+    \item
+      第一人称语尾前a变长ā（一四六十）。
+  \end{itemize}
+\end{frame}
+
+
+\section{连声}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{词尾的m和s}
+
+\begin{frame}{\insertsection  ~~\insertsubsection }
+  \small
+  \centering
+  \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
+    原始形式 & 后词情况 & 最终 & 例 \\[0.2cm]
+    词尾的m & 开头元音 & m & \skttrans{kim atra}  \\
+      &  开头辅音 & ṃ & \skttrans{kiṃ tatra} \\[0.2cm]
+        词尾的s & 无其他词 & ḥ & \skttrans{bharataḥ}  \\
+  \end{tabular} 
+\end{frame}
+
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第四章练习2，练习3
+    \item
+      阅读教材第4课相关内容
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}  
+
+\end{document}	

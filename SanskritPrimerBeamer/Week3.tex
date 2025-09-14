@@ -1,0 +1,242 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage{xcolor}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
+\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
+%---------------------------------------------------------------词根
+
+\title{{梵语入门}}
+\subtitle{3. 动词概述}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+
+
+\begin{document}	
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{\insertsubsection ~~第一章练习3}
+  \small
+  \centering
+  \begin{tabular}{@{}lllll@{}} % 6 columns
+    a） & \skt{naraḥ}  & \skt{aditiḥ}  & \skt{karma} & \skt{devaḥ}    \\
+    & \skt{uṣāḥ} & \skt{śivaḥ}  & \skt{āyurvedaḥ}  & \skt{ekāya}  \\
+    & \skt{sarasvatī} & \skt{nāma} & \skt{avatāraḥ}  & \skt{bhārataḥ}   \\
+    & \skt{namaste} & \skt{agniḥ} & \skt{priyau} & \skt{ātmā}  \\
+    & \skt{rākṣasaḥ}  & \skt{bhagavadgītā} & \skt{cakrāṇi} & \skt{manuḥ} \\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~第一章练习3}
+  \small
+  \centering
+  \begin{tabular}{@{}lllll@{}} % 6 columns
+    b） & \skt{kṛṣṇaḥ}  & \skt{devī}  & \skt{gaṇeśaḥ} & \skt{rāmaḥ}  \\
+    & \skt{kaliyugam} & \skt{lakṣmī}  & \skt{mitram}  & \skt{muniḥ}  \\
+    & \skt{pūjā} & \skt{ṛgvedaḥ} & \skt{hanumān}  & \skt{śāntiḥ}  \\
+    & \textcolor{red}{\skt{tantram}} & \skt{yogī} & \skt{amṛtā} & \skt{brāhmaṇaḥ}  \\
+    & \skt{itihāsaḥ}  & \skt{mahātmā} & \textcolor{red}{\skt{putraiḥ}} & \skt{saṃsāraḥ} \\
+    & \skt{nirvāṇam}  & \skt{paṇḍitaḥ}  & \skt{āśramaḥ} & \skt{īśvarebhyaḥ}   \\
+    & \skt{saṃskṛtam} &   &  &   \\
+  \end{tabular}
+\end{frame}
+         
+\begin{frame}{\insertsubsection ~~第一章练习3}
+  \small
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    c） & \skt{siṃhaḥ}  & \skt{svāmī}  & \skt{viṣṇuḥ} & \skt{ācāryaḥ}  \\
+    & \skt{mahāyānam}  & \skt{ṛṣiḥ}  & \skt{vākṣu}  & \skt{arhaḥ}  \\
+    & \skt{iṣṭam} & \skt{annam} & \textcolor{red}{\skt{uktvā}}  & \skt{añjaliḥ}  \\
+    & \textcolor{red}{\skt{guptaḥ}} & \skt{akṣaḥ} & \skt{gantum} & \skt{yajñaḥ} \\ 
+    & \skt{aśvaḥ}  & \skt{svastiḥ} & \skt{patsu} & \skt{kva} \\
+  \end{tabular}
+\end{frame}  
+
+\begin{frame}{\insertsubsection ~~第一章练习3}
+  \small
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    d） & \skt{vāgbhiḥ}  & \skt{uttamaḥ}  & \skt{uktam} & \skt{atra}  \\
+    & \skt{vatsaḥ} & \skt{strī}  & \skt{bodhisattvaḥ}  & \skt{itthā} \\
+    & \textcolor{red}{\skt{vākyam}} & \skt{adya}  & \skt{padbhiḥ}  & \skt{tattat} \\
+    & \skt{rātryā} & \skt{labdhāyai} & \skt{mantram}  & \skt{vidyut}  \\
+    & \skt{buddhaḥ} & \skt{brahma} &  &  \\
+  \end{tabular}
+\end{frame}      
+   
+\section{动词概述}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{词类}
+  \begin{itemize}
+    \item 梵语是一种屈折语
+    \item
+      按照屈折变化的方式分类：
+      
+      动词、名词、不变词
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{\insertsection ~~相关概念}
+  \begin{itemize}
+    \item
+      形态层面：
+      
+      词根、词缀、词干、词尾
+    \item
+      意义层面：
+      
+      时态和语气、人称、数、语态
+  \end{itemize}
+  
+\end{frame}
+
+\subsection{动词的形态}
+
+\begin{frame}{\insertsubsection }
+  \small
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+    词根 & 词干 & 词尾 & 词  \\
+    & （语干） & （语尾） &   \\
+    Root & Stem & Ending & Full form   \\    
+    \skttransroot{as} & \skttrans{as-} & \skttrans{-ti} & \skttrans{asti}  \\
+    \skttransroot{viś}& \skttrans{viśa-} & \skttrans{-ti} & \skttrans{viśati}  \\
+    \skttransroot{dā} & \skttrans{dadā-} & \skttrans{-ti} & \skttrans{dadāti} \\
+  \end{tabular}
+\end{frame}
+
+\subsection{动词的意义}
+
+\begin{frame}{\insertsubsection ~~时态和语气}
+  \begin{itemize}
+    \item
+      时态 Tense
+      \begin{itemize}
+        \item 时 Time：过去、现在、将来
+        \item 体 Aspect：一般、完成、进行
+      \end{itemize}
+    \item
+      语气 Mood：
+      
+    陈述、祈使、虚拟、条件等
+    \item
+      主要体现在语干上
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~时态和语气}
+  \small
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
+      形态 &   & 意义 &   \\
+      时态名称 & 时  & 体 & 语气   \\
+      \midrule
+      现在时  & 现在  & 一般/进行 & 陈述 \\
+      \textcolor{blue}{未完成时}  & 过去  & 进行 & 陈述 \\
+      命令语气  & 现在  & 一般/进行 & 祈使 \\
+      祈愿语气  & 现在  & 一般/进行 & 可能 \\
+      \textcolor{gray}{虚拟语气}  & 将来  & 一般/进行 & 祈求 \\
+      将来时  & 将来  & 一般/进行 & 陈述 \\
+      迂回将来时  & 将来  & 一般/进行 & 陈述 \\
+      条件式  & 将来/过去  & 一般/进行 & 可能/条件 \\
+      \textcolor{blue}{完成时}  & 现在 & 完成 & 陈述 \\
+      \textcolor{blue}{不定过去时}  & 过去 & 一般 & 陈述 \\
+      祈求式  & 现在 & 一般 & 祈使 \\
+    \end{tabular} 
+  }
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~人称、数、语态}
+  \begin{itemize}
+    \item
+      人称 Person：第一、第二、第三
+    \item
+      数 Number：单数、双数、复数
+    \item
+      语态 Voice：主动、\textcolor{red}{被动}、中间
+    \item
+      主要体现在语尾上
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{动词概念总结}
+  \centering
+  \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
+    形态 & 意义 \\
+    语干 & 时态和语气  \\
+    语尾  & 人称 \\
+      & 数 \\
+      & 语态 \\
+  \end{tabular} 
+\end{frame}
+
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第二章练习2，第三章练习1
+    \item
+      阅读教材第3课相关内容
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}  
+
+\end{document}	
