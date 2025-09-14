@@ -14,10 +14,12 @@
 *.xdv
 *.pdf
 
+
 # Sync and cache files
 .anyshare.cache/
 .sync/
 old/
+未同步文档/
 
 # Allow source files
 !SanskritPrimerBeamer/  # Allow the Beamer project folder
