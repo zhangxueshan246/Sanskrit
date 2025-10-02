@@ -33,13 +33,31 @@
 %-----------------------------------------插图表格
 
 \usepackage{hyperref} 
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
 %------------------------------颜色
 
-\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
-\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
-\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
-%---------------------------------------------------------------词根
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
 
 \title{{梵语入门}}
 \subtitle{3. 动词概述}
@@ -152,9 +170,9 @@
     词根 & 词干 & 词尾 & 词  \\
     & （语干） & （语尾） &   \\
     Root & Stem & Ending & Full form   \\    
-    \skttransroot{as} & \skttrans{as-} & \skttrans{-ti} & \skttrans{asti}  \\
-    \skttransroot{viś}& \skttrans{viśa-} & \skttrans{-ti} & \skttrans{viśati}  \\
-    \skttransroot{dā} & \skttrans{dadā-} & \skttrans{-ti} & \skttrans{dadāti} \\
+    \skttransroot{as} \veryimportant{(2)} & \skttransverbstem{as} & \skttransending{ti} & \skttranspada{asti}  \\
+    \skttransroot{viś} \veryimportant{(6)} & \skttransverbstem{viśa} & \skttransending{ti} & \skttranspada{viśati}  \\
+    \skttransroot{dā} \veryimportant{(3)} & \skttransverbstem{dadā} & \skttransending{ti} & \skttranspada{dadāti} \\
   \end{tabular}
 \end{frame}
 
@@ -207,7 +225,7 @@
     \item
       数 Number：单数、双数、复数
     \item
-      语态 Voice：主动、\textcolor{red}{被动}、中间
+      语态 Voice：主动、\important{被动}、中间
     \item
       主要体现在语尾上
   \end{itemize}
@@ -216,14 +234,24 @@
 \begin{frame}{动词概念总结}
   \centering
   \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
-    形态 & 意义 \\
-    语干 & 时态和语气  \\
-    语尾  & 人称 \\
-      & 数 \\
-      & 语态 \\
-  \end{tabular} 
+    形态 & 意义 & 数量\\
+    语干 & 时态和语气 & 10 \\
+     & \notsoimportant{动词的类} & 10 \\
+    语尾  & 人称 & 3 \\
+      & 数 & 3 \\
+      & 语态 & 2/3 \\
+  \end{tabular}
 \end{frame}
 
+\begin{frame}{上节未完 ~~第一章练习1}
+  \centering
+  \begin{tabular}{@{}lllllll@{}} % 6 columns
+    c） & \skt{ṣa}  & \skt{va}  & \skt{ha} & \skt{ṭa} & \skt{ṅa} & \skt{ī}  \\
+    & \skt{bha}  & \skt{dha}  & \skt{gha} & \skt{ai} & \skt{la} & \skt{sa}  \\
+    d） & \skt{au}  & \skt{gha}  & \skt{la} & \skt{ta} & \skt{na} & \skt{tha}  \\
+    & \skt{ya}  & \skt{dha}  & \skt{ba} & \skt{va} & \skt{śa} & \skt{ṣa}  \\
+  \end{tabular}
+\end{frame}
 
 \section{本节作业}
 

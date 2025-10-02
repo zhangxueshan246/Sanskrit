@@ -33,16 +33,42 @@
 %-----------------------------------------插图表格
 
 \usepackage{hyperref} 
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
 %------------------------------颜色
 
-\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
-\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
-\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
-%---------------------------------------------------------------词根
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
 
 \title{{梵语入门}}
-\subtitle{5. 名词概述}
+\subtitle{5-6. 名词概述}
 \author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
 \date{}
 %\institute{}
@@ -154,15 +180,15 @@
   \centering
   \resizebox{\textwidth}{!}{
     \begin{tabular}{@{}llllll@{}} % 6 columns
-      格 & 单数 & 双数 & 复数  \\
-      主 & \skttrans{devaḥ}  & \skttrans{devau} & \skttrans{devāḥ}   \\
-      呼 & \skttrans{deva} & \skttrans{devau} & \skttrans{devāḥ} \\
-      业 & \skttrans{devam} & \skttrans{devau} & \skttrans{devān} \\
-      具 & \skttrans{devena} & \skttrans{devābhyām} & \skttrans{devaiḥ} \\
-      为 & \skttrans{devāya} & \skttrans{devābhyām} & \skttrans{devebhyaḥ} \\
-      从 & \skttrans{devāt} & \skttrans{devābhyām} & \skttrans{devebhyaḥ} \\
-      属 & \skttrans{devasya} & \skttrans{devayoḥ} & \skttrans{devānām} \\
-      依 & \skttrans{deve} & \skttrans{devayoḥ} & \skttrans{deveṣu} \\
+       & 单数 & 双数 & 复数  \\
+      主 & \skttranspada{devaḥ}  & \skttranspada{devau} & \skttranspada{devāḥ}   \\
+      呼 & \skttranspada{deva} & \skttranspada{devau} & \skttranspada{devāḥ} \\
+      业 & \skttranspada{devam} & \skttranspada{devau} & \skttranspada{devān} \\
+      具 & \skttranspada{devena} & \skttranspada{devābhyām} & \skttranspada{devaiḥ} \\
+      为 & \skttranspada{devāya} & \skttranspada{devābhyām} & \skttranspada{devebhyaḥ} \\
+      从 & \skttranspada{devāt} & \skttranspada{devābhyām} & \skttranspada{devebhyaḥ} \\
+      属 & \skttranspada{devasya} & \skttranspada{devayoḥ} & \skttranspada{devānām} \\
+      依 & \skttranspada{deve} & \skttranspada{devayoḥ} & \skttranspada{deveṣu} \\
     \end{tabular}
   }
 \end{frame}
@@ -172,11 +198,11 @@
   \centering
   \resizebox{\textwidth}{!}{
     \begin{tabular}{@{}llllll@{}} % 6 columns
-      格 & 单数 & 双数 & 复数  \\
-      主 & \skttrans{vanam} & \skttrans{vane} & \skttrans{vanāni} \\
-      呼 & \skttrans{vana} & \skttrans{vane} & \skttrans{vanāni} \\
-      业 & \skttrans{vanam} & \skttrans{vane} & \skttrans{vanāni} \\
-      具 & \skttrans{vanena} & \skttrans{vanābhyām} & \skttrans{vanaiḥ} \\
+       & 单数 & 双数 & 复数  \\
+      主 & \skttranspada{vanam} & \skttranspada{vane} & \skttranspada{vanāni} \\
+      呼 & \skttranspada{vana} & \skttranspada{vane} & \skttranspada{vanāni} \\
+      业 & \skttranspada{vanam} & \skttranspada{vane} & \skttranspada{vanāni} \\
+      具 & \skttranspada{vanena} & \skttranspada{vanābhyām} & \skttranspada{vanaiḥ} \\
        & 下同 &  &  \\
     \end{tabular}
   }
@@ -224,9 +250,9 @@
   \centering
   \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
     条件 & 顶化 & 不顶化 \\[0.2cm]
-    1  & \skt{mitreṇa}~mit\textcolor{red}{r}eṇa  & \skttrans{vanena}  \\
-    2  & \skt{brahmaṇā}~brahmaṇ\textcolor{red}{ā} & \skttrans{brahman} \\
-    3  & \skttrans{rāmeṇa} & \skt{rathena}~ra\textcolor{red}{th}ena  \\
+    1  & \sktpada{mitreṇa}~\fullpada{mit\textcolor{red}{r}eṇa}  & \skttranspada{vanena}  \\
+    2  & \sktpada{brahmaṇā}~\fullpada{brahmaṇ\textcolor{red}{ā}} & \skttranspada{brahman} \\
+    3  & \skttranspada{rāmeṇa} & \sktpada{rathena}~\fullpada{ra\textcolor{red}{th}ena}  \\
   \end{tabular} 
 \end{frame}
 

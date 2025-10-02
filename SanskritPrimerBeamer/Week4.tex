@@ -33,13 +33,39 @@
 %-----------------------------------------插图表格
 
 \usepackage{hyperref} 
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
 %------------------------------颜色
 
-\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
-\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
-\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
-%---------------------------------------------------------------词根
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
 
 \title{{梵语入门}}
 \subtitle{4. 现在时}
@@ -114,7 +140,18 @@
   数字与标点： \skt{1 2 3 4 5 6 7 8 9 0 ~~~~। ॥} 
 \end{frame} 
 
-
+\subsection{上节复习}
+\begin{frame}{\insertsubsection~~动词概念总结}
+  \centering
+  \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
+    形态 & 意义 & 数量\\
+    语干 & 时态和语气 & 10 \\
+     & \notsoimportant{动词的类} & 10 \\
+    语尾  & 人称 & 3 \\
+      & 数 & 3 \\
+      & 语态 & 2/3 \\
+  \end{tabular}
+\end{frame}
 
 \section[动词 \\ ~~现在时]{动词现在时}
 \begin{frame}{\insertsection }
@@ -127,9 +164,9 @@
   \centering
   \begin{tabular}{@{}llll@{}} % 4 columns
     & 单数  & 双数  & 复数 \\
-    第一人称 & \skttrans{-mi} & \skttrans{-vaḥ}  & \skttrans{-maḥ}  \\
-    第二人称 & \skttrans{-si} & \skttrans{-thaḥ} & \skttrans{-tha}   \\
-    第三人称 & \skttrans{-ti} & \skttrans{-taḥ} & \skttrans{-nti}  \\
+    第一人称 & \skttransending{mi} & \skttransending{vaḥ}  & \skttransending{maḥ}  \\
+    第二人称 & \skttransending{si} & \skttransending{thaḥ} & \skttransending{tha}   \\
+    第三人称 & \skttransending{ti} & \skttransending{taḥ} & \skttransending{nti}  \\
   \end{tabular}   
 \end{frame}
 
@@ -137,7 +174,7 @@
 \begin{frame}{\insertsubsection ~~动词分类}
   \begin{itemize}
     \item
-      带插入元音a的：
+      带插入元音\pratyaya{\nobreakdash-a-}的：
       
       第一、四、六、\textcolor{blue}{十}类动词
     \item
@@ -155,14 +192,14 @@
   \small
   \begin{itemize}
     \item
-      词根元音前加\nobreakdash-a\nobreakdash-，词根后加\nobreakdash-a\nobreakdash-。
+      词根元音前加\pratyaya{\nobreakdash-a\nobreakdash-}，词根后加\pratyaya{\nobreakdash-a\nobreakdash-}。
   \end{itemize} 
 
   \centering
   \begin{tabular}{@{}llllll@{}} % 6 columns
     词根 & 过程 & 语干  \\
-    \skttransroot{bhṛ} & \textcolor{gray}{*bh-a-ṛ-a-} & \skttrans{bhara-}  \\
-    \skttransroot{budh} & \textcolor{gray}{*b-a-udh-a-} & \skttrans{bodha-}  \\
+    \skttransroot{bhṛ} & \notsoimportant{*bh-a-ṛ-a-} & \skttransverbstem{bhara}  \\
+    \skttransroot{budh} & \notsoimportant{*b-a-udh-a-} & \skttransverbstem{bodha}  \\
   \end{tabular}
 
 \end{frame}
@@ -177,7 +214,7 @@
   \centering
   \begin{tabular}{@{}llllll@{}} % 6 columns
     词根 & 过程 & 语干  \\
-    \skttransroot{hṛṣ} & \textcolor{gray}{*hṛṣ-ya-} & \skttrans{hṛṣya-}  \\
+    \skttransroot{hṛṣ} & \textcolor{gray}{*hṛṣ-ya-} & \skttransverbstem{hṛṣya}  \\
   \end{tabular}
 
 \end{frame}
@@ -190,7 +227,7 @@
 
       \begin{tabular}{@{}llllll@{}} % 6 columns
         词根 & 过程 & 语干  \\
-        \skttransroot{viś} & \textcolor{gray}{*viś-a-} & \skttrans{viśa-}  \\
+        \skttransroot{viś} & \textcolor{gray}{*viś-a-} & \skttransverbstem{viśa}  \\
       \end{tabular}
    
     \item
@@ -200,9 +237,9 @@
   \centering
   \begin{tabular}{@{}llllll@{}} % 6 columns
     %词根 & 过程 & 语干  \\
-    \skttransroot{muc} & \textcolor{gray}{*mu-ñ-c-a-} & \skttrans{muñca-}  \\
-    \skttransroot{vid} & \textcolor{gray}{*vi-n-d-a-} & \skttrans{vinda-}  \\
-    \skttransroot{lup} & \textcolor{gray}{*lu-m-p-a-} & \skttrans{lumpa-}  \\
+    \skttransroot{muc} & \textcolor{gray}{*mu-ñ-c-a-} & \skttransverbstem{muñca}  \\
+    \skttransroot{vid} & \textcolor{gray}{*vi-n-d-a-} & \skttransverbstem{vinda}  \\
+    \skttransroot{lup} & \textcolor{gray}{*lu-m-p-a-} & \skttransverbstem{lumpa}  \\
   \end{tabular}
 
 \end{frame}
@@ -211,16 +248,16 @@
 
 \begin{frame}{\insertsubsection }
   \footnotesize
-  词根 ~\skttransroot{bhṛ} ~~现在时语干 ~ {\skt{bhara-}} bhara\nobreakdash-
+  词根 ~\skttransroot{bhṛ} \veryimportant{(1)} ~~现在时语干 ~ \skttransverbstem{bhara} 
 
   \centering
   \textcolor{gray}{
     \begin{tabular}{@{}llll@{}} % 4 columns
       %\multicolumn{2}{l}{词根 ~\skttransroot{bhṛ}} & \multicolumn{2}{l}{现在时语干~\skttrans{bhara-}} \\
       & 单数  & 双数  & 复数 \\
-      第一人称 & \skttrans{-mi} & \skttrans{-vaḥ}  & \skttrans{-maḥ}  \\
-      第二人称 & \skttrans{-si} & \skttrans{-thaḥ} & \skttrans{-tha}   \\
-      第三人称 & \skttrans{-ti} & \skttrans{-taḥ} & \skttrans{-nti}  \\
+      第一人称 & \skttransending{mi} & \skttransending{vaḥ}  & \skttransending{maḥ}  \\
+      第二人称 & \skttransending{si} & \skttransending{thaḥ} & \skttransending{tha}   \\
+      第三人称 & \skttransending{ti} & \skttransending{taḥ} & \skttransending{nti}  \\
     \end{tabular}
   }
   \bigskip
@@ -228,15 +265,15 @@
   \resizebox{\textwidth}{!}{
     \begin{tabular}{@{}llll@{}} % 4 columns
       & 单  & 双  & 复 \\
-      1st & \skt{bharāmi}~{bhar\textcolor{red}{ā}mi} & \skt{bharāvaḥ}~{bhar\textcolor{red}{ā}vaḥ}  & \skt{bharāmaḥ}~{bhar\textcolor{red}{ā}maḥ}  \\
-      2nd & \skttrans{bharasi} & \skttrans{bharathaḥ} & \skttrans{bharatha}   \\
-      3rd & \skttrans{bharati} & \skttrans{bharataḥ} & \skttrans{bharanti}  \\
+      1st & \sktpada{bharāmi}~\fullpada{bhar\textcolor{red}{ā}mi} & \sktpada{bharāvaḥ}~\fullpada{bhar\textcolor{red}{ā}vaḥ}  & \sktpada{bharāmaḥ}~\fullpada{bhar\textcolor{red}{ā}maḥ}  \\
+      2nd & \skttranspada{bharasi} & \skttranspada{bharathaḥ} & \skttranspada{bharatha}   \\
+      3rd & \skttranspada{bharati} & \skttranspada{bharataḥ} & \skttranspada{bharanti}  \\
     \end{tabular}
   }
   
   \begin{itemize}
     \item
-      第一人称语尾前a变长ā（一四六十）。
+      第一人称语尾前短a变长ā（一四六十）。
   \end{itemize}
 \end{frame}
 
@@ -253,9 +290,9 @@
   \centering
   \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
     原始形式 & 后词情况 & 最终 & 例 \\[0.2cm]
-    词尾的m & 开头元音 & m & \skttrans{kim atra}  \\
-      &  开头辅音 & ṃ & \skttrans{kiṃ tatra} \\[0.2cm]
-        词尾的s & 无其他词 & ḥ & \skttrans{bharataḥ}  \\
+    词尾的m & 开头元音 & m & \skttranspada{kim atra}  \\
+      &  开头辅音 & ṃ & \skttranspada{kiṃ tatra} \\[0.2cm]
+        词尾的s & 无其他词 & ḥ & \skttranspada{bharataḥ}  \\
   \end{tabular} 
 \end{frame}
 

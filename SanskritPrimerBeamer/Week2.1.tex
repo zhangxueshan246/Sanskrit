@@ -39,12 +39,36 @@
 \definecolor{light-gray}{gray}{0.9}
 %------------------------------颜色
 
-\newcommand{\verbroot}[1]{{$\sqrt{#1}$}}
-\newcommand{\sktroot}[1]{{\verbroot{}\skt{#1}}}
-\newcommand{\skttransroot}[1]{{\sktroot{#1}~#1}}
-%---------------------------------------------------------------词根
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
 
-\title{{梵语入门}}
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
 \subtitle{19. 不带插入元音的动词语干（续） }
 \author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
 \date{}
@@ -100,12 +124,12 @@
   \begin{itemize}
     \item 第二类：词根直接加词尾
     \item 第三类：重复语干加词尾
-    \item 第五类：强语干加\nobreakdash-no\nobreakdash-，弱语干加\nobreakdash-nu\nobreakdash-
-    \item 第七类：强加\nobreakdash-na\nobreakdash-弱加\nobreakdash-n\nobreakdash-，
+    \item 第五类：强语干加\pratyaya{\nobreakdash-no\nobreakdash-}，弱语干加\pratyaya{\nobreakdash-nu\nobreakdash-}
+    \item 第七类：强加\pratyaya{\nobreakdash-na\nobreakdash-}，弱加\pratyaya{\nobreakdash-n\nobreakdash-}，
     
     \hspace*{4em}加在落尾辅音前
-    \item 第八类：强语干加\nobreakdash-o\nobreakdash-，弱语干加\nobreakdash-u\nobreakdash-
-    \item 第九类：强语干加\nobreakdash-nā\nobreakdash-，弱语干加\nobreakdash-nī\nobreakdash-/\nobreakdash-n\nobreakdash-
+    \item 第八类：强语干加\pratyaya{\nobreakdash-o\nobreakdash-}，弱语干加\pratyaya{\nobreakdash-u\nobreakdash-}
+    \item 第九类：强语干加\pratyaya{\nobreakdash-nā\nobreakdash-}，弱语干加\pratyaya{\nobreakdash-nī\nobreakdash-/\nobreakdash-n\nobreakdash-}
   \end{itemize}
 \end{frame}
 
@@ -113,9 +137,9 @@
   \centering
   \begin{tabular}{@{}llll@{}} % 4 columns
     & 单数  & 双数  & 复数 \\
-    第一人称 & -mi & -vaḥ  & -maḥ  \\
-    第二人称 & -si & -thaḥ & -tha  \\
-    第三人称 & -ti & -taḥ & -\textcolor{red}{a}nti  \\
+    第一人称 & \wordending{mi} & \wordending{vaḥ}  & \wordending{maḥ}  \\
+    第二人称 & \wordending{si} & \wordending{thaḥ} & \wordending{tha}  \\
+    第三人称 & \wordending{ti} & \wordending{taḥ} & \cellcolor{green!20}\wordending{anti} \\
   \end{tabular}   
 \end{frame}
 
@@ -124,29 +148,34 @@
   \centering
   \begin{tabular}{@{}llll@{}} % 4 columns
     & 单数  & 双数  & 复数 \\
-    第一人称 & -\textcolor{red}{a}m & -va  & -ma  \\
-    第二人称 & -\textcolor{blue}{ḥ} & -tam & -ta  \\
-    第三人称 & -\textcolor{blue}{t} & -tām & -\textcolor{red}{a}n/-\textcolor{OliveGreen}{uḥ}  \\
+    第一人称 & \cellcolor{green!20}\wordending{am} & \wordending{va}  & \wordending{ma}  \\
+    第二人称 & \cellcolor{yellow!30}\wordending{ḥ} & \wordending{tam} & \wordending{ta}  \\
+    第三人称 & \cellcolor{yellow!30}\wordending{t} & \wordending{tām} & \cellcolor{green!20}\wordending{an/uḥ}  \\
   \end{tabular}   
 \end{frame}
 
 \subsection{未完成时}
 \begin{frame}{\insertsubsection}
   \small
+  \begin{itemize}
+    \item 主动语态单数是强语干
+    \item 词干前加 \pratyaya{a\nobreakdash-}
+  \end{itemize}
+
   \raggedright  
   \begin{tabular}{@{}llll@{}} % 4 columns
-    \verbroot{}hu & 单数  & 双数  & 复数 \\
-    第一人称 & \cellcolor{light-gray}ajuh\textcolor{red}{av}am & ajuhuva  & ajuhuma  \\
-    第二人称 & \cellcolor{light-gray}ajuhoḥ & ajuhutam & ajuhuta  \\
-    第三人称 & \cellcolor{light-gray}ajuhot & ajuhutām & ajuh\textcolor{red}{v}an  \\
+    \verbroot{hu (3)} & 单数  & 双数  & 复数 \\
+    第一人称 & \cellcolor{light-gray}\fullpada{ajuh\textcolor{red}{av}am} & \fullpada{ajuhuva}  & \fullpada{ajuhuma}  \\
+    第二人称 & \cellcolor{light-gray}\fullpada{ajuhoḥ} & \fullpada{ajuhutam} & \fullpada{ajuhuta}  \\
+    第三人称 & \cellcolor{light-gray}\fullpada{ajuhot} & \fullpada{ajuhutām} & \fullpada{ajuh\textcolor{red}{v}an}  \\
   \end{tabular} 
   \bigskip
     
   \begin{tabular}{@{}llll@{}} % 4 columns
-    \verbroot{}dviṣ & 单数  & 双数  & 复数 \\
-    第一人称 & \cellcolor{light-gray}adveṣam & adviṣva & adviṣma \\
-    第二人称 & \cellcolor{light-gray}adve\textcolor{blue}{ṭ} & adviṣṭam & adviṣṭa \\
-    第三人称 & \cellcolor{light-gray}adve\textcolor{blue}{ṭ} & adviṣṭām & adviṣ\textcolor{OliveGreen}{an}/adviṣ\textcolor{OliveGreen}{ur} \\
+    \verbroot{dviṣ (2)} & 单数  & 双数  & 复数 \\
+    第一人称 & \cellcolor{light-gray}\fullpada{adveṣam} & \fullpada{adviṣva} & \fullpada{adviṣma} \\
+    第二人称 & \cellcolor{light-gray}\fullpada{adve\important{ṭ}} & \fullpada{adviṣṭam} & \fullpada{adviṣṭa} \\
+    第三人称 & \cellcolor{light-gray}\fullpada{adve\important{ṭ}} & \fullpada{adviṣṭām} & \fullpada{adviṣan/adviṣur} \\
   \end{tabular}   
 \end{frame}
 
@@ -154,18 +183,18 @@
 \begin{frame}{\insertsubsection}
   \small
   \begin{itemize}
-    \item 全部弱语干，词尾前加 \nobreakdash-yā\nobreakdash-
-    \item 第三人称单数是 \nobreakdash-yuḥ
+    \item 全部弱语干，词尾前加 \pratyaya{\nobreakdash-yā-}
+    \item 第三人称单数词尾直接是 \wordending{yuḥ}
   \end{itemize}
   \centering
   \begin{tabular}{@{}lllll@{}} % 5 columns
     & 一单  & 二单 & 三单 & 三复 \\
-    二 & iyām & iyāḥ & iyāt  & iyuḥ  \\
-    三 & juhuyām & juhuyāḥ & juhuyāt & juhuyuḥ  \\
-    五 & sunuyām & sunuyāḥ & sunuyāt & sunuyuḥ  \\
-    七 & rundhyām & rundhyāḥ & rundhyāt & rundhyuḥ  \\
-    八 & tanuyām & tanuyāḥ & tanuyāt & tanuyuḥ  \\
-    九 & vṛṇīyām & vṛṇīyāḥ & vṛṇīyāt & vṛṇīyuḥ  \\
+    二 & \fullpada{iyām} & \fullpada{iyāḥ} & \fullpada{iyāt}  & \fullpada{iyuḥ}  \\
+    三 & \fullpada{juhuyām} & \fullpada{juhuyāḥ} & \fullpada{juhuyāt} & \fullpada{juhuyuḥ}  \\
+    五 & \fullpada{sunuyām} & \fullpada{sunuyāḥ} & \fullpada{sunuyāt} & \fullpada{sunuyuḥ}  \\
+    七 & \fullpada{rundhyām} & \fullpada{rundhyāḥ} & \fullpada{rundhyāt} & \fullpada{rundhyuḥ}  \\
+    八 & \fullpada{tanuyām} & \fullpada{tanuyāḥ} & \fullpada{tanuyāt} & \fullpada{tanuyuḥ}  \\
+    九 & \fullpada{vṛṇīyām} & \fullpada{vṛṇīyāḥ} & \fullpada{vṛṇīyāt} & \fullpada{vṛṇīyuḥ}  \\
   \end{tabular}   
 \end{frame}
 
@@ -175,27 +204,27 @@
     \tableofcontents[currentsection]
 \end{frame}
 
-\begin{frame}{\verbroot{}as (II) 是}
+\begin{frame}{\verbroot{as (2)} 是}
   %\small
   \begin{itemize}
-    \item 现在时：强语干as\nobreakdash-，弱语干s\nobreakdash-
+    \item 现在时：强语干 \verbstem{as}，弱语干 \verbstem{s}
   \end{itemize}
   \centering
   \begin{tabular}{@{}llll@{}} % 4 columns
     &   \multicolumn{3}{c}{现在时}  \\
     & 单  & 双 & 复 \\
-    1st & \cellcolor{light-gray}asmi & svaḥ & smaḥ  \\
-    2nd & \cellcolor{light-gray}a\textcolor{red}{s}i & sthaḥ & stha \\
-    3rd & \cellcolor{light-gray}asti & staḥ & santi \\
+    1st & \cellcolor{light-gray}\fullpada{asmi} & \fullpada{svaḥ} & \fullpada{smaḥ}  \\
+    2nd & \cellcolor{light-gray}\fullpada{a\textcolor{red}{s}i} & \fullpada{sthaḥ} & \fullpada{stha} \\
+    3rd & \cellcolor{light-gray}\fullpada{asti} & \fullpada{staḥ} & \fullpada{santi} \\
   \end{tabular}   
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{\verbroot{}as (II) 是}
+  \frametitle{\verbroot{as (2)} 是}
   \small
   \begin{itemize}
-    \item 未完成时：全都是ās\nobreakdash-，二单三单加\nobreakdash-ī\nobreakdash-
-    \item 祈愿语气：全都是弱语干s\nobreakdash-
+    \item 未完成时：语干全是 \verbstem{ās}，二单三单加 \pratyaya{\nobreakdash-ī-}
+    \item 祈愿语气：全是弱语干 \verbstem{s}
   \end{itemize}
   \centering
   \begin{NiceTabular}{lllllll}
@@ -204,16 +233,16 @@
     \Body % 7 columns
     &   \multicolumn{3}{c}{未完成时} & \multicolumn{3}{c}{祈愿语气} \\
     & 单  & 双 & 复 & 单  & 双 & 复 \\
-    1st & āsam & āsva & āsma & syām & syāva & syāma\\
-    2nd & ās\textcolor{red}{ī}ḥ  & āstam & āsta & syāḥ  & syātam & syāta \\
-    3rd & ās\textcolor{red}{ī}t & āstām & āsan & syāt & syātām & syuḥ \\
+    1st & \fullpada{āsam} & \fullpada{āsva} & \fullpada{āsma} & \fullpada{syām} & \fullpada{syāva} & \fullpada{syāma}\\
+    2nd & \fullpada{ās\veryimportant{ī}ḥ}  & \fullpada{āstam} & \fullpada{āsta} & \fullpada{syāḥ}  & \fullpada{syātam} & \fullpada{syāta} \\
+    3rd & \fullpada{ās\veryimportant{ī}t} & \fullpada{āstām} & \fullpada{āsan} & \fullpada{syāt} & \fullpada{syātām} & \fullpada{syuḥ} \\
   \end{NiceTabular}   
 \end{frame}
 
-\begin{frame}{\verbroot{}i (II) 走}
+\begin{frame}{\verbroot{i (2)} 走}
   %\small
   \begin{itemize}
-    \item 未完成时：全都是ai\nobreakdash-
+    \item 未完成时：语干全是 \verbstem{ai}
   \end{itemize}
   \centering
   \begin{NiceTabular}{@{}llll@{}} % 4 columns
@@ -222,18 +251,18 @@
     \Body 
     &   \multicolumn{3}{c}{未完成时}  \\
     & 单  & 双 & 复 \\
-    1st & āyam & aiva & aima  \\
-    2nd & aiḥ & aitam & aita \\
-    3rd & ait & aitām & āyan \\
+    1st & \fullpada{āyam} & \fullpada{aiva} & \fullpada{aima}  \\
+    2nd & \fullpada{aiḥ} & \fullpada{aitam} & \fullpada{aita} \\
+    3rd & \fullpada{ait} & \fullpada{aitām} & \fullpada{āyan} \\
   \end{NiceTabular}   
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{\verbroot{}han (II) 杀}
+  \frametitle{\verbroot{han (2)} 杀}
   \small
   \begin{itemize}
-    \item 单数和第一人称都是强语干han\nobreakdash-
-    \item 弱语干：辅音前是ha\nobreakdash-，元音前是ghn\nobreakdash-
+    \item 单数和第一人称都是强语干 \verbstem{han}
+    \item 弱语干：辅音前是 \verbstem{ha}，元音前是 \verbstem{ghn}
   \end{itemize}
   \centering
   \footnotesize
@@ -245,17 +274,17 @@
     \Body % 7 columns
     &   \multicolumn{3}{c}{现在时} & \multicolumn{3}{c}{未完成时} \\
     & 单  & 双 & 复 & 单  & 双 & 复 \\
-    1 & hanmi & hanvaḥ & hanmaḥ & ahanam & ahanva & ahanma\\
-    2 & haṃsi  & hathaḥ & hatha & ahan  & ahatam & ahata \\
-    3 & hanti & hataḥ & ghnanti & ahan & ahatām & aghnan \\
+    1 & \fullpada{hanmi} & \fullpada{hanvaḥ} & \fullpada{hanmaḥ} & \fullpada{ahanam} & \fullpada{ahanva} & \fullpada{ahanma}\\
+    2 & \fullpada{haṃsi}  & \fullpada{hathaḥ} & \fullpada{hatha} & \fullpada{ahan}  & \fullpada{ahatam} & \fullpada{ahata} \\
+    3 & \fullpada{hanti} & \fullpada{hataḥ} & \fullpada{ghnanti} & \fullpada{ahan} & \fullpada{ahatām} & \fullpada{aghnan} \\
   \end{NiceTabular}   
 \end{frame}
 
 \begin{frame}%[fragile]
-  \frametitle{\verbroot{}brū (II) 说}
+  \frametitle{\verbroot{brū (2)} 说}
   \small
   \begin{itemize}
-    \item 强语干辅音语尾前加\nobreakdash-ī\nobreakdash-
+    \item 强语干辅音语尾前加 \pratyaya{\nobreakdash-ī\nobreakdash-}
   \end{itemize}
   \centering
   \begin{NiceTabular}{llll}
@@ -265,22 +294,22 @@
     \Body % 7 columns
     &   \multicolumn{3}{c}{现在时}  \\
     & 单  & 双 & 复  \\
-    1 & bravīmi & brūvah & brūmaḥ \\
-    2 & bravīsi  & brūthaḥ & brutha \\
-    3 & bravīti & brūtaḥ & bruvanti  \\
+    1 & \fullpada{bravīmi} & \fullpada{brūvah} & \fullpada{brūmaḥ} \\
+    2 & \fullpada{bravīsi}  & \fullpada{brūthaḥ} & \fullpada{brutha} \\
+    3 & \fullpada{bravīti} & \fullpada{brūtaḥ} & \fullpada{bruvanti}  \\
     \bigskip \\
     &    \multicolumn{3}{c}{未完成时} \\
-    1  & abravam & abrūva & abrūma\\
-    2 & abravīḥ  & abrūtam & abrūta \\
-    3  & abravīt & abrūtām & abruvan \\
+    1  & \fullpada{abravam} & \fullpada{abrūva} & \fullpada{abrūma} \\
+    2 & \fullpada{abravīḥ}  & \fullpada{abrūtam} & \fullpada{abrūta} \\
+    3  & \fullpada{abravīt} & \fullpada{abrūtām} & \fullpada{abruvan} \\
   \end{NiceTabular}   
 \end{frame}
 
 \begin{frame}%[fragile]
-  \frametitle{\verbroot{}dā (III) 给，\verbroot{}dhā (III) 放 }
+  \frametitle{\verbroot{dā (3)} 给，\verbroot{dhā (3)} 放 }
   \small
   \begin{itemize}
-    \item 弱语干去掉\nobreakdash-ā\nobreakdash-，三单语尾是\nobreakdash-ati
+    \item 弱语干去掉 \veryimportant{\nobreakdash-ā\nobreakdash-}，三单语尾是 \wordending{ati}
   \end{itemize}
   \centering
   \begin{NiceTabular}{llll}
@@ -289,43 +318,42 @@
       \rectanglecolor{light-gray}{7-2}{9-2}
     \Body % 7 columns
     &   \multicolumn{3}{c}{现在时}  \\
-    \verbroot{}dā & 单  & 双 & 复  \\
-    1 & dadāmi & dadvaḥ & dadmaḥ \\
-    2 & dadāsi  & datthaḥ & dhattha \\
-    3 & dadāti & dattaḥ & dadati \\
-    \verbroot{}dhā & 单  & 双 & 复  \\
-    1  & dadhāmi & dadhvaḥ & dadhmaḥ \\
-    2 & dadhāsi  & dhatthaḥ & dhattha \\
-    3  & dadhāti & dhattaḥ & dadhati \\
+    \verbroot{dā} & 单  & 双 & 复  \\
+    1 & \fullpada{dadāmi} & \fullpada{dadvaḥ} & \fullpada{dadmaḥ} \\
+    2 & \fullpada{dadāsi}  & \fullpada{datthaḥ} & \fullpada{dhattha} \\
+    3 & \fullpada{dadāti} & \fullpada{dattaḥ} & \fullpada{dadati} \\
+    \verbroot{dhā} & 单  & 双 & 复  \\
+    1  & \fullpada{dadhāmi} & \fullpada{dadhvaḥ} & \fullpada{dadhmaḥ} \\
+    2 & \fullpada{dadhāsi}  & \fullpada{dhatthaḥ} & \fullpada{dhattha} \\
+    3  & \fullpada{dadhāti} & \fullpada{dhattaḥ} & \fullpada{dadhati} \\
   \end{NiceTabular}   
 \end{frame}
 
 \begin{frame}%[fragile]
-  \frametitle{\verbroot{}kṛ (VIII) 做}
+  \frametitle{\verbroot{kṛ (8)} 做}
   \small
   \begin{itemize}
-    \item 强语干karo\nobreakdash-，弱语干kuru\nobreakdash-
-    \item 弱语干的\nobreakdash-u\nobreakdash-在语尾的\nobreakdash-v\nobreakdash-和\nobreakdash-m\nobreakdash-前消失
+    \item 强语干 \verbstem{karo}，弱语干 \verbstem{kuru}
+    \item 弱语干的 \verbstem{\nobreakdash-u} 在语尾的 \wordending{v\nobreakdash-} 和 \wordending{m\nobreakdash-} 前消失
   \end{itemize}
   \centering
   \begin{NiceTabular}{llll}
     \CodeBefore
-      \rectanglecolor{light-gray}{3-2}{5-2}
-      \rectanglecolor{light-gray}{8-2}{10-2}
+      \rectanglecolor{light-gray}{2-2}{4-2}
+      \rectanglecolor{light-gray}{6-2}{8-2}
     \Body % 7 columns
-    &   \multicolumn{3}{c}{现在时}  \\
-    & 单  & 双 & 复  \\
-    1 & karomi & kurvaḥ & kurmaḥ \\
-    2 & karoṣi & kuruthaḥ & kurutha \\
-    3 & karoti & kurutaḥ & kurvanti  \\
-    &    \multicolumn{3}{c}{未完成时} \\
-    1 & akaravam & akurva & akurma\\
-    2 & akaroḥ  & akurutam & akuruta \\
-    3 & akarot & akurutām & akurvan \\
+    现在时 & 单  & 双 & 复  \\
+    1 & \fullpada{karomi} & \fullpada{kurvaḥ} & \fullpada{kurmaḥ} \\
+    2 & \fullpada{karoṣi} & \fullpada{kuruthaḥ} & \fullpada{kurutha} \\
+    3 & \fullpada{karoti} & \fullpada{kurutaḥ} & \fullpada{kurvanti} \\
+    未完成时 & 单  & 双 & 复  \\
+    1 & \fullpada{akaravam} & \fullpada{akurva} & \fullpada{akurma} \\
+    2 & \fullpada{akaroḥ}  & \fullpada{akurutam} & \fullpada{akuruta} \\
+    3 & \fullpada{akarot} & \fullpada{akurutām} & \fullpada{akurvan} \\
   \end{NiceTabular}   
 \end{frame}
 
-\begin{frame}{\verbroot{}stu (II) 赞颂}
+\begin{frame}{\verbroot{stu (2)} 赞颂}
   %\small
   \begin{itemize}
     \item 强语干三合
@@ -334,9 +362,9 @@
   \begin{tabular}{@{}llll@{}} % 4 columns
     &   \multicolumn{3}{c}{现在时}  \\
     & 单  & 双 & 复 \\
-    1st & \cellcolor{light-gray}staumi & stuvaḥ & stumaḥ  \\
-    2nd & \cellcolor{light-gray}stausi & stuthaḥ & stutha \\
-    3rd & \cellcolor{light-gray}stauti & stutaḥ & stuvanti \\
+    1st & \cellcolor{light-gray}\fullpada{staumi} & \fullpada{stuvaḥ} & \fullpada{stumaḥ}  \\
+    2nd & \cellcolor{light-gray}\fullpada{stausi} & \fullpada{stuthaḥ} & \fullpada{stutha} \\
+    3rd & \cellcolor{light-gray}\fullpada{stauti} & \fullpada{stutaḥ} & \fullpada{stuvanti} \\
   \end{tabular}   
 \end{frame}
 
@@ -344,8 +372,8 @@
   \frametitle{第二类不分强弱语干动词}
   \small
   \begin{itemize}
-    \item 以 \nobreakdash-ā 结尾的动词，如 \verbroot{}yā (II) 去
-    \item \verbroot{}svap (II) 睡：辅音语尾前加 \nobreakdash-i\nobreakdash-
+    \item 以 \veryimportant{\nobreakdash-ā} 结尾的动词，如 \verbroot{yā (2)} 去
+    \item \verbroot{svap (2)} 睡：辅音语尾前加 \pratyaya{\nobreakdash-i\nobreakdash-}
   \end{itemize}
   \centering
   \begin{NiceTabular}{llll}
@@ -354,14 +382,14 @@
       %\rectanglecolor{light-gray}{7-2}{9-2}
     \Body % 7 columns
     %&   \multicolumn{3}{c}{现在时}  \\
-    \verbroot{}yā & 单  & 双 & 复  \\
-    1 & yāmi & yāvaḥ & yāmaḥ \\
-    2 & yāsi  & yāthaḥ & yātha \\
-    3 & yāti & yātaḥ & yānti \\
-    \verbroot{}svap &  & &  \\
-    1  & svapimi & svapivaḥ & svapimaḥ \\
-    2 & svapiṣi  & svapithaḥ & svapitha \\
-    3  & svapiti & svapitaḥ & svapanti \\
+    \verbroot{yā} & 单  & 双 & 复  \\
+    1 & \fullpada{yāmi} & \fullpada{yāvaḥ} & \fullpada{yāmaḥ} \\
+    2 & \fullpada{yāsi}  & \fullpada{yāthaḥ} & \fullpada{yātha} \\
+    3 & \fullpada{yāti} & \fullpada{yātaḥ} & \fullpada{yānti} \\
+    \verbroot{svap} & 单  & 双 & 复  \\
+    1  & \fullpada{svapimi} & \fullpada{svapivaḥ} & \fullpada{svapimaḥ} \\
+    2 & \fullpada{svapiṣi}  & \fullpada{svapithaḥ} & \fullpada{svapitha} \\
+    3  & \fullpada{svapiti} & \fullpada{svapitaḥ} & \fullpada{svapanti} \\
   \end{NiceTabular}   
 \end{frame}
 
@@ -370,22 +398,21 @@
   \small
   \centering
   \begin{itemize}
-    \item \verbroot{}vac (II) 说 ~~ \verbroot{}dviṣ (II) 恨
+    \item \verbroot{vac (2)} 说 ~~ \verbroot{dviṣ (2)} 恨
   \end{itemize}
   \begin{NiceTabular}{llll}
     \CodeBefore
-      %\rectanglecolor{light-gray}{3-2}{5-2}
-      %\rectanglecolor{light-gray}{7-2}{9-2}
+      \rectanglecolor{light-gray}{3-2}{3-4}
+      \rectanglecolor{light-gray}{6-2}{8-2}
     \Body % 7 columns 
     &   \multicolumn{3}{c}{现在时}  \\
-    \verbroot{}vac & 单  & 双 & 复  \\
-    1 & vacmi & vacvaḥ & vacmaḥ \\
-    2 & vakṣi  & vakthaḥ & vaktha \\
-    3 & vakti & vaktaḥ & vacanti \\
-    \verbroot{}dviṣ &   &  &  \\
-    1  & dveṣmi & dviṣvaḥ & dviṣmaḥ \\
-    2 & dvekṣi  & dviṣṭhaḥ & dviṣṭhaṣ̄ \\
-    3  & dveṣṭi & dviṣṭaḥ & dviṣanti \\
+    \verbroot{vac} & 1  & 2 & 3  \\
+    单数 & \fullpada{vacmi} & \fullpada{vakṣi} & \fullpada{vakti} \\
+    \vspace{0.5cm} \\
+    \verbroot{dviṣ} & 单  & 双 & 复 \\
+    1  & \fullpada{dveṣmi} & \fullpada{dviṣvaḥ} & \fullpada{dviṣmaḥ} \\
+    2 & \fullpada{dvekṣi}  & \fullpada{dviṣṭhaḥ} & \fullpada{dviṣṭha} \\
+    3  & \fullpada{dveṣṭi} & \fullpada{dviṣṭaḥ} & \fullpada{dviṣanti} \\
   \end{NiceTabular}   
 \end{frame}
 
