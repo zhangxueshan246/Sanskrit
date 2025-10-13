@@ -1,0 +1,264 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{20. 代词概述}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第十九章练习3}
+  \small
+  \raggedright
+  \begin{verse}
+    \mbox{\skt{1) svaptumicchāma ityuktvā kanyā gṛhamāyan ।}} \\
+    \skt{2) janāḥ pāpaṃ dviṣyuḥ śūraṃ ca stuyuḥ ।} \\
+    \skt{3) cāpau gṛhītvā narāstau \important{nṛpāya} dadyuḥ ।} \\
+    \skt{4) narā gṛhe syurna tu santīti nārī vakti ।} \\
+    \skt{5) api chinnaṃ vṛkṣaṃ paśyasītyapṛccham । } 
+    \mbox{\skt{na draṣṭuṃ śaknomīti kanyā punarabravīt ।}} \\
+    \skt{6) saṃstutya devāñjuhuyāteti narānvadasi ।} \\
+  \end{verse}
+\end{frame}
+
+
+\begin{frame}{第十九章练习3}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{7) śūrāḥ kṣatriyānaghnanniti janāḥ parituṣya nagaramalamakurvan ।} \\
+    \skt{8) aśvaṃ narāya dadyā itīśvaro dāsīmavadat । }
+    \mbox{\skt{janānāṃ pālaḥ sadāsīditi dāsī punarabravīt ।}} \\
+    \mbox{\skt{9) īśvarasya vacanāni nāśṛṇumeti janā avadan ।}} \\
+    \mbox{\skt{10) īśvaro varāṃ dāsīṃ stutvā dānānyadadāt ।}} \\
+    \skt{11) rathasthaḥ kṣatriyo nidhanaṃ jñātvā na bibheti । kṣatriyaṃ stuyāma ।} \\
+    \skt{12) hṛṣṭanetraḥ kumāraḥ kanyāyā rūpaṃ dṛṣṭvā darśanaṃ prabhāṃ ca sukhairvacanairastaut ।} \\
+  \end{verse}
+
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{不带插入元音的动词}
+  \raggedright
+  \begin{itemize}
+    \item 未完成时：
+    \begin{itemize}
+      \item 主动语态单数是强语干
+      \item 词干前加 \pratyaya{a\nobreakdash-} 
+    \end{itemize} 
+    \item 祈愿语气
+    \begin{itemize}
+      \item 全部弱语干，词尾前加 \pratyaya{\nobreakdash-yā-}
+      \item 第三人称复数词尾直接是 \wordending{yuḥ}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+
+\section{代词}
+\begin{frame}{\insertsection }
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{代词概述}
+\begin{frame}{\insertsubsection}
+  %\small
+  \begin{itemize}
+    \item 代词的分类（按照形态划分）
+    \begin{itemize}
+      \item 人称代词：你我\notsoimportant{(第32章)}他
+      \item 指示代词：这那
+      \item 按代词变化的形容词\notsoimportant{(第22章)}
+    \end{itemize}
+    \item 代词的特点
+    \begin{itemize}
+      \item 代词有单独的语尾
+      \item 很多代词有多个语干
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\subsection{第三人称代词}
+\begin{frame}{\insertsubsection ~~\nounstem{saḥ/tad}}
+  \small
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}llllllll@{}} % 8 columns
+       &   \multicolumn{3}{c}{阳性}  &   \multicolumn{3}{c}{阴性}  \\
+       & 单数 & 双数 & 复数  & 单数 & 双数 & 复数 \\
+      主 & \fullpada{saḥ}  & \fullpada{tau} & \fullpada{te}  & \fullpada{sā}  & \fullpada{te} & \fullpada{tāḥ} \\
+      业 & \fullpada{tam} & \fullpada{tau} & \fullpada{tān} & \fullpada{tām} & \fullpada{te} & \fullpada{tāḥ}\\
+      具 & \fullpada{tena} & \fullpada{tābhyām} & \fullpada{taiḥ} & \fullpada{tayā} & \fullpada{tābhyām} & \fullpada{tābhiḥ} \\
+      为 & \fullpada{tasmai} & \fullpada{tābhyām} & \fullpada{tebhyaḥ} & \fullpada{tasyai} & \fullpada{tābhyām} & \fullpada{tābhyaḥ}\\
+      从 & \fullpada{tasmāt} & \fullpada{tābhyām} & \fullpada{tebhyaḥ} & \fullpada{tasyāḥ} & \fullpada{tābhyām} & \fullpada{tābhyaḥ}\\
+      属 & \fullpada{tasya} & \fullpada{tayoḥ} & \fullpada{teṣām} & \fullpada{tasyāḥ} & \fullpada{tayoḥ} & \fullpada{tāsām} \\
+      依 & \fullpada{tasmin} & \fullpada{tayoḥ} & \fullpada{teṣu} & \fullpada{tasyām} & \fullpada{tayoḥ} & \fullpada{tāsu}\\
+       &   \multicolumn{3}{c}{中性}  &   \multicolumn{3}{c}{}  \\
+      主业 & \fullpada{tat}  & \fullpada{te} & \fullpada{tāni}  &   \multicolumn{3}{c}{}  \\
+    \end{tabular}
+  }   
+\end{frame}
+
+\begin{frame}{\veryimportant{saḥ} 特殊连声}
+  %\small
+  \begin{itemize}
+    \item \veryimportant{后词是辅音时变为} \fullpada{sa}
+    
+    \fullpada{sa naraḥ}
+    \item 后词是 a 时变为 \fullpada{so}
+    
+    \skttranspada{so 'gacchat}
+    \item 后词是其他元音时变为 \fullpada{sa}
+    
+    \fullpada{yo yacchraddhaḥ sa eva saḥ.}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{用法}
+  %\small
+  \begin{itemize}
+    \item 单独使用时为第三人称代词
+    
+    \fullpada{so 'gacchat.}
+    \item 和其他词同格时可以是定冠词、指示代词或强调
+    
+    \fullpada{sa naraḥ. so 'ham. sa Rāmaḥ.}
+    \item yad...tad...引起关系从句\notsoimportant{（23章）}
+    
+    \fullpada{yo yacchraddhaḥ sa eva saḥ.}
+  \end{itemize}
+\end{frame}
+
+\subsection{指示代词}
+\begin{frame}{\insertsubsection ~~\nounstem{ayam/idam}}
+  \small
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}llllllll@{}} % 8 columns
+       &   \multicolumn{3}{c}{阳性}  &   \multicolumn{3}{c}{阴性}  \\
+       & 单数 & 双数 & 复数  & 单数 & 双数 & 复数 \\
+      主 & \fullpada{ayam}  & \fullpada{imau} & \fullpada{ime}  & \fullpada{iyam}  & \fullpada{ime} & \fullpada{imāḥ} \\
+      业 & \fullpada{imam} & \fullpada{imau} & \fullpada{imān} & \fullpada{imām} & \fullpada{ime} & \fullpada{imāḥ}\\
+      具 & \fullpada{anena} & \fullpada{ābhyām} & \fullpada{ebhiḥ} & \fullpada{anayā} & \fullpada{ābhyām} & \fullpada{ābhiḥ} \\
+      为 & \fullpada{asmai} & \fullpada{ābhyām} & \fullpada{ebhyaḥ} & \fullpada{asyai} & \fullpada{ābhyām} & \fullpada{ābhyaḥ}\\
+      从 & \fullpada{asmāt} & \fullpada{ābhyām} & \fullpada{ebhyaḥ} & \fullpada{asyāḥ} & \fullpada{ābhyām} & \fullpada{ābhyaḥ}\\
+      属 & \fullpada{asya} & \fullpada{anayoḥ} & \fullpada{eṣām} & \fullpada{asyāḥ} & \fullpada{anayoḥ} & \fullpada{āsām} \\
+      依 & \fullpada{asmin} & \fullpada{anayoḥ} & \fullpada{eṣu} & \fullpada{asyām} & \fullpada{anayoḥ} & \fullpada{āsu}\\
+       &   \multicolumn{3}{c}{中性}  &   \multicolumn{3}{c}{}  \\
+      主业 & \fullpada{idam}  & \fullpada{ime} & \fullpada{imāni}  &   \multicolumn{3}{c}{}  \\
+    \end{tabular}
+  }   
+\end{frame}
+
+\begin{frame}%[fragile]
+  \frametitle{指示代词的远近程度}
+  \small
+  \centering
+  \begin{NiceTabular}{cccc}
+    \CodeBefore
+      %\rectanglecolor{light-gray}{3-2}{5-2}
+      %\rectanglecolor{light-gray}{7-2}{9-2}
+    \Body % 7 columns
+    %&   \multicolumn{3}{c}{现在时}  \\
+    最近 & 近  & 远 & 最远  \\
+    \fullpada{eṣaḥ/etad} & \fullpada{ayam/idam} & \fullpada{saḥ/tad} & \fullpada{asau/adas} \\
+  \end{NiceTabular}   
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第二十章练习4
+    %\item
+    %  勘误：第3题括号后加\skt{nṛpāya}
+    \bigskip
+    %\item
+    %  现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}  
+
+\end{document}	
