@@ -1,0 +1,353 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{21. 将来时、中间语态}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第二十章练习4}
+  \raggedright
+  \begin{verse}
+    \skt{1) nārī naraśca gṛhaṃ saṃpratyāgacchataḥ । so 'nnaṃ bharati sā tūdakam ।}   \\
+    \skt{2) tadarthe puramāyam ।}   \\
+    \skt{3) te 'śvāḥ pṛtanāyāṃ rathānanayan ।}   \\
+    \skt{4) tattena nareṇa kṛtam ।}  \\
+    \skt{5) apīdaṃ tasmai tasyai vākaroḥ ।}   \\
+    \skt{6) tasmindeśe sukhā janā vasanti ।}   \\
+  \end{verse}
+\end{frame}  
+
+\begin{frame}{第二十章练习4}
+  \begin{verse}
+    \mbox{\skt{7) ebhiḥ pālitaṃ puraṃ dagdhuṃ na śaknomi ।}}   \\
+    \skt{8) tāstenātuṣyan ।}   \\
+    \mbox{\skt{9) tanna kartuṃ śaknomīti naro jānāti ।}} \\
+    \skt{10) asmādvanātpratyāgatya kumāro gṛhaṃ prāviśat ।}   \\
+    \skt{11) ime bhadrā ebhyastu bibhemi।}   \\
+    \skt{12) idaṃ gṛhaṃ na jānāmi ।}   \\
+  \end{verse}
+\end{frame}  
+ 
+
+\subsection{上节问题}
+\begin{frame}{\insertsubsection}
+  \begin{itemize}
+    \item vacmi (梵语基础读本 43)
+    
+    ~~~在以元音、半元音或鼻音为首的语尾前，辅音一般不变。
+    \item gṛhītvā (梵语基础读本 187注2)
+    
+    ~~~\verbroot{grah} 的联系元音是 \pratyaya{\nobreakdash-ī\nobreakdash-}。
+    \item 现在时语干 $\neq$ 未完成时语干
+    
+    ~~~未完成时语干
+    
+    = 未完成时标志 \pratyaya{a\nobreakdash-} + 现在时语干
+  \end{itemize}
+\end{frame}
+
+\section{将来时}
+\begin{frame}{\insertsection }
+    \small
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{形式}
+\begin{frame}{\insertsubsection}
+  \begin{itemize}
+    \item 词根二合
+    \item 将来时标志：\pratyaya{\nobreakdash-sya\nobreakdash-/\nobreakdash-iṣya\nobreakdash-}
+    \item 原始语尾  
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\verbroot{gam}}
+  %\small
+  现在时： \verbstem{\nobreakdash gaccha} \fullpada{\nobreakdash gacchati}
+  \bigskip
+
+
+  将来时： \verbstem{\nobreakdash gamiṣya} 
+  \bigskip
+
+  \centering
+  \begin{tabular}{@{}cccc@{}} % 6 columns
+    & 单 & 双 & 复  \\
+    1st & \fullpada{gamiṣyāmi} & \fullpada{gamiṣyāvaḥ}  & \fullpada{gamiṣyāmaḥ}  \\
+    2nd & \fullpada{gamiṣyasi} & \fullpada{gamiṣyathaḥ} & \fullpada{gamiṣyatha}   \\
+    3rd & \fullpada{gamiṣyati} & \fullpada{gamiṣyataḥ} & \fullpada{gamiṣyanti}  \\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{\pratyaya{\nobreakdash-sya\nobreakdash-/\nobreakdash-iṣya\nobreakdash-}}
+  \begin{itemize}
+    \item 加哪个词缀一般无规律。
+
+    \verbroot{gam} \fullpada{gamiṣyati}  \fullpada{gaṃsyati}
+    \item 第十类和致使动词用 \pratyaya{\nobreakdash-iṣya\nobreakdash-}，\\加在现在时语干基础上。
+    
+    \verbroot{kath} \fullpada{kathayati} \fullpada{kathayiṣyati} 
+
+    \verbroot{pat} \fullpada{patati} \fullpada{pātayati} \fullpada{pātayiṣyati} 
+  \end{itemize}    
+\end{frame}
+
+\subsection{相关连声}
+\begin{frame}{\pratyaya{\nobreakdash-sya\nobreakdash-} \insertsubsection}
+  \begin{itemize}
+    \item 浊音轻化，腭音变喉音
+
+    \verbroot{yuj}  \reconstruction{yoj\nobreakdash-syati}  \reconstruction{yok\nobreakdash-syati} \fullpada{yokṣyati}
+    \item ś 变 k，h 变 k
+    
+    \verbroot{viś} \fullpada{vekṣyati} ~~\verbroot{snih} \fullpada{snekṣyati}
+    \item s 变 t (少见)  
+    
+    \verbroot{vas} \fullpada{vatsyati} 
+    \item 送气音前移 (无规律)
+
+    \verbroot{budh} \fullpada{bhotsyati} ~~\verbroot{dah} \fullpada{dhakṣyati}
+  \end{itemize}
+\end{frame}
+
+\section{中间语态}
+\begin{frame}{\insertsection }
+    \small
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{形式与意义}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item 形式层面：主动与中间语态语尾
+    \item 意义层面：主动与被动含义
+    \item 两者之间的关系：
+    \begin{itemize}
+      \item 主动语态表达主动含义。
+      \item 现在时和未完成时有单独被动形式，被动语态使用中间语态语尾。
+      \item 这两个时态的中间语态表主动含义。
+      \item 其他时态中间语态表被动含义。
+    \end{itemize}    
+  \end{itemize}
+\end{frame}
+
+\subsection{中间语态语尾}
+\begin{frame}{中间语态原始语尾}
+  \small
+  \centering
+  \begin{NiceTabular}{@{}ccccccc@{}} % 6 columns
+    & \Block{1-3}{主动语态} & & & \Block{1-3}{中间语态} \\
+    & 单 & 双 & 复 & 单 & 双 & 复 \\
+    1st & \wordending{mi} & \wordending{vaḥ}  & \wordending{maḥ} & \wordending{e} & \wordending{vahe}  & \wordending{mahe}  \\
+    2nd & \wordending{si} & \wordending{thaḥ} & \wordending{tha} & \wordending{se} & \wordending{(e/ā)the} & \wordending{dhve}   \\
+    3rd & \wordending{ti} & \wordending{taḥ} & \wordending{anti} & \wordending{te} & \wordending{(e/ā)te} & \wordending{a(n)te}  \\
+  \end{NiceTabular}
+\end{frame}
+
+\begin{frame}{中间语态例词 \verbroot{bhāṣ}}
+  \small
+  \centering
+  \begin{tabular}{@{}cccc@{}} % 6 columns
+    现在时 & 单 & 双 & 复  \\
+    1st & \fullpada{bhāṣ\veryimportant{e}} & \fullpada{bhāṣāvahe}  & \fullpada{bhāṣāmahe}  \\
+    2nd & \fullpada{bhāṣase} & \fullpada{bhāṣethe} & \fullpada{bhāṣadhve}   \\
+    3rd & \fullpada{bhāṣate} & \fullpada{bhāṣete} & \fullpada{bhāṣante}  \\
+    \\
+    将来时 & 单 & 双 & 复  \\
+    1st & \fullpada{bhāṣiṣy\veryimportant{e}} & \fullpada{bhāṣiṣyāvahe}  & \fullpada{bhāṣiṣyāmahe}  \\
+    2nd & \fullpada{bhāṣiṣyase} & \fullpada{bhāṣiṣyethe} & \fullpada{bhāṣiṣyadhve}   \\
+    3rd & \fullpada{bhāṣiṣyate} & \fullpada{bhāṣiṣyete} & \fullpada{bhāṣiṣyante}  \\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{中间语态例词 \verbroot{hu}}
+  %\small
+  \centering
+  \begin{tabular}{@{}cccc@{}} % 6 columns
+    现在时 & 单 & 双 & 复  \\
+    1st & \fullpada{juhve} & \fullpada{juhuvahe}  & \fullpada{juhumahe}  \\
+    2nd & \fullpada{juhuṣe} & \fullpada{juhv\veryimportant{ā}the} & \fullpada{juhudhve}   \\
+    3rd & \fullpada{juhute} & \fullpada{juhv\veryimportant{ā}te} & \fullpada{juhv\veryimportant{a}te}  \\
+  \end{tabular}
+  \begin{itemize}
+      \item 非插入元音的中间语态用弱语干。
+      \item 注意二双、三双和三复。
+  \end{itemize}  
+\end{frame}
+
+\subsection{现在时被动语态}
+\begin{frame}{\insertsubsection}
+  \begin{itemize}
+    \item
+      词根零级 + \pratyaya{\nobreakdash-ya\nobreakdash-} + 中间语态语尾   
+  \end{itemize}
+  \small
+  \centering
+  \begin{NiceTabular}{@{}ccccccc@{}} % 6 columns
+     & 单 & 单 & 双 & 复 \\
+    \verbroot{yuj (7)} & 主动 & \Block{1-3}{被动} \\
+    1st & \fullpada{yunajmi}  & \fullpada{yujye} & \fullpada{yujyāvahe}  & \fullpada{yujyāmahe}  \\
+    2nd & \fullpada{yunakṣi}  & \fullpada{yujyase} & \fullpada{yujyethe} & \fullpada{yujyadhve}   \\
+    3rd & \fullpada{yunakti}  & \fullpada{yujyate} & \fullpada{yujyete} & \fullpada{yujyante}  \\
+    \verbroot{yaj (1)} & 中间 & \Block{1-3}{被动} \\
+    1st & \fullpada{yaje}  & \fullpada{ijye} & \fullpada{ijyāvahe}  & \fullpada{ijyāmahe}  \\
+    2nd & \fullpada{yajase}  & \fullpada{ijyase} & \fullpada{ijyethe} & \fullpada{ijyadhve}   \\
+    3rd & \fullpada{yajate}  & \fullpada{ijyate} & \fullpada{ijyete} & \fullpada{ijyante}  \\
+  \end{NiceTabular}
+\end{frame}
+
+\subsection{被动不规则变化}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item
+      以元音结尾的词根，元音可能会变。
+  \end{itemize}
+  \centering
+  \begin{tabular}{@{}llllll@{}} % 6 columns
+      ā 变 ī & \verbroot{dā}  & \fullpada{dīyate}   \\
+      i/u变长 &\verbroot{ji} & \fullpada{jīyate} \\
+      & \verbroot{śru} & \fullpada{śrūyate} \\
+      ṛ 变 ri &\verbroot{bhṛ} & \fullpada{bhriyate}  \\
+      复合辅音后变 ar &\verbroot{smṛ} & \fullpada{smaryate}  \\
+      ṝ 变 īr &\verbroot{tṝ} & \fullpada{tīryate}  \\
+      唇音后变 ūr &\verbroot{pṝ} & \fullpada{pūryate}  \\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item  有的词根元音用二合形式。
+
+    \verbroot{han} \fullpada{hanyate} ~~\verbroot{labh} \fullpada{labhyate}
+    \item 第十类动词和致使动词\\词根元音级别和主动语态一样。 
+    
+    \verbroot{bhṛ} \fullpada{bhārayati} \fullpada{bhāryate}
+  \end{itemize}
+\end{frame}
+
+\subsection{相关句法}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item  逻辑主语用具格。
+
+    \fullsentence{bālaḥ nareṇa bhṛtaḥ}
+
+    \fullsentence{bālaḥ nareṇa bhriyate}
+    \item 非现在时中间语态形式需根据上下文判断是主动还是被动意义。 
+    
+    \fullsentence{bālaḥ nareṇa drakṣyate} 
+
+    \fullsentence{bālaḥ naram drakṣyate}
+    \item 某些第四类动词现在时也是。
+    
+    \verbroot{man(4)} \fullpada{manyate}
+  \end{itemize}
+\end{frame}
+
+\subsection{相关连声}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item  词尾的e在非a元音前变为a。
+
+    \reconstruction{bhāṣate upaviśati ca}
+
+    \fullsentence{~~bhāṣata upaviśati ca}
+  \end{itemize}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第21章练习4
+  \end{itemize}
+\end{frame}  
+
+\end{document}	

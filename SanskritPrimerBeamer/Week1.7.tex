@@ -1,0 +1,348 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语入门}}
+\subtitle{8. 独立式分词等}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第七章练习7}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{1) priyaṃ gṛhaṃ tyajāmaḥ aśvān ca nagaraṃ prati nayāmaḥ ।}   \\
+    \skt{2) mitra api devān vacanaiḥ ślokaiḥ ca pūjayasi ।}   \\
+    \skt{3) īśvarāḥ puraṃ vardhayanti ।}   \\
+    \mbox{\skt{4) bālau kim atra tiṣṭhathaḥ na ca gṛhe bhavathaḥ ।}}  \\
+    \skt{5) bālaḥ mitreṇa saha gṛhāt dravati ।}   \\
+  \end{verse}
+\end{frame}  
+
+\begin{frame}{第七章练习7}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{6) śūrāḥ narāḥ vyāghraṃ vanaṃ prati drāvayanti ।}   \\
+    \skt{7) api kṣatriyāḥ pāpān yuddhe pātayanti ।}   \\
+    \mbox{\skt{8) śūraḥ aśvaḥ vyāghrāt naraṃ rakṣati ।}} \\
+    \skt{9) mitrāṇi eva smarāmi gṛhaṃ ca nayāmi ।}   \\
+    \skt{10) kṣatriyāḥ api yuddhe pāpaṃ jayatha janān ca nagaraṃ prati nayatha ।}   \\
+  \end{verse}
+\end{frame}  
+ 
+\subsection{复习}
+
+\begin{frame}{元音的系统变化}
+  %\small
+  \centering
+  %\resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}ccc@{}} % 6 columns
+      零级 & 二合 & 三合  \\
+      \fullpada{-} & \fullpada{a} & \fullpada{ā} \\
+      \hline
+      \fullpada{ṛ/ṝ}  & \fullpada{ar} & \fullpada{ār}   \\
+      \fullpada{ḷ}  & \fullpada{al} & \fullpada{āl}   \\
+      \hline
+      \fullpada{i/ī} & \fullpada{ay/e} & \fullpada{āy/ai} \\
+      \fullpada{u/ū} & \fullpada{av/o} & \fullpada{āv/au} \\
+    \end{tabular}
+  %}
+\end{frame}
+
+\begin{frame}{元音转换的应用}
+  \begin{itemize}
+    \item 第十类动词
+    \begin{itemize}
+      \item
+        词根变哪级都可能，后加 \nobreakdash-aya\nobreakdash-。
+      \item 名转动词：保留名词的级别
+      \item 其他：能产生重音节的最低级
+    \end{itemize}
+    \item 致使动词
+    \begin{itemize}
+      \item
+        其他类的动词按照第十类变化
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{独立式等}
+\begin{frame}{\insertsection }
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{为什么要有这些形式}
+  \begin{itemize}
+    \item 梵语一般每句话只有一个动词。
+    \item 其他的动作要用\veryimportant{非谓语形式}表达。
+  \end{itemize}
+  \bigskip
+    {\footnotesize
+    She \important{leaves} the house, \important{goes} into the forest and \important{sits} down.
+
+    After she \important{left} the house and \important{went} into the forest, she \important{sat} down.
+
+    \important{Having left} \textsubscript{\textbf{(独立式/分词)}}  the house and \important{having gone} \textsubscript{\textbf{(独立式/分词)}}  into the forest, 
+she \important{sat} \textsubscript{\textbf{(主要动词)}} down.
+    }
+\end{frame}
+
+\subsection{独立式}
+\begin{frame}{\insertsubsection}
+  \begin{itemize}
+    \item 形式
+    
+    词根零级 + \pratyaya{\nobreakdash-tvā} 
+
+    \notsoimportant{前缀 + 词根零级 + \pratyaya{\nobreakdash-tya} / \pratyaya{\nobreakdash-ya}}
+    \item 意义 (having x\nobreakdash-ed)
+    
+    动作发生在主要动词之前 
+
+    与主要动词主语一致
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsection  ~~例词}
+  \centering
+  \begin{tabular}{@{}ll@{}} % 6 columns
+    词根 & 独立式  \\
+    \skttransroot{dru} 跑 & \skttranspada{drutvā}  \\
+    \skttransroot{kṛ} 做 & \skttranspada{kṛtvā}  \\
+    \skttransroot{gam} 去 & \skttranspada{gatvā}  \\
+  \end{tabular}
+\end{frame}
+
+\subsection{过去分词}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item 形式
+    
+    词根零级 + \pratyaya{\nobreakdash-ta\nobreakdash-} \veryimportant{(按名词变格)}
+    \item 意义
+    \begin{itemize}
+      \item ppp. 过去被动分词
+      
+      (having been x\nobreakdash-ed)
+      \item 没法被动的词表主动含义
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~例词}
+  \centering
+  \begin{tabular}{@{}lll@{}} % 6 columns
+    & 词根 & 过去分词  \\
+    被动含义 & \skttransroot{bhṛ} 扛 & \skttransnounstem{bhṛta}  \\
+    & \skttransroot{kṛ} 做 & \skttransnounstem{kṛta}  \\
+    主动含义 &  \skttransroot{bhū} 存在 & \skttransnounstem{bhūta} \\ 
+    & \skttransroot{gam} 去 & \skttransnounstem{gata}\\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~句法}
+  \begin{itemize}
+    \item 句中没有主要动词时\\过去分词可代替主要动词
+    
+    \fullsentence{puraṃ dṛṣṭaṃ} The city was seen. \\
+    \fullsentence{narāḥ puraṃ gatāḥ} The men went to the city.
+    \item 被动的逻辑主语用具格或属格
+    
+    \fullsentence{nareṇa / narasya aśvaḥ dṛṣṭaḥ} \\
+    The horse was seen by the man.
+  \end{itemize}
+\end{frame}
+
+\subsection{不定式}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item 形式
+    
+    词根二合 + \pratyaya{\nobreakdash-tum} 
+
+    \item 意义
+    
+    to x (to do)
+    
+    和表示期望/想要/去等动词连用
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~例词}
+  \centering
+  \begin{tabular}{@{}lll@{}} % 6 columns
+    & 词根 & 不定式  \\
+    & \skttransroot{nī} 带领 & \skttranspada{netum}  \\
+    & \skttransroot{śru} 听 & \skttranspada{śrotum}  \\ 
+  \end{tabular}
+\end{frame}
+
+\subsection{不规则形式}
+\begin{frame}{\insertsubsection ~~联系元音 i}
+  \begin{itemize}
+    \item 某些以辅音结尾的词根\\和以 t 开头的词缀间加 i
+    
+    \verbroot{likh} 写 \nounstem{likhita} \fullpada{likhitvā}\\
+    \verbroot{pat} 飞 \fullpada{patitum} 
+    \item 第十类和致使动词一定加 i
+    
+    \verbroot{cint} 想 \fullpada{cintayitum}\\
+    \verbroot{pat} 飞 \nounstem{pātayita} \fullpada{pātayitvā}
+
+    \item 其他词加不加 i 没有规律
+
+    \verbroot{bhū} 存在 \nounstem{bhūta} \fullpada{bhūtvā} \fullpada{bhavitum}
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~词根二合}
+  \begin{itemize}
+    \item 某些词根二合构成独立式\\和过去分词
+
+    \verbroot{rakṣ} 保护 \nounstem{rakṣita} \fullpada{rakṣitvā}\\
+    \verbroot{pat} 飞 \nounstem{patita} \fullpada{patitvā}
+    \item 哪些词这样变没有规律
+  \end{itemize}  
+\end{frame}
+
+\section{词内连声}
+\begin{frame}{\insertsection }
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{t 前辅音}
+\begin{frame}{\insertsubsection 连声}
+  \begin{itemize}
+    \item 浊音变清音
+    ~~\verbroot{chid} 切 \fullpada{chittvā}
+
+    \item 腭音变喉音
+
+    \verbroot{muc} 放 \fullpada{muktvā} \\
+    \verbroot{yuj} 联系 \fullpada{yuktvā}
+    \item 鼻音变n   
+    ~~\verbroot{gam} 去 \fullpada{gantum} 
+
+    {\small
+    \notsoimportant{扩展：鼻音的发音部位跟着后面的辅音变}}
+    \item śt 变 ṣṭ
+    ~~\verbroot{dṛś} 看 \fullpada{dṛṣṭvā}  
+  \end{itemize}  
+\end{frame}
+
+\subsection{buddha 连声}
+\begin{frame}{\insertsubsection}
+  \begin{itemize}
+    \item 前音是送气浊音时，\\前音变不送气，t变dh 
+    
+    \verbroot{budh} 醒 ~\nounstem{buddha} \\
+    \verbroot{labh} ~得 ~\fullpada{labdhvā} \\
+    \verbroot{dah} ~~烧 ~\nounstem{dagdha} \\
+    ~~~\notsoimportant{h 历史上往往是 gh}
+  \end{itemize}  
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      \veryimportant{下周期中考试：默写字母表}
+    \item
+      第八章练习4
+    \item
+      阅读教材第8课相关内容
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}  
+
+\end{document}	
