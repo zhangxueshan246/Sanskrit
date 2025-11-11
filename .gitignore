@@ -13,6 +13,7 @@
 *.fls
 *.xdv
 *.pdf
+*.ini
 
 
 # Sync and cache files

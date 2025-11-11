@@ -1,0 +1,330 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\usepackage{diagbox}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.85}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{24. s的变格和命令语气}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  %\small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第23章练习1}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{1) yasmātpurātsarve te kumārā āgacchaṃstasminvastumicchāmi ।}   \\
+    \skt{2) yānkṣatriyānapadravamāṇānpaśyasi tānhantuṃ na śakṣyāmaḥ ।}   \\
+    \skt{3) yāṃ bālāṃ vana āsīnāṃ naro 'paśyattasyā annamadadāt }\\
+    \skt{4) yāvatsūryaṃ dyotamānamīkṣe tāvatsmaye ।}   \\
+    \skt{5) kutra te kumārāḥ । atra nagaryāṃ na santīti pṛṣṭā yoddhumapāgacchanniti nārī duḥkhaṃ punarabravīt ।}   \\
+    \skt{6) yo yo jāyate sa mariṣyati ।}   \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第23章练习1}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{7) yato yuddhātpratyāgataṃ putraṃ paśyati tato hṛṣyati ।}   \\
+    \skt{8) kadā cana bālo nagarīṃ gacchati tadā tasmai bhoktumannaṃ dīyate ।}   \\
+    \skt{9) yāni vacanānyaśṛṇavaṃ tāni staumi ।}\\
+    \skt{10) kadā citkaṃ cana vedavidaṃ paśyasi tadā tasya vacanāni śrotumarhasi ।}  \\
+    \skt{11) yatra yatra mitrāṇi tatra sukham ।}  \\
+    \skt{12) katarastayorvṛkṣayoruttaro 'sti । ya uttaro 'sti taṃ rohitumicchāmi ।}   \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第23章 Sudarśana}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{sudarśanaṃ pravakṣyāmi dvīpaṃ te kurunandana ।}   \\
+    \skt{parimaṇḍalo mahārāja dvīpo 'sau cakrasaṃsthitaḥ ॥ 13 ॥}   \\
+    \skt{nadījalapraticchannaḥ parvataiścābhrasaṃnibhaiḥ ।}\\
+    \mbox{\skt{puraiśca vividhākārai ramyairjanapadaistathā ॥ 14 ॥}}  \\
+    \skt{vṛkṣaiḥ puṣpaphalopetaiḥ saṃpannadhanadhānyavān ।}  \\
+    \mbox{\skt{lavaṇena samudreṇa samantātparivāritaḥ ॥ 15 ॥}}  \\
+    \skt{yathā hi puruṣaḥ paśyedādarśe mukhamātmanaḥ ।}  \\
+    \mbox{\skt{evaṃ sudarśanadvīpo dṛśyate candramaṇḍale ॥ 16 ॥}}  \\
+  \end{verse}
+\end{frame}
+
+
+\begin{frame}{第23章 Sudarśana}  
+  \centering
+  \includegraphics[width=\textwidth]{sudarśana.png} %
+\end{frame}
+
+
+\section{s的变格}
+\begin{frame}{\insertsection }
+    \small
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item s 结尾的名词一般是中性
+    \item 还有以中性名词为后词的多财释
+    \item 加正常辅音格尾，主要是连声问题。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{辅音格尾表复习}
+  \small
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & \Block{1-2}{单数} & & \Block{1-2}{双数} & & \Block{1-2}{复数} &  \\
+       & 阳阴 & 中 & 阳阴 & 中 & 阳阴 & 中  \\
+      主 & \wordending{s} & \Block{3-1}{\wordending{}} & \Block{3-1}{\wordending{au}}  & \Block{3-1}{\wordending{ī}}  & \Block{3-1}{\wordending{aḥ}} &  \Block{3-1}{\wordending{ni}}   \\
+      呼 & \wordending{} & & & & & \\
+      业 & \wordending{am} &  & & & & \\
+      具 & \Block{1-2}{\wordending{ā}} &  & \Block{3-2}{\wordending{bhyām}}  & & \Block{1-2}{\wordending{bhiḥ}} & \\
+      为 & \Block{1-2}{\wordending{e}} &  & & & \Block{2-2}{\wordending{bhyaḥ}}  & \\
+      从 & \Block{2-2}{\wordending{aḥ}} &  & & & & \\
+      属 & &  & \Block{2-2}{\wordending{oḥ}} & &  \Block{1-2}{\wordending{ām}} & \\
+      依 & \Block{1-2}{\wordending{i}} &  & & & \Block{1-2}{\wordending{su}}&  \\
+    \end{NiceTabular}
+\end{frame}
+
+\subsection{as结尾名词}
+\begin{frame}{\nounstem{-as} 结尾的中性名词}
+  \small
+  \nounstem{manas} n. 心，意
+  \bigskip
+
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & 单数 & 双数 & 复数  \\
+      主 & \Block{3-1}{\fullpada{manaḥ}}  & \Block{3-1}{\fullpada{manasī}} & \Block{3-1}{\fullpada{manāṃsi}}   \\
+      呼 &  &  &  \\
+      业 &  &  &  \\
+      具 & \fullpada{manasā} & \Block{3-1}{\fullpada{manobhyām}} & \fullpada{manobhiḥ} \\
+      为 & \fullpada{manase} &  & \Block{2-1}{\fullpada{manobhyaḥ}} \\
+      从 & \Block{2-1}{\fullpada{manasaḥ}} &  &  \\
+      属 &  & \Block{2-1}{\fullpada{manasoḥ}} & \fullpada{manasām} \\
+      依 & \fullpada{manasi} &  & \fullpada{manaḥsu} \\
+    \end{NiceTabular}
+\end{frame}
+
+\begin{frame}{\nounstem{-as} 结尾的多财释}
+  \small
+  \nounstem{sumanas} adj. 好心的
+  \begin{itemize}
+    \item 中性变化同 \nounstem{manas}
+    \item 阳性阴性具格以下也一样
+    \item 阳性阴性主呼业格如下表
+  \end{itemize}
+  
+  \bigskip
+
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & 单数 & 双数 & 复数  \\
+      主 & \fullpada{sumanāḥ}  & \Block{3-1}{\fullpada{sumanasau}} & \Block{3-1}{\fullpada{sumanasaḥ}}  \\
+      呼 & \fullpada{sumanaḥ} &  &  \\
+      业 & \fullpada{sumanasam} &  &  \\
+    \end{NiceTabular}
+\end{frame}
+
+\subsection{is/us结尾名词}
+\begin{frame}{\nounstem{-us} 结尾的名词}
+  \small
+  \nounstem{cakṣus} n. 眼睛 ~~ \nounstem{acakṣus} adj. 失明的
+  \bigskip
+
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      阳阴 & 单数 & 双数 & 复数  \\
+      主呼 & \fullpada{acakṣuḥ}  & \Block{2-1}{\fullpada{acakṣuṣau}} & \Block{2-1}{\fullpada{acakṣuṣaḥ}}  \\
+      业 & \fullpada{acakṣuṣam} &  &  \\
+      中性 & \Block{2-1}{\fullpada{cakṣuḥ}}  & \Block{2-1}{\fullpada{cakṣuṣī}} & \Block{2-1}{\fullpada{cakṣūṃṣi}}   \\
+      主呼业 &  &  &  \\
+      具 & \fullpada{cakṣuṣā} & \Block{3-1}{\fullpada{cakṣurbhyām}} & \fullpada{cakṣurbhiḥ} \\
+      为 & \fullpada{cakṣuṣe} &  & \Block{2-1}{\fullpada{cakṣurbhyaḥ}} \\
+      从 & \Block{2-1}{\fullpada{cakṣuṣaḥ}} &  &  \\
+      属 &  & \Block{2-1}{\fullpada{cakṣuṣoḥ}} & \fullpada{cakṣuṣām} \\
+      依 & \fullpada{cakṣuṣi} &  & \fullpada{cakṣuḥṣu} \\
+    \end{NiceTabular}
+\end{frame}
+
+\section{命令语气}
+\subsection{形式}
+\begin{frame}{命令语气语尾}  
+  \centering
+  \includegraphics[width=\textwidth]{imperativeendings.png} %
+\end{frame}
+
+\begin{frame}{\verbstem{a} 语干 }
+  \small
+  \verbroot{bhṛ (1)} ~持
+  \bigskip
+
+  \centering 
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    P. & 单数  & 双数  & 复数 \\
+    1st & \fullpada{bharāṇi} & \cellcolor{yellow!30}\fullpada{bharāva}  & \cellcolor{yellow!30}\fullpada{bharāma}  \\
+    2nd & \fullpada{bhara} & \cellcolor{yellow!30}\fullpada{bharatam} & \cellcolor{yellow!30}\fullpada{bharata}  \\
+    3rd & \fullpada{bharatu} & \cellcolor{yellow!30}\fullpada{bharatām} & \fullpada{bharantu}  \\
+  \end{tabular} 
+  \bigskip
+    
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    Ā. & 单数  & 双数  & 复数 \\
+    1st & \fullpada{bharai} & \fullpada{bharāvahai} & \fullpada{bharāmahai} \\
+    2nd & \fullpada{bharasva} & \cellcolor{yellow!30}\fullpada{bharethām} & \cellcolor{yellow!30}\fullpada{bharadhvam} \\
+    3rd & \fullpada{bharatām} & \cellcolor{yellow!30}\fullpada{bharetām} & \fullpada{bharantām} \\
+  \end{tabular}   
+\end{frame}
+
+\begin{frame}{非 \verbstem{a} 语干 }
+  \small
+  \verbroot{bhuj (7)} ~享用
+  \bigskip
+  
+  \centering 
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    P. & 单数  & 双数  & 复数 \\
+    1st & \cellcolor{light-gray}\fullpada{bhunajāṇi} & \cellcolor{light-gray}\fullpada{bhunajāva}  & \cellcolor{light-gray}\fullpada{bhunajāma}  \\
+    2nd & \fullpada{bhuṅgdhi} & \fullpada{bhuṅktam} & \fullpada{bhuṅkta}  \\
+    3rd & \cellcolor{light-gray}\fullpada{bhunaktu} & \fullpada{bhuṅktām} & \fullpada{bhuñjantu}  \\
+  \end{tabular} 
+  \bigskip
+    
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    Ā. & 单数  & 双数  & 复数 \\
+    1st & \cellcolor{light-gray}\fullpada{bhunajai} & \cellcolor{light-gray}\fullpada{bhunajāvahai} & \cellcolor{light-gray}\fullpada{bhunajāmahai} \\
+    2nd & \fullpada{bhuṅkṣva} & \fullpada{bhuñjāthām} & \fullpada{bhuṅgdhvam} \\
+    3rd & \fullpada{bhuṅktām} & \fullpada{bhuñjātām} & \fullpada{bhuñjatām} \\
+  \end{tabular}   
+\end{frame}
+
+\begin{frame}{第二人称单数}
+  \begin{itemize}
+    \item \verbstem{a} 语干主动：等于现在时语干\\
+    \verbroot{bhṛ}  \fullpada{bhara}  ~~ \verbroot{sthā}  \fullpada{uttiṣṭḥa}
+    \item 非 \verbstem{a} 语干主动：语尾是 \wordending{dhi} 或 \wordending{hi}\\
+    \verbroot{bhuj}  \fullpada{bhuṅgdhi}  ~~ \verbroot{brū}  \fullpada{brūhi}
+    \item 第五类动词：等于弱语干\\
+    \verbroot{śru}  \fullpada{śṛṇu}  
+    \item 中间语态：语尾是 \wordending{sva}\\
+    \verbroot{yudh}  \fullpada{yudhyasva}  
+  \end{itemize}
+\end{frame}
+
+\subsection{意义和用法}
+\begin{frame}{\insertsubsection }
+  \begin{itemize}
+    \item 第二人称表示命令
+    \item 第三人称表示允许、建议等意义
+    \item 第一人称实际少用
+  \end{itemize}
+\end{frame}
+
+\subsection{表达禁止}
+\begin{frame}{禁止的表达方式}
+  \begin{itemize}
+    \item mā + 命令语气/祈愿语气\\
+    \fullsentence{mā gaccha} ~~ \fullsentence{mā gacchet}
+    \item alam + 具格\\
+    \fullsentence{alaṃ bhayena} ~~ \fullsentence{alaṃ krodhena}
+    \item na + 必要分词 (33章) \\
+    \fullsentence{naraḥ na hantavyaḥ}   
+  \end{itemize}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第24章练习5
+    \item 所有的Readings
+  \end{itemize}
+\end{frame}  
+
+\end{document}	
