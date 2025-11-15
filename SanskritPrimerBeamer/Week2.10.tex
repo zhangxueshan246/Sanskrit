@@ -1,0 +1,277 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\usepackage{diagbox}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.85}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{25. 多语干名词变格}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  %\small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第24章练习5}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{1) parvatasya śira āruhya viśvaṃ lokaṃ draṣṭuṃ śakṣyāmīti cintayitvā kumāraḥ puramatyajat ।
+  śirastvāptuṃ nāśaknot ।}   \\
+    \skt{2) yatra cakṣūṃṣi tatra vapuḥ ।}   \\
+    \mbox{\skt{3) alaṃ bhayena । uttiṣṭha paraṃtapa । parānyudhyasva ।}}\\
+    \skt{4) yaśo namaśca sarvasmai kṣatriyāya yo dharmavijjitendriyaśca maraṇānna bibheti ।}   \\
+    \skt{5) ojasā nṛpaḥ parānabhibhavitumaśaknot ।}   \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第24章练习5}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{6) bālaḥ kanyāyai phalāni dadātu । kanye tāni phalāni bhuṅkṣva ।}   \\
+    \skt{7) namo devebhyaḥ kuru sadā ca tattvaṃ brūhi ।}   \\
+    \skt{8) rajasi sucakṣuṣo 'pyacakṣuṣaḥ ।}\\
+    \skt{9) sumanasaḥ kanyāyā annamadaduḥ ।}   \\
+    \skt{10) kṣatriyā hataṃ mitraṃ labhadhvam ।  svaṃ gṛhaṃ pratyābharata ।}   \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第24章练习5}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{11) vacobhiḥ stuvanti manaḥsu tu kupyanti ।}   \\
+    \skt{12) yatkumārā nṛpasya gṛhe 'kurvaṃstatkathayantu ।}   \\
+    \skt{13) nṛpasya teja īkṣamāṇāḥ sarve paurāstaṃ namasā pūjayanti ।}\\
+    \mbox{\skt{14) naro duḥkhaṃ mitraṃ dṛṣṭvā tadvaco 'bravīt ।}}\\
+    ~~~~~~\skt{śṛṇu mitra alaṃ cintayeti । śvo 'nyaṃ yatnaṃ kuru ।}   \\
+    \skt{15) kutrottamāḥ parvatā iti pṛṣṭvā kumārastāndraṣṭuṃ gacchati ।}   \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{佛教书第29页前5题}
+  \small
+  %\raggedright
+    1. tasmin pradeśe tathāgataḥ viharati | \\
+    2. ekasmin samaye buddhaḥ jetavane anāthapiṇḍadasya ārāme viharati | 
+prajñapte eva āsane niṣīdati sma |   \\
+    3. bodhisattvaḥ āsanāt ut-tiṣṭhati | tathāgatam ca evam vadati | \\
+    4. puruṣaḥ dine dine ātma-bhāvān parityajati |  \\
+    5. evam etad yathā vadasi |  \\
+\end{frame}
+
+\subsection{复习}
+
+\begin{frame}{辅音格尾表}
+  \small
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & \Block{1-2}{单数} & & \Block{1-2}{双数} & & \Block{1-2}{复数} &  \\
+       & 阳阴 & 中 & 阳阴 & 中 & 阳阴 & 中  \\
+      主 & \wordending{s} & \Block{3-1}{\wordending{}} & \Block{3-1}{\wordending{au}}  & \Block{3-1}{\wordending{ī}}  & \Block{3-1}{\wordending{aḥ}} &  \Block{3-1}{\wordending{ni}}   \\
+      呼 & \wordending{} & & & & & \\
+      业 & \wordending{am} &  & & & & \\
+      具 & \Block{1-2}{\wordending{ā}} &  & \Block{3-2}{\wordending{bhyām}}  & & \Block{1-2}{\wordending{bhiḥ}} & \\
+      为 & \Block{1-2}{\wordending{e}} &  & & & \Block{2-2}{\wordending{bhyaḥ}}  & \\
+      从 & \Block{2-2}{\wordending{aḥ}} &  & & & & \\
+      属 & &  & \Block{2-2}{\wordending{oḥ}} & &  \Block{1-2}{\wordending{ām}} & \\
+      依 & \Block{1-2}{\wordending{i}} &  & & & \Block{1-2}{\wordending{su}}&  \\
+    \end{NiceTabular}
+\end{frame}
+
+\begin{frame}{命令语气语尾}  
+  \centering
+  \includegraphics[width=\textwidth]{imperativeendings.png} %
+\end{frame}
+
+\section{多语干名词}
+\begin{frame}{\insertsection }
+    \small
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item \nounstem{\nobreakdash-vant}, \nounstem{\nobreakdash-mant}, \nounstem{\nobreakdash-ant}
+    \item 词内连声和以 t 结尾的名词一样
+    \item 但他们还有语干变化
+    \item 强语干是横着背表前五个
+    \item 弱语干是 \nounstem{\nobreakdash-vat}, \nounstem{\nobreakdash-mat}, \nounstem{\nobreakdash-at}
+  \end{itemize}
+\end{frame}
+
+\subsection{vant，mant}
+
+\begin{frame}{\nounstem{\nobreakdash-vant}, \nounstem{\nobreakdash-mant} 变格}
+  \small
+  \nounstem{guṇavant} adj. 有德 
+  \bigskip
+
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      阳性 & 单数 & 双数 & 复数  \\
+      主 & \cellcolor{light-gray}\fullpada{guṇavān}  & \cellcolor{light-gray}\Block{3-1}{\fullpada{guṇavantau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{guṇavantaḥ}}  \\
+      呼 & \cellcolor{light-gray}\fullpada{guṇavan} & \cellcolor{light-gray} & \cellcolor{light-gray} \\
+      业 & \cellcolor{light-gray}\fullpada{guṇavantam} & \cellcolor{light-gray} & \fullpada{guṇavataḥ} \\
+      中性 & \Block{2-1}{\fullpada{guṇavat}}  & \Block{2-1}{\fullpada{guṇavatī}} & \Block{2-1}{\fullpada{guṇavanti}}   \\
+      主呼业 &  &  &  \\
+      具 & \fullpada{guṇavatā} & \Block{3-1}{\fullpada{guṇavadbhyām}} & \fullpada{guṇavadbhiḥ} \\
+      为 & \fullpada{guṇavate} &  & \Block{2-1}{\fullpada{guṇavadbhyaḥ}} \\
+      从 & \Block{2-1}{\fullpada{guṇavataḥ}} &  &  \\
+      属 &  & \Block{2-1}{\fullpada{guṇavatoḥ}} & \fullpada{guṇavatām} \\
+      依 & \fullpada{guṇavati} &  & \fullpada{guṇavatsu} \\
+    \end{NiceTabular}
+  }
+\end{frame}
+
+\begin{frame}{\nounstem{\nobreakdash-vant}, \nounstem{\nobreakdash-mant} 意义}
+  \begin{itemize}
+    \item \pratyaya{\nobreakdash-vant\nobreakdash-}, \pratyaya{\nobreakdash-mant\nobreakdash-} 词缀表所有或性质\\
+    \nounstem{guṇavant} 有德的~~ \nounstem{dhīmant} 聪明的
+    \item 阴性是弱语干加 \pratyaya{\nobreakdash-ī\nobreakdash-}
+    \item \pratyaya{\nobreakdash-vat\nobreakdash-} 作副词表示方式\\
+    \fullpada{cakravat} ~~ 像车轮一样
+    \item \pratyaya{\nobreakdash-tavant\nobreakdash-} 构成过去主动分词\\
+    \nounstem{likhita} 被写的~~ \nounstem{likhitavant} 写过的
+  \end{itemize}
+\end{frame}
+
+\subsection{ant}
+\begin{frame}{\nounstem{\nobreakdash-ant} 分词}
+  \begin{itemize}
+    \item \pratyaya{\nobreakdash-ant\nobreakdash-} 词缀构成现在/将来主动分词\\
+    \begin{itemize}
+      \item \nounstem{\nobreakdash-a} 语干加 \pratyaya{\nobreakdash-nt\nobreakdash-} \nounstem{gacchant}
+      \item 非 \nounstem{\nobreakdash-a} 弱语干加 \pratyaya{\nobreakdash-ant\nobreakdash-}  \nounstem{ghnant}
+    \end{itemize}
+    \item 变格基本同 \nounstem{\nobreakdash-vant} 
+    \begin{itemize}
+      \item 阳性单数主格是 \pratyaya{\nobreakdash-an} \fullpada{paśyan}
+      \item 第三类动词全用弱语干 \fullpada{juhvat}
+    \end{itemize}
+    \item 阴性都是加 \pratyaya{\nobreakdash-ī\nobreakdash-}\\
+    \begin{itemize}
+      \item 现在分词 \nounstem{\nobreakdash-a} 语干用强语干 \nounstem{paśyantī}
+      \item 非 \nounstem{\nobreakdash-a} 语干用弱语干 \nounstem{bibhyatī}
+      \item 将来分词多用强语干，有时也用弱语干 \nounstem{bhariṣyantī\nobreakdash- / bhariṣyatī}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{mahānt}
+
+\begin{frame}{\nounstem{mahānt} 变格}
+  %\small
+  \nounstem{mahānt} adj. 大 
+
+  \begin{itemize}
+      \item 强语干三合 
+      \item 常见形式是 \nounstem{mahā}
+    \end{itemize}
+  \centering
+  \bigskip
+  {\small
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      阳性 & 单数 & 双数 & 复数  \\
+      主 & \cellcolor{light-gray}\fullpada{mahān}  & \cellcolor{light-gray}\Block{3-1}{\fullpada{mahāntau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{mahāntaḥ}}  \\
+      呼 & \cellcolor{light-gray}\fullpada{mahan} & \cellcolor{light-gray} & \cellcolor{light-gray} \\
+      业 & \cellcolor{light-gray}\fullpada{mahāntam} & \cellcolor{light-gray} & \fullpada{mahataḥ} \\
+      中性 & \Block{2-1}{\fullpada{mahat}}  & \Block{2-1}{\fullpada{mahatī}} & \Block{2-1}{\fullpada{mahānti}}   \\
+      主呼业 &  &  &  \\
+    \end{NiceTabular}
+  }
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第25章练习4，注意勘误
+    \item 佛教书第29页6-11题
+  \end{itemize}
+\end{frame}  
+
+\end{document}	

@@ -1,0 +1,293 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语入门}}
+\subtitle{11. 词间辅音连声}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第十章练习2}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{1) janāḥ vigacchanti । narāḥ kṣetre bālāḥ ca gṛhe gacchanti ।} \\
+    \skt{2) narāḥ bhāryāḥ bālāḥ ca ślokaiḥ devān saṃpūjayanti ।}  \\
+    \skt{3) vyāghrāt bālāḥ aśvaiḥ saha gṛhaṃ saṃdravanti khagāḥ ca utpatanti ।}   \\
+    \skt{4) īśvaram avanatya kumārāḥ samuttiṣṭhanti ।}  \\
+    \skt{5) prājñaḥ nṛpaḥ prajānāṃ cintāḥ prapaśyati ।}  \\
+  \end{verse}
+\end{frame}  
+
+\begin{frame}{第十章练习2}
+  \small
+  \raggedright
+  \begin{verse}
+    \skt{6) kṣatriyaḥ na atijīvati janāḥ ca śocanti ।}   \\
+    \skt{7) īśvarasya vacanāni abhiśrutya kanye āgacchataḥ ।}  \\
+    \skt{8) priyāḥ cintāḥ vismṛtya kanyā uttiṣṭhati ca nagaraṃ ca pratigacchati ।}   \\
+    \skt{9) aśvān kṣetrebhyaḥ saṃnīya gṛhe sīdāmaḥ kathāḥ ca kathayāmaḥ ।}   \\
+    \skt{10) janāḥ vyāghreṇa viluptaṃ bālam anuśocanti ।}   \\
+    \mbox{\skt{11) bāle gṛhāt vyapagatya kṣetrāṇi upadravataḥ ।}}   \\
+  \end{verse}
+\end{frame}  
+
+
+\subsection{复习}
+
+\begin{frame}{动词前缀}
+  \small
+  \centering
+    \begin{tabular}{@{}rlrl@{}} % 6 columns
+      \pratyaya{ati\nobreakdash-} & 从上面，从旁边 & \pratyaya{ud\nobreakdash-} & 在上面，来自  \\
+      \pratyaya{adhi\nobreakdash-} & 从上面，在上面  & \pratyaya{upa\nobreakdash-} & 向着   \\
+      \pratyaya{anu\nobreakdash-} & 在后面，沿着 & \pratyaya{ni\nobreakdash-} & 向下面，向里面 \\
+      \pratyaya{antar\nobreakdash-} & 在中间 & \pratyaya{nis\nobreakdash-} & 出来 \\
+      \pratyaya{apa\nobreakdash-} & 离开 & \pratyaya{parā\nobreakdash-} & 离开 \\
+      \pratyaya{api\nobreakdash-} & 朝……而去 & \pratyaya{pari\nobreakdash-} & 围绕着 \\
+      \pratyaya{abhi\nobreakdash-} & 朝着 & \pratyaya{pra\nobreakdash-} & 向前 \\
+      \pratyaya{ava\nobreakdash-} & 从……往下 & \pratyaya{prati\nobreakdash-} & 阻挡，回来 \\
+      \pratyaya{ā\nobreakdash-} & 向着，来 & \pratyaya{vi\nobreakdash-} & 离开，散开 \\
+       &  & \pratyaya{sam\nobreakdash-} & 同，一起 \\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{词内元音连声}
+ % \small
+  \begin{itemize}
+    \item 简单元音同类融合为长音\\
+    \pratyaya{upa\nobreakdash-ā\nobreakdash-}\verbroot{nī} \fullpada{upānayati}  \\
+    \item i/u加不同类时变成对应半元音\\
+    \pratyaya{vi\nobreakdash-apa\nobreakdash-}\verbroot{nī} \fullpada{vyapanayati}  \\
+    \pratyaya{adhi\nobreakdash-ā\nobreakdash-}\verbroot{gam} \fullpada{adhyāgacchati}  \\
+    \item a/ā加不同类时升一级\\ 
+    \pratyaya{pra\nobreakdash-ud\nobreakdash-}\verbroot{dhṛ} \fullpada{proddharati}  \\
+  \end{itemize}
+\end{frame}
+
+\section{词间连声}
+\begin{frame}{\insertsection }
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{词间连声总则}
+\begin{frame}{\insertsubsection }
+  \small
+  \centering
+  \begin{itemize}
+    \item 前词尾音和后词首音相遇发生变化。
+    \item 一般前音会变，有时后音也变。
+    \item 辅音会被后音同化，而且要连写。
+    \item 止音 ḥ 变化较特殊，前后原形都要看。
+    \item 元音遇元音常融合，遇辅音不变。
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{词间辅音连声总表}  
+  \centering
+  \includegraphics[width=0.75\textwidth]{consonantsandhi1.png} %
+\end{frame}
+
+\subsection{落尾辅音}
+\begin{frame}{\insertsubsection}  
+  \centering
+  \includegraphics[width=0.5\textwidth]{consonantending.png} %
+\end{frame}
+
+\begin{frame}{词尾辅音变化}
+  \small
+  \begin{itemize}
+    \item 多个辅音作尾音，只能留住第一个。 \\
+    \verbroot{as} \reconstruction{sants} $\to$ \fullpada{san}  \\
+    \item k ṭ t p ṅ n m，以及止声 (ḥ) 可落尾，\\其余都要起变化。 
+    \item k ṭ t p 同行变，腭音变喉 j 可 ṭ。 \\
+    \reconstruction{tad} $\to$ \fullpada{tat} ~~ \reconstruction{devarāj} $\to$ \fullpada{devarāṭ}  
+    \item ś ṣ h 变 ṭ 少变 k, r s 要变 visarga(ḥ)。 \\
+    \reconstruction{ṣaṣ} $\to$ \fullpada{ṣaṭ} ~~ \reconstruction{diś} $\to$ \fullpada{dik}  
+  \end{itemize}
+\end{frame}
+
+\subsection{辅音连声}
+\begin{frame}{词间辅音连声总表}  
+  \centering
+  \includegraphics[width=0.75\textwidth]{consonantsandhi1.png} %
+\end{frame}
+
+\subsection{~~~词尾清音}
+\begin{frame}{词尾清音}
+  \small
+  \begin{itemize}
+    \item 清遇清来不变化，遇浊浊化，鼻鼻化。 \\
+    \fullsentence{tat tat}  \sktsentence{tattat} \\
+    \reconstruction{āsit rājā} $\to$ \fullsentence{āsid rājā} \sktsentence{āsidrājā}  \\
+    \reconstruction{abhavat atra} $\to$ \fullsentence{abhavad atra} \sktsentence{abhavadatra}  \\
+    \reconstruction{tat na} $\to$ \fullsentence{tan na} \sktsentence{tanna} \\
+    \reconstruction{tat mṛṣā} $\to$ \fullsentence{tan mṛṣā} \sktsentence{tanmṛṣā}\\
+    \reconstruction{vāk me} $\to$ \fullsentence{vāṅ me} \sktsentence{vāṅme} \\
+    \item 清音遇 h 影响它，h 变相应送气浊。 \\
+    \reconstruction{tat hi} $\to$ \fullsentence{tad dhi} \sktsentence{taddhi} \\
+    \reconstruction{vāk hi} $\to$ \fullsentence{vāg ghi} \sktsentence{vāgghi} \\
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{词尾清音}
+  \small
+  \begin{itemize}
+    \item t 同化于腭、顶、l，遇 ś 变 c，ś 变ch。 \\
+    \reconstruction{tat ca} $\to$ \fullsentence{tac ca} \sktsentence{tacca} \\
+    \reconstruction{tat jalam} $\to$ \fullsentence{taj jalam} \sktsentence{tajjalam} \\  
+    \reconstruction{tat labhate} $\to$ \fullsentence{tal labhate} \sktsentence{tallabhate} \\
+    \reconstruction{tat śrutvā} $\to$ \fullsentence{tac chrutvā} \sktsentence{tacchrutvā} \\
+  \end{itemize}
+\end{frame}
+
+\subsection{~~~词尾鼻音}
+\begin{frame}{词尾鼻音}
+  \small
+  \begin{itemize}
+    \item 前短元音后元音，除 m 鼻音要重复。 \\
+    \reconstruction{āsan atra} $\to$ \fullsentence{āsann atra} \sktsentence{āsannatra} \\
+    \reconstruction{pratyaṅ āsīnaḥ} $\to$ \fullsentence{pratyaṅṅ āsīnaḥ} \\
+    \hspace*{4cm} \sktsentence{pratyaṅṅāsīnaḥ} \\
+    \item 只要遇辅音，尾 m 变随韵。 \\
+    \reconstruction{tam ca} $\to$ \fullsentence{taṃ ca} \sktsentence{taṃ ca} \\
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{词尾鼻音}
+  \small
+  \begin{itemize}
+    \item n 遇浊的腭、顶、ś，被其同化， ś 可 ch。 \\
+    \reconstruction{tān janān} $\to$ \fullsentence{tāñ janān} \sktsentence{tāñjanān} \\
+    \reconstruction{tān śaśān} $\to$ \fullsentence{tāñ śaśān} \sktsentence{tāñśaśān} \\
+    \hspace*{2.2cm} 或 \fullsentence{tāñ chaśān} \sktsentence{tāñchaśān}\\
+    \item n 遇清的腭、顶、齿，变随韵加同位咝。 \\
+    \reconstruction{tān ca} $\to$ \fullsentence{tāṃś ca} \sktsentence{tāṃśca} \\
+    \reconstruction{tān tān} $\to$ \fullsentence{tāṃs tān} \sktsentence{tāṃstān} \\
+    \item n 在 l 前鼻化 l̃ ({\sanskritfont{ल्ँ}})，也可写作 ṃl 或 ṃ 。 \\
+    \reconstruction{tān lokān} $\to$ \fullsentence{tā\~{l} lokān / tāṃl lokān} \\
+    \hspace*{3cm}\fullsentence{\sanskritfont{ताँल्लोकान्}} ~ \sktsentence{tāṃllokān} \\
+  \end{itemize}
+\end{frame}
+
+\subsection{课堂练习}
+\begin{frame}{\insertsubsection }
+  \raggedright
+  \begin{verse}
+    \skt{1) nagarādgrāmaṃ gacchati ।}   \\
+    \skt{2) grāmaṃ nagarānna gacchati ।}  \\
+    \skt{3) nagarādiha gacchati ।}   \\
+    \skt{4) nagarāddhi gacchati ।}   \\
+    \skt{5) nagarādgrāmamāgacchati ।}   \\
+    \skt{6) nagarādapagacchati ।}   \\
+    \skt{7) buddhvā । bud\-dhvā ।}   \\
+    \mbox{\skt{8) etānhatānyudhe nṛpa śocitumarhasi ।}}  \\
+  \end{verse}
+\end{frame}  
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第11章练习5
+    \item
+      阅读教材第11课相关内容
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}  
+
+\end{document}	
