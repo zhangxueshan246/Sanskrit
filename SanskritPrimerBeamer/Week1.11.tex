@@ -1,0 +1,313 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语入门}}
+\subtitle{12. 未完成时与祈愿语气}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第11章练习5}
+  %\small
+  \raggedright
+  \begin{verse}
+    \skt{1) vṛkṣātpatati} \\
+    \skt{2) vṛkṣādavapatati} \\
+    \skt{3) kumārameva} \\
+    \skt{4) ślokamavagacchāmi} \\
+    \skt{5) siṃhānna vidravati} \\
+    \skt{6) gṛhāddhi} \\
+    \skt{7) narāṃśca kumārāṃśca paśyāmi} \\
+    \skt{8) mitramupaveśayati} \\
+    \skt{9) kṣatriyāñjayati} \\
+  \end{verse}
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{词间辅音连声总表}  
+  \centering
+  \includegraphics[width=0.75\textwidth]{consonantsandhi1.png} %
+\end{frame}
+
+\section{动词时态两种}
+\begin{frame}{\insertsection }
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{动词复习}
+\begin{frame}{\insertsubsection ~~相关概念}
+  \small
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
+      形态层面 &     \\
+      时态(Tense) & 现在时、未完成时、祈愿语气、\\
+      & 命令语气、将来时、迂回将来时、\\
+      & 条件式、完成时、不定过去时、祈求式 \\
+      %\midrule
+      意义层面 &  \\
+      时(Time)  & 现在、过去、将来 \\
+      体(Aspect) & 完成、未完成、一般 \\
+      语气(Mood) & 陈述、祈使、虚拟、条件等 \\
+      语态(Voice) & 主动、中间、被动 \\
+      人称(Person) & 第一、第二、第三 \\
+      数(Number) & 单数、双数、复数 \\
+    \end{tabular} 
+  }
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~时态和语气}
+  \small
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}lllll@{}} % 7 columns: type, length/type, and 5 vowels
+      形态 &   & 意义 &   \\
+      时态名称 & 时  & 体 & 语气   \\
+      \midrule
+      现在时  & 现在  & 一般/进行 & 陈述 \\
+      \textcolor{blue}{未完成时}  & 过去  & 进行 & 陈述 \\
+      命令语气  & 现在  & 一般/进行 & 祈使 \\
+      祈愿语气  & 现在  & 一般/进行 & 可能 \\
+      \textcolor{gray}{虚拟语气}  & 将来  & 一般/进行 & 祈求 \\
+      将来时  & 将来  & 一般/进行 & 陈述 \\
+      迂回将来时  & 将来  & 一般/进行 & 陈述 \\
+      条件式  & 将来/过去  & 一般/进行 & 可能/条件 \\
+      \textcolor{blue}{完成时}  & 现在 & 完成 & 陈述 \\
+      \textcolor{blue}{不定过去时}  & 过去 & 一般 & 陈述 \\
+      祈求式  & 现在 & 一般 & 祈使 \\
+    \end{tabular} 
+  }
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~现在时构成}
+  %\small
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    词根 & 词干  & 词尾  & 最终形式 \\
+    \verbroot{bhū (1)} & \verbstem{bhava} & \wordending{ti}  & \fullpada{bhavati}  \\
+    \verbroot{hṛṣ (4)} & \verbstem{hṛṣya} & \wordending{ti}  & \fullpada{hṛṣyati}  \\
+    \verbroot{muc (6)} & \verbstem{muñca} & \wordending{ti}  & \fullpada{muñcati}  \\
+    \verbroot{kath (10)} & \verbstem{kathaya} & \wordending{ti}  & \fullpada{kathayati}  \\
+  \end{tabular} 
+  \bigskip
+
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{mi} & \wordending{vaḥ}  & \wordending{maḥ}  \\
+    第二人称 & \wordending{si} & \wordending{thaḥ} & \wordending{tha}   \\
+    第三人称 & \wordending{ti} & \wordending{taḥ} & \wordending{nti}  \\
+  \end{tabular}   
+\end{frame}
+
+\subsection[未完成时\\与祈愿语气]{未完成时与祈愿语气}
+
+\subsection{~~~意义}
+\begin{frame}{未完成时与祈愿语气~~意义}
+  %\small
+  \begin{itemize}
+      \item 未完成时 (Imperfect) 表示过去
+      
+      \item 祈愿语气 (Potential / Optative) \\ 表示一种泛指的可能性
+      \begin{itemize}
+        \item 第三人称可以表示希望、要求、推测、条件等
+        \item 第一人称常用作 "让我们..." 
+      \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{~~~形式}
+\begin{frame}{未完成时与祈愿语气~~形式}
+  %\small
+  \begin{itemize}
+    \item \textbf{语干：} 现在时语干加上时态标志
+    \begin{itemize} 
+      \item 未完成时：语干前加 \pratyaya{a\nobreakdash-} \\
+        称为前加元音 (Augment)
+      \item 祈愿语气：语尾前加 \pratyaya{\nobreakdash-ī\nobreakdash-}  \\
+        在元音前加 \pratyaya{\nobreakdash-īy\nobreakdash-}，\\
+        和语干的 \pratyaya{\nobreakdash-a\nobreakdash-} 融合成 \pratyaya{\nobreakdash-e\nobreakdash-}(\pratyaya{\nobreakdash-ey\nobreakdash-})。
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{未完成时与祈愿语气~~形式}
+  \centering
+  \begin{itemize}
+    \item \textbf{语尾：} 均使用派生语尾\\ ~~~~~~~（Secondary Endings）
+  \end{itemize} 
+  \bigskip
+
+  \begin{tabular}{@{}cccc@{}} % 4 columns
+    & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{(a)m} & \wordending{va}  & \wordending{ma}  \\
+    第二人称 & \wordending{ḥ} & \wordending{tam} & \wordending{ta}   \\
+    第三人称 & \wordending{t} & \wordending{tām} & \wordending{(a)n/\nobreakdash-uḥ}  \\
+  \end{tabular}     
+\end{frame}
+
+\begin{frame}{例词：\verbroot{bhṛ (1)} 持}
+  %\small
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    Impf & 单  & 双  & 复 \\
+    1st & \fullpada{abharam} & \fullpada{abharāva}  & \fullpada{abharāma}  \\
+    2nd & \fullpada{abharaḥ} & \fullpada{abharatam} & \fullpada{abharata}   \\
+    3rd & \fullpada{abharat} & \fullpada{abharatām} & \fullpada{abharan}  \\
+    \\
+    Pot & 单  & 双  & 复 \\
+    1st & \fullpada{bhareyam} & \fullpada{bhareva}  & \fullpada{bharema}  \\
+    2nd & \fullpada{bhareḥ} & \fullpada{bharetam} & \fullpada{bhareta}   \\
+    3rd & \fullpada{bharet} & \fullpada{bharetām} & \fullpada{bhareyuḥ}  \\
+  \end{tabular}
+\end{frame}
+
+\subsection{~~~前加元音}
+\begin{frame}{前加元音 \pratyaya{a\nobreakdash-} 的两条说明}
+  %\small
+  \begin{itemize}
+    \item 前加元音 \pratyaya{a\nobreakdash-} 的位置紧挨词干，\\因此在前缀之后。\\
+    \pratyaya{prati\nobreakdash-} + \pratyaya{a\nobreakdash-} + \verbstem{gaccha} + \wordending{t}\\
+     $\to$ \fullpada{pratyagacchat} \\    
+    \item 前加元音 \pratyaya{a\nobreakdash-} 与词根开头的元音\\结合变为三合元音。\\
+    \verbroot{iṣ} ~现在时 \fullpada{icchati} \\
+    ~~~~~~未完成时 \fullpada{aicchat} \\
+  \end{itemize}
+\end{frame}
+
+\section{课堂练习}
+
+\begin{frame}{辅音连声练习}
+  \raggedright
+  \begin{verse}
+    \skt{1) nagarādgrāmaṃ gacchati ।}   \\
+    \skt{2) grāmaṃ nagarānna gacchati ।}  \\
+    \skt{3) nagarādiha gacchati ।}   \\
+    \skt{4) nagarāddhi gacchati ।}   \\
+    \skt{5) nagarādgrāmamāgacchati ।}   \\
+    \skt{6) nagarādapagacchati ।}   \\
+    \skt{7) buddhvā । bud\-dhvā ।}   \\
+    \mbox{\skt{8) etānhatānyudhe nṛpa śocitumarhasi ।}}  \\
+  \end{verse}
+\end{frame}  
+
+\begin{frame}{找到词根与前缀}
+  %\small
+  \raggedright
+  例： \skt{samāgacchati} = \pratyaya{sam} + \pratyaya{ā} + \verbroot{gam}
+  \bigskip  
+  \begin{verse}
+    \skt{1) paryanunayāmaḥ} \\
+    \skt{2) saṃnibhṛtaḥ} \\
+    \skt{3) anūttiṣṭhati} \\
+    \skt{4) pratyupadravasi} \\
+    \skt{5) samutkṣipataḥ} \\
+    \skt{6) prodgacchanti । vyapāgacchāma} \\
+    \skt{7) apātiṣṭhāvaḥ । apātiṣṭhāva}
+  \end{verse}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第12章练习 6 (注意\veryimportant{勘误})。
+    \item
+      阅读教材第12课相关内容
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}
+
+\end{document}

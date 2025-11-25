@@ -1,0 +1,254 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\usepackage{diagbox}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.85}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{26. i 和 u 的变格}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  %\small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第25章练习 4}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{1) api mahātapasaṃ kumāramāśramasya samīpa āsīnamapaśyaḥ । sa} \\
+    \mbox{~~~~~\skt{duḥkhaśokavānihāgatya na kiṃ cidbhāṣate ।}}\\
+    \mbox{\skt{2) tebhyo narebhyo dānānyābharadbhyo 'pi bibhemi ।}} \\
+    \skt{3) mahābalo vīraḥ śocantībhyo nārībhyo 'pagacchanna kadā
+    citpunaryuddhaṃ syādityaicchat ।}\\
+    \skt{4) pāpaṃ nṛpaṃ jayato mahārathasya mahadyaśaḥ syāt ।}   \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第25章练习 4 }
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{5) api bālau naraṃ mahācetasaṃ śṛṇvantau paśyasi । tau dhīmantau guṇavidau ca bhaviṣyataḥ ।}\\
+    \skt{6) yadbhadraṃ ca guṇavaccāsti taddhīmadbhirjñāyate ।}\\
+    \skt{7) naraḥ śokavāṃśchāyāvati vana āsīno 'pi na smayate ।}\\
+    \skt{8) ratnavatīṃ rājñīṃ dṛṣṭavatī kanyā smayantyuttiṣṭhati ।}\\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第25章练习 4 }
+  \raggedright
+  \small
+  \begin{verse}    
+    \skt{9) vardhamānena vismayena dāsī mahatyā nagaryāḥ samīpe bahujalāṃ nadīmapaśyat ।}   \\
+    \skt{10) yāvalloke guṇavanto janāstāvadiha sukhaṃ bhaviṣyati ।}\\
+    \skt{11) guṇavatāṃ narāṇāṃ manaḥsu yadasti tatsarveṣāṃ manaḥsu syāt ।} \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{佛教书第29页}
+    \small
+  %\raggedright
+  \begin{verse}\normalfont
+    6. ārya\nobreakdash-avalokiteśvaraḥ bodhisattvaḥ \mbox{skandhān svabhāva\nobreakdash-śūnyān paśyati |} \\
+    7. atha khalu tathāgataḥ piṇḍa\nobreakdash-pātāt pratikrāmati | \\
+    8. sattvāḥ aṇḍajāḥ vā jarāyujāḥ vā saṃsvedajāḥ vā upapādukāḥ vā | na tu 
+    kaścit sattvaḥ parinirvāṇam \mbox{gacchati |} \\
+  \end{verse}
+    
+\end{frame}
+
+\begin{frame}{佛教书第29页}
+    \small
+    \begin{verse}\normalfont
+      9. buddha\nobreakdash-dharmaḥ buddha\nobreakdash-dharmaḥ iti abuddha\nobreakdash-dharmāḥ ca eva te | \\
+    10. sarva\nobreakdash-dharmāḥ iti adharmāḥ | tasmāt tathāgataḥ sarva\nobreakdash-dharmāḥ buddha\nobreakdash-dharmāḥ iti vadati |\\
+    11. kuśalāḥ dharmāḥ kuśalāḥ dharmāḥ iti adharmāḥ |
+    \end{verse}
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{多语干名词变格}
+  \small
+  \nounstem{guṇavant} adj. 有德 
+  \bigskip
+
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      阳性 & 单数 & 双数 & 复数  \\
+      主 & \cellcolor{light-gray}\fullpada{guṇavān}  & \cellcolor{light-gray}\Block{3-1}{\fullpada{guṇavantau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{guṇavantaḥ}}  \\
+      呼 & \cellcolor{light-gray}\fullpada{guṇavan} & \cellcolor{light-gray} & \cellcolor{light-gray} \\
+      业 & \cellcolor{light-gray}\fullpada{guṇavantam} & \cellcolor{light-gray} & \fullpada{guṇavataḥ} \\
+      中性 & \Block{2-1}{\fullpada{guṇavat}}  & \Block{2-1}{\fullpada{guṇavatī}} & \Block{2-1}{\fullpada{guṇavanti}}   \\
+      主呼业 &  &  &  \\
+      具 & \fullpada{guṇavatā} & \Block{3-1}{\fullpada{guṇavadbhyām}} & \fullpada{guṇavadbhiḥ} \\
+      为 & \fullpada{guṇavate} &  & \Block{2-1}{\fullpada{guṇavadbhyaḥ}} \\
+      从 & \Block{2-1}{\fullpada{guṇavataḥ}} &  &  \\
+      属 &  & \Block{2-1}{\fullpada{guṇavatoḥ}} & \fullpada{guṇavatām} \\
+      依 & \fullpada{guṇavati} &  & \fullpada{guṇavatsu} \\
+    \end{NiceTabular}
+  }
+\end{frame}
+
+\begin{frame}{各种分词}
+  \small
+  \centering
+    \begin{NiceTabular}{@{}lllll@{}} % 6 columns
+       &  & 主动 & 中间 & 被动\\
+      过去 &  & \pratyaya{\nobreakdash-tavant\nobreakdash-}  & $\times$ & \pratyaya{\nobreakdash-ta\nobreakdash-}\\
+      \Block{2-1}{现在} & a语干 & \pratyaya{\nobreakdash-nt\nobreakdash-} & \pratyaya{\nobreakdash-māna\nobreakdash-} & \Block{2-1}{\pratyaya{\nobreakdash-yamāna\nobreakdash-}} \\
+       & 非a语干 & \pratyaya{\nobreakdash-ant} & \pratyaya{\nobreakdash-āna\nobreakdash-} &  \\
+      将来 &  & \pratyaya{\nobreakdash-syant\nobreakdash-} & \Block{1-2}{\pratyaya{\nobreakdash-syamāna\nobreakdash-}} & \\
+    \end{NiceTabular}
+\end{frame}
+
+\section[i u 变格]{i 和 u 结尾的名词}
+\begin{frame}{\insertsection }
+    \small
+    \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{名词变格}
+\begin{frame}{\insertsubsection }
+  \small
+  \begin{itemize}
+    \item i 和 u 结尾的名词阳性、阴性和中性都有可能。
+    
+    \item 变格都不一样但都比较眼熟。
+    
+    \item 中性名词在所有元音格尾前加 \pratyaya{\nobreakdash-n\nobreakdash-}。
+    
+    \item 阳性名词某些格不加 \pratyaya{\nobreakdash-n\nobreakdash-} 而是二合。
+    
+    \item 阴性名词单数后四格有两套形式：按阳性或 ī/ū 结尾阴性词变化均可。
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{i u 变格大表}  
+  \centering
+  \includegraphics[width=\textwidth]{iudeclension.png} %
+\end{frame}
+
+\subsection{形容词变格}
+
+\begin{frame}{\insertsubsection }
+  \small
+  \begin{itemize}
+    \item i 和 u 结尾的形容词一般按对应的名词变化。也有例外：\\
+    \item 中性形容词在加 \pratyaya{\nobreakdash-n\nobreakdash-} 的地方也可按阳性变。\\
+        
+    \nounstem{guru} 重 ~~中性单数为格：\\ ~~~\fullpada{guruṇe} 或 \fullpada{gurave} 都可以。\\
+    \item u结尾的形容词阴性也可加阴性词缀 \pratyaya{\nobreakdash-ī\nobreakdash-}。\\
+        
+    \nounstem{guru} 重 ~~阴性词干：\\ ~~~\nounstem{guru} 或 \nounstem{gurvī} 都可以。
+  \end{itemize}
+\end{frame}
+
+\subsection{ti词缀}
+\begin{frame}{构词法~~\insertsubsection }
+  \small
+  \begin{itemize}
+    \item 大部分 i 结尾的阴性词是抽象名词。\\
+    \item 形式是零级词根 + \pratyaya{\nobreakdash-ti\nobreakdash-} 词缀。\\   
+    \verbroot{nī} 带领 ~~\nounstem{nīti} 规范、政事\\ 
+    \verbroot{man} 想 ~~\nounstem{mati} 智慧 \\ 
+    \item 注意 t 前连声。\\
+    \verbroot{dṛś} 看 ~~\nounstem{dṛṣṭi} 视力 \\ 
+    \verbroot{vṛdh} 增长 ~~\nounstem{vṛddhi} 增长 \\   
+    \verbroot{budh} 觉醒 ~~\nounstem{buddhi} 智慧 \\  
+  \end{itemize}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第26章练习4
+    \item 先不做佛教了……
+  \end{itemize}
+\end{frame}  
+
+\end{document}	
