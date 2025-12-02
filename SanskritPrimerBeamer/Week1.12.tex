@@ -1,0 +1,395 @@
+﻿%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语入门}}
+\subtitle{13. ī/ū 变格与止音连声}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第12章练习6}
+  \small
+  \begin{verse}
+    \skt{1) naraḥ· purātpratyāgatya bālāyai vṛkṣamadarśayat ।} \\
+    \skt{2) devānāṃ prabhāṃ paśyeḥ· iti naraḥ· mitramavadat ।} \\
+    \skt{3) ugraṃ kṣatriyaṃ dṛṣṭvā naraḥ· mitramapi kṣatriyamapaśyaḥ· iti· apṛcchat ।} \\
+    \mbox{\skt{4) devānyajñaiḥ· toṣayema· iti śūraḥ· avadat ।}}\\
+    \skt{5) yuddhe yathā nagarāṇi \veryimportant{naṣṭāni} tathā janāḥ· \veryimportant{naṣṭāḥ} ।} \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第12章练习6}
+  \small
+  \begin{verse}
+    \skt{6) ugraḥ·  nṛpaḥ·  janebhyaḥ·  dānāni·  āptumaicchat ।}\\
+    \mbox{\skt{7) padmaṃ darśayeḥ·  iti bālau kanyāmavadatām ।}}\\
+    \skt{8) bhadre kāle punar·  samāgacchema·  iti·  uktvā kumāraḥ kṣaṇādapāgacchat ।}\\
+    \skt{9) kṣatriyasya vacanāni śrutvā narāḥ·  atra \mbox{niṣadya·  cintāḥ·  vismareḥ·  iti·  avadan ।}}\\
+    \skt{10) yathā janāḥ·  kṣetre sthitasya vṛkṣasya phalaiḥ·  tuṣyanti tathā·  aśvāḥ ।}\\
+  \end{verse}
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{未完成时与祈愿语气}
+  %\small
+  \centering
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    Impf & 单  & 双  & 复 \\
+    1st & \fullpada{abharam} & \fullpada{abharāva}  & \fullpada{abharāma}  \\
+    2nd & \fullpada{abharaḥ} & \fullpada{abharatam} & \fullpada{abharata}   \\
+    3rd & \fullpada{abharat} & \fullpada{abharatām} & \fullpada{abharan}  \\
+    \\
+    Pot & 单  & 双  & 复 \\
+    1st & \fullpada{bhareyam} & \fullpada{bhareva}  & \fullpada{bharema}  \\
+    2nd & \fullpada{bhareḥ} & \fullpada{bharetam} & \fullpada{bhareta}   \\
+    3rd & \fullpada{bharet} & \fullpada{bharetām} & \fullpada{bhareyuḥ}  \\
+  \end{tabular}
+\end{frame}
+
+\section[ī ū 变格]{ī和ū结尾的名词变格}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{课本附录有变格大表}  
+  \centering
+  \includegraphics[width=\textwidth]{longiudeclension.png} %
+\end{frame}
+
+\begin{frame}{ī和ū结尾的名词概述}
+  \small
+  \begin{itemize}
+    \item 以ī和ū结尾的名词均为\important{阴性}，\\
+    变格也很像以ā结尾的阴性名词。
+    \item 按照音节可分两类：\\
+    多音节：\nounstem{nadī} (河), \nounstem{camū} (军队)。\\
+    单音节：\nounstem{dhī} (思想), \nounstem{bhū} (大地)。\\
+    \important{主要区别：} \\
+    单音节某些格可用两套格尾。\\
+    遇到元音词尾时词内连声规则不同。
+  \end{itemize}
+\end{frame}
+
+\subsection[多音节ī名词]{多音节 ī 结尾名词}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 元音格尾前 ī 变 y。
+     \nounstem{nadī} f. 河
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & 单数 & 双数 & 复数 \\
+    主 & \fullpada{nadī} & \Block{3-1}{\fullpada{nadyau}} & \Block{2-1}{\fullpada{nadyaḥ}}  \\
+    呼 & \fullpada{nadi} &  &  \\
+    业 & \fullpada{nadīm} &  & \fullpada{nadīḥ} \\
+    具 & \fullpada{nadyā} & \Block{3-1}{\fullpada{nadībhyām}} & \fullpada{nadībhiḥ} \\
+    为 & \fullpada{nadyai} &  & \Block{2-1}{\fullpada{nadībhyaḥ}} \\
+    从 & \Block{2-1}{\fullpada{nadyāḥ}} &  &  \\
+    属 &  & \Block{2-1}{\fullpada{nadyoḥ}} & \fullpada{nadīnām} \\
+    依 & \fullpada{nadyām} &  & \fullpada{nadīṣu} \\
+  \end{NiceTabular}
+    \vspace*{0.3em}
+
+  \footnotesize{注意：和ā不太像的地方和a像。}
+\end{frame}
+
+
+\subsection[单音节ī名词]{单音节 ī 结尾名词}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 元音格尾前 ī 变 iy。
+    \nounstem{dhī} f. 思想\\
+  \end{itemize}
+  \centering
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & 单数 & 双数 & 复数 \\
+    主呼 & \fullpada{dhīḥ} & \Block{2-1}{\fullpada{dhiyau}} & \Block{2-1}{\fullpada{dhiyaḥ}} \\
+    业 & \fullpada{dhiyam} &  & \\
+    具 & \fullpada{dhiyā} & \Block{3-1}{\fullpada{dhībhyām}} & \fullpada{dhībhiḥ} \\
+    为 & \fullpada{dhiye dhiyai} &  & \Block{2-1}{\fullpada{dhībhyaḥ}} \\
+    从 & \Block{2-1}{\fullpada{dhiyaḥ dhiyāḥ}} &  &  \\
+    属 &  & \Block{2-1}{\fullpada{dhiyoḥ}} & \fullpada{dhiyām dhīnām} \\
+    依 & \fullpada{dhiyi dhiyām} &  & \fullpada{dhīṣu} \\
+  \end{NiceTabular}
+  \vspace*{0.3em}
+
+  \footnotesize{注意：单数主呼增加止声。\\两种形式的格使用ā或辅音语尾。}
+\end{frame}
+
+\subsection{ū 结尾名词}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item ū 结尾名词几乎和 ī 结尾名词完全平行。\\
+    \item 多音节词元音格尾前 ū 变 v。\\
+    \nounstem{camū} f. 军队\\
+    只有\important{单数主格}不同 \fullpada{camūḥ}\\
+    单业 \fullpada{camūm} 单具 \fullpada{camvā}
+    
+    \item 单音节词元音格尾前 ū 变 uv。\\
+    \nounstem{bhū} f. 大地\\
+    单主 \fullpada{bhūḥ} 
+    单业 \fullpada{bhuvam} 单具 \fullpada{bhuvā}
+  \end{itemize}
+\end{frame}
+
+\subsection{阴性词缀}
+\begin{frame}{构词法~~\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 大多数以a结尾的词变阴性加 \pratyaya{\nobreakdash-ā\nobreakdash-}\\
+    \nounstem{bāla} m. 男孩 \nounstem{bālā} f. 女孩 \\
+    \nounstem{nava} m. 新的 \nounstem{navā} f. 新的 \\    
+    \item 也有的不加 \pratyaya{\nobreakdash-ā\nobreakdash-} 而是加 \pratyaya{\nobreakdash-ī\nobreakdash-}\\
+    \nounstem{deva} m. 天神 \nounstem{devī} f. 女神 \\
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{性数格一致原则}
+  \small
+  \begin{itemize}
+    \item 此前见到的形容词和名词格尾都一样。\\
+    
+    阳性 \fullsentence{priyaḥ bālaḥ}\\
+    中性 \fullsentence{priyaṃ mitram} \\
+    阴性 \fullsentence{priyā kanyā}
+    
+    \item 现在有可能长得不一样了但还是一致的。\\
+    
+    主格 \fullsentence{priyā nārī}\\
+    呼格 \fullsentence{priye nāri}\\
+    \bigskip
+    
+    希望大家能认出来。
+  \end{itemize}
+\end{frame}
+
+
+\section{止音连声}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+
+\begin{frame}{复习~~词间连声总则}
+  \small
+  \centering
+  \begin{itemize}
+    \item 前词尾音和后词首音相遇发生变化。
+    \item 一般前音会变，有时后音也变。
+    \item 辅音会被后音同化，而且要连写。
+    \item \important{止音 ḥ 变化较特殊，前后原形都要看。}
+    \item 元音遇元音常融合，遇辅音不变。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{止音连声表}  
+  \centering
+  \includegraphics[width=0.4\textwidth]{visargasandhi.png} %
+\end{frame}
+
+\subsection{基本情况}
+\begin{frame}{止音连声\insertsubsection}
+  \small
+    \begin{itemize}
+      \item 止音 (ḥ) 通常来源于词尾的 s 或 r。
+      
+      它的变化主要可分三种情况：
+      \item 后遇清辅音，变咝或止音 (ḥ)。
+      \item 后遇浊音较复杂，前面元音影响大。
+      \item 原始结尾 r，浊前不变化。
+    \end{itemize}
+\end{frame}
+
+\subsection{后遇清辅音}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item s 遇清的腭卷齿，变为相应的咝音。\\    
+    \reconstruction{kuṭhāraiḥ ṭaṅkaiḥ ca} \\$\to$ \fullsentence{kuṭhāraiṣ ṭaṅkaiś ca} \sktsentence{kuṭhāraiṣṭaṅkaiśca}\\
+    \reconstruction{bhrātaraḥ trayaḥ} \\$\to$ \fullsentence{bhrātaras trayaḥ} \sktsentence{bhrātarastrayaḥ}\\
+    \item 遇他清音或落尾，就要变为 visarga (ḥ)。 \\
+    \reconstruction{tās kānyāḥ} $\to$ \fullsentence{tāḥ kānyāḥ} \sktsentence{tāḥ kānyāḥ}\\
+    \reconstruction{vrīhis pacyate} \\$\to$ \fullsentence{vrīhiḥ pacyate} \sktsentence{vrīhiḥ pacyate}\\    
+  \end{itemize}
+\end{frame}
+
+\subsection{后遇浊音}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 浊前非a/ā元音后，s音就要变成r。 \\
+    \reconstruction{matiḥ mama} \\$\to$ \fullsentence{matir mama} \sktsentence{matirmama}\\ 
+    \reconstruction{paśuḥ iva} \\$\to$ \fullsentence{paśur iva} \sktsentence{paśuriva}\\   
+    \item r前止音要消失，前音若短要变长。 \\
+    \reconstruction{taruḥ rohati} \\$\to$ \fullsentence{tarū rohati} \sktsentence{tarū rohati}\\
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item as遇浊辅变成o， \\
+    \reconstruction{aśvas vahati} $\to$ \fullsentence{aśvo vahati} \sktsentence{aśvo vahati}\\ 
+    \item 遇a变o还吃a， \\
+    \reconstruction{aśvas api} $\to$ \fullsentence{aśvo 'pi} \sktsentence{aśvo 'pi}\\   
+    \item 遇他元音则脱落。 \\
+    \reconstruction{aśvas iva} $\to$ \fullsentence{aśva iva} \sktsentence{aśva iva}\\
+    \item ās浊前都脱落。 \\
+    \reconstruction{aśvās vahanti} $\to$ \fullsentence{aśvā vahanti} \sktsentence{aśvā vahanti}\\
+    \reconstruction{aśvās ūhuḥ} $\to$ \fullsentence{aśvā ūhuḥ} \sktsentence{aśvā ūhuḥ}\\
+  \end{itemize}
+\end{frame}
+
+\subsection{原始结尾r}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 清前之r变如s。\\
+    \reconstruction{punar tatra} $\to$ \fullsentence{punas tatra} \sktsentence{punastatra}\\ 
+    \reconstruction{punar punar} $\to$ \fullsentence{punaḥ punaḥ} \sktsentence{punaḥ punaḥ}\\ 
+    \item 浊前之r不变化。\\
+    \reconstruction{punar asti} $\to$ \fullsentence{punar asti} \sktsentence{punarasti}\\ 
+    \item 不可出现两个r。\\
+    \reconstruction{punar rohati} $\to$ \fullsentence{punā rohati} \sktsentence{punā rohati}\\ 
+  \end{itemize}
+\end{frame}
+
+\section{课堂练习}
+
+\begin{frame}{找到词根与前缀}
+  %\small
+  \raggedright
+  例： \skt{samāgacchati} = \pratyaya{sam} + \pratyaya{ā} + \verbroot{gam}
+  \bigskip  
+  \begin{verse}
+    \skt{1) paryanunayāmaḥ} \\
+    \skt{2) saṃnibhṛtaḥ} \\
+    \skt{3) anūttiṣṭhati} \\
+    \skt{4) pratyupadravasi} \\
+    \skt{5) samutkṣipataḥ} \\
+    \skt{6) prodgacchanti । vyapāgacchāma} \\
+    \skt{7) apātiṣṭhāvaḥ । apātiṣṭhāva}
+  \end{verse}
+\end{frame}
+
+\begin{frame}{止音连声练习}
+  \begin{verse}
+    	\skt{1) naraḥ + tatra}\\
+    	\skt{2) naraḥ + uktavān}\\
+    	\skt{3) bālāḥ + gacchanti}\\
+    	\skt{4) kaviḥ + vadati}\\
+    	\skt{5) guroḥ + āśramaḥ}\\
+    	\skt{6) naraḥ + ayam}\\
+    	\skt{7) punaḥ + rāmaḥ}
+  \end{verse}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      没有作业\string~
+    \item
+      阅读教材第12课相关内容
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}
+
+\end{document}
