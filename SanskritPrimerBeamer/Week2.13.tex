@@ -1,0 +1,377 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语入门}}
+\subtitle{29. ṛ/n 变格与迂回将来时}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第28章练习4}
+  \small
+  \begin{verse}
+    \skt{1) śūrā arīndadṛśuḥ । nagaraṃ pālayitumicchantaḥ pradudruvuḥ ।}\\
+    \skt{2) bahuvasornarasya gṛhaṃ nanāśa । vasu taṃ na duḥkhādrarakṣeti bubudhima ।}\\
+    \skt{3) īśvaraṃ dṛṣṭvā namaścakrire ।}\\
+    \skt{4) uṣasi kumārāḥ priye gṛhanagare tatyajuḥ ।}\\
+    \skt{5) yataḥ kāmaḥ kumārasya hṛdaye vavardha tataḥ kanyāyai ratnaṃ dadau ।}\\
+    \skt{6) bālau gurorvacanāni śuśruvatuḥ । sa dhīmāneveti tuṣṭuvatuḥ ।}
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第28章练习4}
+  \small
+  \begin{verse}
+    \skt{7) kumārā āpadi hataṃ mitraṃ śuśucire । guṇavānmahābalaścāsīditi sasmaruḥ ।}\\
+    \skt{8) uditasya sūryasya prabhayā prasannaḥ siṃho 'cintaḥ suṣvāpa ।}\\
+    \skt{9) yato nṛpaḥ paurānna rarakṣa tataḥ śatravaḥ \mbox{puramabhidudruvuḥ sarvāṇi ratnāni cāpajahruḥ ।}}\\
+    \skt{10) kāle tu paurāḥ puraṃ tyaktuṃ śekuḥ ।}\\
+    \skt{11) api bibhyeti pṛṣṭāḥ । ciraṃ bibhīmādhunaiva tu na bibhīma iti pratyūcima ।}
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第28章练习4}
+  \small
+  \begin{verse}
+    \skt{12) ciraṃ mahānvṛkṣaḥ kṣatriyagaṇasya chāyāṃ \mbox{dadau ।} tadā tu chinnaḥ ।}\\
+    \skt{13) yadannaṃ suhṛdaḥ pecustadbubhujimahe ।}\\
+    \skt{14) nṛpaḥ kumārāya rūpavatīṃ kanyāṃ saratnāṃ dadau । mahāsukhau kumāraḥ kanyā cāpajagmatuḥ ।}\\
+    \skt{15) bahava eva kṣatriyā yuddhe mamruḥ । eke tu svāṃ nagarīṃ pratyājagmuḥ ।}\\
+    \skt{16) ciraṃ vasumānāsa । tadā tu sarvaṃ tatyāja vane ca gatvā tatra cintayituṃ sasāda ।}
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第28章练习4}
+  \small
+  \begin{verse}
+    \skt{17) smayatā sakhīgaṇena parivṛtā nāryapi jahāsa ।}\\
+    \skt{18) kṣatriyā iṣubhirhatā bhuvi petuḥ ।}\\
+    \skt{19) pure jagmima । api kadā citpure \mbox{jagma ।} jagama sa ca jagāma te tu na jagmuḥ ।}\\
+    \skt{20) naraḥ striyā darśanena tutoṣa । tasyāḥ prabhā devyā iveti mene ।}
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第28章练习4}
+  \small
+  \begin{verse}
+    \skt{21) mṛtasya śatro rathamiṣūṃśca sadhanuṣo yuddhakṣetrādlebhimahe । kṣatriyebhyaḥ svabandhubhyo dadima ।}\\
+    \skt{22) vyāghro haṃsaṃ jagrāha । kṣaṇenāpadudrāva ।}\\
+    \skt{23) yataḥ kopāduvacitha tato na śuśruma ।}\\
+    \skt{24) kṣatriyo na kadā \mbox{canārīnhantumiyeṣa ।} adhunā tu dharmavittānabhibabhūva । tānsarvāñjaghāna ।}
+  \end{verse}
+\end{frame}
+
+\section[ṛ的变格]{以ṛ结尾的名词变格}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{ṛ的变格~~意义层面}
+  \small
+  \begin{itemize}
+    \item 亲属名词，表示亲属关系。\\
+    \nounstem{pitṛ}, \nounstem{mātṛ}\\
+    \item 行动名词，\\
+    词根二合+ \pratyaya{\nobreakdash-tṛ\nobreakdash-}，表示动作发出者。\\
+  \end{itemize}
+  \centering
+  \begin{tabular}{@{}ll@{}} % 6 columns
+    \textbf{词根} & \textbf{行动名词} \\    
+    \verbroot{nī} & \nounstem{netṛ} \\
+    \verbroot{labh} & \nounstem{labdhṛ} \\    
+    \verbroot{rakṣ} & \nounstem{rakṣitṛ} \\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{ṛ的变格~~形态层面}
+  \small
+  \begin{itemize}
+    \item 要区分强弱语干，词尾大多正常。\\
+    \item 弱语干都是ṛ，单数依格都是ar。\\
+    \item 强语干分两类：
+    \begin{itemize}
+      \item 父母兄女人用ar，\\
+      \nounstem{pitṛ}, \nounstem{mātṛ}, \nounstem{bhrātṛ}, \nounstem{duhitṛ}, \nounstem{nṛ}\\
+      \item 其他都用ār。
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{以ṛ结尾的名词变格}
+  \small
+  \nounstem{pitṛ} m. 父亲，~~~~\nounstem{netṛ} m. 向导
+  \bigskip
+
+  \resizebox{\textwidth}{!}{
+    \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & \Block{1-2}{单数} & & \Block{1-2}{双数} & & \Block{1-2}{复数}  \\
+      主 & \cellcolor{light-gray}\fullpada{pitā} & \cellcolor{light-gray}\fullpada{netā} & \cellcolor{light-gray}\Block{3-1}{\fullpada{pitarau}} & \cellcolor{light-gray}\Block{3-1}{\fullpada{netārau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{pitaraḥ}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{netaraḥ}}  \\
+      呼 & \cellcolor{light-gray}\fullpada{pitaḥ} & \cellcolor{light-gray}\fullpada{netaḥ} & \cellcolor{light-gray}  & \cellcolor{light-gray} & \cellcolor{light-gray} & \cellcolor{light-gray} \\
+      业 & \cellcolor{light-gray}\fullpada{pitaram} & \cellcolor{light-gray}\fullpada{netāram} & \cellcolor{light-gray} & \cellcolor{light-gray} & \fullpada{pitṝn} & \fullpada{netṝn} \\
+      具 & \fullpada{pitrā} & \fullpada{netrā} & \Block{3-1}{\fullpada{pitṛbhyām}} & \Block{3-1}{\fullpada{netṛbhyām}} & \fullpada{pitṛbhiḥ} & \fullpada{netṛbhiḥ} \\
+      为 & \fullpada{pitre} & \fullpada{netre} & & & \Block{2-1}{\fullpada{pitṛbhyaḥ}}  & \Block{2-1}{\fullpada{netṛbhyaḥ}} \\
+      从 & \Block{2-1}{\fullpada{pituḥ}} & \Block{2-1}{\fullpada{netuḥ}} & &  & & \\
+      属 & & & \Block{2-1}{\fullpada{pitroḥ}} & \Block{2-1}{\fullpada{netroḥ}} & \fullpada{pitṝṇām} & \fullpada{netṝṇām} \\
+      依 & \cellcolor{light-gray}\fullpada{pitari} & \cellcolor{light-gray}\fullpada{netari} & & & \fullpada{pitṛṣu} & \fullpada{netṛṣu}\\
+    \end{NiceTabular}
+  }
+  \bigskip
+
+  注：阴性复数业格结尾是 \wordending{-ṝḥ}。\\
+  ~~~~\nounstem{mātṛ} m. 母亲，复数业格：\fullpada{mātṝḥ}
+\end{frame}
+
+
+\section[n的变格]{以n结尾的名词变格}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{以n结尾的名词}
+  \small
+  \begin{itemize}
+    \item 只有阳性和中性，使用标准辅音格尾。\\
+    \item an结尾阳性词区分强弱语干\\
+    \begin{itemize}
+      \item 强语干三合用ān，\\
+      \item 弱语干零级用n，\\
+      \item -an前是复合辅音的词元音语尾前\\弱语干二合用an。
+    \end{itemize}      
+    \item in结尾只看语尾开头音
+    \begin{itemize}
+      \item 元音语尾前用in，\\
+      \item 辅音语尾前用i。\\
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{an词干}
+\begin{frame}{以an结尾的名词变格}
+  \small
+  \nounstem{rājan} m. 国王，~~~~\nounstem{ātman} m. 自我/灵魂
+  \bigskip
+
+  \resizebox{\textwidth}{!}{
+    \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & \Block{1-2}{单数} & & \Block{1-2}{双数} & & \Block{1-2}{复数}  \\
+      主 & \cellcolor{light-gray}\fullpada{rājā} & \cellcolor{light-gray}\fullpada{ātmā} & \cellcolor{light-gray}\Block{3-1}{\fullpada{rājānau}} & \cellcolor{light-gray}\Block{3-1}{\fullpada{ātmānau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{rājānaḥ}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{ātmānaḥ}}  \\
+      呼 & \cellcolor{light-gray}\fullpada{rājan} & \cellcolor{light-gray}\fullpada{ātman} & \cellcolor{light-gray}  & \cellcolor{light-gray} & \cellcolor{light-gray} & \cellcolor{light-gray} \\
+      业 & \cellcolor{light-gray}\fullpada{rājānam} & \cellcolor{light-gray}\fullpada{ātmānam} & \cellcolor{light-gray} & \cellcolor{light-gray} & \fullpada{rājñaḥ} & \fullpada{ātmanaḥ} \\
+      具 & \fullpada{rājnā} & \fullpada{ātmanā} & \Block{3-1}{\fullpada{rājabhyām}} & \Block{3-1}{\fullpada{ātmabhyām}} & \fullpada{rājabhiḥ} & \fullpada{ātmabhiḥ} \\
+      为 & \fullpada{rājñe} & \fullpada{ātmane} & & & \Block{2-1}{\fullpada{rājabhyaḥ}}  & \Block{2-1}{\fullpada{ātmabhyaḥ}} \\
+      从 & \Block{2-1}{\fullpada{rājñaḥ}} & \Block{2-1}{\fullpada{ātmanaḥ}} & &  & & \\
+      属 & & & \Block{3-1}{\fullpada{rājñoḥ}} & \Block{3-1}{\fullpada{ātmanoḥ}} & \fullpada{rājñām} & \fullpada{ātmanām} \\
+      \Block{2-1}{依} & \fullpada{rājñi} & \Block{2-1}{\fullpada{ātmani}} & & & \Block{2-1}{\fullpada{rājasu}} & \Block{2-1}{\fullpada{ātmaṣu}}\\
+       & \cellcolor{light-gray}\fullpada{rājani} &  & & &  & \\
+    \end{NiceTabular}
+  }
+  \bigskip
+
+  \nounstem{nāman} n. 名字
+  \bigskip
+
+  { \footnotesize
+  \centering 
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & 单数 & 双数 & 复数  \\
+      主呼业 & \fullpada{nāma} & \fullpada{nāmanī/nāmnī} & \fullpada{nāmāni} \\
+    \end{NiceTabular}
+  }
+\end{frame}
+
+\subsection{in词干}
+\begin{frame}{以in结尾的名词变格}
+  \small
+  \nounstem{balin} adj. 强壮，有力的
+  \bigskip
+
+  \centering
+  {\footnotesize
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      阳性 & 单数 & 双数 & 复数  \\
+      主 & \fullpada{balī}  & \Block{3-1}{\fullpada{balinau}} & \Block{3-1}{\fullpada{balinaḥ}}   \\
+      呼 & \fullpada{balin} &  &  \\
+      业 & \fullpada{balinam} &  &  \\
+      具 & \fullpada{balinā} & \Block{3-1}{\fullpada{balibhyām}} & \fullpada{balibhiḥ} \\
+      为 & \fullpada{baline} &  & \Block{2-1}{\fullpada{balibhyaḥ}} \\
+      从 & \Block{2-1}{\fullpada{balinaḥ}} &  &  \\
+      属 &  & \Block{2-1}{\fullpada{balinoḥ}} & \fullpada{balinām} \\
+      依 & \fullpada{balini} &  & \fullpada{baliṣu} \\
+      中性 & 单数 & 双数 & 复数  \\
+      主业 & \fullpada{bali}  & \Block{2-1}{\fullpada{balinī}} & \Block{2-1}{\fullpada{balīni}}   \\
+      呼 & \fullpada{bali(n)} &  &  \\
+    \end{NiceTabular}
+  }
+\end{frame}
+
+\begin{frame}{in相关构词法}
+  \small
+  \begin{itemize}
+    \item \pratyaya{\nobreakdash-in\nobreakdash-} 和 \pratyaya{\nobreakdash-vin\nobreakdash-} 加在名词后表所有。\\
+    以a结尾的名词在加 \pratyaya{\nobreakdash-in\nobreakdash-} 时去掉a。\\
+  \end{itemize} 
+  \centering 
+  \begin{tabular}{@{}ll@{}} % 6 columns
+    \textbf{名词} & \textbf{加in/vin} \\    
+    \nounstem{bala} 力量 & \nounstem{balin} 有力的 \\
+    \nounstem{veda} 知识 & \nounstem{vedin} 知者 \\    
+    \nounstem{hasta} 手 & \nounstem{hastin} 大象 \\
+    \nounstem{tejas} 光芒 & \nounstem{tejasvin} 光辉的 \\
+    \nounstem{tapas} 苦行 & \nounstem{tapasvin} 苦行者 \\
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{in相关构词法}
+  \small
+  \begin{itemize}
+    \item \pratyaya{\nobreakdash-in\nobreakdash-} 加在词根后表doing。\\
+    词根要二合或三合。\\
+  \end{itemize} 
+  \centering 
+  \begin{tabular}{@{}ll@{}} % 6 columns
+    \textbf{词根} & \textbf{加in} \\    
+    \verbroot{kṛ} 做 & \nounstem{karin\nobreakdash-/kārin} 做，做者 \\
+    \verbroot{ji} 战胜 & \nounstem{jayin} 胜利 \\    
+  \end{tabular}
+  \begin{itemize}
+    \item in结尾名词的阴性加\pratyaya{\nobreakdash-ī\nobreakdash-}。\\
+    \nounstem{balin} mn. 强壮 $\to$ \nounstem{balinī} f. 强壮\\
+  \end{itemize} 
+\end{frame}
+
+\section{迂回将来时}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{迂回将来时}
+  \small
+  \begin{itemize}
+    \item 迂回的意思是用两个词而非一个词表达。\\
+    \notsoimportant{迂回完成时在第34章。}
+    \item 迂回将来时\\=行动名词(\pratyaya{\nobreakdash-tṛ\nobreakdash-})主格 + \verbroot{as} 现在时。\\
+    \mbox{一二人称用行动名词单数主格加 \verbroot{as} 变位，}\\
+    第三人称只出现行动名词主格。
+    \item 常与时间副词连用。\\
+    \fullsentence{śvo 'smi hantā Jayadratham} \\~~~明天我将要杀掉胜车王。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{迂回将来时}
+  %\small
+  \verbroot{nī} 带领 $\to$ \nounstem{netṛ} 向导
+  \bigskip
+
+  \centering
+  \begin{tabular}{@{}llll@{}} % 6 columns
+    & 单 & 双 & 复 \\    
+    1st & \fullpada{netāsmi} & \fullpada{netāsvaḥ}  & \fullpada{netāsmaḥ} \\
+    2nd & \fullpada{netāsi} & \fullpada{netāsthaḥ} & \fullpada{netāstha} \\    
+    3rd & \fullpada{netā} & \fullpada{netārau} & \fullpada{netāraḥ} \\
+  \end{tabular}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第29章练习4
+  \end{itemize}
+\end{frame}  
+
+\end{document}
