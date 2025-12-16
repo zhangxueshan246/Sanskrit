@@ -1,0 +1,316 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语入门}}
+\subtitle{15. 以辅音结尾的名词变格}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第14章练习4}
+  %\small
+  \begin{verse}
+    \skt{1) yuddhārthāḥ kṣatriyā raṇamagacchan ।}\\
+    \skt{2) vyāghrā aśvācchīghratarā aśvamaharan ।}\\
+    \mbox{\skt{3) kṣatriyabalabhayātkumāro 'pādravat ।}}\\
+    \skt{4) abhayāḥ kṣatriyā nidhanaṃ gacchanti·  iti dāsī·  avadat ।}\\
+    \skt{5) sūryacandrau kṛtsnaṃ lokaṃ paśyataḥ ।}
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第14章练习4}
+  \small
+  \begin{verse}
+    \skt{6) bhīmakeśaḥ siṃho bālau·  apādrāvayat ।}\\
+    \skt{7) janā hataputraṃ śūraṃ saṃśucya mṛtānputrānpuramabharan ।}\\
+    \skt{8) balārtho bālo vṛkṣānrohituṃ nadīkṣetrāṇi tartumiṣṭvā·  apādravat ।}\\
+    \skt{9) atiguṇā kanyā varaṃ devebhya āharat ।}\\
+    \skt{10) kumāro 'tirūpāṃ kanyāṃ dṛṣṭvā·  acintayatsā kanyā prabhāmukhā sūrya iva·  iti ।}
+  \end{verse}
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{上节\insertsubsection }
+  \small
+  复合词传统分类：
+  \begin{itemize}
+    \item 并列复合词 (相违释 / Dvandva)
+    \item 限定复合词 (依主释 / Tatpuruṣa)
+    \begin{itemize}
+      \item 同位复合词\\ (持业释 / Karmadhāraya)
+    \end{itemize}
+    \item 定语复合词 (多财释 / Bahuvrīhi)
+  \end{itemize}
+\end{frame}
+
+\section[辅音变格]{以辅音结尾的名词变格}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{标准格尾}
+\begin{frame}{\insertsubsection}
+  \small
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & \Block{1-2}{单数} & & \Block{1-2}{双数} & & \Block{1-2}{复数} &  \\
+       & 阳阴 & 中 & 阳阴 & 中 & 阳阴 & 中  \\
+      主 & \wordending{s} & \Block{3-1}{\wordending{}} & \Block{3-1}{\wordending{au}}  & \Block{3-1}{\wordending{ī}}  & \Block{3-1}{\wordending{aḥ}} &  \Block{3-1}{\wordending{ni}}   \\
+      呼 & \wordending{} & & & & & \\
+      业 & \wordending{am} &  & & & & \\
+      具 & \Block{1-2}{\wordending{ā}} &  & \Block{3-2}{\wordending{bhyām}}  & & \Block{1-2}{\wordending{bhiḥ}} & \\
+      为 & \Block{1-2}{\wordending{e}} &  & & & \Block{2-2}{\wordending{bhyaḥ}}  & \\
+      从 & \Block{2-2}{\wordending{aḥ}} &  & & & & \\
+      属 & &  & \Block{2-2}{\wordending{oḥ}} & &  \Block{1-2}{\wordending{ām}} & \\
+      依 & \Block{1-2}{\wordending{i}} &  & & & \Block{1-2}{\wordending{su}}&  \\
+    \end{NiceTabular}
+\end{frame}
+
+\subsection{齿音词干}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 以 t 或 d 结尾的词干。
+    \item 加标准格尾，只需注意连声问题。
+    \begin{itemize}
+      \item 词尾辅音在元音格尾前保持不变，\\ \fullpada{marutā} ~~\fullpada{āpadā}
+      \item 在浊辅音语尾前浊化，\\ \fullpada{marudbhiḥ}~~ \fullpada{āpadbhiḥ}
+      \item 在清辅音语尾前清化。\\ \fullpada{marutsu}~~ \fullpada{āpatsu}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{例词~~ \nounstem{marut} (m.)}
+  \small
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|l|l|l|}
+    \hline
+    & \textbf{Sg} & \textbf{Du} & \textbf{Pl} \\
+    \hline
+    \textbf{Nom} & \important{marut} & marutau & marutaḥ \\
+    \textbf{Acc} & marutam & ... & ... \\
+    \textbf{Instr} & marutā & \important{marudbhyām} & \important{marudbhiḥ} \\
+    \textbf{Dat} & marute & ... & \important{marudbhyaḥ} \\
+    \textbf{Abl/Gen} & marutaḥ & ... & ... \\
+    \textbf{Abl/Gen} & ... & marutoḥ & marutām \\
+    \textbf{Loc} & maruti & ... & \important{marutsu} \\
+    \hline
+  \end{tabular}
+  }
+  \bigskip
+  
+  \nounstem{āpad} (f.) 变化完全相同。
+\end{frame}
+
+\begin{frame}{例词~~ \nounstem{jagat} (n.)}
+  \small
+    \centering
+  中性词仅在主业呼格不同。
+  \bigskip
+  
+
+  \begin{tabular}{|l|l|l|l|}
+    \hline
+    & \textbf{Sg} & \textbf{Du} & \textbf{Pl} \\
+    \hline
+    \textbf{Nom/Acc} & jagat & jagatī & jaganti \\
+    \hline
+  \end{tabular}
+  \bigskip
+  
+  复数插入鼻音 \pratyaya{\nobreakdash-n\nobreakdash-} (类似 \fullpada{phalāni})。
+\end{frame}
+
+\subsection{腭音词干}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 以 c 或 j 结尾的词干。
+    \item 加标准格尾，连声比齿音略微复杂。
+    \begin{itemize}
+      \item 词尾辅音在元音格尾前保持不变，\\ \fullpada{vācā} ~~\fullpada{yajñabhujā}
+      \item 在词尾或辅音格尾前腭音变喉音，\\ \fullpada{vāk}~~ \fullpada{yajñabhuk}
+      \item 然后清浊根据辅音格尾变化。\\ \fullpada{vāgbhiḥ}~~ \fullpada{yajñabhugbhih}\\\fullpada{vākṣu}~~ \fullpada{yajñabhukṣu}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{例词~~ \nounstem{vāc} (f.)}
+  \small
+  \centering
+  %\resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|l|l|l|}
+    \hline
+    & \textbf{Sg} & \textbf{Du} & \textbf{Pl} \\
+    \hline
+    \textbf{Nom} & \important{vāk} & vācau & vācaḥ \\
+    \textbf{Acc} & vācam & ... & ... \\
+    \textbf{Instr} & vācā & \important{vāgbhyām} & \important{vāgbhiḥ} \\
+    \textbf{Dat} & vāce & ... & \important{vāgbhyaḥ} \\
+    \textbf{Abl} & vācaḥ & ... & ... \\
+    \textbf{Gen} & ... & vācoḥ & vācām \\
+    \textbf{Loc} & vāci & ... & \important{vākṣu} \\
+    \hline
+  \end{tabular}
+  %}
+\end{frame}
+
+\begin{frame}{例词~~ \nounstem{yajñabhuj} (m./n.)}
+  \small
+  \begin{itemize}
+    \item 阳性变化和 \nounstem{vāc} 相同，
+    \item   中性词仅在主业呼格不同。
+  \end{itemize}
+    \centering
+  \begin{tabular}{|l|l|l|l|}
+    \hline
+    & \textbf{Sg} & \textbf{Du} & \textbf{Pl} \\
+    \hline
+    \textbf{Nom/Acc} & yajñabhuk & yajñabhujī & yajñabhuñji  \\
+    \hline
+  \end{tabular}
+
+\end{frame}
+
+\section{复合词续}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{词根复合词}
+\begin{frame}{\insertsubsection}
+  \small 
+  词根作为依主释的后词，具有分词含义。
+  \begin{itemize}
+    \item 辅音结尾的词根直接做后词，\\
+    \nounstem{yajñabhuj} 享受祭祀~~\nounstem{vedavid} 懂吠陀的 \\
+    \item 以非a/ā元音结尾的词根常加t。\\
+    \nounstem{yuddhajit} 战胜~~ \nounstem{lokakṛt} 创世 \\
+
+    \item 以ā结尾的词根ā变a，\\
+    \nounstem{sarvajña} 全知~~\nounstem{rathastha} 站在车上 \\
+    \item 以鼻音结尾的词根鼻音消失。\\
+    \nounstem{kulaja} 生于好家族~~\nounstem{khaga} 在空中走，鸟\\
+  \end{itemize}
+\end{frame}
+
+\subsection{sa- 多财释}
+\begin{frame}{sa- 构成的多财释}
+  \small 
+  \begin{itemize}
+    \item \pratyaya{sa\nobreakdash-} 加在名词前形成多财释复合词。
+    \item 和动词前缀 \nounstem{sam} 和副词 \fullpada{saha} 相关。\\
+    \item 修饰名词时可译为“和”或“有”。\\
+    \fullsentence{nṛpaḥ sabhāryaḥ puraṃ gacchati} \\
+    国王和王后去城市。\\
+    \item 中性单数业格可做副词。\\
+    \fullpada{sakrodham} 气愤地\\
+  \end{itemize}
+\end{frame}
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第15章练习 5
+    \item
+      阅读教材第15课相关内容
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,280 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{30.31. 中间语态派生语尾}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第29章练习4}
+  \small
+  \begin{verse}
+    \skt{1) janānāṃ mūrdhni rājā bhavediti pitovāca ।}\\
+    \skt{2) pitarau duhitṝṇāṃ putrāṇāṃ ca rakṣitārau bhavetām ।}\\
+    \skt{3) rājā rakṣitṛbhiḥ sahāpagacchanna dṛṣṭaḥ ।}\\
+    \skt{4) apadruto bhrātā svasṛbhirna lakṣitaḥ pure tu vittiḥ ।}\\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第29章练习4}
+  \small
+  \begin{verse}
+    \skt{5) pakṣigaṇo marutā giribhya ihāpatat ।}\\
+    \skt{6) kanyāgaṇo vadantaṃ haṃsaṃ śrutvā bhayātkṣaṇenāpādravat ।}\\
+    \skt{7) marudvanādvāhi pakṣiṇā lakṣitaḥ ।}\\
+    \mbox{\skt{8) martyānāṃ jīvitamasthāyīti kṣatriyo vetti ।}}\\
+  \end{verse}
+\end{frame}
+
+\section{中间语态派生语尾}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{语尾复习}
+\begin{frame}{原始语尾}
+  \small
+  \centering
+  \begin{itemize}
+    \item \textbf{原始语尾：} 用于现在时和将来时
+  \end{itemize} 
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    \textbf{主动语态} & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{mi} & \wordending{vaḥ}  & \wordending{maḥ}  \\
+    第二人称 & \wordending{si} & \wordending{thaḥ} & \wordending{tha}   \\
+    第三人称 & \wordending{ti} & \wordending{taḥ} & \wordending{nti}  \\
+    \textbf{中间语态} & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{e} & \wordending{vahe}  & \wordending{mahe}  \\
+    第二人称 & \wordending{se} & \wordending{(e/ā)the} & \wordending{dhve}   \\
+    第三人称 & \wordending{te} & \wordending{(e/ā)te} & \wordending{a(n)te}  \\
+  \end{tabular}  
+\end{frame}
+
+\begin{frame}{派生语尾}
+  \small
+  \centering
+  \begin{itemize}
+    \item \textbf{派生语尾：} 用于未完成时与祈愿语气
+  \end{itemize} 
+  \begin{tabular}{@{}cccc@{}} % 4 columns
+    \textbf{主动语态} & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{(a)m} & \wordending{va}  & \wordending{ma}  \\
+    第二人称 & \wordending{ḥ} & \wordending{tam} & \wordending{ta}   \\
+    第三人称 & \wordending{t} & \wordending{tām} & \wordending{(a)n/\nobreakdash-uḥ}  \\
+  \end{tabular}   
+\end{frame}
+
+\subsection{中间语态派生语尾}
+\begin{frame}{\insertsubsection }
+  \small
+  \centering
+  \begin{itemize}
+    \item \textbf{中间语态派生语尾：} \\用于未完成时与祈愿语气的中间语态\\和被动语态(很少见)
+  \end{itemize} 
+  \begin{tabular}{@{}cccc@{}} % 4 columns
+      & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{i/\nobreakdash-(y)a} & \wordending{vahi}  & \wordending{mahi}  \\
+    第二人称 & \wordending{thāḥ} & \wordending{thām} & \wordending{dhvam}   \\
+    第三人称 & \wordending{ta} & \wordending{tām} & \wordending{(n)ta/\nobreakdash-ran}  \\
+  \end{tabular}   
+\end{frame}
+
+\subsection{例词}
+\begin{frame}{例词~~a语干}
+  \small
+  \verbroot{bhṛ(1)} ~~\verbstem{bhara} ~~
+  \begin{itemize}
+    \item 第二三人称双数有插入的
+    \pratyaya{\nobreakdash-i\nobreakdash-} 或 \pratyaya{\nobreakdash-(y)ā\nobreakdash-}
+  \end{itemize}
+
+  \resizebox{\textwidth}{!}{
+    \centering
+    \begin{tabular}{@{}cccc@{}} % 6 columns
+      未完成时 & 单 & 双 & 复  \\
+      1st & \fullpada{abhare} & \fullpada{abharāvahi}  & \fullpada{abharāmahi}  \\
+      2nd & \fullpada{abharathāḥ} & \fullpada{abhar\veryimportant{e}thām} & \fullpada{abharadhvam}   \\
+      3rd & \fullpada{abharata} & \fullpada{abhar\veryimportant{e}tām} & \fullpada{abharanta}  \\
+      \\
+      祈愿语气 & 单 & 双 & 复  \\
+      1st & \fullpada{bhareya} & \fullpada{bharevahi}  & \fullpada{bharemahi}  \\
+      2nd & \fullpada{bharethāḥ} & \fullpada{bhare\veryimportant{yā}thām} & \fullpada{bharedhvam}   \\
+      3rd & \fullpada{bhareta} & \fullpada{bhare\veryimportant{yā}tām} & \fullpada{bhareran}  \\
+    \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}{例词~~非a语干}
+  \small
+  \begin{itemize}
+    \item 全部使用弱语干 ~~\verbroot{yuj(7)} ~~\verbstem{yuñj} 
+    \item 第二三人称双数有插入的 \pratyaya{\nobreakdash-ā\nobreakdash-}，\\
+    祈愿语气前再加 \pratyaya{\nobreakdash-y\nobreakdash-}。
+  \end{itemize}
+  \resizebox{\textwidth}{!}{
+    \centering
+    \begin{tabular}{@{}cccc@{}} % 6 columns
+      未完成时 & 单 & 双 & 复  \\
+      1st & \fullpada{ayuñji} & \fullpada{ayuñjvahi}  & \fullpada{ayuñjmahi}  \\
+      2nd & \fullpada{ayuṅkthāḥ} & \fullpada{ayuñj\veryimportant{ā}thām} & \fullpada{ayuṅgdhvam}   \\
+      3rd & \fullpada{ayuṅkta} & \fullpada{ayuñj\veryimportant{ā}tām} & \fullpada{ayuñjata}  \\
+      祈愿语气 & 单 & 双 & 复  \\
+      1st & \fullpada{yuñjīya} & \fullpada{yuñjīvahi}  & \fullpada{yuñjīmahi}  \\
+      2nd & \fullpada{yuñjīthāḥ} & \fullpada{yuñjī\veryimportant{yā}thām} & \fullpada{yuñjīdhvam}   \\
+      3rd & \fullpada{yuñjīta} & \fullpada{yuñjī\veryimportant{yā}tām} & \fullpada{yuñjīran}  \\
+    \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}{例词~~非a语干}
+  \small
+  \begin{itemize}
+    \item 第五类动词词干末尾的 u 可以消失\\
+    前面是单辅音，且后面是v或m语尾
+
+    \verbroot{vṛ(5)} ~~2nd.Du. \fullpada{avṛṇvahi/avṛṇuvahi} \\
+    \verbroot{āp(5)} ~~2nd.Du. \fullpada{āpnuvahi} \\
+    \item 第九类动词元音语尾前用n，辅音前用nī
+    
+    \verbroot{pū(9)} 未完成时
+  \end{itemize}
+  \centering
+    \begin{tabular}{@{}cccc@{}} % 6 columns
+      & 单 & 双 & 复  \\
+      1st & \fullpada{apuni} & \fullpada{apunīvahi}  & \fullpada{apunīmahi}  \\
+      2nd & \fullpada{apunīthāḥ} & \fullpada{apunāthām} & \fullpada{apunīdhvam}   \\
+      3rd & \fullpada{apunīta} & \fullpada{apunātām} & \fullpada{apunata}  \\
+    \end{tabular}
+\end{frame}
+
+
+
+
+\section{词汇}
+
+\begin{frame}{词汇~~\verbroot{yuj}}
+  \small
+  \verbroot{yuj} (VII \fullpada{yunakti/yuṅkte}, 被动 \fullpada{yujyate}) 
+  
+  \begin{itemize}
+    \item \textbf{本义} ~~连接~~同源词 yoke
+    \item \textbf{用法} 
+      \begin{itemize}
+        \item 联系，结合，上轭。
+        \item 使用，约束。
+        \item 准备，安排，修习。 
+      \end{itemize}
+    \item \textbf{派生词:}
+      \begin{itemize}
+        \item \fullpada{yukta} (ppp.): 结合，擅长，合理。
+        \item \nounstem{yoga} (m.): 连接，结合，方法，瑜伽。
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第30章练习5
+    \item
+      第31章练习6
+  \end{itemize}
+\end{frame}  
+
+\end{document}
