@@ -1,0 +1,228 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{32. 第一、二人称代词}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第30章练习5}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{1) narāṇāṃ jīvitamantavaddevānāṃ tvanantavadevetyṛṣibhirabhāṣyata ।}   \\
+    \skt{2) pitarau gāyantyā duhitrānandetām ।}   \\
+    \skt{3) bhrāturdoṣānkṣamethāḥ ।}   \\
+    \skt{4) kathaṃ devaṃ jānāsīti pṛṣṭo gururdevā rūpavanto 'svedā achāyā ajarā animiṣāśceti pratyabhāṣata ।} \\
+    \skt{5) \mbox{daṇḍinau pakṣiṇo daṇḍābhyāmudapātayatām ।} annaṃ khādituṃ bhuvyupāviśetām ।}  \\
+    \skt{6) gāyantī kanyā svasṛbhyāmaśasyata ।} \\
+
+  \end{verse}
+\end{frame}  
+
+\begin{frame}{第30章练习5}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{7) \mbox{yadannaṃ mātaraḥ pecustatkuto nākhādadhvam ।}}\\
+    \skt{8) pure vasato janānugrebhyaḥ śatrubhyo rakṣemahītyuktvā tānarakṣāmahi ।} \\
+    \skt{9) senayorubhayoḥ kṣatriyau balavattamāvayudhyetām । anyonyaṃ jaghantuḥ ।} \\
+    \skt{10) netā karmabhirjñāyate ।} \\
+    \skt{11) aśvo bālaṃ bhṛtavānpitrāśasyata ।} \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第31章练习6}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{1) mahākarmāṇaṃ kṣatriyaṃ senayormūrdhni sthitamajānīmahi ।}   \\
+    \skt{2) pitarāvakīrtikaraṃ putramanindetām ।}   \\
+    \skt{3) yuddhamantakaramasti । alaṃ yuddheneti pitovāca ।}   \\
+    \skt{4) prathamaṃ na sadā śreṣṭhamiti dhīmānuktvānyadyatnamakuruta ।}  \\
+    \skt{5) apyannamabhuṅgdhvamiti pitā putrānpṛṣṭavān । \mbox{adhunā kaveḥ kathāḥ śrotumiyāmetyavadata ।}}  \\
+    \skt{6) na kadā cidyuddhāya kalpiṣyatha iti kṣatriyaḥ kumārāvabalāvabravīt ।} \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第31章练习6}
+  \raggedright
+  \small
+  \begin{verse}
+    \skt{7) bālā nadyāmasnāyanta । alaṃ snānena iti mātā bhāṣitvā tāngṛhamanayat ।} \\
+    \skt{8) devāḥ sarvakarāḥ sarvavidaśca । devānpūjayā namasā ca juhvīmahi ।} \\
+    \skt{9) rājā prajākāmaḥ kathamaprajo jīvitaṃ bhuñjīteti papraccha ।} \\
+    \skt{10) mahābuddhergurorvacanāni śṛṇuyāveti bāle 'cintayatām ।} \\
+    \skt{11) ciraṃ suptvā bālo 'cirāduttiṣṭheyamityavadat । annakāma udatiṣṭhat ।} \\
+  \end{verse}
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{\insertsubsection }
+  \small
+  \centering
+  \begin{itemize}
+    \item \textbf{中间语态派生语尾：} \\用于未完成时与祈愿语气的中间语态\\和被动语态(很少见)
+  \end{itemize} 
+  \begin{tabular}{@{}cccc@{}} % 4 columns
+      & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{i/\nobreakdash-(y)a} & \wordending{vahi}  & \wordending{mahi}  \\
+    第二人称 & \wordending{thāḥ} & \wordending{thām} & \wordending{dhvam}   \\
+    第三人称 & \wordending{ta} & \wordending{tām} & \wordending{(n)ta/\nobreakdash-ran}  \\
+  \end{tabular}   
+\end{frame}
+
+\section{代词 III}
+
+\subsection{第一、二人称代词}
+\begin{frame}{第一人称代词 \nounstem{asmad}}
+  \small
+  \centering
+  \begin{NiceTabular}{llll}[hvlines]
+    \CodeBefore \rowcolor{light-gray}{1} \Body
+    格 & 单数 (Sg) & 双数 (Du) & 复数 (Pl) \\
+    主 & \fullpada{aham} & \fullpada{āvām} & \fullpada{vayam} \\
+    业 & \fullpada{mām, mā} & \fullpada{āvām} & \fullpada{asmān, naḥ} \\
+    具 & \fullpada{mayā} & \fullpada{āvābhyām} & \fullpada{asmābhiḥ} \\
+    为 & \fullpada{mahyam, me} & \fullpada{āvābhyām} & \fullpada{asmabhyam, naḥ} \\
+    从 & \fullpada{mat} & \fullpada{āvābhyām} & \fullpada{asmat} \\
+    属 & \fullpada{mama, me} & \fullpada{āvayoḥ} & \fullpada{asmākam, naḥ} \\
+    依 & \fullpada{mayi} & \fullpada{āvayoḥ} & \fullpada{asmāsu} \\
+  \end{NiceTabular}
+\end{frame}
+
+\begin{frame}{第二人称代词 \nounstem{yuṣmad}}
+  \small
+  \centering
+  \begin{NiceTabular}{llll}[hvlines]
+    \CodeBefore \rowcolor{light-gray}{1} \Body
+    格 & 单数 (Sg) & 双数 (Du) & 复数 (Pl) \\
+    主 & \fullpada{tvam} & \fullpada{yuvām} & \fullpada{yūyam} \\
+    业 & \fullpada{tvām, tvā} & \fullpada{yuvām} & \fullpada{yuṣmān, vaḥ} \\
+    具 & \fullpada{tvayā} & \fullpada{yuvābhyām} & \fullpada{yuṣmābhiḥ} \\
+    为 & \fullpada{tubhyam, te} & \fullpada{yuvābhyām} & \fullpada{yuṣmabhyam, vaḥ} \\
+    从 & \fullpada{tvat} & \fullpada{yuvābhyām} & \fullpada{yuṣmat} \\
+    属 & \fullpada{tava, te} & \fullpada{yuvayoḥ} & \fullpada{yuṣmākam, vaḥ} \\
+    依 & \fullpada{tvayi} & \fullpada{yuvayoḥ} & \fullpada{yuṣmāsu} \\
+  \end{NiceTabular}
+\end{frame}
+
+\subsection{形态要点}
+\begin{frame}{语法要点}
+  \small
+  \begin{itemize}
+    \item \veryimportant{无性区别}：\\第一、二人称对所有词性形式相同。
+    \item \veryimportant{词干形式}：
+      \begin{itemize}
+        \item 第一人称：\nounstem{mat}
+        \item 第二人称：\nounstem{tvat}
+      \end{itemize}
+    \item \important{附着形式 (Enclitics)}：表中逗号后的形式（如 \fullpada{me, naḥ, te, vaḥ}）为轻读形式。
+      \begin{itemize}
+        \item 不能放在句首。
+        \item 用于非强调语境。
+      \end{itemize}
+    \item Ruki连声：\nounstem{asmat} vs. \nounstem{yuṣmat}。
+  \end{itemize}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item 第30章练习3
+    \item 学习通作业提交pdf
+    \item 截止时间12月31日
+  \end{itemize}
+\end{frame}  
+
+\end{document}	

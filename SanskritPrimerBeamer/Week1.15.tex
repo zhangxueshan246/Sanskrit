@@ -1,0 +1,244 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语入门}}
+\subtitle{16. 词间元音连声}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+%\institute{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第15章练习5}
+  \small
+  \begin{verse}
+    \skt{1) suhṛdbālāyai·  annamudakaṃ ca·  ābharat ।}\\
+    \skt{2) suhṛdo vācaṃ śrutvā bālā·  annodake āhṛtya prāṇamat ।}\\
+    \skt{3) nṛpasya vācaṃ śrutvā narā vacanāni na vismaranti ।}\\
+    \skt{4) dharmavidaṃ kṣatriyaṃ pūjayema । kṣatriyasya balaṃ kṛtsne jagati pāpānabhibhavet ।}
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第15章练习5}
+  \small
+  \begin{verse}
+    \skt{5) akṣānkṣiptvā jitāḥ śūrā vane vastuṃ pratyāgacchan ।}\\
+    \skt{6) yadā rathastho nṛpaḥ puramagacchattadā kṣatriyagaṇaḥ kṣaṇādapaśyat ।}\\
+    \skt{7) marudiva kṛtsnaṃ jagattartumicchāmi ।}\\
+    \skt{8) udakabhujaṃ bālaṃ dṛṣṭvā tuṣyāmi ।}\\
+    \skt{9) lokakṛddevo bhūtāni kṛtsnāyāṃ bhuvi toṣayati ।}
+  \end{verse}
+\end{frame}
+
+\subsection{复习}
+\begin{frame}{标准格尾}
+  \small
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+       & \Block{1-2}{单数} & & \Block{1-2}{双数} & & \Block{1-2}{复数} &  \\
+       & 阳阴 & 中 & 阳阴 & 中 & 阳阴 & 中  \\
+      主 & \wordending{s} & \Block{3-1}{\wordending{}} & \Block{3-1}{\wordending{au}}  & \Block{3-1}{\wordending{ī}}  & \Block{3-1}{\wordending{aḥ}} &  \Block{3-1}{\wordending{ni}}   \\
+      呼 & \wordending{} & & & & & \\
+      业 & \wordending{am} &  & & & & \\
+      具 & \Block{1-2}{\wordending{ā}} &  & \Block{3-2}{\wordending{bhyām}}  & & \Block{1-2}{\wordending{bhiḥ}} & \\
+      为 & \Block{1-2}{\wordending{e}} &  & & & \Block{2-2}{\wordending{bhyaḥ}}  & \\
+      从 & \Block{2-2}{\wordending{aḥ}} &  & & & & \\
+      属 & &  & \Block{2-2}{\wordending{oḥ}} & &  \Block{1-2}{\wordending{ām}} & \\
+      依 & \Block{1-2}{\wordending{i}} &  & & & \Block{1-2}{\wordending{su}}&  \\
+    \end{NiceTabular}
+\end{frame}
+
+\section{词间连声}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{连声复习}
+\begin{frame}{词间连声总则}
+  \small
+  \centering
+  \begin{itemize}
+    \item 前词尾音和后词首音相遇发生变化。
+    \item 一般前音会变，有时后音也变。
+    \item 辅音会被后音同化，而且要连写。
+    \item 止音 ḥ 变化较特殊，前后原形都要看。
+    \item 元音遇元音常融合，遇辅音不变。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{词内元音连声}
+ % \small
+  \begin{itemize}
+    \item 简单元音同类融合为长音\\
+    \pratyaya{upa\nobreakdash-ā\nobreakdash-}\verbroot{nī} \fullpada{upānayati}  \\
+    \item i/u加不同类时变成对应半元音\\
+    \pratyaya{vi\nobreakdash-apa\nobreakdash-}\verbroot{nī} \fullpada{vyapanayati}  \\
+    \pratyaya{adhi\nobreakdash-ā\nobreakdash-}\verbroot{gam} \fullpada{adhyāgacchati}  \\
+    \item a/ā加不同类时升一级\\ 
+    \pratyaya{pra\nobreakdash-ud\nobreakdash-}\verbroot{dhṛ} \fullpada{proddharati}  \\
+  \end{itemize}
+\end{frame}
+
+\subsection{词间元音连声}
+\begin{frame}{词间元音连声总则}
+  \small
+    \begin{itemize}
+      \item \textbf{词尾元音 + 词首辅音：} \\不变化也不连写。
+      \item \textbf{词尾元音 + 词首元音：} \\发生融合或音变，元音连续会出现。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{词间元音连声总表}  
+  \centering
+  \includegraphics[width=\textwidth]{external_vowel_sandhi.png} %
+\end{frame}
+
+\subsection{~~~简单元音}
+
+\begin{frame}{简单元音}
+  \small
+  \begin{itemize}
+    \item a/ā自加变长音，其他后者升一级。\\
+    \reconstruction{na adya} $\to$ \fullsentence{nādya} \sktsentence{nādya}  \\
+    \reconstruction{na iha} $\to$ \fullsentence{neha} \sktsentence{neha}  %\\
+    \reconstruction{na eva} $\to$ \fullsentence{naiva} \sktsentence{naiva} \\
+    \reconstruction{sā auṣadhiḥ} $\to$ \fullsentence{sauṣadhiḥ} \sktsentence{sauṣadhiḥ}\\
+    \reconstruction{yathā ṛṣiḥ} $\to$ \fullsentence{yathārṣiḥ} \sktsentence{yathārṣiḥ} \\
+    \item i、u、ṛ自加变长音，遇他变为半元音。 \\
+    \reconstruction{devī iha} $\to$ \fullsentence{devīha} \sktsentence{devīha} \\
+    \reconstruction{sādhu uktam} $\to$ \fullsentence{sadhūktam} \sktsentence{sadhūktam} \\
+    \reconstruction{iti uktvā} $\to$ \fullsentence{ity uktvā} \sktsentence{ityuktvā} \\
+    \reconstruction{astu eva} $\to$ \fullsentence{astv eva} \sktsentence{astveva} \\
+  \end{itemize}
+\end{frame}
+
+\subsection{~~~复合元音}
+\begin{frame}{复合元音}
+  \small
+    \begin{itemize}
+    \item e o除了能吃a，遇到元音就变a。\\
+    \reconstruction{te api} $\to$ \fullsentence{te 'pi} \sktsentence{te 'pi}  \\
+    \reconstruction{vane āste} $\to$ \fullsentence{vana āste} \sktsentence{vana āste}  %\\
+    \item 只要遇到是元音，ai变ā来au变āv。 \\
+    \reconstruction{tasmai adāt} $\to$ \fullsentence{tasmā adāt} \sktsentence{tasmā adāt} \\
+    \reconstruction{tau ubhau} $\to$ \fullsentence{tāv ubhau} \sktsentence{tāvubhau} \\
+  \end{itemize}
+\end{frame}
+
+\subsection{~~~不变尾元音}
+\begin{frame}{不变尾元音}
+  \small
+  \begin{itemize}
+  \item 双数格位ī、ū、e，感叹、呼唤和amī，\\
+  在元音前都不变，传统称为pragṛhya。\\
+    \fullsentence{cakṣuṣī ime} \sktsentence{cakṣuṣī ime}  \\
+    \fullsentence{kanye āsāte atra} \sktsentence{kanye āsāte atra}  \\
+    \fullsentence{he indra} \sktsentence{he indra}  \\
+  \end{itemize}
+\end{frame}
+
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      \textbf{期末作业(12月31日截止)：} \\第16章练习 1 (学习通有截图)
+    \bigskip
+    \item
+      \notsoimportant{阅读教材第16课相关内容}
+    \bigskip
+    \item
+      现在请做学习通\nobreakdash-章节\nobreakdash-课后问卷
+  \end{itemize}
+\end{frame}
+
+\end{document}
