@@ -1,0 +1,248 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex  
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter} 
+\graphicspath{{pic/}}
+\usepackage{booktabs} 
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref} 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+\newcommand{\dicturl}[2]{\href{#1}{\mbox{\texttt{#2}}}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{1. 梵语工具}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+
+\begin{document}	
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{西文资源}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item 词典：Cologne Sanskrit Lexicon
+    \item 变形：Sanskrit Heritage
+  \end{itemize}
+\end{frame}
+
+\subsection{Cologne 科隆}
+\begin{frame}{Cologne Sanskrit Lexicon}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://www.sanskrit-lexicon.uni-koeln.de/}{sanskrit-lexicon.uni-koeln.de}
+    \item 性质：学术检索入口，聚合多部历史词典并支持互跳。
+    \item 底本：MW，PW，PWG，Apte。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{MW. Monier-Williams}
+  \small
+  \begin{itemize}
+    \item Monier\mbox{-}Williams Sanskrit\mbox{-}English Dictionary
+    \item 版本：1899 年增补版，多次重印。
+    \item 特点：义项系统完整，注释其他印欧语言同源词，最常用。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{MW. 缩略语}
+  \small
+  \begin{itemize}
+    \item List of Works and Authors. pp. xxxiii-xxxiv.\\
+    \begin{itemize}
+      \item Ṛ(ig-)V(eda, refered to as RV).
+      \item Kāthās(aritsāgara).
+    \end{itemize}
+    \item Symbols and Abbreviations pp. xxxiv-xxxv.\\
+    \begin{itemize}
+      \item Ā. = Ātmane-pada.
+      \item abl. = ablative case.
+    \end{itemize}    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{PWG./PW. \\Böhtlingk德语词典}
+  \small
+  \begin{itemize}
+    \item Böhtlingk and Roth Grosses Petersburger Wörterbuch (PWG, 1855)
+    \item Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (PW, 1879)
+    \item 特点：历史分层信息丰富，适合语义史与文献义项比对。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{AP. Apte 词典}
+  \small
+  \begin{itemize}
+    \item Practical Sanskrit-English Dictionary
+    \item 版本：1957修订增补本
+    \item 用途：条理清楚，教学友好，适合与 MW/PWG 交叉核对。
+  \end{itemize}
+\end{frame}
+
+\subsection{Sanskrit Heritage}
+\begin{frame}{Dictionnaire Héritage du Sanskrit}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://sanskrit.inria.fr/}{sanskrit.inria.fr}
+    \item 性质：梵语形态分析与分词工具。
+    \item 特点：从屈折形式反查词头，并提供形态解析路径。
+  \end{itemize}
+\end{frame}
+
+\section{中文资源}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item 综合：佛研资讯
+    \item 顺手：梵佛研
+    \item 也常用：梵和大辞典
+  \end{itemize}
+\end{frame}
+
+\subsection{佛研资讯}
+\begin{frame}{佛研资讯}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://foyan.online/}{foyan.online}
+    \item 性质：佛教数字资源聚合入口。
+    \item 内容结构：包含数字佛典平台（CBETA、SAT）与电子词典平台（DDB）等。
+    \item 特点：新且较详细，源自2024综述文章。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{CBETA 数字佛典平台}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://cbetaonline.dila.edu.tw/}{cbetaonline.dila.edu.tw}
+    \item 性质：汉文佛典数据库与检索平台。
+    \item 用途：定位术语在不同译本、不同语境中的用例与译法。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{SAT 数字佛典平台}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://21dzk.l.u-tokyo.ac.jp/SAT/}{21dzk.l.u-tokyo.ac.jp/SAT}
+    \item 性质：大藏经检索与并行对读平台。
+    \item 用途：精确检索汉译佛典术语，补充 CBETA 的检索路径。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{DDB 电子佛教词典}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://www.buddhism-dict.net/ddb/}{buddhism-dict.net/ddb}
+    \item 性质：佛教术语英文释义、汉字词条与跨语言对照。
+    \item 特点：主要是以汉查梵？
+  \end{itemize}
+\end{frame}
+
+
+\subsection{梵佛研}
+\begin{frame}{梵佛研}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://fanfoyan.com/}{fanfoyan.com}
+    \item 资源：梵语宝典和梵佛词典。
+    \item 特点：主要是Monier-Williams，部分词有变格变位表和中文义项。
+  \end{itemize}
+\end{frame}
+
+\subsection{荻原梵和大辞典}
+\begin{frame}{漢譯對照梵和大辭典}
+  \small
+  \begin{itemize}
+    \item 网址：\dicturl{https://www.manduuka.net/sanskrit/dic/ogdic.htm}{manduuka.net/sanskrit/dic/ogdic.htm}
+    \item 编者：荻原雲來
+    \item 性质：梵日漢對照佛教辭典。
+    \item 特点：只有上册可查。
+  \end{itemize}
+\end{frame}
+
+\section{下节预告}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item 上学期作业：第32章练习3
+    \item 第33章：愿望动词和必要分词
+  \end{itemize}
+\end{frame}  
+
+\end{document}
