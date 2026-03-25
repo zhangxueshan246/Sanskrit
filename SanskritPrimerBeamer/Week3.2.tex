@@ -1,0 +1,301 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter}
+\graphicspath{{pic/}}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\mbox{\textcolor{Plum}{#1}}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+\newcommand{\dicturl}[2]{\href{#1}{\mbox{\texttt{#2}}}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{33. 愿望动词和必要分词}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第32章练习3}
+  \small
+  \begin{verse}
+    \skt{1) tvayā vinā jīvituṃ necchāmītyuktvā kumāro 'pajagāma ।}\\
+    \skt{2) tanmayā kṛtamiti hasantī bālāvadat ।}\\
+    \mbox{\skt{3) sarvāṇi bhūtāni mayi vasantītīśvara uvāca ।}}\\
+    \skt{4) ko yuvayoḥ śīghratara iti pṛṣṭau kumārau prativaktuṃ nāśaknutām ।}\\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第32章练习3}
+  \small
+  \begin{verse}
+    \skt{5) tanmama gṛhamidaṃ tu taveti naro mitrāyādarśayat ।}\\
+    \skt{6) ratnāni no na santi । yuṣmākaṃ tu bahūni vasūnyeveti nārya ūcuḥ ।}\\
+    \skt{7) ahaṃ tvanna kadā cidapagamiṣyāmi ।}\\
+    \skt{8) kutaḥ sa vyāghro yuṣmābhirhata iti bālo 'pṛcchat ।}\\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第32章练习3}
+  \small
+  \begin{verse}
+    \skt{9) tvaṃ vardhethā āvābhyāṃ ca bahutarajño bhaveriti pitarau bālamavadetām ।}\\
+    \skt{10) yuvābhyāṃ sahārīnabhibhavituṃ śakṣyāmaḥ ।}\\
+    \skt{11) kuto 'smānna papracchitha । vayameva tvāṃ rakṣiṣyāma iti mitrāṇyūcuḥ ।}\\
+    \skt{12) etanmamāsti tvayā tu luptam ।}\\
+  \end{verse}
+\end{frame}
+
+
+\section{愿望动词}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{意义}
+\begin{frame}{\insertsection ~~意义}
+  \begin{itemize}
+    \item 愿望动词(desiderative)
+    \vspace{1em}
+
+    表示愿望、打算，\\或者行为应该发生。
+  \end{itemize}
+\end{frame}
+
+\subsection{形态}
+\begin{frame}{\insertsection ~~形态}
+  \small
+  \begin{itemize}
+    \item 词根重复
+    \item 加后缀 \pratyaya{-sa-}（有时要加联系元音 \pratyaya{-i-}，\\
+      由于 \emph{ruki} 规则写作 \pratyaya{-ṣa-}、\pratyaya{-iṣa-}）
+    \item 现在时语尾(语态与基础动词相同)
+    \item \notsoimportant{愿望动词的完成时用迂回完成时（34课）}
+  \end{itemize}
+\end{frame}
+
+\subsection{~~重复音节}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item \textbf{辅音：}同完成时和第三类动词
+    \item \textbf{元音：}
+    \begin{itemize}
+      \item 词根含 u/ū  → 重复元音 u
+      \item 词根是其他元音 → 重复元音i
+    \end{itemize}
+  \end{itemize}
+  \vspace{0.5em}
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{@{}lll@{}}
+      词根 & 愿望语干 & 含义 \\
+      \midrule
+      \verbroot{yudh} 'fight' & \verbstem{yuyutsa} (Ā.) & 'desires to fight' \\
+      \verbroot{bhū} 'be' & \verbstem{bubhūṣa} (P.) & 'desires to be' \\
+      \verbroot{pā} 'drink' & \verbstem{pipāsa} (P.) & 'is thirsty' \\
+      \verbroot{bhṛ} 'carry' & \verbstem{bibhariṣa} (P.) & 'desires to carry' \\
+    \end{tabular}
+  }
+\end{frame}
+
+\subsection{~~不规则形式}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 词根元音 \pratyaya{-sa-} 前一般零级，\\
+    \pratyaya{-iṣa-} 前一般二合，但总有例外：\\
+    \verbroot{han} → \fullpada{jighāṃsati} 'wants to kill'
+    \item 词根末 ṛ → \important{īr}：\verbroot{kṛ} → \fullpada{cikīrṣati}
+    \item 短元音词根可延长：\verbroot{śru} → \fullpada{śuśrūṣate}
+    \item 三个常见不规则形式：\\
+    \verbroot{āp}  → \fullpada{īpsate} 'wants to get'\\
+    \verbroot{dā}  → \fullpada{ditsati} 'wants to give'\\
+    \verbroot{dhā} → \fullpada{dhitsati} 'wants to put'
+  \end{itemize}
+\end{frame}
+
+\subsection{愿望形容词和名词}
+\begin{frame}{愿望形容词}
+  \small
+  \begin{itemize}
+    \item 将愿望动词语干末尾的 a 替换为 u\\
+    \verbstem{yuyutsa} →  \nounstem{yuyutsu} 'desiring to fight' \\
+    \verbstem{cikīrṣa} →  \nounstem{cikīrṣu} 'desiring to do' \\
+    \verbstem{didṛkṣa} →  \nounstem{didṛkṣu} 'desiring to see' 
+    \item 按以 u 结尾的形容词变格\\
+    \item 例句 (MBh 2.11.2)\\
+    \fullsentence{purā devayuge\ldots{} ādityo\ldots{} āgacchad}\\
+    \fullsentence{mānuṣaṃ lokaṃ} \fullpada{didṛkṣuḥ}\\
+    \notsoimportant{很久以前，在诸神的时代，太阳神}\\
+    \notsoimportant{\underline{想要观看}人间，便来到此世。}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{愿望名词}
+  \small
+  \begin{itemize}
+    \item 将愿望语干末尾的 a 替换为 ā
+    \item 按以 ā 结尾的阴性名词变格
+    \item 一般表抽象含义
+  \end{itemize}
+  \begin{indentlist}
+    \item \verbroot{pā} 'to drink' → \verbstem{pipāsa} \\
+    → \nounstem{pipāsā} (f.) '渴（= 想要喝的欲望）'\\
+    \item \verbroot{śru} 'to hear' → \verbstem{śuśrūṣa} \\
+    → \nounstem{śuśrūṣā} (f.) '想要聆听；服从'\\
+    \item \verbroot{bhuj} 'to enjoy' → \verbstem{bubhukṣa} \\
+    → \nounstem{bubhukṣā} (f.) '饥饿'\\
+  \end{indentlist}
+\end{frame}
+
+
+\section{必要分词}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{意义}
+\begin{frame}{\insertsection ~~意义}
+  \small
+  \begin{itemize}
+    \item 必要分词(gerundive)\\
+    也叫动形词或将来被动分词
+    \item 由动词词根构成的\important{形容词}，\\
+    表被动必要性 'having to be x-ed'
+    \item 否定的必要分词（前缀 \pratyaya{a-}）\\译为 'must/should \emph{not} be \mbox{x-ed}' \\或 '\emph{cannot} be x-ed'
+  \end{itemize}
+\end{frame}
+
+\subsection{形态}
+\begin{frame}{\insertsection ~~形态}
+  \small
+  \begin{itemize}
+    \item 词根（常二合，也有三合和零级）
+    \item 后缀：\pratyaya{-(t)ya-} / \pratyaya{-tavya-} / \pratyaya{-anīya-}
+    \item 格尾：阳性/中性按a变；阴性按ā变
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{三个后缀对比}
+  \small
+  \centering
+  \begin{NiceTabular}{@{}lccc@{}}
+    词根 & \pratyaya{-(t)ya-} & \pratyaya{-tavya-} & \pratyaya{-anīya-} \\
+    \verbroot{kṛ} 'do' & \fullpada{kārya-} & \fullpada{kartavya-} & \fullpada{karaṇīya-} \\
+    \verbroot{śru} 'hear' & \fullpada{śravya-} & \fullpada{śrotavya-} & \fullpada{śravaṇīya-} \\
+  \end{NiceTabular}
+  \begin{itemize}
+    \item \pratyaya{-(t)ya-} 最常见，但实际都有可能。
+    \item \pratyaya{-tya-} 是 \pratyaya{-ya-} 短元音后的变体
+    \item \pratyaya{-tavya-} 前词根二合
+    （基本与不定式 \pratyaya{-tum} 一致，有的要加联系元音\pratyaya{-i-} ）
+    \item 不规则：词根末尾的 ā 在 \pratyaya{-ya-} 前变 e：\\
+    \verbroot{dā} 'give' → \fullpada{deya-} 'having to be given'
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{例句}
+  \small
+  \sktsentence{sarve munayaḥ kuśīlavau} \sktpada{praśastavyau} \sktsentence{praśaṃsuḥ}\\
+  \notsoimportant{所有圣者赞美了值得赞美的拘尸和罗婆。}\\
+  \hfill\notsoimportant{(\emph{Rāmāyaṇa} 1.4.15)}
+  \vspace{1em}
+
+  \sktsentence{kairmayā saha} \sktpada{yoddhavyam} \sktsentence{asmin raṇasamudyame}\\
+  \notsoimportant{在此战中，我必须与谁作战？}\\
+  \hfill\notsoimportant{(\emph{Bhagavad-Gītā} 1.22)}
+\end{frame}
+
+\section{本节作业}
+
+\begin{frame}{\insertsection }
+  \begin{itemize}
+    \item
+      第33章练习1
+  \end{itemize}
+\end{frame}
+
+\end{document}
