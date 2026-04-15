@@ -1,0 +1,295 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter}
+\graphicspath{{pic/}}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\mbox{\textcolor{Plum}{#1}}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+\newcommand{\dicturl}[2]{\href{#1}{\mbox{\texttt{#2}}}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{35. 完成时分词；比较级}
+\author[张雪杉]{文学院~~张雪杉\\zhangxueshan@sdnu.edu.cn}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第34章练习3}
+  \small
+  \begin{verse}
+    \skt{1) mahatā yatnena narau gṛhaṃ śatrubhyaḥ pālayāmāsatuḥ ।}\\
+    \mbox{\skt{2) paurā adhipatiṃ kṛtāñjalayo 'bhigamya nemuḥ ।}}\\
+    \skt{3) kanyā bālaṃ chinnaṃ vṛkṣaṃ darśayāmāsuḥ ।}\\
+    \mbox{\skt{4) āsīdrājā nalo nāma vīrasenasuto balī ।}}\\
+    \mbox{~~~~~\skt{upapanno guṇairiṣṭaiḥ rūpavānaśvakovidaḥ ॥}}\\
+    \skt{5) pitāmahaḥ prasannānbālānkathāṃ kathayāṃ babhūva ।}\\
+    \skt{6) bāle yuvayoḥ katarā śatrūnpūrvaṃ lakṣayāmāsitha ।}\\
+  \end{verse}
+\end{frame}
+
+
+\begin{frame}{第34章练习3}
+  \small
+  \begin{verse}
+    \skt{7) dūto naścamvo raṇaṃ varṇayāmāsa ।}\\
+    \skt{8) mānuṣā bhuvamavatīrṇaṃ devaṃ praṇemuḥ ।}\\
+    \skt{9) na kadā citpakṣiṇāṃ gaṇairvṛtāṃ bhuvamīkṣāṃ cakra iti kanyābravīt ।}\\
+    \mbox{\skt{10) dagdhasya purasya darśanaṃ paurāñśocayāmāsa ।}}\\
+    \skt{11) mānuṣā adhipatiṃ sasenaṃ yuddhātpratyāgatamānṛcuḥ ।}\\
+    \mbox{\skt{12) sukhino vṛkṣasya chāyāyāmāsāṃ cakṛmahe ।}}\\
+  \end{verse}
+\end{frame}
+
+
+\iffalse
+  \begin{frame}{第34章阅读}
+    \footnotesize{
+      \begin{verse}
+        \mbox{\skt{dhṛṣṭaketuścekitānaḥ kāśirājaśca vīryavān ।}}\\
+        \mbox{\skt{purujit kuntibhojaśca śaibyaśca narapuṅgavaḥ ।। 1-5 ।।}}\\
+        \mbox{\skt{yudhāmanyuśca vikrānta uttamaujāśca vīryavān ।}}\\
+        \mbox{\skt{saubhadro draupadeyāśca sarva eva mahārathāḥ ।। 1-6 ।।}}\\
+        \mbox{\skt{asmākaṃ tu viśiṣṭā ye tānnibodha dvijottama ।}}\\
+        \mbox{\skt{nāyakā mama sainyasya saṃjñārthaṃ tānbravīmi te ।। 1-7 ।।}}\\
+      \end{verse}
+    }
+  \end{frame}
+\fi
+
+
+\section[完成时\\分词]{完成时分词}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{形态}
+\begin{frame}{\insertsection ~~\insertsubsection}
+  \begin{itemize}
+    \item 完成时分词由完成时语干构成
+    \item 两种语态加的词缀不同：
+    \begin{itemize}
+      \item 中间语态分词：后缀 \pratyaya{-āna-}
+      \item 主动语态分词：后缀 \pratyaya{-vas-}
+      \\变格复杂出现少，可用 \pratyaya{-tavant-} 分词表达同样意思（第25章）
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{完成时中间语态分词}
+  \small
+  \begin{itemize}
+    \item 完成时弱语干 + \pratyaya{-āna-}
+    \item 按 \mbox{a-/ā-} 词尾变格
+    \item 注意：只用 \pratyaya{-āna-}，不用 \pratyaya{-māna-}
+  \end{itemize}
+
+  \begin{indentlist}
+    \item \verbroot{yudh} 'to fight' → 弱语干 \verbstem{yuyudh}\\
+      → \nounstem{yuyudhāna} 'having fought'
+    \item \verbroot{yuj} 'to join' (中间语态~ 'to marry')\\
+      → 弱语干 \verbstem{yuyuj}\\
+      → \nounstem{yuyujāna} 'having got married'
+  \end{indentlist}
+\end{frame}
+
+\begin{frame}{完成时主动语态分词}
+  \small
+  \begin{itemize}
+    \item 完成时弱语干 + \pratyaya{-vas-}
+    \item 变格复杂：
+    \begin{itemize}
+      \item 强语干：三合 \pratyaya{-vāṃs-}\\
+      \item 最弱语干（元音前）：零级 \pratyaya{-uṣ-}\\
+      \item 中语干（辅音前）：\pratyaya{-vat-} / \pratyaya{-vad-}
+    \end{itemize}
+    \item 阴性：弱语干 + \pratyaya{-ī-}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\verbroot{kṛ} 完成时主动分词}
+  \small
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      \important{阳性} & 单数 & 双数 & 复数  \\
+      主格 & \cellcolor{light-gray}\fullpada{cakṛvān} & \cellcolor{light-gray}\Block{3-1}{\fullpada{cakṛvāṃsau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{cakṛvāṃsaḥ}}  \\
+      呼格 & \cellcolor{light-gray}\fullpada{cakṛvan} & \cellcolor{light-gray} & \cellcolor{light-gray} \\
+      业格 & \cellcolor{light-gray}\fullpada{cakṛvāṃsam} & \cellcolor{light-gray} & \fullpada{cakruṣaḥ} \\
+      \important{中性} & \Block{2-1}{\fullpada{cakṛvat}} & \Block{2-1}{\fullpada{cakruṣī}} & \Block{2-1}{\fullpada{cakṛvāṃsi}}  \\
+      主呼业 &  &  &  \\
+      具格 & \fullpada{cakruṣā} & \Block{3-1}{\fullpada{cakṛvadbhyām}} & \fullpada{cakṛvadbhiḥ} \\
+      为格 & \fullpada{cakruṣe} &  & \Block{2-1}{\fullpada{cakṛvadbhyaḥ}} \\
+      从格 & \Block{2-1}{\fullpada{cakruṣaḥ}} &  &  \\
+      属格 &  & \Block{2-1}{\fullpada{cakruṣoḥ}} & \fullpada{cakruṣām} \\
+      依格 & \fullpada{cakruṣi} &  & \fullpada{cakṛvatsu} \\
+    \end{NiceTabular}
+  }
+  \begin{itemize}
+    \item \notsoimportant{阴性：\nounstem{cakruṣī}（按 -ī 词尾变格）}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{常见形式：\nounstem{vidvas}}
+  \small
+  \begin{itemize}
+    \item \verbroot{vid} 'to see; to know' \\
+    → 完成时 \fullpada{veda} 'I know'（无重复音节）
+    \item 完成时分词 \nounstem{vidvas} 'knowing, skilled'\\
+
+    \item 阳性主格单数：\fullpada{vidvān} 
+    \item 阴性：\nounstem{viduṣī} 
+  \end{itemize}
+\end{frame}
+
+
+\section{比较级}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{两种构成}
+\begin{frame}{比较级和最高级两种构成}
+  \begin{itemize}
+    \item 常见比较级和最高级后缀：\\
+    \pratyaya{-tara-}，\pratyaya{-tama-}（第9章）
+    \item 替代后缀：\\
+    \pratyaya{-(ī)yas-}，\pratyaya{-(i)ṣṭha-}
+  \end{itemize}
+\end{frame}
+
+\subsection{形态}
+\begin{frame}{\pratyaya{-(ī)yas-} 比较级~~ \insertsubsection}
+  \small
+  \begin{itemize}
+    \item 原词语干会各种变样
+    \begin{itemize}
+      \item 词干形成时加的后缀往往要去掉\\
+      例如：\pratyaya{-a-}, \pratyaya{-an-}, \pratyaya{-in-}，\pratyaya{-u-} 等\\
+      \nounstem{guru-} 'heavy' → \nounstem{garīyas} \\
+      \item 元音常加强\\
+      \nounstem{priya-} 'dear' → \nounstem{preyas} 
+      → \nounstem{preṣṭha} \\
+      \nounstem{śreyas} 'better' → \nounstem{śreṣṭha} 'best'
+    \end{itemize}
+    \item 变格较复杂
+    \begin{itemize}
+      \item 强语干 \pratyaya{-īyāṃs-}，弱语干\pratyaya{-īyas-}\\
+      \item 阴性：弱语干 + \pratyaya{-ī-}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\nounstem{śreyas} 'better'}
+  \small
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      \important{阳性} & 单数 & 双数 & 复数  \\
+      主格 & \cellcolor{light-gray}\fullpada{śreyān} & \cellcolor{light-gray}\Block{3-1}{\fullpada{śreyāṃsau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{śreyāṃsaḥ}}  \\
+      呼格 & \cellcolor{light-gray}\fullpada{śreyan} & \cellcolor{light-gray} & \cellcolor{light-gray} \\
+      业格 & \cellcolor{light-gray}\fullpada{śreyāṃsam} & \cellcolor{light-gray} & \fullpada{śreyasaḥ} \\
+      \important{中性} & \Block{2-1}{\fullpada{śreyaḥ}} & \Block{2-1}{\fullpada{śreyasī}} & \Block{2-1}{\fullpada{śreyāṃsi}}  \\
+      主呼业 &  &  &  \\
+      具格 & \fullpada{śreyasā} & \Block{3-1}{\fullpada{śreyobhyām}} & \fullpada{śreyobhiḥ} \\
+      为格 & \fullpada{śreyase} &  & \Block{2-1}{\fullpada{śreyobhyaḥ}} \\
+      从格 & \Block{2-1}{\fullpada{śreyasaḥ}} &  &  \\
+      属格 &  & \Block{2-1}{\fullpada{śreyasoḥ}} & \fullpada{śreyasām} \\
+      依格 & \fullpada{śreyasi} &  & \fullpada{śreyaḥsu} \\
+    \end{NiceTabular}
+  }
+\end{frame}
+
+
+\section{本节作业}
+
+\begin{frame}{\insertsection}
+  \begin{itemize}
+    \item 第31-32章阅读练习
+  \end{itemize}
+\end{frame}
+
+\end{document}
