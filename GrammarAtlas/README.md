@@ -152,6 +152,104 @@ Push 到 GitHub 后会自动部署到 GitHub Pages。
 
 部署地址：https://zhangxueshan246.github.io/Sanskrit/
 
+### 自动部署工作流
+
+- 当代码推送到 `master` 分支时，GitHub Actions 自动触发
+- 工作流配置文件：`.github/workflows/deploy.yml`
+- 部署完成通常需要 1-2 分钟
+
+## 更新网站的工作流
+
+每次更新经文或代码时，按以下步骤操作：
+
+### 步骤 1：编辑文件
+
+```bash
+# 编辑经文数据
+cd GrammarAtlas
+# 编辑 src/data/sutras.ts、README.md 或其他文件
+```
+
+### 步骤 2：验证并本地测试
+
+```bash
+# 验证引用一致性（必须！）
+npm run validate
+
+# 本地测试
+npm run dev
+# 访问 http://localhost:4321/Sanskrit/ 查看效果
+```
+
+### 步骤 3：提交并推送
+
+```bash
+# 返回项目根目录
+cd ..
+
+# 查看修改
+git status
+
+# 提交更改
+git add GrammarAtlas/
+git commit -m "描述你的更改，例如：Add 5 new sutras from chapter 2"
+
+# 推送到 GitHub（自动触发部署）
+git push origin master
+```
+
+### 步骤 4：检查部署状态
+
+访问：https://github.com/zhangxueshan246/Sanskrit/actions
+
+看到绿色 ✓ 表示部署成功，然后访问网站查看更新效果。
+
+### 常见更新场景
+
+**场景 1：只修改经文数据**
+```bash
+cd GrammarAtlas
+# 编辑 src/data/sutras.ts
+cd ..
+git add GrammarAtlas/src/data/sutras.ts
+git commit -m "Update pan_1.1.1 notes"
+git push origin master
+```
+
+**场景 2：修改样式或代码**
+```bash
+# 编辑代码文件
+git add GrammarAtlas/
+git commit -m "Improve graph colors"
+git push origin master
+```
+
+**场景 3：更新文档**
+```bash
+# 编辑 GrammarAtlas/README.md
+git add GrammarAtlas/README.md
+git commit -m "Update README with new features"
+git push origin master
+```
+
+### 重要提示 ⚠️
+
+- **始终运行 `npm run validate`** 确保 notes 中的 wiki 链接和 references 同步
+- **每次推送前本地测试** `npm run dev`
+- **提交信息要有意义** 方便以后追溯更改
+- **稳定后再推送** 避免频繁部署
+
+### 快速查询命令
+
+```bash
+npm run validate   # 验证引用一致性
+npm run dev        # 本地开发服务器
+npm run build      # 本地构建测试
+npm run preview    # 预览构建结果
+git status         # 查看待提交文件
+```
+
+
 ## 目录结构
 
 ```
