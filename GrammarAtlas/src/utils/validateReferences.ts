@@ -1,9 +1,12 @@
 /**
  * 验证经文数据中的引用一致性
  * 严格模式检查：
- * 1. notes 中的所有 [[id]] 必须在 references 中
+ * 1. notes 中的所有 [[id]] 必须在 references 中，或在任何层级的 adhikaras 中
  * 2. references 中的所有 id 必须是存在的经文
  * 3. references 中的所有 id 必须在 notes 中被提及（无孤立引用）
+ *
+ * 说明：adhikaras 支持层级关系。如果 A 的 adhikara 是 B，B 的 adhikara 是 C，
+ * 那么 A 可以在 notes 中引用 B 或 C，都不会报错。
  */
 
 import { sutras, type Sutra } from '../data/sutras';
@@ -33,6 +36,32 @@ function extractWikiLinks(text: string | undefined): string[] {
 }
 
 /**
+ * 递归获取某条 sutra 的所有 adhikaras（包括直接和间接的）
+ * 处理层级关系：如果 A 的 adhikara 是 B，B 的 adhikara 是 C，
+ * 那么 A 可以引用 B 和 C，都不算孤立引用
+ */
+function getAllAdhikaras(sutraId: string, visited = new Set<string>()): string[] {
+  // 防止循环引用
+  if (visited.has(sutraId)) return [];
+  visited.add(sutraId);
+
+  const sutra = sutras[sutraId];
+  if (!sutra || !sutra.adhikaras || sutra.adhikaras.length === 0) {
+    return [];
+  }
+
+  const allAdhikaras: string[] = [...sutra.adhikaras];
+
+  // 递归获取每个 adhikara 的 adhikaras
+  for (const adhikaraId of sutra.adhikaras) {
+    const ancestorAdhikaras = getAllAdhikaras(adhikaraId, visited);
+    allAdhikaras.push(...ancestorAdhikaras);
+  }
+
+  return allAdhikaras;
+}
+
+/**
  * 验证单个经文的引用一致性
  */
 function validateSutra(sutra: Sutra): ValidationResult {
@@ -47,11 +76,12 @@ function validateSutra(sutra: Sutra): ValidationResult {
   const linksInNotes = extractWikiLinks(sutra.notes);
   const referencesArray = sutra.references || [];
   const existingSutraIds = Object.keys(sutras);
+  const allAdhikaras = getAllAdhikaras(sutra.id);
 
-  // 检查 1：notes 中的所有链接是否都在 references 中
+  // 检查 1：notes 中的所有链接是否都在 references 或任何层级的 adhikaras 中
   for (const link of linksInNotes) {
-    if (!referencesArray.includes(link)) {
-      result.errors.push(`notes 中包含 [[${link}]] 但不在 references 中`);
+    if (!referencesArray.includes(link) && !allAdhikaras.includes(link)) {
+      result.errors.push(`notes 中包含 [[${link}]] 但不在 references 或 adhikaras 中`);
       result.isValid = false;
     }
   }
