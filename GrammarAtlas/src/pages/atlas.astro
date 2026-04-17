@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SutraGraph from '../components/SutraGraph';
+---
+
+<Layout title="图谱">
+  <h2 style="margin-bottom: 1rem;">经文关系图谱</h2>
+  <p style="color: #94a3b8; margin-bottom: 1.5rem;">
+    拖拽节点调整位置，点击查看经文详情。
+  </p>
+  <SutraGraph
+    client:load
+    width={1000}
+    height={700}
+  />
+</Layout>

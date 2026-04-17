@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { sutras } from '../../data/sutras';
+import { parseWikiLinks } from '../../utils/parseWikiLinks';
+
+export function getStaticPaths() {
+  return Object.keys(sutras).map(id => ({
+    params: { id },
+    props: { sutra: sutras[id] }
+  }));
+}
+
+const { id } = Astro.params;
+const { sutra } = Astro.props;
+
+const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : 'Kātantra';
+---
+
+<Layout title={sutra.id}>
+  <div class="sutra-page">
+    <div class="sutra-header">
+      <span class={`source-badge ${sutra.source}`}>{sourceLabel}</span>
+      <h1>{sutra.id.replace('_', ' ')}</h1>
+      <p class="sutra-text">{sutra.text}</p>
+    </div>
+
+    {sutra.translation && (
+      <div class="sutra-section">
+        <h2>翻译</h2>
+        <p set:html={parseWikiLinks(sutra.translation)} />
+      </div>
+    )}
+
+    {sutra.vrtti && (
+      <div class="sutra-section">
+        <h2>Vṛtti 注释</h2>
+        <p set:html={parseWikiLinks(sutra.vrtti)} />
+      </div>
+    )}
+
+    {sutra.notes && (
+      <div class="sutra-section notes">
+        <h2>笔记</h2>
+        <p set:html={parseWikiLinks(sutra.notes)} />
+      </div>
+    )}
+
+    {sutra.adhikaras && sutra.adhikaras.length > 0 && (
+      <div class="sutra-section">
+        <h2>Adhikāra 领句</h2>
+        {sutra.adhikaras.map(adh => (
+          <a href={`/Sanskrit/sutra/${adh}`} class="sutra-link">
+            {adh.replace('_', ' ')}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {sutra.references.length > 0 && (
+      <div class="sutra-section">
+        <h2>引用经文</h2>
+        {sutra.references.map(ref => (
+          <a href={`/Sanskrit/sutra/${ref}`} class="sutra-link">
+            {ref.replace('_', ' ')}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {sutra.parallel && sutra.parallel.length > 0 && (
+      <div class="sutra-section">
+        <h2>互文</h2>
+        {sutra.parallel.map(par => (
+          <a href={`/Sanskrit/sutra/${par}`} class="sutra-link">
+            {par.replace('_', ' ')}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <div style="margin-top: 2rem;">
+      <a href="/Sanskrit/atlas" class="view-link">← 返回图谱</a>
+    </div>
+  </div>
+</Layout>

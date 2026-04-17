@@ -22,5 +22,9 @@
 old/
 未同步文档/
 
+# Node.js
+node_modules/
+dist/
+
 # Allow source files
 !SanskritPrimerBeamer/  # Allow the Beamer project folder

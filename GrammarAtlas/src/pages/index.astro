@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { sutras } from '../data/sutras';
+
+const sutraList = Object.values(sutras);
+const paniniCount = sutraList.filter(s => s.source === 'panini').length;
+const katantraCount = sutraList.filter(s => s.source === 'katantra').length;
+---
+
+<Layout title="首页">
+  <div class="hero">
+    <h1>Grammar Atlas</h1>
+    <p>
+      个人梵语语法笔记，试图用可视化图谱方式展示梵语语法经文之间的关系网络。
+    </p>
+    <p style="color: #64748b; font-size: 0.875rem;">
+      当前收录: Pāṇini {paniniCount} 条 | Kātantra {katantraCount} 条
+    </p>
+    <a href="/Sanskrit/atlas" class="view-link" style="font-size: 1.25rem;">
+      进入图谱视图 →
+    </a>
+  </div>
+
+  <h2 style="margin-bottom: 1rem;">最近添加</h2>
+  <div class="sutra-list">
+    {sutraList.slice(0, 6).map(sutra => (
+      <a href={`/Sanskrit/sutra/${sutra.id}`} class="sutra-card">
+        <h3>{sutra.id.replace('_', ' ')}</h3>
+        <p>{sutra.text}</p>
+      </a>
+    ))}
+  </div>
+</Layout>
