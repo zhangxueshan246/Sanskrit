@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { sutras, edges, type Sutra } from '../data/sutras';
 import { parseWikiLinks } from '../utils/parseWikiLinks';
+import { formatSutraId } from '../utils/formatSutraId';
+import { searchSutras } from '../utils/searchSutras';
 
 interface Props {
   width?: number;
@@ -21,6 +23,8 @@ interface Link extends d3.SimulationLinkDatum<Node> {
 export default function SutraGraph({ width = 800, height = 600 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedSutra, setSelectedSutra] = useState<Sutra | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -46,7 +50,9 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
 
     // 颜色定义
     const sourceColors: Record<string, string> = {
-      panini: "#4f46e5",    // 靛蓝色
+      panini: "#1e3a8a",    // 深蓝
+      jkv: "#3b82f6",       // 中等蓝（略浅）
+      dssk: "#93c5fd",      // 浅蓝（最浅）
       katantra: "#059669",  // 绿色
       other: "#6b7280"      // 灰色
     };
@@ -85,16 +91,17 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
         .on("end", dragended) as any);
 
     // 节点圆形
-    node.append("circle")
+    const nodeCircles = node.append("circle")
       .attr("r", 25)
       .attr("fill", d => sourceColors[d.source] || "#6b7280")
       .attr("stroke", "#fff")
       .attr("stroke-width", 2)
+      .attr("class", d => `node-circle${searchResults.has(d.id) ? ' highlighted' : ''}`)
       .style("cursor", "pointer");
 
     // 节点标签
     node.append("text")
-      .text(d => d.id.replace(/^(pan|kat)_/, ''))
+      .text(d => formatSutraId(d.id))
       .attr("text-anchor", "middle")
       .attr("dy", "0.35em")
       .attr("fill", "white")
@@ -119,6 +126,19 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
       node.attr("transform", d => `translate(${d.x},${d.y})`);
     });
 
+    // 搜索后更新节点样式
+    if (searchQuery.trim()) {
+      nodeCircles
+        .style("opacity", d => searchResults.has(d.id) ? 1 : 0.2)
+        .style("stroke-width", d => searchResults.has(d.id) ? 3 : 2)
+        .style("filter", d => searchResults.has(d.id) ? 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.5))' : 'none');
+    } else {
+      nodeCircles
+        .style("opacity", 1)
+        .style("stroke-width", 2)
+        .style("filter", 'none');
+    }
+
     // 拖拽函数
     function dragstarted(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -140,66 +160,119 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
     return () => {
       simulation.stop();
     };
-  }, [width, height]);
+  }, [width, height, searchResults]);
+
+  // 处理搜索查询变化
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      const results = searchSutras(searchQuery);
+      setSearchResults(new Set(results.map(s => s.id)));
+    } else {
+      setSearchResults(new Set());
+    }
+  }, [searchQuery]);
 
   return (
-    <div className="graph-container">
-      <svg ref={svgRef} width={width} height={height} />
-
-      {/* 图例 */}
-      <div className="legend">
-        <h4>图例</h4>
-        <div className="legend-item">
-          <span className="dot panini"></span> Pāṇini
-        </div>
-        <div className="legend-item">
-          <span className="dot katantra"></span> Kātantra
-        </div>
-        <div className="legend-item">
-          <span className="line reference"></span> 引用
-        </div>
-        <div className="legend-item">
-          <span className="line parallel"></span> 对应
-        </div>
-        <div className="legend-item">
-          <span className="line adhikara"></span> Adhikāra
-        </div>
+    <>
+      {/* 搜索框 - 独立在外面 */}
+      <div className="graph-search-bar">
+        <label htmlFor="graph-search-input" className="graph-search-label">
+          🔍 搜索
+        </label>
+        <input
+          id="graph-search-input"
+          type="text"
+          className="graph-search-input"
+          placeholder="输入经文ID、原文或翻译..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setSearchQuery('');
+            }
+          }}
+        />
+        {searchQuery && (
+          <button
+            className="graph-search-clear"
+            onClick={() => setSearchQuery('')}
+            title="清空搜索 (ESC)"
+          >
+            ✕
+          </button>
+        )}
+        {searchQuery && (
+          <span className="graph-search-count">
+            {searchResults.size} / {Object.keys(sutras).length}
+          </span>
+        )}
       </div>
 
-      {/* 经文详情面板 */}
-      {selectedSutra && (
-        <div className="sutra-panel">
-          <button className="close-btn" onClick={() => setSelectedSutra(null)}>×</button>
-          <h3>{selectedSutra.id.replace('_', ' ')}</h3>
-          <p className="sutra-text" dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.text) }} />
-          {selectedSutra.translation && (
-            <p className="translation" dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.translation) }} />
-          )}
-          {selectedSutra.vrtti && (
-            <div className="vrtti">
-              <strong>Vṛtti:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.vrtti) }} />
-            </div>
-          )}
-          {selectedSutra.notes && (
-            <div className="notes">
-              <strong>笔记:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.notes) }} />
-            </div>
-          )}
-          {selectedSutra.adhikaras && selectedSutra.adhikaras.length > 0 && (
-            <p className="adhikara">
-              <strong>领句:</strong> {selectedSutra.adhikaras.join(' → ')}
-            </p>
-          )}
-          {selectedSutra.parallel && selectedSutra.parallel.length > 0 && (
-            <p className="parallel">
-              <strong>互文:</strong> {selectedSutra.parallel.join(', ')}
-            </p>
-          )}
-          <a href={`/Sanskrit/sutra/${selectedSutra.id}`} className="view-link">
-            查看详情 →
-          </a>
+      {/* 图表容器 */}
+      <div className="graph-container">
+        <svg ref={svgRef} width={width} height={height} />
+
+        {/* 图例 */}
+        <div className="legend">
+          <h4>图例</h4>
+          <div className="legend-item">
+            <span className="dot panini"></span> Pāṇini
+          </div>
+          <div className="legend-item">
+            <span className="dot katantra"></span> Kātantra
+          </div>
+          <div className="legend-item">
+            <span className="dot jkv"></span> Kāśikāvṛṭti
+          </div>
+          <div className="legend-item">
+            <span className="dot dssk"></span> 段晴《波你尼语法入门》
+          </div>
+          <div className="legend-item">
+            <span className="line reference"></span> 引用
+          </div>
+          <div className="legend-item">
+            <span className="line parallel"></span> 对应
+          </div>
+          <div className="legend-item">
+            <span className="line adhikara"></span> Adhikāra
+          </div>
         </div>
-      )}
-    </div>
+
+        {/* 经文详情面板 */}
+        {selectedSutra && (
+          <div className="sutra-panel">
+            <button className="close-btn" onClick={() => setSelectedSutra(null)}>×</button>
+            <h3>{formatSutraId(selectedSutra.id)}</h3>
+            <p className="sutra-text" dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.text) }} />
+            {selectedSutra.translation && (
+              <p className="translation" dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.translation) }} />
+            )}
+            {selectedSutra.vrtti && (
+              <div className="vrtti">
+                <strong>Vṛtti:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.vrtti) }} />
+              </div>
+            )}
+            {selectedSutra.notes && (
+              <div className="notes">
+                <strong>笔记:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.notes) }} />
+              </div>
+            )}
+            {selectedSutra.adhikaras && selectedSutra.adhikaras.length > 0 && (
+              <p className="adhikara">
+                <strong>领句:</strong> {selectedSutra.adhikaras.join(' → ')}
+              </p>
+            )}
+            {selectedSutra.parallel && selectedSutra.parallel.length > 0 && (
+              <p className="parallel">
+                <strong>互文:</strong> {selectedSutra.parallel.join(', ')}
+              </p>
+            )}
+            <a href={`/Sanskrit/sutra/${selectedSutra.id}`} className="view-link">
+              查看详情 →
+            </a>
+          </div>
+        )}
+      </div>
+    </>
   );
 }

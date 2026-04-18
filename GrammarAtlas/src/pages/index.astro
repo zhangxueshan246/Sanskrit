@@ -5,16 +5,19 @@ import { sutras } from '../data/sutras';
 const sutraList = Object.values(sutras);
 const paniniCount = sutraList.filter(s => s.source === 'panini').length;
 const katantraCount = sutraList.filter(s => s.source === 'katantra').length;
+const jkvCount = sutraList.filter(s => s.source === 'jkv').length;
+const dsskCount = sutraList.filter(s => s.source === 'dssk').length;
+const totalCount = sutraList.length;
 ---
 
 <Layout title="首页">
   <div class="hero">
     <h1>Grammar Atlas</h1>
     <p>
-      个人梵语语法笔记，试图用可视化图谱方式展示梵语语法经文之间的关系网络。
+      个人梵语语法笔记，用可视化图谱方式展示梵语语法经文之间的关系网络。
     </p>
     <p style="color: #64748b; font-size: 0.875rem;">
-      当前收录: Pāṇini {paniniCount} 条 | Kātantra {katantraCount} 条
+      当前收录: Pāṇini {paniniCount} 条 | Kātantra {katantraCount} 条 | Kāśikāvṛṭti {jkvCount} 条 | 段晴《波你尼语法入门》{dsskCount} 条 | 共 {totalCount} 条
     </p>
     <a href="/Sanskrit/atlas" class="view-link" style="font-size: 1.25rem;">
       进入图谱视图 →
@@ -29,5 +32,16 @@ const katantraCount = sutraList.filter(s => s.source === 'katantra').length;
         <p>{sutra.text}</p>
       </a>
     ))}
+  </div>
+
+  <hr style="margin: 3rem 0; border: none; border-top: 1px solid var(--color-border);" />
+
+  <div style="color: #64748b; font-size: 0.875rem; line-height: 1.8;">
+    <p><strong>About</strong></p>
+    <p>
+      本项目由
+      <a href="https://github.com/zhangxueshan246" style="color: var(--color-panini); text-decoration: none;">zhangxueshan246</a>
+      与 Claude AI 共同开发。
+    </p>
   </div>
 </Layout>

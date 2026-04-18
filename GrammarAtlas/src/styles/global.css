@@ -1,6 +1,8 @@
 :root {
-  --color-panini: #4f46e5;
+  --color-panini: #1e3a8a;
   --color-katantra: #059669;
+  --color-jkv: #3b82f6;
+  --color-dssk: #93c5fd;
   --color-bg: #f8fafc;
   --color-surface: #ffffff;
   --color-text: #1e293b;
@@ -75,6 +77,8 @@ main {
 .graph-container svg {
   display: block;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* Legend */
@@ -87,6 +91,7 @@ main {
   padding: 1rem;
   border-radius: 8px;
   font-size: 0.875rem;
+  z-index: 10;
 }
 
 .legend h4 {
@@ -109,6 +114,8 @@ main {
 
 .dot.panini { background: var(--color-panini); }
 .dot.katantra { background: var(--color-katantra); }
+.dot.jkv { background: var(--color-jkv); }
+.dot.dssk { background: var(--color-dssk); }
 
 .line {
   width: 20px;
@@ -130,6 +137,7 @@ main {
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
 .sutra-panel h3 {
@@ -216,6 +224,16 @@ main {
 .sutra-header .source-badge.katantra {
   background: var(--color-katantra);
   color: white;
+}
+
+.sutra-header .source-badge.jkv {
+  background: var(--color-jkv);
+  color: white;
+}
+
+.sutra-header .source-badge.dssk {
+  background: var(--color-dssk);
+  color: #1e293b;
 }
 
 .sutra-header h1 {
@@ -309,4 +327,177 @@ main {
 .sutra-card p {
   font-style: italic;
   color: var(--color-text-muted);
+}
+
+/* Sutra List Controls */
+.sutra-list-container {
+  width: 100%;
+}
+
+.sutra-list-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.search-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-label {
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #e0e7ff;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: white;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.search-clear {
+  padding: 0.5rem 0.75rem;
+  background: #ef4444;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+  font-weight: 600;
+}
+
+.search-clear:hover {
+  background: #dc2626;
+}
+
+.sort-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sort-dropdown {
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: white;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.sort-dropdown:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.result-count {
+  padding: 0.5rem 0.75rem;
+  background: #dbeafe;
+  border: 1px solid #60a5fa;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #1e40af;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* Graph Search Bar - 独立在图表容器上方 */
+.graph-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-bottom: 2px solid #60a5fa;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 0;
+}
+
+.graph-search-label {
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.graph-search-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #e0e7ff;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: white;
+  min-width: 200px;
+}
+
+.graph-search-input::placeholder {
+  color: #94a3b8;
+}
+
+.graph-search-input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+  background: white;
+}
+
+.graph-search-clear {
+  padding: 0.5rem 0.75rem;
+  background: #ef4444;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.graph-search-clear:hover {
+  background: #dc2626;
+}
+
+.graph-search-count {
+  padding: 0.5rem 0.75rem;
+  background: #dbeafe;
+  border: 1px solid #60a5fa;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #1e40af;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* Graph Node Styles */
+.node-circle.highlighted {
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.5));
 }

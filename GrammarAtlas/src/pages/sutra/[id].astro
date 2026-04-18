@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { sutras } from '../../data/sutras';
 import { parseWikiLinks } from '../../utils/parseWikiLinks';
+import { formatSutraId } from '../../utils/formatSutraId';
 
 export function getStaticPaths() {
   return Object.keys(sutras).map(id => ({
@@ -13,14 +14,14 @@ export function getStaticPaths() {
 const { id } = Astro.params;
 const { sutra } = Astro.props;
 
-const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : 'Kātantra';
+const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === 'katantra' ? 'Kātantra' : sutra.source === 'jkv' ? 'Kāśikāvṛṭti' : sutra.source === 'dssk' ? '段晴《波你尼语法入门》' : 'Other';
 ---
 
 <Layout title={sutra.id}>
   <div class="sutra-page">
     <div class="sutra-header">
       <span class={`source-badge ${sutra.source}`}>{sourceLabel}</span>
-      <h1>{sutra.id.replace('_', ' ')}</h1>
+      <h1>{formatSutraId(sutra.id)}</h1>
       <p class="sutra-text">{sutra.text}</p>
     </div>
 
@@ -50,7 +51,7 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : 'Kātantra';
         <h2>Adhikāra 领句</h2>
         {sutra.adhikaras.map(adh => (
           <a href={`/Sanskrit/sutra/${adh}`} class="sutra-link">
-            {adh.replace('_', ' ')}
+            {formatSutraId(adh)}
           </a>
         ))}
       </div>
@@ -61,7 +62,7 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : 'Kātantra';
         <h2>引用经文</h2>
         {sutra.references.map(ref => (
           <a href={`/Sanskrit/sutra/${ref}`} class="sutra-link">
-            {ref.replace('_', ' ')}
+            {formatSutraId(ref)}
           </a>
         ))}
       </div>
@@ -72,7 +73,7 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : 'Kātantra';
         <h2>互文</h2>
         {sutra.parallel.map(par => (
           <a href={`/Sanskrit/sutra/${par}`} class="sutra-link">
-            {par.replace('_', ' ')}
+            {formatSutraId(par)}
           </a>
         ))}
       </div>

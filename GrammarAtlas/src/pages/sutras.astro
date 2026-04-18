@@ -1,36 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SutraListControls from '../components/SutraListControls';
 import { sutras } from '../data/sutras';
 
 const sutraList = Object.values(sutras);
-const paniniSutras = sutraList.filter(s => s.source === 'panini');
-const katantraSutras = sutraList.filter(s => s.source === 'katantra');
 ---
 
 <Layout title="经文列表">
-  <h2>Pāṇini Aṣṭādhyāyī</h2>
-  <div class="sutra-list">
-    {paniniSutras.map(sutra => (
-      <a href={`/Sanskrit/sutra/${sutra.id}`} class="sutra-card">
-        <h3>{sutra.id.replace('pan_', '')}</h3>
-        <p>{sutra.text}</p>
-        {sutra.translation && (
-          <small style="color: #64748b;">{sutra.translation}</small>
-        )}
-      </a>
-    ))}
-  </div>
-
-  <h2 style="margin-top: 3rem;">Kātantra</h2>
-  <div class="sutra-list">
-    {katantraSutras.map(sutra => (
-      <a href={`/Sanskrit/sutra/${sutra.id}`} class="sutra-card">
-        <h3>{sutra.id.replace('kat_', '')}</h3>
-        <p>{sutra.text}</p>
-        {sutra.translation && (
-          <small style="color: #64748b;">{sutra.translation}</small>
-        )}
-      </a>
-    ))}
-  </div>
+  <SutraListControls client:load initialSutras={sutraList} />
 </Layout>

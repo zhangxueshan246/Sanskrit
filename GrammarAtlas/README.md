@@ -1,6 +1,6 @@
 # Grammar Atlas
 
-梵语语法经文可视化图谱，展示 Pāṇini Aṣṭādhyāyī 与 Kātantra 等语法书之间的关系网络。
+梵语语法经文可视化图谱，展示 Pāṇini Aṣṭādhyāyī、Kātantra、Kāśikāvṛṭti 等语法书之间的关系网络。
 
 ## 本地运行
 
@@ -14,240 +14,148 @@ npm run dev
 
 ## 如何添加经文
 
-编辑 `src/data/sutras.ts` 文件。
-
-### 基本格式
+编辑 `src/data/sutras.ts` 文件。基本结构和字段说明：
 
 ```typescript
-"pan_1.1.4": {                    // 经文ID：pan_ 或 kat_ 前缀 + 章节号
-  id: "pan_1.1.4",                // 必填：与 key 相同
-  text: "na dhātulopa ārdhadhātuke",  // 必填：经文原文
-  translation: "...",             // 选填：翻译
-  vrtti: "...",                   // 选填：注释
-  notes: "例：bhū + ta → bhūta",  // 选填：个人笔记
-  adhikaras: ["pan_6.4.1"],       // 选填：所属管辖经（可多层）
-  references: ["pan_1.1.3"],      // 必填：引用的其他经文（空数组也要写）
-  parallel: ["kat_x.x.x"],        // 选填：其他语法书的对应经
-  source: "panini"                // 必填："panini" | "katantra" | "other"
-},
+"pan_1.1.4": {
+  id: "pan_1.1.4",                // 经文 ID（必填）
+  text: "na dhātulopa ārdhadhātuke",  // 经文原文（必填）
+  source: "panini",               // 来源（必填）: panini|katantra|jkv|dssk|other
+  translation: "翻译",            // 翻译（选填）
+  vrtti: "注释",                  // 注释（选填）
+  notes: "笔记\n支持多行",         // 笔记（选填，支持 wiki 链接 [[id]] 和 \n 换行）
+  references: ["pan_1.1.3"],      // 引用 ID 数组（必填，至少 []）
+  adhikaras: ["pan_1.1.1"],       // 管辖此经的 adhikāra（选填，支持多层）
+  parallel: ["kat_1.1.7"],        // 对应文献（选填，建议双向）
+}
 ```
 
-### 字段说明
+### 关键规则
 
-| 字段 | 必填 | 说明 |
-|------|------|------|
-| `id` | ✓ | 经文编号，格式 `源_章.节.条`，如 `pan_1.1.1` |
-| `text` | ✓ | 经文原文（梵语） |
-| `source` | ✓ | 来源：`panini` / `katantra` / `other` |
-| `references` | ✓ | 引用的其他经文 ID 数组，无则写 `[]` |
-| `translation` | | 中文或英文翻译 |
-| `vrtti` | | 注释、解释 |
-| `notes` | | 个人笔记（支持 wiki 链接和多行）|
-| `adhikaras` | | 管辖此经的 adhikāra ID 数组（支持多层） |
-| `parallel` | | 其他语法书中的对应经文 ID 数组 |
+1. **Wiki 链接与 references 同步**
+   - 在 `notes`/`translation`/`vrtti` 中用 `[[经文ID]]` 链接
+   - 所有链接的 ID **必须也加到** `references` 数组
+   - 验证脚本会自动检查一致性
 
-### Wiki 链接与多行笔记
+   ```typescript
+   notes: "见 [[pan_1.1.26]]",
+   references: ["pan_1.1.26"]  // 必填
+   ```
 
-在 `notes`、`translation`、`vrtti` 等文本字段中，你可以：
+2. **多行笔记** — 用 `\n` 分隔
+   ```typescript
+   notes: "第一行\n第二行\n第三行"
+   ```
 
-**1. 添加 Wiki 链接**
-```typescript
-notes: "niṣṭhā 的定义见 [[pan_1.1.26]]，用法参考 [[pan_6.4.59]]"
-```
-- 格式：`[[经文ID]]`
-- 链接会自动转换为可点击的超链接
-- **链接的 ID 必须也添加到 `references` 数组中**
+3. **多层 adhikāra** — 可被多个 adhikāra 管辖
+   ```typescript
+   adhikaras: ["pan_6.4.1", "pan_6.1.72"]
+   ```
+   验证脚本会检查**所有层级**的 adhikara，例如如果 `pan_6.4.77` 引用了 `pan_6.4.1`，而 `pan_6.4.1` 本身的 adhikara 包括某条经文，那么这个间接引用也是有效的。
 
-**2. 多行笔记**
-```typescript
-notes: "第一行说明。\n 第二行补充。\n 第三行扩展信息。"
-```
-- 使用 `\n` 作为换行符
-- 每行会显示为单独的段落
-
-**完整示例：**
-```typescript
-"pan_6.4.60": {
-  id: "pan_6.4.60",
-  text: "niṣṭhāyām aṇyadarthe.",
-  translation: "成就词缀前表主动含义时。",
-  notes: "niṣṭhā：成就词缀[[pan_1.1.26]]。\n aṇyadarthe：表主动含义（kartari）。",
-  references: ["pan_1.1.26"],  // 必须包含所有在 notes 中链接的 ID
-  adhikaras: ["pan_6.4.59"],
-  source: "panini"
-},
-```
+4. **对应/注释关系** — `parallel` 建议**双向**写
+   ```typescript
+   // dssk_552 注释 pan_3.1.124
+   "dssk_552": { parallel: ["pan_3.1.124"], ... }
+   "pan_3.1.124": { parallel: ["dssk_552"], ... }  // 不要漏掉！
+   ```
+   这样用户可从任一经文跳转到另一方，图谱也更清晰。
 
 ### 验证引用一致性
-
-添加或修改经文后，运行验证脚本确保 `notes` 中的所有链接都在 `references` 中：
 
 ```bash
 npm run validate
 ```
 
-验证脚本会检查：
-- ✓ notes 中的所有 `[[id]]` 是否都在 references 中
-- ✓ references 中的 ID 是否都是存在的经文
-- ✓ references 中的所有 ID 是否都在 notes 中提及
+脚本检查：
+- ✓ `notes` 中的 `[[id]]` 都在 `references` 或任何层级的 `adhikaras` 中
+- ✓ `references` 中的 ID 都是存在的经文
+- ✓ `references` 中没有孤立 ID（都要在 notes 中提及）
 
-如果有问题会显示错误信息：
-```
-✗ pan_6.4.60:
-  • notes 中包含 [[pan_1.1.26]] 但不在 references 中
-```
+## 搜索和排序
 
-### 多层 Adhikāra 示例
+### 经文列表页 `/sutras`
 
-一条经文可能同时被多个 adhikāra 管辖：
+- **排序选项**：
+  - **按来源分组**（默认）：按 Pāṇini → Kātantra → Kāśikāvṛṭti → Sārasiddhāntakaumudī 分组
+  - **按经文顺序**：按ID的自然数字排序（pan_1.1.26 → pan_1.4.14 → pan_3.1.124...）
 
-```typescript
-"pan_6.4.77": {
-  id: "pan_6.4.77",
-  text: "aci śnudhātubhruvāṃ yvor iyaṅuvaṅau",
-  adhikaras: [
-    "pan_6.4.1",   // aṅgasya（管辖 6.4.1-6.4.175）
-    "pan_6.1.72"   // saṃhitāyām（管辖 6.1.72-6.1.157）
-  ],
-  references: [],
-  source: "panini"
-},
-```
+- **模糊搜索**：
+  - 搜索范围：经文ID、原文、中文翻译、笔记
+  - 搜索时自动取消分组，显示扁平结果
+  - 结果实时计数
 
-### Pāṇini vs Kātantra 对应
+### 图谱页 `/atlas`
 
-用 `parallel` 字段建立对应关系：
-
-```typescript
-// Pāṇini
-"pan_1.1.1": {
-  text: "vṛddhir ādaic",
-  parallel: ["kat_1.1.7"],  // 对应 Kātantra
-  // ...
-},
-
-// Kātantra
-"kat_1.1.7": {
-  text: "ādo vṛddhiḥ",
-  parallel: ["pan_1.1.1"],  // 反向引用
-  // ...
-},
-```
+- **搜索功能**：
+  - 在图谱顶部输入框搜索经文（🔍 搜索标签）
+  - 匹配的节点：高亮发光（蓝色阴影）
+  - 不匹配的节点：淡化显示（opacity 0.2）
+  - 实时显示搜索结果计数（当前/总计）
+  - ESC键或清空按钮清除搜索
+  - 所有D3交互（拖拽、点击）保留
 
 ## 图谱中的连线说明
 
 | 颜色 | 类型 | 含义 |
 |------|------|------|
 | 灰色实线 | reference | 经文互相引用 |
-| 橙色虚线 | parallel | Pāṇini ↔ Kātantra 对应 |
+| 橙色虚线 | parallel | 多文献对应或注释关系 |
 | 红色实线 | adhikara | 管辖关系 |
 
-## 部署
+## 经文来源与颜色
 
-Push 到 GitHub 后会自动部署到 GitHub Pages。
+| 来源 | 前缀 | 显示 | 颜色 | 特点 |
+|------|------|------|------|------|
+| Pāṇini Aṣṭādhyāyī | `pan_` | PS | 深蓝 #1e3a8a | 主要梵语语法 |
+| Kātantra | `kat_` | Kāt | 绿色 #059669 | 简化版梵语语法 |
+| Kāśikāvṛṭti | `jkv_` | JKv | 中蓝 #3b82f6 | Pāṇini 的注释 |
+| 段晴《波你尼语法入门》 | `dssk_` | DSSK | 浅蓝 #93c5fd | 基于中文参考书 |
 
-首次需要在 GitHub 仓库设置中启用：
-1. Settings → Pages
-2. Source 选择 **GitHub Actions**
+## 部署与更新工作流
 
-部署地址：https://zhangxueshan246.github.io/Sanskrit/
+### 自动部署
+- 推送到 GitHub 后自动部署到 GitHub Pages（https://zhangxueshan246.github.io/Sanskrit/）
+- 工作流配置：`.github/workflows/deploy.yml`
+- 首次需要在仓库 Settings → Pages 中选择 GitHub Actions 作为 Source
 
-### 自动部署工作流
-
-- 当代码推送到 `master` 分支时，GitHub Actions 自动触发
-- 工作流配置文件：`.github/workflows/deploy.yml`
-- 部署完成通常需要 1-2 分钟
-
-## 更新网站的工作流
-
-每次更新经文或代码时，按以下步骤操作：
-
-### 步骤 1：编辑文件
-
+### 更新流程
 ```bash
-# 编辑经文数据
+# 1. 编辑 src/data/sutras.ts（或其他文件）
 cd GrammarAtlas
-# 编辑 src/data/sutras.ts、README.md 或其他文件
-```
 
-### 步骤 2：验证并本地测试
+# 2. 验证与本地测试（必须！）
+npm run validate     # 检查 wiki 链接和 references 一致性
+npm run dev         # 本地预览 http://localhost:4321/Sanskrit/
 
-```bash
-# 验证引用一致性（必须！）
-npm run validate
-
-# 本地测试
-npm run dev
-# 访问 http://localhost:4321/Sanskrit/ 查看效果
-```
-
-### 步骤 3：提交并推送
-
-```bash
-# 返回项目根目录
+# 3. 返回项目根并提交
 cd ..
-
-# 查看修改
-git status
-
-# 提交更改
 git add GrammarAtlas/
-git commit -m "描述你的更改，例如：Add 5 new sutras from chapter 2"
-
-# 推送到 GitHub（自动触发部署）
-git push origin master
+git commit -m "简明的描述"  # 例：Add 5 new DSSK sutras
+git push origin master     # 自动触发部署
 ```
 
-### 步骤 4：检查部署状态
+### 常用命令
+| 命令 | 用途 |
+|------|------|
+| `npm run validate` | 检查 wiki 链接和 references 一致性 |
+| `npm run dev` | 启动本地开发服务器 |
+| `npm run build` | 本地构建测试 |
+| `npm run preview` | 预览构建结果 |
 
-访问：https://github.com/zhangxueshan246/Sanskrit/actions
+⚠️ **重要提示**
+- 每次编辑后**必须运行** `npm run validate`
+- **提交前本地测试** `npm run dev` 查看效果
+- 避免频繁小提交，稳定后再 push
 
-看到绿色 ✓ 表示部署成功，然后访问网站查看更新效果。
+## 关于本项目
 
-### 常见更新场景
+本项目由 [zhangxueshan246](https://github.com/zhangxueshan246) 与 Claude AI 共同开发，旨在为梵语语法学习者提供一个可视化的经文关系图谱工具。
 
-**场景 1：只修改经文数据**
-```bash
-cd GrammarAtlas
-# 编辑 src/data/sutras.ts
-cd ..
-git add GrammarAtlas/src/data/sutras.ts
-git commit -m "Update pan_1.1.1 notes"
-git push origin master
-```
+**数据说明**：
+- Pāṇini、Kātantra、Kāśikāvṛṭti 基于对应原典的学习笔记
+- 段晴《波你尼语法入门》部分基于同名中文参考书，而非原始梵文文献
 
-**场景 2：修改样式或代码**
-```bash
-# 编辑代码文件
-git add GrammarAtlas/
-git commit -m "Improve graph colors"
-git push origin master
-```
-
-**场景 3：更新文档**
-```bash
-# 编辑 GrammarAtlas/README.md
-git add GrammarAtlas/README.md
-git commit -m "Update README with new features"
-git push origin master
-```
-
-### 重要提示 ⚠️
-
-- **始终运行 `npm run validate`** 确保 notes 中的 wiki 链接和 references 同步
-- **每次推送前本地测试** `npm run dev`
-- **提交信息要有意义** 方便以后追溯更改
-- **稳定后再推送** 避免频繁部署
-
-### 快速查询命令
-
-```bash
-npm run validate   # 验证引用一致性
-npm run dev        # 本地开发服务器
-npm run build      # 本地构建测试
-npm run preview    # 预览构建结果
-git status         # 查看待提交文件
-```
 
 
 ## 目录结构
