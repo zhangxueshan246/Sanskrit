@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { sutras } from '../data/sutras';
+import { formatSutraId } from '../utils/formatSutraId';
 
 const sutraList = Object.values(sutras);
 const paniniCount = sutraList.filter(s => s.source === 'panini').length;
@@ -28,7 +29,7 @@ const totalCount = sutraList.length;
   <div class="sutra-list">
     {sutraList.slice(0, 6).map(sutra => (
       <a href={`/Sanskrit/sutra/${sutra.id}`} class="sutra-card">
-        <h3>{sutra.id.replace('_', ' ')}</h3>
+        <h3>{formatSutraId(sutra.id)}</h3>
         <p>{sutra.text}</p>
       </a>
     ))}

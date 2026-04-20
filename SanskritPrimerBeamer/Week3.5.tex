@@ -1,0 +1,272 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter}
+\graphicspath{{pic/}}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\mbox{\textcolor{Plum}{#1}}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+\newcommand{\dicturl}[2]{\href{#1}{\mbox{\texttt{#2}}}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{36. 独立结构；代词 ena-}
+\author[张雪杉]{文学院~~张雪杉\\zhangxueshan@sdnu.edu.cn}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{第31章阅读}
+  \footnotesize{
+    \begin{verse}
+      \skt{dhṛtarāṣṭra uvāca}\\
+      \mbox{\skt{dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।}}\\
+      \mbox{\skt{māmakāḥ pāṇḍavāścaiva kimakurvata saṃjaya ।। 1-1 ।।}}\\
+      \skt{saṃjaya uvāca}\\
+      \skt{dṛṣṭvā tu pāṇḍavānīkaṃ vyūḍhaṃ duryodhanastadā ।}\\
+      \mbox{\skt{ācāryamupasaṃgamya rājā vacanamabravīt ।। 1-2 ।।}}\\
+      \skt{paśyaitāṃ pāṇḍuputrāṇāmācārya mahatīṃ camūm ।}\\
+      \mbox{\skt{vyūḍhāṃ drupadaputreṇa tava śiṣyeṇa dhīmatā ।। 1-3 ।।}}\\
+      \skt{atra śūrā maheṣvāsā bhīmārjunasamā yudhi ।}\\
+      \mbox{\skt{yuyudhāno virāṭaśca drupadaśca mahārathaḥ ।। 1-4 ।।}}\\
+    \end{verse}
+  }
+\end{frame}
+
+\begin{frame}{第32章阅读~(1)}
+  \footnotesize{
+    \begin{verse}
+      \skt{atha vyavasthitāndṛṣṭvā dhārtarāṣṭrānkapidhvajaḥ ।}\\
+      \skt{pravṛtte śastrasaṃpāte dhanurudyamya pāṇḍavaḥ ।। 1-20 ।।}\\
+      \skt{hṛṣīkeśa tadā vākyamidamāha mahīpate ।}\\
+      \mbox{\skt{senayorubhayormadhye rathaṃ sthāpaya me 'cyuta ।। 1-21 ।।}}\\
+      \mbox{\skt{yāvadetānnirīkṣe 'haṃ yoddhukāmānavasthitān ।}}\\
+      \mbox{\skt{kairmayā saha yoddhavyamasmin raṇasamudyame ।। 1-22 ।।}}\\
+    \end{verse}
+  }
+\end{frame}
+
+\begin{frame}{第32章阅读~(2)}
+  \footnotesize{
+    \begin{verse}
+      \mbox{\skt{yotsyamānānavekṣe 'haṃ ya ete 'tra samāgatāḥ ।}}\\
+      \mbox{\skt{dhārtarāṣṭrasya durbuddher yuddhe priyacikīrṣavaḥ ।। 1-23 ।।}}\\
+      \skt{saṃjaya uvāca}\\
+      \mbox{\skt{evamukto hṛṣīkeśo guḍākeśena bhārata ।}}\\
+      \mbox{\skt{senayorubhayormadhye sthāpayitvā rathottamam ।। 1-24 ।।}}\\
+      \mbox{\skt{bhīṣmadroṇapramukhataḥ sarveṣāṃ ca mahīkṣitām ।}}\\
+      \mbox{\skt{uvāca pārtha paśyaitān samavetān kurūniti ।। 1-25 ।।}}\\
+    \end{verse}
+  }
+\end{frame}
+
+
+\section[独立结构]{独立结构}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{独立依格}
+\begin{frame}{\insertsection ~~\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 独立依格 (Locative Absolute)：
+    \begin{itemize}
+      \item 名词/代词 + 分词，都用\important{依格}
+      \item 翻译为时间从句："当...时"\\
+        (when / while / after)
+      \item 名词作主语，分词作谓语
+    \end{itemize}
+  \end{itemize}
+  \vspace{0.5em}
+  \begin{indentlist}
+    \item \sktsentence{gate tasmin narā upāviśan}\\
+      \notsoimportant{'当他离开后，众人坐下了'}\\
+      \notsoimportant{(lit. 'at him having gone')}
+  \end{indentlist}
+\end{frame}
+
+\begin{frame}{独立依格——更多例句}
+  \small
+  \begin{indentlist}
+    \item \sktsentence{udyati sūrye vanaṃ praviśati}\\
+      \notsoimportant{'日出时，他进入森林'}\\
+      \notsoimportant{(\verbroot{ud} 'to go up, rise')}
+    \item 分词类型：
+    \begin{itemize}
+      \item 过去被动分词：\fullpada{gate} 'having gone'
+      \item 现在主动分词：\fullpada{udyati} 'rising'
+      \item 完成时分词等皆可
+    \end{itemize}
+    \item 翻译技巧：\\
+      过去分词 → when/after\\
+      现在分词 → while/as
+  \end{indentlist}
+\end{frame}
+
+\subsection{独立属格}
+\begin{frame}{\insertsection ~~\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 独立属格 (Genitive Absolute)：
+    \begin{itemize}
+      \item 名词/代词 + 分词，都用\important{属格}
+      \item 比独立依格\veryimportant{少见}
+      \item 可表时间（when/while）\\
+        或\important{让步}（although）
+    \end{itemize}
+  \end{itemize}
+  \vspace{0.5em}
+  \begin{indentlist}
+    \item \sktsentence{maitrāvaruṇiḥ samudramapibat}\\
+      \sktsentence{sarvalokasya paśyataḥ}\\
+      \notsoimportant{'密多罗和伐楼那之子喝干了海水，'}\\
+      \notsoimportant{'（当时/尽管）全世界都在看'}\\
+      \hfill\notsoimportant{(\emph{Mahābhārata} 3.103.3)}
+  \end{indentlist}
+\end{frame}
+
+\begin{frame}{两种独立结构对比}
+  \small
+  \centering
+  \begin{NiceTabular}{|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & \important{独立依格} & \important{独立属格} \\
+    格 & 依格 (Loc.) & 属格 (Gen.) \\
+    频率 & 常见 & 较少 \\
+    含义 & 纯时间 & 时间或让步 \\
+    翻译 & when/while/after & when/while/although \\
+  \end{NiceTabular}
+\end{frame}
+
+
+\section[代词 ena-]{代词 IV: ena- 'this'}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{概述}
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 指示代词 \nounstem{ena} 'this'
+    \item 用于\important{无强调}的指代
+    \item \veryimportant{缺损代词} (defective)：\\
+      只有部分形式存在
+    \item 仅有形式：
+    \begin{itemize}
+      \item 业格（单、双、复）
+      \item 具格（单数）
+      \item 属从格（双数，仅阳/中性）
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{变格表}
+\begin{frame}{ena- 变格表}
+  \centering
+    \begin{NiceTabular}{|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+      & & \important{阳性} & \important{中性} & \important{阴性} \\
+      \Block{2-1}{单数} & 业格 & \fullpada{enam} & \fullpada{enat} & \fullpada{enām} \\
+      & 具格 & \fullpada{enena} & — & \fullpada{enayā} \\
+      \Block{2-1}{双数} & 业格 & \fullpada{enau} & \fullpada{ene} & \fullpada{ene} \\
+      & 属从格 & \fullpada{enayoḥ} & \fullpada{enayoḥ} & — \\
+      复数 & 业格 & \fullpada{enān} & \fullpada{enāni} & \fullpada{enāḥ} \\
+    \end{NiceTabular}
+  \vspace{0.5em}
+  \begin{itemize}
+    \item \notsoimportant{其他格用 \nounstem{tad} 或 \nounstem{etad} 代替}
+  \end{itemize}
+\end{frame}
+
+
+\section{本节作业}
+
+\begin{frame}{\insertsection}
+  \begin{itemize}
+    \item 第33章阅读练习
+  \end{itemize}
+\end{frame}
+
+\end{document}

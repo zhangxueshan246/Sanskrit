@@ -19,10 +19,10 @@ npm run dev
 ```typescript
 "pan_1.1.4": {
   id: "pan_1.1.4",                // 经文 ID（必填）
-  text: "na dhātulopa ārdhadhātuke",  // 经文原文（必填）
+  text: "na dhātulopa ārdhadhātuke",  // 经文原文（必填，支持 wiki 链接 [[id]] 和 \n 换行）
   source: "panini",               // 来源（必填）: panini|katantra|jkv|dssk|other
-  translation: "翻译",            // 翻译（选填）
-  vrtti: "注释",                  // 注释（选填）
+  translation: "翻译",            // 翻译（选填，支持 wiki 链接 [[id]] 和 \n 换行）
+  vrtti: "注释",                  // 注释（选填，支持 wiki 链接 [[id]] 和 \n 换行）
   notes: "笔记\n支持多行",         // 笔记（选填，支持 wiki 链接 [[id]] 和 \n 换行）
   references: ["pan_1.1.3"],      // 引用 ID 数组（必填，至少 []）
   adhikaras: ["pan_1.1.1"],       // 管辖此经的 adhikāra（选填，支持多层）
@@ -33,18 +33,25 @@ npm run dev
 ### 关键规则
 
 1. **Wiki 链接与 references 同步**
-   - 在 `notes`/`translation`/`vrtti` 中用 `[[经文ID]]` 链接
+   - 在 `text`/`translation`/`vrtti`/`notes` 中用 `[[经文ID]]` 链接（任意字段都支持）
    - 所有链接的 ID **必须也加到** `references` 数组
+   - 引用可以出现在任意一个字段中（只要在某个字段提及就算有效）
    - 验证脚本会自动检查一致性
 
    ```typescript
-   notes: "见 [[pan_1.1.26]]",
+   vrtti: "见 [[pan_1.1.26]] 的说明",
    references: ["pan_1.1.26"]  // 必填
+   // 或者
+   notes: "相关内容见 [[pan_1.1.26]]",
+   references: ["pan_1.1.26"]  // 也支持在 notes 中
    ```
 
-2. **多行笔记** — 用 `\n` 分隔
+2. **多行内容** — 在任何字段中用 `\n` 分隔
    ```typescript
-   notes: "第一行\n第二行\n第三行"
+   text: "原文第一部分\n原文第二部分",
+   translation: "翻译第一行\n翻译第二行",
+   vrtti: "注释第一段\n注释第二段"
+   notes: "笔记第一行\n笔记第二行"
    ```
 
 3. **多层 adhikāra** — 可被多个 adhikāra 管辖
@@ -68,20 +75,20 @@ npm run validate
 ```
 
 脚本检查：
-- ✓ `notes` 中的 `[[id]]` 都在 `references` 或任何层级的 `adhikaras` 中
+- ✓ `text`/`translation`/`vrtti`/`notes` 中的所有 `[[id]]` 都在 `references` 或任何层级的 `adhikaras` 中
 - ✓ `references` 中的 ID 都是存在的经文
-- ✓ `references` 中没有孤立 ID（都要在 notes 中提及）
+- ✓ `references` 中没有孤立 ID（都要在任何一个文本字段中提及）
 
 ## 搜索和排序
 
 ### 经文列表页 `/sutras`
 
 - **排序选项**：
-  - **按来源分组**（默认）：按 Pāṇini → Kātantra → Kāśikāvṛṭti → Sārasiddhāntakaumudī 分组
-  - **按经文顺序**：按ID的自然数字排序（pan_1.1.26 → pan_1.4.14 → pan_3.1.124...）
+  - **按来源分组**（默认）：按 Pāṇini → Kātantra → Kāśikāvṛṭti → 段晴《波你尼语法入门》 分组
+  - **按经文顺序**：按ID的自然数字排序（PS 1.1.26 → PS 1.4.14 → PS 3.1.124...）
 
 - **模糊搜索**：
-  - 搜索范围：经文ID、原文、中文翻译、笔记
+  - 搜索范围：经文ID、原文、中文翻译、注释、笔记
   - 搜索时自动取消分组，显示扁平结果
   - 结果实时计数
 

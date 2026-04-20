@@ -22,7 +22,7 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
     <div class="sutra-header">
       <span class={`source-badge ${sutra.source}`}>{sourceLabel}</span>
       <h1>{formatSutraId(sutra.id)}</h1>
-      <p class="sutra-text">{sutra.text}</p>
+      <p class="sutra-text" set:html={parseWikiLinks(sutra.text)}></p>
     </div>
 
     {sutra.translation && (

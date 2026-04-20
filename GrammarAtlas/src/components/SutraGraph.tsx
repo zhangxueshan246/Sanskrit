@@ -259,12 +259,12 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
             )}
             {selectedSutra.adhikaras && selectedSutra.adhikaras.length > 0 && (
               <p className="adhikara">
-                <strong>领句:</strong> {selectedSutra.adhikaras.join(' → ')}
+                <strong>领句:</strong> {selectedSutra.adhikaras.map(adh => formatSutraId(adh)).join(' → ')}
               </p>
             )}
             {selectedSutra.parallel && selectedSutra.parallel.length > 0 && (
               <p className="parallel">
-                <strong>互文:</strong> {selectedSutra.parallel.join(', ')}
+                <strong>互文:</strong> {selectedSutra.parallel.map(par => formatSutraId(par)).join(', ')}
               </p>
             )}
             <a href={`/Sanskrit/sutra/${selectedSutra.id}`} className="view-link">

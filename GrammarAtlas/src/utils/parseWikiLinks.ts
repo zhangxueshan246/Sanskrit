@@ -1,3 +1,5 @@
+import { formatSutraId } from './formatSutraId';
+
 /**
  * 解析文本中的 Wiki 式链接 [[id]] 并处理换行符
  * 将 \n 转换为 <br/> 标签，将 wiki 链接转换为可点击的 HTML 链接
@@ -13,8 +15,8 @@ export function parseWikiLinks(text: string): string {
   const wikiLinkRegex = /\[\[([^\]]+)\]\]/g;
 
   result = result.replace(wikiLinkRegex, (match, sutraId) => {
-    // sutraId 例如：pan_1.1.26
-    const displayText = sutraId.replace('_', ' '); // 转换为 pan 1.1.26
+    // sutraId 例如：pan_1.1.26 → 格式化为 PS 1.1.26
+    const displayText = formatSutraId(sutraId);
     const href = `/Sanskrit/sutra/${sutraId}`;
 
     // 返回 HTML 链接，使用现有的 .sutra-link 样式类

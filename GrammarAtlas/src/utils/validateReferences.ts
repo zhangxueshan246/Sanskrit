@@ -1,12 +1,12 @@
 /**
  * 验证经文数据中的引用一致性
  * 严格模式检查：
- * 1. notes 中的所有 [[id]] 必须在 references 中，或在任何层级的 adhikaras 中
+ * 1. text、translation、vrtti、notes 中的所有 [[id]] 必须在 references 中，或在任何层级的 adhikaras 中
  * 2. references 中的所有 id 必须是存在的经文
- * 3. references 中的所有 id 必须在 notes 中被提及（无孤立引用）
+ * 3. references 中的所有 id 必须在 text、translation、vrtti、notes 中任何一个出现（无孤立引用）
  *
  * 说明：adhikaras 支持层级关系。如果 A 的 adhikara 是 B，B 的 adhikara 是 C，
- * 那么 A 可以在 notes 中引用 B 或 C，都不会报错。
+ * 那么 A 可以在任何字段中引用 B 或 C，都不会报错。
  */
 
 import { sutras, type Sutra } from '../data/sutras';
@@ -72,16 +72,28 @@ function validateSutra(sutra: Sutra): ValidationResult {
     warnings: []
   };
 
-  // 提取 notes 中的所有链接
+  // 提取所有字段中的链接
+  const linksInText = extractWikiLinks(sutra.text);
+  const linksInTranslation = extractWikiLinks(sutra.translation);
+  const linksInVrtti = extractWikiLinks(sutra.vrtti);
   const linksInNotes = extractWikiLinks(sutra.notes);
+
+  // 合并所有链接
+  const allLinksInContent = new Set([
+    ...linksInText,
+    ...linksInTranslation,
+    ...linksInVrtti,
+    ...linksInNotes
+  ]);
+
   const referencesArray = sutra.references || [];
   const existingSutraIds = Object.keys(sutras);
   const allAdhikaras = getAllAdhikaras(sutra.id);
 
-  // 检查 1：notes 中的所有链接是否都在 references 或任何层级的 adhikaras 中
-  for (const link of linksInNotes) {
+  // 检查 1：所有字段中的所有链接是否都在 references 或任何层级的 adhikaras 中
+  for (const link of allLinksInContent) {
     if (!referencesArray.includes(link) && !allAdhikaras.includes(link)) {
-      result.errors.push(`notes 中包含 [[${link}]] 但不在 references 或 adhikaras 中`);
+      result.errors.push(`文本中包含 [[${link}]] 但不在 references 或 adhikaras 中`);
       result.isValid = false;
     }
   }
@@ -94,10 +106,10 @@ function validateSutra(sutra: Sutra): ValidationResult {
     }
   }
 
-  // 检查 3：references 中的所有 id 是否都在 notes 中出现（严格模式）
+  // 检查 3：references 中的所有 id 是否都在任何一个文本字段中出现（严格模式）
   for (const refId of referencesArray) {
-    if (!linksInNotes.includes(refId)) {
-      result.errors.push(`references 中的 [[${refId}]] 没有在 notes 中提及（孤立引用）`);
+    if (!allLinksInContent.has(refId)) {
+      result.errors.push(`references 中的 [[${refId}]] 没有在文本任何字段中提及（孤立引用）`);
       result.isValid = false;
     }
   }
