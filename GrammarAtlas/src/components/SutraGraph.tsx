@@ -35,6 +35,16 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
     const svg = d3.select(svgRef.current)
       .attr("viewBox", [0, 0, width, height]);
 
+    // 创建一个 group 用于缩放/平移
+    const g = svg.append("g");
+
+    // 添加缩放和平移功能
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
+      .on("zoom", (event) => {
+        g.attr("transform", event.transform);
+      });
+    svg.call(zoom);
+
     // 准备数据
     const nodes: Node[] = Object.values(sutras).map(s => ({
       id: s.id,
@@ -46,7 +56,12 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
       source: e.from,
       target: e.to,
       type: e.type
-    }));
+    })).sort((a, b) => {
+      // adhikara (领句/红色) 最后渲染，确保在上面不被覆盖
+      if (a.type === 'adhikara' && b.type !== 'adhikara') return 1;
+      if (a.type !== 'adhikara' && b.type === 'adhikara') return -1;
+      return 0;
+    });
 
     // 颜色定义
     const sourceColors: Record<string, string> = {
@@ -58,10 +73,10 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
     };
 
     const edgeColors: Record<string, string> = {
-      reference: "#94a3b8",  // 灰色
+      reference: "#6b7280",  // 深灰
       parallel: "#f59e0b",   // 橙色
       adhikara: "#ef4444",   // 红色
-      sequence: "#cbd5e1"    // 浅灰
+      sequence: "#06b6d4"    // 青色
     };
 
     // 创建力导向模拟
@@ -69,10 +84,23 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
       .force("link", d3.forceLink<Node, Link>(links).id(d => d.id).distance(100))
       .force("charge", d3.forceManyBody().strength(-300))
       .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collision", d3.forceCollide().radius(40));
+      .force("collision", d3.forceCollide().radius(40))
+      // 添加边界力，阻止节点跑出显示范围
+      .force("boundary", () => {
+        const padding = 50;
+        for (const node of nodes) {
+          // 只约束未被拖动的节点（拖动时 fx/fy 不为 null）
+          if (node.fx === null && node.fy === null) {
+            if (node.x! < padding) node.x = padding;
+            if (node.x! > width - padding) node.x = width - padding;
+            if (node.y! < padding) node.y = padding;
+            if (node.y! > height - padding) node.y = height - padding;
+          }
+        }
+      });
 
     // 绘制边
-    const link = svg.append("g")
+    const link = g.append("g")
       .selectAll("line")
       .data(links)
       .join("line")
@@ -81,7 +109,7 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
       .attr("stroke-dasharray", d => d.type === 'parallel' ? "5,5" : "none");
 
     // 绘制节点
-    const node = svg.append("g")
+    const node = g.append("g")
       .selectAll("g")
       .data(nodes)
       .join("g")
@@ -139,16 +167,20 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
         .style("filter", 'none');
     }
 
-    // 拖拽函数
+    // 拖拽函数（需要考虑缩放变换）
     function dragstarted(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
-      event.subject.fx = event.subject.x;
-      event.subject.fy = event.subject.y;
+      const point = d3.pointer(event, svg.node() as SVGSVGElement);
+      const invertedPoint = new DOMMatrix(g.attr("transform")).inverse().transformPoint(new DOMPoint(point[0], point[1]));
+      event.subject.fx = invertedPoint.x;
+      event.subject.fy = invertedPoint.y;
     }
 
     function dragged(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
-      event.subject.fx = event.x;
-      event.subject.fy = event.y;
+      const point = d3.pointer(event, svg.node() as SVGSVGElement);
+      const invertedPoint = new DOMMatrix(g.attr("transform")).inverse().transformPoint(new DOMPoint(point[0], point[1]));
+      event.subject.fx = invertedPoint.x;
+      event.subject.fy = invertedPoint.y;
     }
 
     function dragended(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
@@ -236,6 +268,15 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
           <div className="legend-item">
             <span className="line adhikara"></span> Adhikāra
           </div>
+          <div className="legend-item">
+            <span className="line sequence"></span> 序列
+          </div>
+          <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0', fontSize: '0.875rem', color: '#64748b' }}>
+            <p style={{ margin: '0.5rem 0', lineHeight: '1.4' }}>💡 交互提示：</p>
+            <p style={{ margin: '0.25rem 0' }}>• 滚轮缩放图谱</p>
+            <p style={{ margin: '0.25rem 0' }}>• 拖动背景平移</p>
+            <p style={{ margin: '0.25rem 0' }}>• 拖动节点调整位置</p>
+          </div>
         </div>
 
         {/* 经文详情面板 */}
@@ -265,6 +306,11 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
             {selectedSutra.parallel && selectedSutra.parallel.length > 0 && (
               <p className="parallel">
                 <strong>互文:</strong> {selectedSutra.parallel.map(par => formatSutraId(par)).join(', ')}
+              </p>
+            )}
+            {selectedSutra.sequence && selectedSutra.sequence.length > 0 && (
+              <p className="sequence">
+                <strong>后继:</strong> {selectedSutra.sequence.map(seq => formatSutraId(seq)).join(', ')}
               </p>
             )}
             <a href={`/Sanskrit/sutra/${selectedSutra.id}`} className="view-link">
