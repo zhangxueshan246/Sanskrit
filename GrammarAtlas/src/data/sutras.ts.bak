@@ -1,17 +1,5 @@
 // 经文数据结构
 // 你可以在这里添加更多经文
-//
-// 添加新经文时的推荐用法：
-// "new_id": {
-//   id: "new_id",
-//   text: "经文原文",
-//   translation: "翻译",
-//   notes: "个人笔记",
-//   references: ["ref1", "ref2"],
-//   parallel: [],
-//   source: "panini",
-//   updatedAt: new Date('2025-04-24').getTime(),  // 指定日期，首页会显示最近的经文
-// }
 
 export interface Sutra {
   id: string;
@@ -24,7 +12,7 @@ export interface Sutra {
   parallel?: string[];    // 其他语法书的对应经（如Kātantra）
   sequence?: string[];    // 后继经文（自然序列关系）
   source: 'panini' | 'katantra' | 'jkv' | 'dssk' | 'other';
-  updatedAt?: number;     // 时间戳（毫秒），用于排序最近更新的经文。推荐用法: new Date('YYYY-MM-DD').getTime()
+  updatedAt?: number;     // 时间戳（毫秒），用于排序最近更新的经文
 }
 
 export interface GraphEdge {
@@ -44,7 +32,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: ["pan_6.4.59"],
     references: ["pan_1.1.26"],
     parallel: [],
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "panini"
   },
   "pan_6.4.59": {
@@ -56,7 +43,6 @@ export const sutras: Record<string, Sutra> = {
     references: [],
     parallel: [],
     sequence: ["pan_6.4.60"], 
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "panini"
   },
   "pan_6.4.58": {
@@ -66,7 +52,6 @@ export const sutras: Record<string, Sutra> = {
     notes: "不确定，待查。",
     adhikaras: [], 
     references: [],
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "panini",
     sequence: ["pan_6.4.59"],
   },
@@ -78,7 +63,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["dssk_552"],
-    updatedAt: new Date('2025-04-20').getTime(),
     source: "panini"
   },
     "dssk_552": {
@@ -89,7 +73,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: ["pan_7.2.115"],
     parallel: ["pan_3.1.124"],
-    updatedAt: new Date('2025-04-20').getTime(),
     source: "dssk"
   },
   "pan_1.1.26": {
@@ -100,7 +83,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["dssk_565"],
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "panini"
   },
     "dssk_565": {
@@ -111,7 +93,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["pan_1.1.26"],
-    updatedAt: new Date('2025-04-20').getTime(),
     source: "dssk"
   },
     "pan_1.1.72": {
@@ -121,7 +102,6 @@ export const sutras: Record<string, Sutra> = {
     notes: "参见[[dssk_15]] 讲解后半部分。",
     adhikaras: [], 
     references: ["dssk_15"],
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "panini"
   },
     "pan_1.4.14": {
@@ -132,7 +112,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["dssk_15"],
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "panini"
   },
     "dssk_15": {
@@ -143,7 +122,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: ["pan_1.1.72"],
     parallel: ["pan_1.4.14"],
-    updatedAt: new Date('2025-04-18').getTime(),
     source: "dssk"
   },
     "pan_7.2.116": {
@@ -154,7 +132,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["dssk_415"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "panini"
   },
     "dssk_415": {
@@ -165,7 +142,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: ["dssk_361"],
     parallel: ["pan_7.2.116"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "dssk"
   },
     "pan_3.4.82": {
@@ -176,7 +152,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["dssk_361"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "panini"
   },
     "dssk_361": {
@@ -187,7 +162,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["pan_3.4.82"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "dssk"
   },
     "pan_3.1.26": {
@@ -198,7 +172,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["dssk_525"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "panini"
   },
     "pan_3.1.25": {
@@ -210,7 +183,6 @@ export const sutras: Record<string, Sutra> = {
     references: [],
     parallel: ["dssk_515"],
     sequence: ["pan_3.1.26"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "panini"
   },
     "dssk_515": {
@@ -221,7 +193,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["pan_3.1.25"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "dssk"
   },
     "dssk_525": {
@@ -232,7 +203,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: ["dssk_162", "dssk_515"],
     parallel: ["pan_3.1.26"],
-    updatedAt: new Date('2025-04-24').getTime(),
     source: "dssk"
   },
     "pan_7.2.115": {
@@ -244,7 +214,6 @@ export const sutras: Record<string, Sutra> = {
     references: [],
     parallel: ["dssk_162"],
     sequence: ["pan_7.2.116"],
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "panini",
   },
    "dssk_162": {
@@ -255,7 +224,6 @@ export const sutras: Record<string, Sutra> = {
     adhikaras: [], 
     references: [],
     parallel: ["pan_7.2.115"],
-    updatedAt: new Date('2025-04-20').getTime(),
     source: "dssk"
   },
   // ===== Kātantra 示例数据 =====
@@ -263,7 +231,6 @@ export const sutras: Record<string, Sutra> = {
     id: "kat_1.1.1",
     text: "siddho varṇasamāmnāyaḥ.",
     translation: "字母的排列是已知的",
-    updatedAt: new Date('2025-04-17').getTime(),
     source: "katantra",
     references: [],
     parallel: []

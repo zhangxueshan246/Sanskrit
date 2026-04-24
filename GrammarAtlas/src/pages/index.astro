@@ -9,11 +9,21 @@ const katantraCount = sutraList.filter(s => s.source === 'katantra').length;
 const jkvCount = sutraList.filter(s => s.source === 'jkv').length;
 const dsskCount = sutraList.filter(s => s.source === 'dssk').length;
 const totalCount = sutraList.length;
+
+// 按时间戳排序（最新在前），如果没有时间戳则使用默认顺序
+const recentSutras = sutraList
+  .sort((a, b) => {
+    if (a.updatedAt && b.updatedAt) {
+      return b.updatedAt - a.updatedAt; // 最新的在前
+    }
+    return 0; // 保持原顺序
+  })
+  .slice(0, 6);
 ---
 
 <Layout title="首页">
   <div class="hero">
-    <h1>Grammar Atlas</h1>
+    <h1>Vyākaraṇa Atlas</h1>
     <p>
       个人梵语语法笔记，用可视化图谱方式展示梵语语法经文之间的关系网络。
     </p>
@@ -27,7 +37,7 @@ const totalCount = sutraList.length;
 
   <h2 style="margin-bottom: 1rem;">最近添加</h2>
   <div class="sutra-list">
-    {sutraList.slice(0, 6).map(sutra => (
+    {recentSutras.map(sutra => (
       <a href={`/Sanskrit/sutra/${sutra.id}`} class="sutra-card">
         <h3>{formatSutraId(sutra.id)}</h3>
         <p>{sutra.text}</p>

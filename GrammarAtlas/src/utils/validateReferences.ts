@@ -1,12 +1,13 @@
 /**
  * 验证经文数据中的引用一致性
  * 严格模式检查：
- * 1. text、translation、vrtti、notes 中的所有 [[id]] 必须在 references 中，或在任何层级的 adhikaras 中
+ * 1. text、translation、vrtti、notes 中的所有 [[id]] 必须在 references、parallel、adhikaras 或 sequence 中至少出现一次
  * 2. references 中的所有 id 必须是存在的经文
- * 3. references 中的所有 id 必须在 text、translation、vrtti、notes 中任何一个出现（无孤立引用）
+ * 3. references 中的所有 id 必须在文本字段中被提及（无孤立引用）
  *
- * 说明：adhikaras 支持层级关系。如果 A 的 adhikara 是 B，B 的 adhikara 是 C，
- * 那么 A 可以在任何字段中引用 B 或 C，都不会报错。
+ * 说明：如果某个ID在文本中被提到，可以通过任意一种方式"满足"：
+ * - 加到 references 数组、parallel 数组、sequence 数组之一
+ * - 或存在于任何层级的 adhikaras 中
  */
 
 import { sutras, type Sutra } from '../data/sutras';
@@ -90,10 +91,18 @@ function validateSutra(sutra: Sutra): ValidationResult {
   const existingSutraIds = Object.keys(sutras);
   const allAdhikaras = getAllAdhikaras(sutra.id);
 
-  // 检查 1：所有字段中的所有链接是否都在 references 或任何层级的 adhikaras 中
+  // 获取所有允许的ID（references、adhikaras、parallel、sequence）
+  const allowedIds = new Set([
+    ...referencesArray,
+    ...allAdhikaras,
+    ...(sutra.parallel || []),
+    ...(sutra.sequence || [])
+  ]);
+
+  // 检查 1：所有字段中的所有链接是否都在允许的范围内
   for (const link of allLinksInContent) {
-    if (!referencesArray.includes(link) && !allAdhikaras.includes(link)) {
-      result.errors.push(`文本中包含 [[${link}]] 但不在 references 或 adhikaras 中`);
+    if (!allowedIds.has(link)) {
+      result.errors.push(`文本中包含 [[${link}]] 但不在 references、parallel、adhikaras 或 sequence 中`);
       result.isValid = false;
     }
   }

@@ -122,9 +122,10 @@ main {
   height: 3px;
 }
 
-.line.reference { background: #94a3b8; }
+.line.reference { background: #6b7280; }
 .line.parallel { background: #f59e0b; }
 .line.adhikara { background: #ef4444; }
+.line.sequence { background: #06b6d4; }
 
 /* Sutra Panel */
 .sutra-panel {
@@ -150,6 +151,8 @@ main {
   font-size: 1.125rem;
   font-style: italic;
   margin-bottom: 0.75rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .sutra-panel .translation {
@@ -160,6 +163,7 @@ main {
 .sutra-panel .vrtti,
 .sutra-panel .adhikara,
 .sutra-panel .parallel,
+.sutra-panel .sequence,
 .sutra-panel .notes {
   font-size: 0.875rem;
   margin-top: 0.5rem;
@@ -244,6 +248,8 @@ main {
 .sutra-header .sutra-text {
   font-size: 1.5rem;
   font-style: italic;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .sutra-section {
@@ -327,6 +333,8 @@ main {
 .sutra-card p {
   font-style: italic;
   color: var(--color-text-muted);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Sutra List Controls */

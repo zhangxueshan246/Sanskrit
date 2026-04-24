@@ -79,6 +79,17 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
       </div>
     )}
 
+    {sutra.sequence && sutra.sequence.length > 0 && (
+      <div class="sutra-section">
+        <h2>后继经文</h2>
+        {sutra.sequence.map(seq => (
+          <a href={`/Sanskrit/sutra/${seq}`} class="sutra-link">
+            {formatSutraId(seq)}
+          </a>
+        ))}
+      </div>
+    )}
+
     <div style="margin-top: 2rem;">
       <a href="/Sanskrit/atlas" class="view-link">← 返回图谱</a>
     </div>

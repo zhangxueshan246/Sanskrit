@@ -167,20 +167,16 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
         .style("filter", 'none');
     }
 
-    // 拖拽函数（需要考虑缩放变换）
+    // 拖拽函数
     function dragstarted(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
-      const point = d3.pointer(event, svg.node() as SVGSVGElement);
-      const invertedPoint = new DOMMatrix(g.attr("transform")).inverse().transformPoint(new DOMPoint(point[0], point[1]));
-      event.subject.fx = invertedPoint.x;
-      event.subject.fy = invertedPoint.y;
+      event.subject.fx = event.subject.x;
+      event.subject.fy = event.subject.y;
     }
 
     function dragged(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
-      const point = d3.pointer(event, svg.node() as SVGSVGElement);
-      const invertedPoint = new DOMMatrix(g.attr("transform")).inverse().transformPoint(new DOMPoint(point[0], point[1]));
-      event.subject.fx = invertedPoint.x;
-      event.subject.fy = invertedPoint.y;
+      event.subject.fx = event.subject.x + event.dx;
+      event.subject.fy = event.subject.y + event.dy;
     }
 
     function dragended(event: d3.D3DragEvent<SVGGElement, Node, Node>) {

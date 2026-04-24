@@ -1,4 +1,4 @@
-# Grammar Atlas
+# Vyākaraṇa Atlas
 
 梵语语法经文可视化图谱，展示 Pāṇini Aṣṭādhyāyī、Kātantra、Kāśikāvṛṭti 等语法书之间的关系网络。
 
@@ -27,6 +27,7 @@ npm run dev
   references: ["pan_1.1.3"],      // 引用 ID 数组（必填，至少 []）
   adhikaras: ["pan_1.1.1"],       // 管辖此经的 adhikāra（选填，支持多层）
   parallel: ["kat_1.1.7"],        // 对应文献（选填，建议双向）
+  sequence: ["pan_1.1.5"],        // 后继经文（选填，表示自然序列关系）
 }
 ```
 
@@ -60,7 +61,17 @@ npm run dev
    ```
    验证脚本会检查**所有层级**的 adhikara，例如如果 `pan_6.4.77` 引用了 `pan_6.4.1`，而 `pan_6.4.1` 本身的 adhikara 包括某条经文，那么这个间接引用也是有效的。
 
-4. **对应/注释关系** — `parallel` 建议**双向**写
+4. **自然序列关系** — 用 `sequence` 表示后继经文
+   ```typescript
+   // 在 pan_1.1.4 中指向下一条经文
+   sequence: ["pan_1.1.5"]
+   
+   // 也可以有多个后继
+   sequence: ["pan_1.1.5", "pan_1.2.1"]
+   ```
+   这样可以在图谱中显示经文的自然顺序流程。
+
+5. **对应/注释关系** — `parallel` 建议**双向**写
    ```typescript
    // dssk_552 注释 pan_3.1.124
    "dssk_552": { parallel: ["pan_3.1.124"], ... }
@@ -75,9 +86,28 @@ npm run validate
 ```
 
 脚本检查：
-- ✓ `text`/`translation`/`vrtti`/`notes` 中的所有 `[[id]]` 都在 `references` 或任何层级的 `adhikaras` 中
+- ✓ `text`/`translation`/`vrtti`/`notes` 中的所有 `[[id]]` 都在 `references`、`parallel`、`sequence` 或 `adhikaras` 中
 - ✓ `references` 中的 ID 都是存在的经文
 - ✓ `references` 中没有孤立 ID（都要在任何一个文本字段中提及）
+
+**灵活性：** 文本中提到的ID，可以在任何关系字段中出现就被认为有效：
+```typescript
+// 以下任意一种方式都会通过 validation
+notes: "参见 [[pan_1.1.26]]",
+references: ["pan_1.1.26"]    // 方式1：加到 references
+
+// 或
+notes: "参见 [[dssk_15]]",
+parallel: ["dssk_15"]         // 方式2：加到 parallel
+
+// 或
+notes: "之后是 [[pan_1.1.5]]",
+sequence: ["pan_1.1.5"]       // 方式3：加到 sequence
+
+// 或
+notes: "参见 [[pan_6.4.1]]",
+adhikaras: ["pan_6.4.1"]      // 方式4：加到 adhikaras
+```
 
 ## 搜索和排序
 
@@ -106,9 +136,10 @@ npm run validate
 
 | 颜色 | 类型 | 含义 |
 |------|------|------|
-| 灰色实线 | reference | 经文互相引用 |
+| 深灰实线 | reference | 经文互相引用 |
 | 橙色虚线 | parallel | 多文献对应或注释关系 |
 | 红色实线 | adhikara | 管辖关系 |
+| 青色实线 | sequence | 自然序列（后继关系） |
 
 ## 经文来源与颜色
 
