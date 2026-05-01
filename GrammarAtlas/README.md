@@ -2,6 +2,17 @@
 
 梵语语法经文可视化图谱，展示 Pāṇini Aṣṭādhyāyī、Kātantra、Kāśikāvṛṭti 等语法书之间的关系网络。
 
+## 🚀 技术栈
+
+- **框架**：Astro v6 + React 18
+- **数据**：JSON 文件存储（直接 fs 读取）
+- **类型检查**：TypeScript strict
+- **可视化**：D3.js 力导向图
+- **搜索**：Fuse.js 模糊搜索
+- **部署**：GitHub Pages
+
+**最近更新**（2026-05-01 下午）：清理代码、改进文本换行系统。`updatedAt` 自动读取文件修改时间。支持 `|` 和 `-` 标记换行点。
+
 ## 本地运行
 
 ```bash
@@ -14,70 +25,133 @@ npm run dev
 
 ## 如何添加经文
 
-编辑 `src/data/sutras.ts` 文件。基本结构和字段说明：
+### 新方式：使用 JSON 文件（推荐）
 
-```typescript
-"pan_1.1.4": {
-  id: "pan_1.1.4",                // 经文 ID（必填）
-  text: "na dhātulopa ārdhadhātuke",  // 经文原文（必填，支持 wiki 链接 [[id]] 和 \n 换行）
-  source: "panini",               // 来源（必填）: panini|katantra|jkv|dssk|other
-  translation: "翻译",            // 翻译（选填，支持 wiki 链接 [[id]] 和 \n 换行）
-  vrtti: "注释",                  // 注释（选填，支持 wiki 链接 [[id]] 和 \n 换行）
-  notes: "笔记\n支持多行",         // 笔记（选填，支持 wiki 链接 [[id]] 和 \n 换行）
-  references: ["pan_1.1.3"],      // 引用 ID 数组（必填，至少 []）
-  adhikaras: ["pan_1.1.1"],       // 管辖此经的 adhikāra（选填，支持多层）
-  parallel: ["kat_1.1.7"],        // 对应文献（选填，建议双向）
-  sequence: ["pan_1.1.5"],        // 后继经文（选填，表示自然序列关系）
+从 Astro v6 开始，每个经文存储为独立的 JSON 文件，更加清晰易维护。
+
+**基本结构**：
+```json
+// src/content/sutras/panini/pan_1.1.1.json
+{
+  "id": "pan_1.1.1",
+  "text": "经文原文 [[ref_id]]",
+  "translation": "翻译",
+  "vrtti": "注释",
+  "notes": "笔记\n支持多行",
+  "source": "panini",
+  "references": ["ref_id"],
+  "parallel": ["other_id"],
+  "adhikaras": ["adhikara_id"],
+  "sequence": ["next_id"],
+  "updatedAt": 1743638400000
 }
 ```
 
-### 关键规则
+**字段说明**：
 
-1. **Wiki 链接与 references 同步**
-   - 在 `text`/`translation`/`vrtti`/`notes` 中用 `[[经文ID]]` 链接（任意字段都支持）
-   - 所有链接的 ID **必须也加到** `references` 数组
-   - 引用可以出现在任意一个字段中（只要在某个字段提及就算有效）
-   - 验证脚本会自动检查一致性
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `id` | string | ✓ | 经文ID (例: `pan_1.1.1`) |
+| `text` | string | ✓ | 经文原文，支持 `[[id]]` wiki链接、`\n` 强制换行、`\|` 可选换行点、`-` 后自动添加断点 |
+| `translation` | string | ✗ | 中英翻译，同样支持 wiki 链接和换行标记 |
+| `vrtti` | string | ✗ | 注释/讲解 |
+| `notes` | string | ✗ | 个人笔记 |
+| `source` | enum | ✓ | `panini` \| `katantra` \| `jkv` \| `dssk` \| `other` |
+| `references` | array | ✓ | 引用ID数组（至少 `[]`） |
+| `parallel` | array | ✗ | 其他文献的对应经文 |
+| `adhikaras` | array | ✗ | 管辖此经的 adhikāra |
+| `sequence` | array | ✗ | 后继经文（自然序列关系） |
+| `updatedAt` | number | ✗ | 时间戳（毫秒），省略则自动读取文件修改时间 |
 
-   ```typescript
-   vrtti: "见 [[pan_1.1.26]] 的说明",
-   references: ["pan_1.1.26"]  // 必填
-   // 或者
-   notes: "相关内容见 [[pan_1.1.26]]",
-   references: ["pan_1.1.26"]  // 也支持在 notes 中
+**添加步骤**：
+
+1. **创建文件** — 根据 `source` 放在对应目录
+   ```bash
+   src/content/sutras/
+   ├── panini/
+   │   └── pan_1.1.1.json        ← 新建在这里
+   ├── dssk/
+   ├── katantra/
+   └── jkv/
    ```
 
-2. **多行内容** — 在任何字段中用 `\n` 分隔
-   ```typescript
-   text: "原文第一部分\n原文第二部分",
-   translation: "翻译第一行\n翻译第二行",
-   vrtti: "注释第一段\n注释第二段"
-   notes: "笔记第一行\n笔记第二行"
+2. **填充数据** — 使用上面的 JSON 模板
+
+3. **验证一致性** — 确保 wiki 链接和 references 一致
+   ```bash
+   npm run validate
    ```
 
-3. **多层 adhikāra** — 可被多个 adhikāra 管辖
-   ```typescript
-   adhikaras: ["pan_6.4.1", "pan_6.1.72"]
+4. **本地预览** — 查看效果
+   ```bash
+   npm run dev
+   # 访问 http://localhost:4321/Sanskrit/
    ```
-   验证脚本会检查**所有层级**的 adhikara，例如如果 `pan_6.4.77` 引用了 `pan_6.4.1`，而 `pan_6.4.1` 本身的 adhikara 包括某条经文，那么这个间接引用也是有效的。
 
-4. **自然序列关系** — 用 `sequence` 表示后继经文
-   ```typescript
-   // 在 pan_1.1.4 中指向下一条经文
-   sequence: ["pan_1.1.5"]
-   
-   // 也可以有多个后继
-   sequence: ["pan_1.1.5", "pan_1.2.1"]
+5. **提交推送** — GitHub Actions 自动部署
+   ```bash
+   git add src/content/sutras/
+   git commit -m "Add new sutra: pan_1.1.1"
+   git push origin master
    ```
-   这样可以在图谱中显示经文的自然顺序流程。
 
-5. **对应/注释关系** — `parallel` 建议**双向**写
-   ```typescript
-   // dssk_552 注释 pan_3.1.124
-   "dssk_552": { parallel: ["pan_3.1.124"], ... }
-   "pan_3.1.124": { parallel: ["dssk_552"], ... }  // 不要漏掉！
-   ```
-   这样用户可从任一经文跳转到另一方，图谱也更清晰。
+### 文本换行与断行
+
+长梵文词需要手动标记换行点，避免在错误位置断行。支持三种方式：
+
+| 标记 | 作用 | 何时显示 |
+|------|------|--------|
+| `\|` | 可选换行点 | 仅在容器窄小时换行，显示连字符 `-` |
+| `-` | 复合词分隔 | 自动在 `-` 后添加换行点（如 `yoga-yoga-` 中每个 `-` 后） |
+| `\n` | 强制换行 | 总是换行（无连字符） |
+
+**例子**：
+```json
+{
+  "text": "niṣṭhāyām|aṇy|adarthe.",
+  "notes": "长注释中可以|在任何地方|标记换行点"
+}
+```
+
+**工作原理**：
+- 宽屏幕 → 不显示 `|` 或 `-`，正常显示（无换行）
+- 窄屏幕 → 在标记点处换行，显示连字符 `-`
+- 如果没有标记 → 长词自动在容器边缘折断（无连字符）
+
+**编辑建议**：
+1. 编写经文时，先不加 `|`
+2. 本地预览（`npm run dev`），在窄屏看效果
+3. 发现不合理的断行？在那些地方加 `|`
+4. 刷新页面验证
+
+### wiki 链接与 references 规则
+
+文本中提到的 ID 必须在某个关系字段中出现，支持灵活的方式：
+
+```json
+{
+  "text": "见 [[pan_1.1.26]] 的说明",
+  "references": ["pan_1.1.26"]     // 方式1：加到 references
+}
+
+// 或
+{
+  "notes": "相关内容见 [[dssk_15]]",
+  "parallel": ["dssk_15"]          // 方式2：加到 parallel
+}
+
+// 或
+{
+  "notes": "之后是 [[pan_1.1.5]]",
+  "sequence": ["pan_1.1.5"]        // 方式3：加到 sequence
+}
+
+// 或
+{
+  "notes": "参见 [[pan_6.4.1]]",
+  "adhikaras": ["pan_6.4.1"]       // 方式4：加到 adhikaras
+}
+```
 
 ### 验证引用一致性
 
@@ -90,24 +164,6 @@ npm run validate
 - ✓ `references` 中的 ID 都是存在的经文
 - ✓ `references` 中没有孤立 ID（都要在任何一个文本字段中提及）
 
-**灵活性：** 文本中提到的ID，可以在任何关系字段中出现就被认为有效：
-```typescript
-// 以下任意一种方式都会通过 validation
-notes: "参见 [[pan_1.1.26]]",
-references: ["pan_1.1.26"]    // 方式1：加到 references
-
-// 或
-notes: "参见 [[dssk_15]]",
-parallel: ["dssk_15"]         // 方式2：加到 parallel
-
-// 或
-notes: "之后是 [[pan_1.1.5]]",
-sequence: ["pan_1.1.5"]       // 方式3：加到 sequence
-
-// 或
-notes: "参见 [[pan_6.4.1]]",
-adhikaras: ["pan_6.4.1"]      // 方式4：加到 adhikaras
-```
 
 ## 搜索和排序
 
@@ -176,15 +232,34 @@ git push origin master     # 自动触发部署
 ### 常用命令
 | 命令 | 用途 |
 |------|------|
-| `npm run validate` | 检查 wiki 链接和 references 一致性 |
-| `npm run dev` | 启动本地开发服务器 |
-| `npm run build` | 本地构建测试 |
-| `npm run preview` | 预览构建结果 |
+| `npm run dev` | 启动本地开发服务器 (http://localhost:4321/Sanskrit/) |
+| `npm run validate` | 检查所有经文的 wiki 链接和 references 一致性 |
+| `npm run build` | 生产构建（生成静态 HTML） |
+| `npm run preview` | 预览构建后的网站 |
+
+### 快速工作流
+
+```bash
+# 1. 新增经文
+# 编辑 src/content/sutras/{source}/{id}.json
+
+# 2. 验证
+npm run validate     # 应该看到 "✅ 所有经文引用检查通过！"
+
+# 3. 本地预览
+npm run dev
+# 访问 http://localhost:4321/Sanskrit/sutra/{id}
+
+# 4. 提交
+git add src/content/
+git commit -m "Add sutra: {id}"
+git push origin master   # 自动部署到 GitHub Pages
+```
 
 ⚠️ **重要提示**
-- 每次编辑后**必须运行** `npm run validate`
+- 每次编辑经文后**必须运行** `npm run validate`
 - **提交前本地测试** `npm run dev` 查看效果
-- 避免频繁小提交，稳定后再 push
+- 避免频繁小提交，验证通过后再 push
 
 ## 关于本项目
 
@@ -201,15 +276,38 @@ git push origin master     # 自动触发部署
 ```
 GrammarAtlas/
 ├── src/
-│   ├── data/
-│   │   └── sutras.ts      ← 经文数据（主要编辑这个）
+│   ├── content/                    ← 经文数据（新：JSON格式）
+│   │   └── sutras/
+│   │       ├── panini/             ← Pāṇini sutras
+│   │       ├── dssk/               ← DSSK sutras
+│   │       ├── katantra/           ← Kātantra sutras
+│   │       └── jkv/                ← Kāśikāvṛṭti sutras
+│   ├── content.config.ts           ← Zod schema 定义（新）
+│   ├── types/
+│   │   └── sutra.ts                ← TypeScript 类型定义（新）
+│   ├── data/                       ← （已删除，改用 content/）
 │   ├── components/
-│   │   └── SutraGraph.tsx ← D3.js 图谱组件
+│   │   ├── SutraGraph.tsx          ← D3.js 图谱组件
+│   │   └── SutraListControls.tsx   ← 搜索排序组件
 │   ├── pages/
-│   │   ├── index.astro    ← 首页
-│   │   ├── atlas.astro    ← 图谱页面
-│   │   └── sutra/[id].astro ← 经文详情页
+│   │   ├── index.astro             ← 首页
+│   │   ├── atlas.astro             ← 图谱页面
+│   │   ├── sutras.astro            ← 列表页面
+│   │   └── sutra/[id].astro        ← 经文详情页
+│   ├── utils/
+│   │   ├── getSutras.ts            ← 数据访问层（新）
+│   │   ├── validateReferences.ts   ← 验证脚本（已更新）
+│   │   ├── searchSutras.ts         ← Fuse.js 搜索
+│   │   ├── sortSutras.ts           ← 排序工具
+│   │   ├── formatSutraId.ts        ← ID 格式化
+│   │   └── parseWikiLinks.ts       ← Wiki 链接解析
+│   ├── layouts/
+│   │   └── Layout.astro            ← 基础布局
 │   └── styles/
-│       └── global.css     ← 样式
-└── package.json
+│       └── global.css              ← 全局样式
+├── astro.config.mjs                ← Astro 配置
+├── tsconfig.json                   ← TypeScript 配置
+├── package.json                    ← 依赖管理
+└── README.md                       ← 本文件
 ```
+

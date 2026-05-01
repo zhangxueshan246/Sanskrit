@@ -1,0 +1,264 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter}
+\graphicspath{{pic/}}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\mbox{\textcolor{Plum}{#1}}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+\newcommand{\dicturl}[2]{\href{#1}{\mbox{\texttt{#2}}}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{37. 数词}
+\author[张雪杉]{文学院~~张雪杉\\zhangxueshan@sdnu.edu.cn}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{《薄伽梵歌》1.26-29}
+  \footnotesize{
+    \begin{verse}
+      \mbox{\skt{tatrāpaśyatsthitānpārthaḥ pitṝnatha pitāmahān ।}}\\
+      \mbox{\skt{ācāryānmātulānbhrātṝnputrānpautrānsakīṃstathā ।। 1-26 ।।}}\\
+      \skt{śvaśurānsuhṛdaścaiva senayorubhayorapi ।}\\
+      \mbox{\skt{tānsamīkṣya sa kaunteyaḥ sarvānbandhūnavasthitān ।। 1-27 ।।}}\\
+      \skt{kṛpayā parayāviṣṭo viṣīdannidamabravīt ।}\\
+      \skt{arjuna uvāca}\\
+      \mbox{\skt{dṛṣṭvemaṃ svajanaṃ kṛṣṇa yuyutsuṃ samupasthitam ।। 1-28 ।।}}\\
+      \skt{sīdanti mama gātrāṇi mukhaṃ ca pariśuṣyati ।}\\
+      \mbox{\skt{vepathuśca śarīre me romaharṣaśca jāyate ।। 1-29 ।।}}\\
+    \end{verse}
+  }
+\end{frame}
+
+\begin{frame}{《薄伽梵歌》1.30-33}
+  \footnotesize{
+    \begin{verse}
+      \skt{gāṇḍīvaṃ sraṃsate hastāttvakcaiva paridahyate ।}\\
+      \mbox{\skt{na ca śaknomyavasthātuṃ bhramatīva ca me manaḥ ।। 1-30 ।।}}\\
+      \skt{nimittāni ca paśyāmi viparītāni keśava ।}\\
+      \mbox{\skt{na ca śreyo 'nupaśyāmi hatvā svajanamāhave ।। 1-31 ।।}}\\
+      \skt{na kāṅkṣe vijayaṃ kṛṣṇa na ca rājyaṃ sukhāni ca ।}\\
+      \mbox{\skt{kiṃ no rājyena govinda kiṃ bhogairjīvitena vā ।। 1-32 ।।}}\\
+      \skt{yeṣāmarthe kāṅkṣitaṃ no rājyaṃ bhogāḥ sukhāni ca ।}\\
+      \mbox{\skt{ta ime 'vasthitā yuddhe prāṇāṃstyaktvā dhanāni ca ।। 1-33 ।।}}\\
+    \end{verse}
+  }
+\end{frame}
+
+\section{基数词}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{概述}
+\begin{frame}{基数词 \insertsubsection}
+  \small
+  \begin{itemize}
+    \item \nounstem{eka} (1) \nounstem{dvi} (2) 
+    \nounstem{tri} (3) \nounstem{catur} (4) \\
+    是形容词，要按修饰的名词分性变格。
+    \item \nounstem{pañca} (5) \nounstem{ṣaṣ} (6) \nounstem{sapta} (7) \\
+    \nounstem{aṣṭa} (8) \nounstem{nava} (9) \nounstem{daśa} (10)\\
+    按中性名词变格。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{基数词 \insertsubsection}
+  \small
+  \begin{itemize}
+    \item \nounstem{eka} (1)：变格类似tad （第22章）
+    \\ 三个数都有，双数和复数表示一些、某些
+    \item \nounstem{dvi} (2)：只有双数。
+    \item \nounstem{tri} (3) \textasciitilde{} \nounstem{daśa} (10) 只有复数。
+
+    \item 更大的查字典\\百：\nounstem{śata} (n.)；千：\nounstem{sahasra} (n.)\\
+  \end{itemize}
+\end{frame}
+
+\subsection{二}
+\begin{frame}{dvi- (2)}
+  \small
+  \centering
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & \important{阳性} & \important{中性} & \important{阴性} \\
+    主/呼/业格 & \fullpada{dvau} & \fullpada{dve} & \fullpada{dve} \\
+    具/为/从格 & \fullpada{dvābhyām} & \fullpada{dvābhyām} & \fullpada{dvābhyām} \\
+    属/依格   & \fullpada{dvayoḥ} & \fullpada{dvayoḥ} & \fullpada{dvayoḥ} \\
+  \end{NiceTabular}
+  \begin{itemize}
+    \item 词干 \nounstem{dvi} 是复合词中使用的形式。\\
+    \nounstem{dvipad} 两脚的 \nounstem{trilocana} 三眼的
+  \end{itemize}
+\end{frame}
+
+\subsection{三和四}
+\begin{frame}{\mbox{tri- (3) 和 catur- (4) }}
+  \footnotesize
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    \important{tri- (3)} & 阳 & 中 & 阴 \\
+    主/呼 & \fullpada{trayaḥ} & \fullpada{trīṇi} & \fullpada{tisraḥ} \\
+    业格 & \fullpada{trīn} & \fullpada{trīṇi} & \fullpada{tisraḥ} \\
+    具格 & \fullpada{tribhiḥ} & \fullpada{tribhiḥ} & \fullpada{tisṛbhiḥ} \\
+    为/从格 & \fullpada{tribhyaḥ} & \fullpada{tribhyaḥ} & \fullpada{tisṛbhyaḥ} \\
+    属格 & \fullpada{trayāṇām} & \fullpada{trayāṇām} & \fullpada{tisṛṇām} \\
+    依格 & \fullpada{triṣu} & \fullpada{triṣu} & \fullpada{tisṛṣu} \\
+
+    \important{catur- (4)} & 阳 & 中 & 阴 \\
+    主/呼 & \fullpada{catvāraḥ} & \fullpada{catvāri} & \fullpada{catasraḥ} \\
+    业格 & \fullpada{caturaḥ} & \fullpada{catvāri} & \fullpada{catasraḥ} \\
+    具格 & \fullpada{caturbhiḥ} & \fullpada{caturbhiḥ} & \fullpada{catasṛbhiḥ} \\
+    为/从格 & \fullpada{caturbhyaḥ} & \fullpada{caturbhyaḥ} & \fullpada{catasṛbhyaḥ} \\
+    属格 & \fullpada{caturṇām} & \fullpada{caturṇām} & \fullpada{catasṛṇām} \\
+    依格 & \fullpada{caturṣu} & \fullpada{caturṣu} & \fullpada{catasṛṣu} \\
+  \end{NiceTabular}%
+  }
+\end{frame}
+
+\subsection{五到十}
+\begin{frame}{\mbox{pañca- (5) \textasciitilde{} daśa- (10) }}
+  \footnotesize
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+     & \important{pañca (5)} & \important{ṣaṣ (6)} & \important{sapta (7)} \\
+    主/呼/业 & \fullpada{pañca} & \fullpada{ṣaṭ} & \fullpada{sapta} \\
+    具格 & \fullpada{pañcabhiḥ} & \fullpada{ṣaḍbhiḥ} & \fullpada{saptabhiḥ} \\
+    为/从格 & \fullpada{pañcabhyaḥ} & \fullpada{ṣaḍbhyaḥ} & \fullpada{saptabhyaḥ} \\
+    属格 & \fullpada{pañcānām} & \fullpada{ṣaṇṇām} & \fullpada{saptānām} \\
+    依格 & \fullpada{pañcasu} & \fullpada{ṣaṭsu} & \fullpada{saptasu} \\
+
+    & \important{aṣṭa (8)} & \important{nava (9)} & \important{daśa (10)} \\
+    主/呼/业 & \fullpada{aṣṭa}/\fullpada{aṣṭau} & \fullpada{nava} & \fullpada{daśa} \\
+    具格 & \fullpada{aṣṭabhiḥ}/\fullpada{aṣṭābhiḥ} & \fullpada{navabhiḥ} & \fullpada{daśabhiḥ} \\
+    为/从格 & \fullpada{aṣṭabhyaḥ}/\fullpada{aṣṭābhyaḥ} & \fullpada{navabhyaḥ} & \fullpada{daśabhyaḥ} \\
+    属格 & \fullpada{aṣṭānām}/\fullpada{aṣṭānām} & \fullpada{navānām} & \fullpada{daśānām} \\
+    依格 & \fullpada{aṣṭasu}/\fullpada{aṣṭāsu} & \fullpada{navasu} & \fullpada{daśasu} \\
+  \end{NiceTabular}%
+  }
+\end{frame}
+
+
+\section{序数词}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{序数词 1-10}
+  \small
+  \mbox{阳/中性 \nounstem{-a}，阴性 \nounstem{-ā}/\nounstem{-ī}}\\
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item \nounstem{prathama} 第一
+      \item \nounstem{dvitīya} 第二
+      \item \nounstem{tṛtīya} 第三
+      \item \nounstem{caturtha}/\nounstem{caturīya} 第四
+      \item \nounstem{pañcama} 第五
+    \end{itemize}
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item \nounstem{ṣaṣṭha} 第六
+      \item \nounstem{saptama} 第七
+      \item \nounstem{aṣṭama} 第八
+      \item \nounstem{navama} 第九
+      \item \nounstem{daśama} 第十
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+
+\section{本节作业}
+
+\begin{frame}{\insertsection}
+  \begin{itemize}
+    \item 第34章阅读练习
+  \end{itemize}
+\end{frame}
+
+\end{document}

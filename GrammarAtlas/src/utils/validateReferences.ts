@@ -4,19 +4,57 @@
  * 1. text、translation、vrtti、notes 中的所有 [[id]] 必须在 references、parallel、adhikaras 或 sequence 中至少出现一次
  * 2. references 中的所有 id 必须是存在的经文
  * 3. references 中的所有 id 必须在文本字段中被提及（无孤立引用）
- *
- * 说明：如果某个ID在文本中被提到，可以通过任意一种方式"满足"：
- * - 加到 references 数组、parallel 数组、sequence 数组之一
- * - 或存在于任何层级的 adhikaras 中
  */
 
-import { sutras, type Sutra } from '../data/sutras';
+import * as fs from 'fs';
+import * as path from 'path';
+import type { Sutra } from '../types/sutra';
 
 interface ValidationResult {
   sutraId: string;
   isValid: boolean;
   errors: string[];
   warnings: string[];
+}
+
+/**
+ * 从 JSON 文件夹递归加载所有经文
+ */
+async function loadAllSutras(): Promise<Sutra[]> {
+  // 获取项目根目录
+  const scriptDir = new URL('.', import.meta.url);
+  let sutraDir = scriptDir.pathname;
+
+  // 处理 Windows 路径前缀
+  if (sutraDir.startsWith('/')) {
+    sutraDir = sutraDir.substring(1);
+  }
+
+  sutraDir = path.join(sutraDir, '..', 'content', 'sutras');
+  const sutras: Sutra[] = [];
+
+  console.log(`📂 Looking for sutras in: ${sutraDir}`);
+
+  function walkDir(dir: string) {
+    if (!fs.existsSync(dir)) {
+      console.error(`❌ Directory not found: ${dir}`);
+      return;
+    }
+    const files = fs.readdirSync(dir, { withFileTypes: true });
+    for (const file of files) {
+      const fullPath = path.join(dir, file.name);
+      if (file.isDirectory()) {
+        walkDir(fullPath);
+      } else if (file.name.endsWith('.json')) {
+        const content = fs.readFileSync(fullPath, 'utf-8');
+        const sutra = JSON.parse(content) as Sutra;
+        sutras.push(sutra);
+      }
+    }
+  }
+
+  walkDir(sutraDir);
+  return sutras;
 }
 
 /**
@@ -38,24 +76,24 @@ function extractWikiLinks(text: string | undefined): string[] {
 
 /**
  * 递归获取某条 sutra 的所有 adhikaras（包括直接和间接的）
- * 处理层级关系：如果 A 的 adhikara 是 B，B 的 adhikara 是 C，
- * 那么 A 可以引用 B 和 C，都不算孤立引用
  */
-function getAllAdhikaras(sutraId: string, visited = new Set<string>()): string[] {
-  // 防止循环引用
+function getAllAdhikaras(
+  sutraId: string,
+  sutrasMap: Map<string, Sutra>,
+  visited = new Set<string>()
+): string[] {
   if (visited.has(sutraId)) return [];
   visited.add(sutraId);
 
-  const sutra = sutras[sutraId];
+  const sutra = sutrasMap.get(sutraId);
   if (!sutra || !sutra.adhikaras || sutra.adhikaras.length === 0) {
     return [];
   }
 
   const allAdhikaras: string[] = [...sutra.adhikaras];
 
-  // 递归获取每个 adhikara 的 adhikaras
   for (const adhikaraId of sutra.adhikaras) {
-    const ancestorAdhikaras = getAllAdhikaras(adhikaraId, visited);
+    const ancestorAdhikaras = getAllAdhikaras(adhikaraId, sutrasMap, visited);
     allAdhikaras.push(...ancestorAdhikaras);
   }
 
@@ -65,7 +103,7 @@ function getAllAdhikaras(sutraId: string, visited = new Set<string>()): string[]
 /**
  * 验证单个经文的引用一致性
  */
-function validateSutra(sutra: Sutra): ValidationResult {
+function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationResult {
   const result: ValidationResult = {
     sutraId: sutra.id,
     isValid: true,
@@ -73,13 +111,11 @@ function validateSutra(sutra: Sutra): ValidationResult {
     warnings: []
   };
 
-  // 提取所有字段中的链接
   const linksInText = extractWikiLinks(sutra.text);
   const linksInTranslation = extractWikiLinks(sutra.translation);
   const linksInVrtti = extractWikiLinks(sutra.vrtti);
   const linksInNotes = extractWikiLinks(sutra.notes);
 
-  // 合并所有链接
   const allLinksInContent = new Set([
     ...linksInText,
     ...linksInTranslation,
@@ -88,10 +124,9 @@ function validateSutra(sutra: Sutra): ValidationResult {
   ]);
 
   const referencesArray = sutra.references || [];
-  const existingSutraIds = Object.keys(sutras);
-  const allAdhikaras = getAllAdhikaras(sutra.id);
+  const existingSutraIds = Array.from(sutrasMap.keys());
+  const allAdhikaras = getAllAdhikaras(sutra.id, sutrasMap);
 
-  // 获取所有允许的ID（references、adhikaras、parallel、sequence）
   const allowedIds = new Set([
     ...referencesArray,
     ...allAdhikaras,
@@ -99,7 +134,6 @@ function validateSutra(sutra: Sutra): ValidationResult {
     ...(sutra.sequence || [])
   ]);
 
-  // 检查 1：所有字段中的所有链接是否都在允许的范围内
   for (const link of allLinksInContent) {
     if (!allowedIds.has(link)) {
       result.errors.push(`文本中包含 [[${link}]] 但不在 references、parallel、adhikaras 或 sequence 中`);
@@ -107,7 +141,6 @@ function validateSutra(sutra: Sutra): ValidationResult {
     }
   }
 
-  // 检查 2：references 中的所有 id 是否存在
   for (const refId of referencesArray) {
     if (!existingSutraIds.includes(refId)) {
       result.errors.push(`references 包含不存在的经文 [[${refId}]]`);
@@ -115,7 +148,6 @@ function validateSutra(sutra: Sutra): ValidationResult {
     }
   }
 
-  // 检查 3：references 中的所有 id 是否都在任何一个文本字段中出现（严格模式）
   for (const refId of referencesArray) {
     if (!allLinksInContent.has(refId)) {
       result.errors.push(`references 中的 [[${refId}]] 没有在文本任何字段中提及（孤立引用）`);
@@ -129,15 +161,18 @@ function validateSutra(sutra: Sutra): ValidationResult {
 /**
  * 验证所有经文
  */
-function validateAllSutras(): void {
+async function validateAllSutras(): Promise<void> {
   console.log('🔍 开始验证经文引用...\n');
+
+  const sutras = await loadAllSutras();
+  const sutrasMap = new Map(sutras.map(s => [s.id, s]));
 
   const allResults: ValidationResult[] = [];
   let totalValid = 0;
   let totalInvalid = 0;
 
-  for (const sutra of Object.values(sutras)) {
-    const result = validateSutra(sutra);
+  for (const sutra of sutras) {
+    const result = validateSutra(sutra, sutrasMap);
     allResults.push(result);
 
     if (result.isValid) {
@@ -168,5 +203,4 @@ function validateAllSutras(): void {
   }
 }
 
-// 运行验证
 validateAllSutras();

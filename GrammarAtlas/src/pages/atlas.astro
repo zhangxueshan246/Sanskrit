@@ -1,6 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SutraGraph from '../components/SutraGraph';
+import { getAllSutras, generateEdges } from '../utils/getSutras';
+
+const sutras = await getAllSutras();
+const edges = await generateEdges();
 ---
 
 <Layout title="图谱">
@@ -12,5 +16,7 @@ import SutraGraph from '../components/SutraGraph';
     client:load
     width={1000}
     height={700}
+    sutras={sutras}
+    edges={edges}
   />
 </Layout>

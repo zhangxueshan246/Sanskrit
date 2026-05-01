@@ -9,8 +9,8 @@
     "validate": "tsx src/utils/validateReferences.ts"
   },
   "dependencies": {
-    "@astrojs/react": "^3.6.0",
-    "astro": "^4.16.0",
+    "@astrojs/react": "^5.0.4",
+    "astro": "^6.2.1",
     "d3": "^7.9.0",
     "fuse.js": "^7.3.0",
     "react": "^18.3.0",

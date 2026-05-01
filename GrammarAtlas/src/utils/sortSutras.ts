@@ -1,4 +1,4 @@
-import { type Sutra } from '../data/sutras';
+import { type Sutra } from '../types/sutra';
 
 /**
  * 从ID中提取数字部分，用于自然排序

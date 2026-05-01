@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SutraListControls from '../components/SutraListControls';
-import { sutras } from '../data/sutras';
+import { getAllSutras } from '../utils/getSutras';
 
-const sutraList = Object.values(sutras);
+const sutraList = await getAllSutras();
 ---
 
 <Layout title="经文列表">

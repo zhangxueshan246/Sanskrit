@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
-import { searchSutras, getAllSutras } from '../utils/searchSutras';
+import { searchSutras } from '../utils/searchSutras';
 import { sortByIdNatural, sortBySource, type SortMode } from '../utils/sortSutras';
 import { formatSutraId } from '../utils/formatSutraId';
-import type { Sutra } from '../data/sutras';
+import { parseWikiLinks } from '../utils/parseWikiLinks';
+import type { Sutra } from '../types/sutra';
 
 interface Props {
   initialSutras: Sutra[];
@@ -19,7 +20,7 @@ export default function SutraListControls({ initialSutras }: Props) {
 
   // 计算搜索和排序结果
   const results = useMemo(() => {
-    let sutras = searchQuery.trim() ? searchSutras(searchQuery) : initialSutras;
+    let sutras = searchQuery.trim() ? searchSutras(searchQuery, initialSutras) : initialSutras;
 
     if (sortMode === 'id-natural') {
       // ID自然排序，不分组
@@ -101,9 +102,9 @@ export default function SutraListControls({ initialSutras }: Props) {
                 className="sutra-card"
               >
                 <h3>{formatSutraId(sutra.id)}</h3>
-                <p>{sutra.text}</p>
+                <p dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.text) }} />
                 {sutra.translation && (
-                  <small style={{ color: '#64748b' }}>{sutra.translation}</small>
+                  <small style={{ color: '#64748b' }} dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.translation) }} />
                 )}
               </a>
             ))
@@ -130,11 +131,9 @@ export default function SutraListControls({ initialSutras }: Props) {
                       className="sutra-card"
                     >
                       <h3>{formatSutraId(sutra.id)}</h3>
-                      <p>{sutra.text}</p>
+                      <p dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.text) }} />
                       {sutra.translation && (
-                        <small style={{ color: '#64748b' }}>
-                          {sutra.translation}
-                        </small>
+                        <small style={{ color: '#64748b' }} dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.translation) }} />
                       )}
                     </a>
                   ))}

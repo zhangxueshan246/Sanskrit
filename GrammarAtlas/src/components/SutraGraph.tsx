@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { sutras, edges, type Sutra } from '../data/sutras';
+import type { Sutra, GraphEdge } from '../types/sutra';
 import { parseWikiLinks } from '../utils/parseWikiLinks';
 import { formatSutraId } from '../utils/formatSutraId';
 import { searchSutras } from '../utils/searchSutras';
@@ -8,6 +8,8 @@ import { searchSutras } from '../utils/searchSutras';
 interface Props {
   width?: number;
   height?: number;
+  sutras: Sutra[];
+  edges: GraphEdge[];
 }
 
 interface Node extends d3.SimulationNodeDatum {
@@ -20,7 +22,7 @@ interface Link extends d3.SimulationLinkDatum<Node> {
   type: string;
 }
 
-export default function SutraGraph({ width = 800, height = 600 }: Props) {
+export default function SutraGraph({ width = 800, height = 600, sutras, edges }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedSutra, setSelectedSutra] = useState<Sutra | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,7 +48,7 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
     svg.call(zoom);
 
     // 准备数据
-    const nodes: Node[] = Object.values(sutras).map(s => ({
+    const nodes: Node[] = sutras.map(s => ({
       id: s.id,
       text: s.text,
       source: s.source
@@ -139,8 +141,8 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
 
     // 点击事件
     node.on("click", (event, d) => {
-      const sutra = sutras[d.id];
-      setSelectedSutra(sutra);
+      const sutra = sutras.find(s => s.id === d.id);
+      if (sutra) setSelectedSutra(sutra);
     });
 
     // 更新位置
@@ -188,7 +190,7 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
     return () => {
       simulation.stop();
     };
-  }, [width, height, searchResults]);
+  }, [width, height, searchResults, sutras, edges]);
 
   // 处理搜索查询变化
   useEffect(() => {
@@ -231,7 +233,7 @@ export default function SutraGraph({ width = 800, height = 600 }: Props) {
         )}
         {searchQuery && (
           <span className="graph-search-count">
-            {searchResults.size} / {Object.keys(sutras).length}
+            {searchResults.size} / {sutras.length}
           </span>
         )}
       </div>

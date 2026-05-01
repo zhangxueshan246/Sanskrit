@@ -151,13 +151,17 @@ main {
   font-size: 1.125rem;
   font-style: italic;
   margin-bottom: 0.75rem;
-  word-break: break-word;
+  word-break: normal;
   overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .sutra-panel .translation {
   color: var(--color-text-muted);
   margin-bottom: 0.75rem;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .sutra-panel .vrtti,
@@ -169,6 +173,9 @@ main {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--color-border);
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .close-btn {
@@ -248,8 +255,9 @@ main {
 .sutra-header .sutra-text {
   font-size: 1.5rem;
   font-style: italic;
-  word-break: break-word;
+  word-break: normal;
   overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .sutra-section {
@@ -258,6 +266,12 @@ main {
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 1rem;
+}
+
+.sutra-section p {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .sutra-section.notes {
@@ -333,8 +347,9 @@ main {
 .sutra-card p {
   font-style: italic;
   color: var(--color-text-muted);
-  word-break: break-word;
+  word-break: normal;
   overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Sutra List Controls */
