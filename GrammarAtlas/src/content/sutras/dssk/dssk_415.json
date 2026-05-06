@@ -1,13 +1,14 @@
 {
   "id": "dssk_415",
   "text": "vṛddhiḥ ñiti ṇiti ca pratyaye. jagāda jagadatuḥ jagaduḥ jagadithaḥ jagadadhuḥ jagada.",
-  "translation": "段书：是三合元音替换，当遇到带 ñ 和 ṇ 符号的语尾时。(例如：) jagāda jagadatuḥ jagaduḥ ……",
-  "vrtti": "段书讲解：\n 例如完成时单数第三人称的语尾是个带 ṇ 符号的，见[[dssk_361]]，在完成时单数第三人称的语尾之前，词干的倒数第二的 a 音发生三合的变化，于是得到 jagāda。依次演示的是完成时双、复数第三人称，第二人称的单、双、复数，除了已交代过的首位辅音的音变之外，无特殊变化。",
+  "translation": "段书：是三合元音替换，当遇到带ñ和ṇ符号的语尾时。(例如：) jagāda jagadatuḥ jagaduḥ ……",
+  "vrtti": "段书讲解：\n 例如完成时单数第三人称的语尾是个带ṇ符号的，见[[dssk_361]]，在完成时单数第三人称的语尾之前，词干的倒数第二的a音发生三合的变化，于是得到jagāda。依次演示的是完成时双、复数第三人称，第二人称的单、双、复数，除了已交代过的首位辅音的音变之外，无特殊变化。",
   "source": "dssk",
   "references": [
     "dssk_361"
   ],
   "parallel": [
     "pan_7.2.116"
-  ]
+  ],
+  "updatedAt": 1777710313289
 }

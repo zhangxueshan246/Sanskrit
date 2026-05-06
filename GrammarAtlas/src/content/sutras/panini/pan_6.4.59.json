@@ -1,8 +1,8 @@
 {
   "id": "pan_6.4.59",
   "text": "kṣiyaḥ.",
-  "translation": "在词根 kṣi 后。",
-  "notes": " [[pan_6.4.58]] 中的 dīrghas 代入这一句。",
+  "translation": "在词根kṣi后。",
+  "notes": " [[pan_6.4.58]] 中的dīrghas代入这一句。",
   "source": "panini",
   "adhikaras": [
     "pan_6.4.58"
@@ -10,5 +10,6 @@
   "references": [],
   "sequence": [
     "pan_6.4.60"
-  ]
+  ],
+  "updatedAt": 1777710212395
 }

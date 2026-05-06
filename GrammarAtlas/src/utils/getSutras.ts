@@ -25,11 +25,6 @@ async function loadAllSutras(): Promise<Sutra[]> {
           try {
             const content = fs.readFileSync(fullPath, 'utf-8');
             const sutra = JSON.parse(content) as Sutra;
-            // Auto-fill updatedAt from file modification time if not present
-            if (!sutra.updatedAt) {
-              const stats = fs.statSync(fullPath);
-              sutra.updatedAt = stats.mtimeMs;
-            }
             sutras.push(sutra);
           } catch (e) {
             console.error(`[getSutras] Error parsing ${fullPath}:`, e);
@@ -59,11 +54,6 @@ async function loadAllSutras(): Promise<Sutra[]> {
 
 export async function getAllSutras(): Promise<Sutra[]> {
   return loadAllSutras();
-}
-
-export async function getSutraById(id: string): Promise<Sutra | undefined> {
-  const sutras = await loadAllSutras();
-  return sutras.find((s) => s.id === id);
 }
 
 export async function generateEdges(): Promise<GraphEdge[]> {
@@ -108,13 +98,4 @@ export async function generateEdges(): Promise<GraphEdge[]> {
   }
 
   return edges;
-}
-
-export async function getSutrasRecord(): Promise<Record<string, Sutra>> {
-  const sutras = await getAllSutras();
-  const record: Record<string, Sutra> = {};
-  for (const sutra of sutras) {
-    record[sutra.id] = sutra;
-  }
-  return record;
 }

@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "validate": "tsx src/utils/validateReferences.ts"
+    "validate": "tsx src/utils/validateReferences.ts",
+    "stamp": "tsx src/utils/stampSutras.ts"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.4",

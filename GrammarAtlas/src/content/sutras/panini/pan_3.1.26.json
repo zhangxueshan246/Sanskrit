@@ -2,7 +2,7 @@
   "id": "pan_3.1.26",
   "text": "hetumati ca.",
   "translation": "段书：遇到果时，也是。",
-  "notes": "也要加 ṇic，继承自[[pan_3.1.25]]。",
+  "notes": "也要加ṇic，继承自[[pan_3.1.25]]。",
   "source": "panini",
   "adhikaras": [
     "pan_3.1.25"
@@ -10,5 +10,6 @@
   "references": [],
   "parallel": [
     "dssk_525"
-  ]
+  ],
+  "updatedAt": 1777710313291
 }

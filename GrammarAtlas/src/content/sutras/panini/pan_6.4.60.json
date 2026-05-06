@@ -2,12 +2,13 @@
   "id": "pan_6.4.60",
   "text": "niṣṭhāyām aṇyadarthe.",
   "translation": "成就词缀前表主动含义时。",
-  "notes": "niṣṭhā：成就词缀。[[pan_1.1.26]] \n aṇyadarthe：当它的意义不是 ṇyat 词缀的意义时（ṇyat 词缀专门表示被动 karmaṇi 或无人称状态 bhāve）。也就是说，当它表示主动（kartari）意义时。",
+  "notes": "niṣṭhā：成就词缀。[[pan_1.1.26]] \n aṇyadarthe：当它的意义不是ṇyat词缀的意义时（ṇyat词缀专门表示被动karmaṇi或无人称状态bhāve）。也就是说，当它表示主动（kartari）意义时。",
   "source": "panini",
   "adhikaras": [
     "pan_6.4.59"
   ],
   "references": [
     "pan_1.1.26"
-  ]
+  ],
+  "updatedAt": 1777710313292
 }

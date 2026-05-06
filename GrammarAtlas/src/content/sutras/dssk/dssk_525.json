@@ -1,8 +1,8 @@
 {
   "id": "dssk_525",
   "text": "prayojakanyāpāre preraṇādau vācye dhātor ṇic. bhavantaṃ prerayati bhāvayati.",
-  "translation": "段书：当役使者的作业被表达时，如差遣等，在词根后加 ṇic。 bhavantaṃ prerayati = bhāvayati (使成为)。",
-  "vrtti": "段书讲解：\n hetumat：相对于因的“果”。上一句提到，致使动词的主语是因，这个因导致的果是指因引起的行为。《迦湿伽》对这个词的解释十分明确：hetuḥ svatantrasya kartuḥ prayojakaḥ, tadīyo vyāpāraḥ preṣaṇādilakṣaṇo hetumān， “因是指对自主的行为者的役使者，他的以差遣为特征的作业是为果。”\n 这句经文上接[[dssk_515]]，同样在说明词缀 ṇic 的用途。这句经文说明，于词根后加 ṇic，以表达役使这层意义。ṇic 是构成致使动词的词缀。ṇ 符号表示，与它相逢的元音变为三合元音，参阅[[dssk_162]]。其它变化如第十类动词。",
+  "translation": "段书：当役使者的作业被表达时，如差遣等，在词根后加ṇic。 bhavantaṃ prerayati = bhāvayati (使成为)。",
+  "vrtti": "段书讲解：\n hetumat：相对于因的“果”。上一句提到，致使动词的主语是因，这个因导致的果是指因引起的行为。《迦湿伽》对这个词的解释十分明确：hetuḥ svatantrasya kartuḥ prayojakaḥ, tadīyo vyāpāraḥ preṣaṇādilakṣaṇo hetumān， “因是指对自主的行为者的役使者，他的以差遣为特征的作业是为果。”\n 这句经文上接[[dssk_515]]，同样在说明词缀ṇic的用途。这句经文说明，于词根后加ṇic，以表达役使这层意义。ṇic是构成致使动词的词缀。ṇ符号表示，与它相逢的元音变为三合元音，参阅[[dssk_162]]。其它变化如第十类动词。",
   "source": "dssk",
   "references": [
     "dssk_162",
@@ -10,5 +10,6 @@
   ],
   "parallel": [
     "pan_3.1.26"
-  ]
+  ],
+  "updatedAt": 1777710313289
 }

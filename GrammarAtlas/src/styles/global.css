@@ -21,6 +21,7 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+  text-autospace: ideograph-alpha;
 }
 
 /* Layout */

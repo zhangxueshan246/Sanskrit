@@ -11,7 +11,6 @@
 - **搜索**：Fuse.js 模糊搜索
 - **部署**：GitHub Pages
 
-**最近更新**（2026-05-01 下午）：清理代码、改进文本换行系统。`updatedAt` 自动读取文件修改时间。支持 `|` 和 `-` 标记换行点。
 
 ## 本地运行
 
@@ -61,7 +60,7 @@ npm run dev
 | `parallel` | array | ✗ | 其他文献的对应经文 |
 | `adhikaras` | array | ✗ | 管辖此经的 adhikāra |
 | `sequence` | array | ✗ | 后继经文（自然序列关系） |
-| `updatedAt` | number | ✗ | 时间戳（毫秒），省略则自动读取文件修改时间 |
+| `updatedAt` | number | ✗ | 时间戳（毫秒），**不要手动填写**，提交前运行 `npm run stamp` 自动补全 |
 
 **添加步骤**：
 
@@ -82,13 +81,18 @@ npm run dev
    npm run validate
    ```
 
-4. **本地预览** — 查看效果
+4. **打上时间戳** — 确保 `updatedAt` 字段正确（GitHub Pages 不保留文件时间）
+   ```bash
+   npm run stamp
+   ```
+
+5. **本地预览** — 查看效果
    ```bash
    npm run dev
    # 访问 http://localhost:4321/Sanskrit/
    ```
 
-5. **提交推送** — GitHub Actions 自动部署
+6. **提交推送** — GitHub Actions 自动部署
    ```bash
    git add src/content/sutras/
    git commit -m "Add new sutra: pan_1.1.1"
@@ -215,14 +219,17 @@ npm run validate
 
 ### 更新流程
 ```bash
-# 1. 编辑 src/data/sutras.ts（或其他文件）
+# 1. 编辑或新建 src/content/sutras/{source}/{id}.json
 cd GrammarAtlas
 
-# 2. 验证与本地测试（必须！）
+# 2. 验证与打时间戳（必须！）
 npm run validate     # 检查 wiki 链接和 references 一致性
+npm run stamp        # 用文件系统修改时间更新所有文件的 updatedAt
+
+# 3. 本地预览
 npm run dev         # 本地预览 http://localhost:4321/Sanskrit/
 
-# 3. 返回项目根并提交
+# 4. 返回项目根并提交
 cd ..
 git add GrammarAtlas/
 git commit -m "简明的描述"  # 例：Add 5 new DSSK sutras
@@ -233,6 +240,7 @@ git push origin master     # 自动触发部署
 | 命令 | 用途 |
 |------|------|
 | `npm run dev` | 启动本地开发服务器 (http://localhost:4321/Sanskrit/) |
+| `npm run stamp` | 给新经文 JSON 补全 `updatedAt` 时间戳（已有的不覆盖） |
 | `npm run validate` | 检查所有经文的 wiki 链接和 references 一致性 |
 | `npm run build` | 生产构建（生成静态 HTML） |
 | `npm run preview` | 预览构建后的网站 |
@@ -243,8 +251,9 @@ git push origin master     # 自动触发部署
 # 1. 新增经文
 # 编辑 src/content/sutras/{source}/{id}.json
 
-# 2. 验证
+# 2. 验证 + 打时间戳
 npm run validate     # 应该看到 "✅ 所有经文引用检查通过！"
+npm run stamp        # 给新文件补全 updatedAt
 
 # 3. 本地预览
 npm run dev
@@ -257,7 +266,7 @@ git push origin master   # 自动部署到 GitHub Pages
 ```
 
 ⚠️ **重要提示**
-- 每次编辑经文后**必须运行** `npm run validate`
+- 每次新增或修改经文后**必须运行** `npm run validate` 和 `npm run stamp`
 - **提交前本地测试** `npm run dev` 查看效果
 - 避免频繁小提交，验证通过后再 push
 
@@ -276,15 +285,14 @@ git push origin master   # 自动部署到 GitHub Pages
 ```
 GrammarAtlas/
 ├── src/
-│   ├── content/                    ← 经文数据（新：JSON格式）
+│   ├── content/                    ← 经文数据（JSON格式）
 │   │   └── sutras/
 │   │       ├── panini/             ← Pāṇini sutras
 │   │       ├── dssk/               ← DSSK sutras
 │   │       ├── katantra/           ← Kātantra sutras
 │   │       └── jkv/                ← Kāśikāvṛṭti sutras
-│   ├── content.config.ts           ← Zod schema 定义（新）
 │   ├── types/
-│   │   └── sutra.ts                ← TypeScript 类型定义（新）
+│   │   └── sutra.ts                ← TypeScript 类型定义
 │   ├── data/                       ← （已删除，改用 content/）
 │   ├── components/
 │   │   ├── SutraGraph.tsx          ← D3.js 图谱组件
@@ -295,8 +303,9 @@ GrammarAtlas/
 │   │   ├── sutras.astro            ← 列表页面
 │   │   └── sutra/[id].astro        ← 经文详情页
 │   ├── utils/
-│   │   ├── getSutras.ts            ← 数据访问层（新）
-│   │   ├── validateReferences.ts   ← 验证脚本（已更新）
+│   │   ├── getSutras.ts            ← 数据访问层
+│   │   ├── stampSutras.ts          ← 给 JSON 补全 updatedAt 时间戳
+│   │   ├── validateReferences.ts   ← 验证脚本
 │   │   ├── searchSutras.ts         ← Fuse.js 搜索
 │   │   ├── sortSutras.ts           ← 排序工具
 │   │   ├── formatSutraId.ts        ← ID 格式化
