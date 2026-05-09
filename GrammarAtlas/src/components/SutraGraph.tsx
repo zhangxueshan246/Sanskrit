@@ -195,7 +195,7 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
   // 处理搜索查询变化
   useEffect(() => {
     if (searchQuery.trim()) {
-      const results = searchSutras(searchQuery);
+      const results = searchSutras(searchQuery, sutras);
       setSearchResults(new Set(results.map(s => s.id)));
     } else {
       setSearchResults(new Set());
