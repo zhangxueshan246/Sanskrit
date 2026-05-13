@@ -1,0 +1,320 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainfont{Arial} %设置主字体
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}             %输出天城体
+%\newfontfamily\sanskritfont[Mapping=tex-text]{Times New Roman}              %输出转写
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}} %输出天城体
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}  %输出天城体和转写
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter}
+\graphicspath{{pic/}}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\newenvironment{indentlist}
+  {\begin{list}{}{\setlength{\leftmargin}{2em}\setlength{\itemsep}{0.5em}}}
+  {\end{list}}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\mbox{\textcolor{Plum}{#1}}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+\newcommand{\sktsentence}[1]{\textcolor{MidnightBlue}{\skt{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+\newcommand{\dicturl}[2]{\href{#1}{\mbox{\texttt{#2}}}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{39-40. 代词五·不规则名词}
+\author[张雪杉]{文学院~~张雪杉\\zhangxueshan@sdnu.edu.cn}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \small
+  \tableofcontents
+\end{frame}
+
+\section{上节作业}
+
+\begin{frame}{《薄伽梵歌》1.41--44}
+  \footnotesize{
+    \begin{verse}
+      \skt{adharmābhibhavātkṛṣṇa praduṣyanti kulastriyaḥ ।}\\
+      \mbox{\skt{strīṣu duṣṭāsu vārṣṇeya jāyate varṇasaṃkaraḥ ।। 1-41 ।।}}\\
+      \skt{saṃkaro narakāyaiva kulaghnānāṃ kulasya ca ।}\\
+      \mbox{\skt{patanti pitaro hyeṣāṃ luptapiṇḍodakakriyāḥ ।। 1-42 ।।}}\\
+      \skt{doṣairetaiḥ kulaghnānāṃ varṇasaṃkarakārakaiḥ ।}\\
+      \mbox{\skt{utsādyante jātidharmāḥ kuladharmāśca śāśvatāḥ ।। 1-43 ।।}}\\
+      \skt{utsannakuladharmāṇāṃ manuṣyāṇāṃ janārdana ।}\\
+      \mbox{\skt{narake 'niyataṃ vāso bhavatītyanuśuśruma ।। 1-44 ।।}}\\
+    \end{verse}
+  }
+\end{frame}
+
+\begin{frame}{《薄伽梵歌》1.45--47}
+  \footnotesize{
+    \begin{verse}
+      \skt{aho bata mahatpāpaṃ kartuṃ vyavasitā vayam ।}\\
+      \mbox{\skt{yadrājyasukhalobhena hantuṃ svajanamudyatāḥ ।। 1-45 ।।}}\\
+      \skt{yadi māmapratīkāramaśastraṃ śastrapāṇayaḥ ।}\\
+      \mbox{\skt{dhārtarāṣṭrā raṇe hanyustanme kṣemataraṃ bhavet ।। 1-46 ।।}}\\
+      \skt{evamuktvārjunaḥ saṃkhye rathopastha upāviśat ।}\\
+      \mbox{\skt{visṛjya saśaraṃ cāpaṃ śokasaṃvignamānasaḥ ।। 1-47 ।।}}\\
+    \end{verse}
+  }
+\end{frame}
+
+\begin{frame}{《薄伽梵歌》1.41--47}
+  \small
+~~~~~~一旦非法滋生，族中妇女堕落；一旦妇女堕落，种姓也就混乱。（41）种姓混乱导致家族和毁灭家族者堕入地狱；祖先失去供品饭和水，也跟着遭殃，纷纷坠落。​（42）这些人毁灭家族，造成种姓混乱；这些人犯下罪过，破坏宗法和种姓法。​（43）我们已经听说，折磨敌人者啊！毁弃宗法的人，注定住进地狱。​（44）由于贪图王国，贪图幸福，天哪！我们决心犯大罪，准备杀害自己人。​（45）我宁可手无寸铁，在战斗中不抵抗，让持国的儿子们，手持武器杀死我。​”​（46）阿周那说完这些话，心中充满忧伤，他放下弓和箭，坐在车座上。​（47）
+\end{frame}
+
+\section[asau/adas]{代词五：asau/adas-}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{概述}
+  \small
+  \begin{itemize}
+    \item \nounstem{asau}/\nounstem{adas} "那个（远处的）"
+    \item 与 \nounstem{ayam}/\nounstem{idam} "这个（近处的）"对比\\
+    \notsoimportant{（第20章）}
+  \end{itemize}
+    \begin{NiceTabular}{cccc}
+    \CodeBefore
+      %\rectanglecolor{light-gray}{3-2}{5-2}
+      %\rectanglecolor{light-gray}{7-2}{9-2}
+    \Body % 7 columns
+    %&   \multicolumn{3}{c}{现在时}  \\
+    最近 & 近  & 远 & 最远  \\
+    \fullpada{eṣaḥ/etad} & \fullpada{ayam/idam} & \fullpada{saḥ/tad} & \fullpada{asau/adas} \\
+  \end{NiceTabular} 
+  \begin{itemize}  
+    \item 三个词干：\\
+    \important{amu-} 基本词干\\
+    \important{amī-} 阳性复数专用\\
+    \important{amū-} 双数和阴性复数
+  \end{itemize}
+\end{frame}
+
+\subsection{阳性和中性}
+\begin{frame}{asau/adas- 阳性和中性变格}
+  \footnotesize
+  \centering
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    \Block{1-4}{\important{阳性}} & & & \\
+    & \important{单数} & \important{双数} & \important{复数} \\
+    主格 & \fullpada{asau} & \Block{2-1}{\fullpada{amū}} & \fullpada{amī} \\
+    业格 & \fullpada{amum} &  & \fullpada{amūn} \\
+    具格 & \fullpada{amunā} & \Block{3-1}{\fullpada{amūbhyām}} & \fullpada{amībhiḥ} \\
+    为格 & \fullpada{amuṣmai} & & \Block{2-1}{\fullpada{amībhyaḥ}} \\
+    从格 & \fullpada{amuṣmāt} & &  \\
+    属格 & \fullpada{amuṣya} & \Block{2-1}{\fullpada{amuyoḥ}} & \fullpada{amīṣām} \\
+    依格 & \fullpada{amuṣmin} & & \fullpada{amīṣu} \\
+    \Block{1-4}{\important{中性}} & & & \\
+    主/业格 & \fullpada{adaḥ} & \fullpada{amū} & \fullpada{amūni} \\
+    其他 & \Block{1-3}{同阳性} & & \\
+  \end{NiceTabular}
+\end{frame}
+
+\subsection{阴性}
+\begin{frame}{asau/adas- 阴性变格}
+  \small
+  \centering
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & \important{单数} & \important{双数} & \important{复数} \\
+    主格 & \fullpada{asau} & \Block{2-1}{\fullpada{amū}} & \Block{2-1}{\fullpada{amūḥ}} \\
+    业格 & \fullpada{amūm} &   &   \\
+    具格 & \fullpada{amuyā} & \Block{3-1}{\fullpada{amūbhyām}} & \fullpada{amūbhiḥ} \\
+    为格 & \fullpada{amuṣyai} & & \Block{2-1}{\fullpada{amūbhyaḥ}} \\
+    从格 & \Block{2-1}{\fullpada{amuṣyāḥ}} & &  \\
+    属格 &   & \Block{2-1}{\fullpada{amuyoḥ}} & \fullpada{amūṣām} \\
+    依格 & \fullpada{amuṣyām} & & \fullpada{amūṣu} \\
+  \end{NiceTabular}
+\end{frame}
+
+
+\section{不规则名词}
+\begin{frame}{\insertsection}
+  \small
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{概述}
+  \small
+  \begin{itemize}
+    \item 四个不规则名词：\\
+    \nounstem{go} (m./f.) '牛'\\
+    \nounstem{dyo} (f.) '天空'\\
+    \nounstem{path} (m.) '路'\\
+    \nounstem{puṃs} (m.) '人'
+    \item 共同特点：\important{区分强弱语干}\\
+    强语干：主/呼/业格单双，主/呼格复\\
+    弱语干：其他格
+  \end{itemize}
+\end{frame}
+
+\subsection{go- 牛}
+\begin{frame}{go- (m./f.) '牛'}
+  \footnotesize
+  \begin{itemize}
+    \item 强语干三合：\nounstem{gau}/\nounstem{gāv}\\
+    \item 弱语干二合：\nounstem{go}/\nounstem{gav}
+    \item 业格单数 \fullpada{gām} 和复数 \fullpada{gāḥ} 特殊
+  \end{itemize}
+  \centering
+  \resizebox{0.7\textwidth}{!}{%
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & \important{单数} & \important{双数} & \important{复数} \\
+    主/呼格 & \cellcolor{light-gray}\fullpada{gauḥ} & \cellcolor{light-gray}\Block{2-1}{\fullpada{gāvau}} & \cellcolor{light-gray}\fullpada{gāvaḥ} \\
+    业格 & \cellcolor{light-gray}\fullpada{gām} & \cellcolor{light-gray}  & \fullpada{gāḥ} \\
+    具格 & \fullpada{gavā} & \Block{3-1}{\fullpada{gobhyām}} & \fullpada{gobhiḥ} \\
+    为格 & \fullpada{gave} &   & \Block{2-1}{\fullpada{gobhyaḥ}} \\
+    从格 & \Block{2-1}{\fullpada{goḥ}} &   &  \\    
+    属格 &  & \Block{2-1}{\fullpada{gavoḥ}} & \fullpada{gavām} \\
+    依格 & \fullpada{gavi} &   & \fullpada{goṣu} \\
+  \end{NiceTabular}%
+  }
+\end{frame}
+
+\subsection{dyo- 天空}
+\begin{frame}{dyo- (f.) '天空'}
+  \footnotesize
+  \begin{itemize}
+    \item 有两种变化方式，第二种更常用\\
+    \item 一种类似 \nounstem{go}，强语干三合，弱语干二合
+    \item 一种用零级词干，元音前 \nounstem{div}，辅音前 \nounstem{dyu}
+  \end{itemize}
+  \centering
+  \resizebox{1\textwidth}{!}{%
+  \begin{NiceTabular}{|c|c|c|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & \important{单数} & \important{双数} & \important{复数} & \important{单数} & \important{双数} & \important{复数} \\
+    主/呼 & \cellcolor{light-gray}\fullpada{dyauḥ} & \cellcolor{light-gray}\Block{2-1}{\fullpada{dyāvau}} & \cellcolor{light-gray}\fullpada{dyāvaḥ} & \cellcolor{light-gray}\fullpada{dyauḥ} & \Block{2-1}{\fullpada{divau}} & \fullpada{divaḥ}  \\
+    业格 & \cellcolor{light-gray}\fullpada{dyām} & \cellcolor{light-gray}  & \fullpada{dyūn} & \fullpada{divam} &   & \fullpada{divaḥ} \\
+    具格 & \fullpada{dyavā} & \Block{3-1}{\fullpada{dyobhyām}} & \fullpada{dyobhiḥ} & \fullpada{divā} & \Block{3-1}{\fullpada{dyubhyām}} & \fullpada{dyubhiḥ}\\
+    为格 & \fullpada{dyave} &   & \Block{2-1}{\fullpada{dyobhyaḥ}} & \fullpada{dive} &   & \Block{2-1}{\fullpada{dyubhyaḥ}}\\
+    从格 & \Block{2-1}{\fullpada{dyoḥ}} &   &  & \Block{2-1}{\fullpada{divaḥ}} &   &  \\    
+    属格 &  & \Block{2-1}{\fullpada{dyavoḥ}} & \fullpada{dyavām} &  & \Block{2-1}{\fullpada{divoḥ}} & \fullpada{divām}\\
+    依格 & \fullpada{dyavi} &   & \fullpada{dyoṣu} & \fullpada{divi} &   & \fullpada{dyuṣu}\\
+  \end{NiceTabular}%
+  }
+\end{frame}
+
+\subsection{path- 路}
+\begin{frame}{path- (m.) '路'}
+  \footnotesize
+  \begin{itemize}
+    \item 强语干加鼻音：\nounstem{panth} （多加 \pratyaya{-ān-}）\\
+    \item 弱语干无鼻音： \nounstem{path}，辅音语尾前加 \pratyaya{-i-}
+  \end{itemize}
+    \centering
+  \resizebox{0.85\textwidth}{!}{%
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & \important{单数} & \important{双数} & \important{复数} \\
+    主/呼格 & \cellcolor{light-gray}\fullpada{panthāḥ} & \cellcolor{light-gray}\Block{2-1}{\fullpada{panthānau}} & \cellcolor{light-gray}\fullpada{panthānaḥ} \\
+    业格 & \cellcolor{light-gray}\fullpada{panthānam} & \cellcolor{light-gray} & \fullpada{pathaḥ} \\
+    具格 & \fullpada{pathā} & \Block{3-1}{\fullpada{pathibhyām}} & \fullpada{pathibhiḥ} \\
+    为格 & \fullpada{pathe} &   & \Block{2-1}{\fullpada{pathibhyaḥ}} \\
+    从格 & \Block{2-1}{\fullpada{pathaḥ}} &   &  \\
+    属格 &   & \Block{2-1}{\fullpada{pathoḥ}} & \fullpada{pathām} \\
+    依格 & \fullpada{pathi} &  & \fullpada{pathiṣu} \\
+  \end{NiceTabular}%
+  }
+
+\end{frame}
+
+\subsection{puṃs- 人}
+\begin{frame}{puṃs- (m.) '人'}
+  \footnotesize
+  \begin{itemize}
+    \item 强语干： \nounstem{pumāṃs}，弱语干 \nounstem{puṃs}/辅音前 \nounstem{pum}
+    \item 呼格单数有两种形式 
+  \end{itemize}
+  \centering
+  \resizebox{0.85\textwidth}{!}{%
+  \begin{NiceTabular}{|c|c|c|c|}[hvlines, rules/width=0.3pt, rules/color=gray]
+    & \important{单数} & \important{双数} & \important{复数} \\
+    主格 & \cellcolor{light-gray}\fullpada{pumān} & \cellcolor{light-gray}\Block{3-1}{\fullpada{pumāṃsau}} & \cellcolor{light-gray}\Block{2-1}{\fullpada{pumāṃsaḥ}} \\
+    呼格 & \cellcolor{light-gray}\fullpada{puman/pumaḥ} & \cellcolor{light-gray} & \cellcolor{light-gray}  \\
+    业格 & \cellcolor{light-gray}\fullpada{pumāṃsam} & \cellcolor{light-gray} & \fullpada{puṃsaḥ} \\
+    具格 & \fullpada{puṃsā} & \Block{3-1}{\fullpada{pumbhyām}} & \fullpada{pumbhiḥ} \\
+    为格 & \fullpada{puṃse} &  & \Block{2-1}{\fullpada{pumbhyaḥ}} \\
+    从格 & \Block{2-1}{\fullpada{puṃsaḥ}} &  &  \\
+    属格 &   & \Block{2-1}{\fullpada{puṃsoḥ}} & \fullpada{puṃsām} \\
+    依格 & \fullpada{puṃsi} &   & \fullpada{puṃsu} \\
+  \end{NiceTabular}%
+  }
+\end{frame}
+
+
+
+
+\begin{frame}{The End}
+  \begin{itemize}
+    \item 还想听啥？或者再见？
+  \end{itemize}
+\end{frame}
+
+\end{document}
