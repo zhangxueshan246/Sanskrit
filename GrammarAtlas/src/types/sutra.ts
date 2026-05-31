@@ -2,10 +2,11 @@ export interface Sutra {
   id: string;
   text: string;
   translation?: string;
+  tibetan?: string;
   vrtti?: string;
   notes?: string;
   adhikaras?: string[];
-  references: string[];
+  references?: string[];
   parallel?: string[];
   sequence?: string[];
   source: 'panini' | 'katantra' | 'jkv' | 'dssk' | 'other';

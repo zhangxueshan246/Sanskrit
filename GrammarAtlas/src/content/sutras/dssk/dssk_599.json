@@ -1,0 +1,17 @@
+{
+  "id": "dssk_599",
+  "text": "samāsaśāstre prathamānirdiṣṭam upasarjanam syāt.",
+  "translation": "段书：于有关复合词的教条中，第一格所指示的是附属词。",
+  "vrtti": "段书讲解：\n upasarjanam：这是本句经文引入的一个新的术语，意思是“附属词，从属词，定语”。当两个词构成复合词时，其中一个失去它原来的独立特征，作为另一个词的修饰语、定语，这个词就是“附属词”。与upasarjanam对应的是pradhāna（主词）。在《波你尼经》中，凡是在复合词作领句的各条经文中，第一格指示出的词类是附属词。在上一句经文[[dssk_598]]中，第一格所指示出的是avyayam不变词，按照这一条规则，也就是说，凡是不变词皆为附属词。",
+  "source": "dssk",
+  "parallel": [
+    "pan_1.2.43"
+  ],
+  "references": [
+    "dssk_598"
+  ],
+  "sequence": [
+    "dssk_600"
+  ],
+  "updatedAt": 1780214991657
+}

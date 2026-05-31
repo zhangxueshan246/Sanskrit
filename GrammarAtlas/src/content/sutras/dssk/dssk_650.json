@@ -1,0 +1,16 @@
+{
+  "id": "dssk_650",
+  "text": "anekaṃ prathamāntam anyapadārthe vartamāne vā samasyate sa bahuvrīhiḥ. prāptam udakaṃ yaṃ saḥ prāptodako grāmaḥ. ūḍharatho 'naḍvān. upahṛtapaśū rudraḥ. uddhṛtaudanā sthālī. pītāmbaro hariḥ. vīrapuruṣo grāmaḥ.",
+  "source": "dssk",
+  "references": [
+    "dssk_613"
+  ],
+  "updatedAt": 1780214866623,
+  "translation": "段书：两个以上的词以第一格收尾，表达的是另一个词的意义，可以组成复合词，成为多财释。(例如：)prāptam udakaṃ yaṃ saḥ prāptodako grāmaḥ. ūḍharatho 'naḍvān. upahṛtapaśū rudraḥ. uddhṛtaudanā sthālī. pītāmbaro hariḥ. vīrapuruṣo grāmaḥ.",
+  "vrtti": "段书讲解：\n现在开始进入对多财释复合词的介绍。这句经文的前一句是：\nśeṣo bahuvrīhiḥ. [[pan_2.2.23]]\n其余的是多财释。\n意思是，在介绍以上复合词时没有包括进去的格尾，是余下的。没有讲到的仅是第一格尾，因此这一句经文强调，两个以上的词，皆是以第一格收尾的，可以组成复合词，但这样的复合词是为了修饰另一个词，这就是多财释复合词的特点。《迦湿伽》中还有一句说明[[jkv_2.2.23]]，认为多财释复合词修饰的是第一格以外的其余各格，以下的例句也说明了这一点，例如：\nprāptam udakaṃ yaṃ saḥ prāptodako grāmaḥ “水到达的那个村庄是得到水的村庄”，这个例句演示了对多财释复合词的拆分法。prāptam（到达）、udakam（水）皆为第一格，yaṃ代表另一个实际应被修饰的以第二格收尾的词。prāptam udakaṃ组成复合词 prāptodakaḥ，为了修饰第三者grāmaḥ（村庄）。至于加了过去被动分词词缀的prāptam一词为什么会获得主动的意义，请参看[[dssk_613]]条之下的说明。\nūḍharatho 'naḍvān“拉车的牛”。“牛”是前面多财释复合词修饰的对象，这一组词拆开以后是：ūḍho ratho yena。yena代表被修饰的第三个词，是第三格。\nupahṛtapaśū rudraḥ “献给鲁达罗神的牺牲”。前面的多财释复合词拆开后是：upahṛtaḥ paśū yasmai。yasmai代表被修饰的第三个词，是第四格。\nuddhṛtaudanā sthālī “被取出了食物的锅”。前面的多财释复合词拆开后是：uddhṛtaḥ odanaḥ yasyāḥ。yasyāḥ代表被修饰的第三个词，是阴性第五格。\npītāmbaro hariḥ “身穿黄色衣服的诃利”。前面的多财释复合词拆开后是：pitam ambaram yasya。yasya代表被修饰的第三个词，是第六格。\nvīrapuruṣo grāmaḥ “英雄人民所在的村庄”。前面的多财释复合词拆开后是：vīrāḥ puruṣā yasmin。yasmin代表被修饰的第三个词，是第七格。\n以上的例词说明多财释复合词可以修饰从第二格到第七格意义上的任何词。在这些例词中，构成多财释复合词的两个词在拆分开后皆处于一致的第一格。因为是一致的，这类多财释复合词又被称为“语法关系一致的多财释”，或“同格词多财释”——bahuvrīhiḥ samānādhikaraṇānām.",
+  "draft": "\n161. prathamārtham ekam varjayitvā sarveṣu vibhaktyartheṣu bahuvrlhir bhavati，\n“多财释表示的是除了第一格尾的意义以外的所有格尾的意义。”\n",
+  "parallel": [
+    "pan_2.2.24",
+    "pan_2.2.23"
+  ]
+}

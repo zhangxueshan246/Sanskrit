@@ -101,6 +101,16 @@ function getAllAdhikaras(
 }
 
 /**
+ * 获取 jkv 对应的 pan 经文 id
+ * jkv 是 pan 的注释，相同编号的 pan 相当于 jkv 的 adhikara
+ * 例如: jkv_1.1.1 -> pan_1.1.1
+ */
+function getCorrespondingPanId(jkvId: string): string | null {
+  if (!jkvId.startsWith('jkv_')) return null;
+  return jkvId.replace(/^jkv_/, 'pan_');
+}
+
+/**
  * 验证单个经文的引用一致性
  */
 function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationResult {
@@ -136,6 +146,22 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
 
   for (const link of allLinksInContent) {
     if (!allowedIds.has(link)) {
+      // 规则1: 检查 jkv 对应的 pan 是否在 allowedIds 中
+      const correspondingPan = getCorrespondingPanId(link);
+      if (correspondingPan && allowedIds.has(correspondingPan)) {
+        continue;
+      }
+
+      // 规则2: 检查被引用经文的 parallel 是否有任何一个在 allowedIds 中
+      // 如果引用了某经文的 parallel，就相当于引用了该经文本身
+      const linkedSutra = sutrasMap.get(link);
+      if (linkedSutra && linkedSutra.parallel && linkedSutra.parallel.length > 0) {
+        const hasParallelInAllowed = linkedSutra.parallel.some(p => allowedIds.has(p));
+        if (hasParallelInAllowed) {
+          continue;
+        }
+      }
+
       result.errors.push(`文本中包含 [[${link}]] 但不在 references、parallel、adhikaras 或 sequence 中`);
       result.isValid = false;
     }
@@ -148,11 +174,48 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
     }
   }
 
+  for (const parId of (sutra.parallel || [])) {
+    if (!existingSutraIds.includes(parId)) {
+      result.errors.push(`parallel 包含不存在的经文 [[${parId}]]`);
+      result.isValid = false;
+    }
+  }
+
+  for (const seqId of (sutra.sequence || [])) {
+    if (!existingSutraIds.includes(seqId)) {
+      result.errors.push(`sequence 包含不存在的经文 [[${seqId}]]`);
+      result.isValid = false;
+    }
+  }
+
+  for (const adhId of (sutra.adhikaras || [])) {
+    if (!existingSutraIds.includes(adhId)) {
+      result.errors.push(`adhikaras 包含不存在的经文 [[${adhId}]]`);
+      result.isValid = false;
+    }
+  }
+
   for (const refId of referencesArray) {
     if (!allLinksInContent.has(refId)) {
       result.errors.push(`references 中的 [[${refId}]] 没有在文本任何字段中提及（孤立引用）`);
       result.isValid = false;
     }
+  }
+
+  const hasContent = !!(sutra.translation?.trim() || sutra.vrtti?.trim() || sutra.notes?.trim());
+  if (!hasContent) {
+    result.errors.push(`translation、vrtti、notes 三个字段均为空，经文内容未完成`);
+    result.isValid = false;
+  }
+
+  const hasSequence = sutra.sequence && sutra.sequence.length > 0;
+  if (!hasSequence) {
+    result.warnings.push(`sequence 字段为空，建议补充`);
+  }
+
+  const hasDraft = sutra.draft && sutra.draft.trim().length > 0;
+  if (hasDraft) {
+    result.warnings.push(`draft 字段不为空，可能有内容未编辑完成`);
   }
 
   return result;
@@ -177,7 +240,14 @@ async function validateAllSutras(): Promise<void> {
 
     if (result.isValid) {
       totalValid++;
-      console.log(`✓ ${sutra.id}: 引用有效`);
+      if (result.warnings.length > 0) {
+        console.log(`✓ ${sutra.id}: 引用有效`);
+        for (const warning of result.warnings) {
+          console.log(`  ⚠ ${warning}`);
+        }
+      } else {
+        console.log(`✓ ${sutra.id}: 引用有效`);
+      }
     } else {
       totalInvalid++;
       console.log(`✗ ${sutra.id}:`);

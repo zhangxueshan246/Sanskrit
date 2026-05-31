@@ -60,20 +60,28 @@ export async function generateEdges(): Promise<GraphEdge[]> {
   const sutras = await getAllSutras();
   const sutraMap = new Map(sutras.map((s) => [s.id, s]));
   const edges: GraphEdge[] = [];
+  const parallelPairs = new Set<string>(); // 用于去重 parallel 边
 
   for (const sutra of sutras) {
     // Reference edges
-    for (const ref of sutra.references) {
-      if (sutraMap.has(ref)) {
-        edges.push({ from: sutra.id, to: ref, type: 'reference' });
+    if (sutra.references) {
+      for (const ref of sutra.references) {
+        if (sutraMap.has(ref)) {
+          edges.push({ from: sutra.id, to: ref, type: 'reference' });
+        }
       }
     }
 
-    // Parallel edges
+    // Parallel edges (去重，确保每对只有一条边)
     if (sutra.parallel) {
       for (const par of sutra.parallel) {
         if (sutraMap.has(par)) {
-          edges.push({ from: sutra.id, to: par, type: 'parallel' });
+          // 用字典序生成唯一 key，避免重复
+          const pairKey = [sutra.id, par].sort().join('|');
+          if (!parallelPairs.has(pairKey)) {
+            parallelPairs.add(pairKey);
+            edges.push({ from: sutra.id, to: par, type: 'parallel' });
+          }
         }
       }
     }

@@ -47,6 +47,28 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
       });
     svg.call(zoom);
 
+    // 定义箭头标记（为每种类型创建不同颜色的箭头）
+    const defs = svg.append("defs");
+
+    Object.entries({
+      reference: "#6b7280",  // 深灰
+      parallel: "#f59e0b",   // 橙色
+      adhikara: "#ef4444",   // 红色
+      sequence: "#06b6d4"    // 青色
+    }).forEach(([type, color]) => {
+      defs.append("marker")
+        .attr("id", `arrow-${type}`)
+        .attr("viewBox", "0 0 10 10")
+        .attr("refX", 8)
+        .attr("refY", 5)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto-start-reverse")
+        .append("path")
+        .attr("d", "M 0 0 L 10 5 L 0 10 z")
+        .attr("fill", color);
+    });
+
     // 准备数据
     const nodes: Node[] = sutras.map(s => ({
       id: s.id,
@@ -107,8 +129,9 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
       .data(links)
       .join("line")
       .attr("stroke", d => edgeColors[d.type] || "#ccc")
-      .attr("stroke-width", d => d.type === 'parallel' ? 3 : 1.5)
-      .attr("stroke-dasharray", d => d.type === 'parallel' ? "5,5" : "none");
+      .attr("stroke-width", 1.5)  // 统一线宽
+      .attr("stroke-dasharray", d => d.type === 'parallel' ? "5,5" : "none")
+      .attr("marker-end", d => d.type === 'parallel' ? null : `url(#arrow-${d.type})`);  // parallel 不显示箭头
 
     // 绘制节点
     const node = g.append("g")
@@ -146,14 +169,72 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
     });
 
     // 更新位置
+    let tickCount = 0;
     simulation.on("tick", () => {
-      link
-        .attr("x1", d => (d.source as Node).x!)
-        .attr("y1", d => (d.source as Node).y!)
-        .attr("x2", d => (d.target as Node).x!)
-        .attr("y2", d => (d.target as Node).y!);
+      link.each(function(d) {
+        const source = d.source as Node;
+        const target = d.target as Node;
+
+        // 计算方向向量
+        const dx = target.x! - source.x!;
+        const dy = target.y! - source.y!;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // 节点半径 + 一点间距，让箭头不被遮挡
+        const offset = 28;
+
+        // 归一化方向向量并偏移
+        const offsetX = (dx / dist) * offset;
+        const offsetY = (dy / dist) * offset;
+
+        d3.select(this)
+          .attr("x1", source.x!)
+          .attr("y1", source.y!)
+          .attr("x2", target.x! - offsetX)
+          .attr("y2", target.y! - offsetY);
+      });
 
       node.attr("transform", d => `translate(${d.x},${d.y})`);
+
+      // 在第 50 次 tick 后自动缩放到合适大小
+      tickCount++;
+      if (tickCount === 50) {
+        // 计算所有节点的边界框
+        let minX = Infinity, maxX = -Infinity;
+        let minY = Infinity, maxY = -Infinity;
+
+        nodes.forEach(n => {
+          if (n.x! < minX) minX = n.x!;
+          if (n.x! > maxX) maxX = n.x!;
+          if (n.y! < minY) minY = n.y!;
+          if (n.y! > maxY) maxY = n.y!;
+        });
+
+        // 计算边界框的中心和尺寸
+        const boundingWidth = maxX - minX;
+        const boundingHeight = maxY - minY;
+        const centerX = (minX + maxX) / 2;
+        const centerY = (minY + maxY) / 2;
+
+        // 计算缩放比例（留 10% 边距）
+        const padding = 0.9;
+        const scale = Math.min(
+          (width * padding) / boundingWidth,
+          (height * padding) / boundingHeight
+        );
+
+        // 计算平移量，使边界框中心对齐 SVG 中心
+        const translateX = width / 2 - centerX * scale;
+        const translateY = height / 2 - centerY * scale;
+
+        // 应用初始缩放（加快动画速度）
+        svg.transition()
+          .duration(400)
+          .call(
+            zoom.transform as any,
+            d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+          );
+      }
     });
 
     // 搜索后更新节点样式
@@ -258,16 +339,16 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
             <span className="dot dssk"></span> 段晴《波你尼语法入门》
           </div>
           <div className="legend-item">
-            <span className="line reference"></span> 引用
+            <span className="line reference"></span> 引用经文
           </div>
           <div className="legend-item">
-            <span className="line parallel"></span> 对应
+            <span className="line parallel"></span> 平行文本
           </div>
           <div className="legend-item">
-            <span className="line adhikara"></span> Adhikāra
+            <span className="line adhikara"></span> Adhikāra 领句
           </div>
           <div className="legend-item">
-            <span className="line sequence"></span> 序列
+            <span className="line sequence"></span> 后继经文
           </div>
           <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0', fontSize: '0.875rem', color: '#64748b' }}>
             <p style={{ margin: '0.5rem 0', lineHeight: '1.4' }}>💡 交互提示：</p>
@@ -298,17 +379,17 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
             )}
             {selectedSutra.adhikaras && selectedSutra.adhikaras.length > 0 && (
               <p className="adhikara">
-                <strong>领句:</strong> {selectedSutra.adhikaras.map(adh => formatSutraId(adh)).join(' → ')}
+                <strong>Adhikāra 领句:</strong> {selectedSutra.adhikaras.map(adh => formatSutraId(adh)).join(' → ')}
               </p>
             )}
             {selectedSutra.parallel && selectedSutra.parallel.length > 0 && (
               <p className="parallel">
-                <strong>互文:</strong> {selectedSutra.parallel.map(par => formatSutraId(par)).join(', ')}
+                <strong>平行文本:</strong> {selectedSutra.parallel.map(par => formatSutraId(par)).join(', ')}
               </p>
             )}
             {selectedSutra.sequence && selectedSutra.sequence.length > 0 && (
               <p className="sequence">
-                <strong>后继:</strong> {selectedSutra.sequence.map(seq => formatSutraId(seq)).join(', ')}
+                <strong>后继经文:</strong> {selectedSutra.sequence.map(seq => formatSutraId(seq)).join(', ')}
               </p>
             )}
             <a href={`/Sanskrit/sutra/${selectedSutra.id}`} className="view-link">

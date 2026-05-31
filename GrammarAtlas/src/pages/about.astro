@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="关于项目">
+  <div class="license-page">
+    <h1>关于本项目</h1>
+
+    <div class="intro">
+      <p>
+        Vyākaraṇa Atlas 是一个开源的梵语语法笔记项目，采用双协议授权：
+      </p>
+    </div>
+
+    <section class="license-section">
+      <h2>🔧 代码协议 - MIT License</h2>
+      <p class="scope">适用于：网站源代码、脚本、组件等软件部分</p>
+
+      <div class="license-box">
+        <p><strong>Copyright (c) 2026 zhangxueshan246</strong></p>
+        <p>
+          Permission is hereby granted, free of charge, to any person obtaining a copy
+          of this software and associated documentation files (the "Software"), to deal
+          in the Software without restriction, including without limitation the rights
+          to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+          copies of the Software, and to permit persons to whom the Software is
+          furnished to do so, subject to the following conditions:
+        </p>
+        <p>
+          The above copyright notice and this permission notice shall be included in all
+          copies or substantial portions of the Software.
+        </p>
+        <p class="disclaimer">
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+          IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+          AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+          OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+          SOFTWARE.
+        </p>
+      </div>
+    </section>
+
+    <section class="license-section">
+      <h2>📚 数据协议 - CC BY 4.0</h2>
+      <p class="scope">适用于：<code>src/content/sutras/</code> 目录下的经文数据文件</p>
+
+      <div class="license-box">
+        <p>
+          <strong>Creative Commons Attribution 4.0 International License</strong>
+        </p>
+        <p>您可以自由地：</p>
+        <ul>
+          <li><strong>分享</strong> - 在任何媒介以任何形式复制、发行本作品</li>
+          <li><strong>演绎</strong> - 修改、转换或以本作品为基础进行创作，用于任何目的（包括商业用途）</li>
+        </ul>
+        <p>惟须遵守以下条件：</p>
+        <ul>
+          <li>
+            <strong>署名</strong> - 您必须给出适当的署名，提供指向本许可协议的链接，
+            同时标明是否对原作品作了修改。您可以用任何合理的方式来署名，
+            但不得以任何方式暗示许可人为您或您的使用背书。
+          </li>
+        </ul>
+        <p>
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color: var(--color-panini);"
+          >
+            查看完整的 CC BY 4.0 协议 →
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="license-section">
+      <h2>📖 建议的引用方式</h2>
+      <div class="citation-box">
+        <p>如果您在学术或其他工作中使用了本项目的经文数据，建议这样引用：</p>
+        <pre><code>Vyākaraṇa Atlas, zhangxueshan246, 2026.
+https://zhangxueshan246.github.io/Sanskrit/
+Licensed under CC BY 4.0.</code></pre>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <p>
+        <a href="https://github.com/zhangxueshan246/Sanskrit" style="color: var(--color-panini);">
+          📁 在 GitHub 上查看源代码
+        </a>
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .license-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .license-page h1 {
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .intro {
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    font-size: 1.125rem;
+  }
+
+  .license-section {
+    margin-bottom: 3rem;
+  }
+
+  .license-section h2 {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .scope {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .scope code {
+    background: var(--color-bg);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+
+  .license-box {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .license-box p {
+    margin-bottom: 1rem;
+  }
+
+  .license-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .license-box ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .license-box li {
+    margin-bottom: 0.5rem;
+  }
+
+  .disclaimer {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .citation-box {
+    background: var(--color-bg);
+    border-left: 4px solid var(--color-panini);
+    padding: 1.5rem;
+    border-radius: 4px;
+  }
+
+  .citation-box p {
+    margin-bottom: 1rem;
+  }
+
+  .citation-box pre {
+    background: var(--color-surface);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+  }
+
+  .citation-box code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .footer-note {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+</style>

@@ -1,0 +1,268 @@
+%%% XeLaTeX-article %%%
+%# -*- coding: utf-8 -*-
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = xelatex
+%---------------------虽然加了%还是要保留！
+
+\documentclass[17pt]{beamer}
+\mode<presentation>
+{
+\usetheme[width=40pt]{Hannover}
+\usecolortheme[]{dove}
+\usefonttheme[]{structurebold}
+\setbeameroption{hide notes}
+}
+
+\usepackage{fontspec}
+\setmainfont{Arial}
+\newfontfamily\sanskritfont[Script=Devanagari,Mapping=romantodevanagari,Scale=1.15]{Sanskrit 2003}
+\doublehyphendemerits=-10000
+\newcommand{\skt}[1]{{\sanskritfont{#1}}}
+\newcommand{\skttrans}[1]{{\skt{#1}~#1}}
+%----------------------------------------------------设置梵文输入方法 danda । ॥
+
+\usepackage[UTF8,fontset=windows]{ctex}
+\usepackage{amsmath}
+%----------------------------------------------------设置中文环境
+
+\usepackage{graphicx}
+\usepackage{flafter}
+\graphicspath{{pic/}}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+%-----------------------------------------插图表格
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+\title{{梵语提高}}
+\subtitle{17. 名词构成}
+\author[张雪杉]{文学院~~张雪杉 \\ zhangxueshan@sdnu.edu.cn}
+\date{}
+
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{本节内容}
+  \tableofcontents
+\end{frame}
+
+%===================================================
+\section{上节作业}
+
+\begin{frame}{第十六章练习1~~（1--5）}
+  \footnotesize
+  \raggedright
+  \begin{verse}
+    \skt{1) sukeśā kanyā gṛhamāviśat kumāraśca kṣaṇādudatiṣṭhat ।} \\
+    \skt{2) nṛpāya natvā prajāstaṃ cintāḥ kathayanti ।} \\
+    \skt{3) grāmātpratyāgatya nārī priyāṃ nagarīṃ dṛṣṭvā kṣaṇātprāviśat ।} \\
+    \skt{4) kṛtsnaṃ deśamabhibhūyogro nṛpo nagarīradahat ।} \\
+    \skt{5) ka nagarīṇāṃ pālā bhavantīti nārī dagdhā nagarīṣṭāpṛcchat ।} \\
+  \end{verse}
+\end{frame}
+
+\begin{frame}{第十六章练习1~~（6--9）}
+  \footnotesize
+  \raggedright
+  \begin{verse}
+    \skt{6) naro bālāpālāṃ dāsīṃ vairadinaistoṣayitvā bālāṃ gṛhamanayat ।} \\
+    \skt{7) bhīmau kṣatriyau narasya bhāryāṃ sabālāṃ luptvā naraṃ duḥkhamatyajatām ।} \\
+    \skt{8) nagaravananadīṣṭo tuṣṭo bālo gṛhaṃ pratyāgacchat ।} \\
+    \skt{9) bālo vismayena rājñā ratnāni dṛṣṭvā tasyāḥ prabhā sūryasyeveti cintayati ।} \\
+  \end{verse}
+\end{frame}
+
+%===================================================
+\section{名词的构成}
+
+\begin{frame}{词缀}
+  \small
+  \begin{itemize}
+    \item 加在动词词根的 guṇa 级（有时 vṛddhi \nobreakdash-ā）上
+    \item 构成\textbf{阳性名词}和形容词（偶尔中性）
+    \bigskip
+    \item \verbroot{likh} → \nounstem{lekha} (m.)~~书写、信件
+    \item \verbroot{vid} → \nounstem{veda} (m.)~~知识、吠陀
+    \item \verbroot{hṛṣ} → \nounstem{harṣa} (m.)~~兴奋；(Adj) 令人兴奋的
+    \item \verbroot{bhṛ} → \nounstem{bhara}/\nounstem{bhāra} (m.)~~携带、负担
+    \item \verbroot{budh} → \nounstem{bodha} (m.)~~觉醒、意识；(Adj) 知晓的
+  \end{itemize}
+\end{frame}
+
+\subsection{a}
+\begin{frame}{a词缀}
+  \small
+  \begin{itemize}
+    \item 加在动词词根的 guṇa 级（有时 vṛddhi \nobreakdash-ā）上
+    \item 构成\textbf{阳性名词}和形容词（偶尔中性）
+    \bigskip
+    \item \verbroot{likh} → \nounstem{lekha} (m.)~~书写、信件
+    \item \verbroot{vid} → \nounstem{veda} (m.)~~知识、吠陀
+    \item \verbroot{hṛṣ} → \nounstem{harṣa} (m.)~~兴奋；(Adj) 令人兴奋的
+    \item \verbroot{bhṛ} → \nounstem{bhara}/\nounstem{bhāra} (m.)~~携带、负担
+    \item \verbroot{budh} → \nounstem{bodha} (m.)~~觉醒、意识；(Adj) 知晓的
+  \end{itemize}
+\end{frame}
+
+%===================================================
+\subsection{ana}
+
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 加在动词词根的 guṇa 级上
+    \item 构成\textbf{中性名词}和形容词（类似英语 \textit{-ing}）
+    \item ana- 形容词通常作复合词末尾成分
+    \bigskip
+    \item \verbroot{vac} → \nounstem{vacana} (n.)~~言语、词语
+    \item \verbroot{muc} → \nounstem{mocana} (n.)~~释放；(Adj) 解放的
+    \item \verbroot{dṛś} → \nounstem{darśana} (n.)~~看见、相见
+    \item \verbroot{mṛ} → \nounstem{maraṇa} (n.)~~死亡
+    \item \verbroot{loc} → \nounstem{locana} (n.)~~眼睛（看之工具）
+  \end{itemize}
+\end{frame}
+
+%===================================================
+\subsection{tra}
+
+\begin{frame}{\insertsubsection}
+  \small
+  \begin{itemize}
+    \item 加在动词词根的 guṇa 级上
+    \item 构成\textbf{工具名词}（几乎全为中性）
+
+    \hspace{2em}= "执行该动作的工具/手段"
+    \bigskip
+    \item \verbroot{śās} → \nounstem{śāstra} (n.)~~教令、典籍、教科书
+    \item \verbroot{śas} → \nounstem{śastra} (n.)~~刀、剑（切割工具）
+    \item \verbroot{man} → \nounstem{mantra} (n.)~~咒语、祈文（思考工具）
+    \item \verbroot{nī} → \nounstem{netra} (n.)~~眼睛（引导工具）
+    \item \verbroot{pat} → \nounstem{patra} (n.)~~翅膀（飞翔工具）
+  \end{itemize}
+\end{frame}
+
+%===================================================
+\subsection{tva与tā}
+
+\begin{frame}{tva~~中性抽象名词}
+  \small
+  \begin{itemize}
+    \item 加在\textbf{名词或形容词}上（不加在词根上）
+    \item 意义："……的状态、性质"（≈ 英语 \textit{-ness, -hood}）
+    \item 构成\textbf{中性}名词
+    \bigskip
+    \item \nounstem{nara} → \nounstem{naratva} (n.)~~人性、做人
+    \item \nounstem{deva} → \nounstem{devatva} (n.)~~神性、成为神
+    \item \nounstem{guru} → \nounstem{gurutva} (n.)~~为师之道
+    \item \nounstem{abuddha} → \nounstem{abuddhatva} (n.)~~愚蠢
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{tā~~阴性抽象名词}
+  \small
+  \begin{itemize}
+    \item 同样加在\textbf{名词或形容词}上，意义与 \wordending{tva} 相近
+    \item 构成\textbf{阴性}名词
+    \bigskip
+    \item \nounstem{priya} → \nounstem{priyatā} (f.)~~可爱、亲爱之情
+    \item \nounstem{mitra} → \nounstem{mitratā} (f.)~~友谊
+    \item \nounstem{puruṣa} → \nounstem{puruṣatā} (f.)~~阳刚、男性气质
+    \item \nounstem{deva} → \nounstem{devatā} (f.)~~神性；神灵（可指具体神）
+    \bigskip
+    \item \notsoimportant{部分词同时有 \wordending{tva} 和 \wordending{tā} 两种形式}
+  \end{itemize}
+\end{frame}
+
+%===================================================
+\section{三合派生词}
+
+\begin{frame}{\insertsection~~构成}
+  \small
+  \begin{itemize}
+    \item 将词的\textbf{第一个元音}变为 vṛddhi 级
+    \item 若非 \nobreakdash-a\nobreakdash- 词干，加 \wordending{ya}；末尾 \nobreakdash-a\nobreakdash- 也可换为 \wordending{ya}
+    \item 意义：\important{"属于……的"，"与……有关的"}
+    \bigskip
+    \item \nounstem{pura}（城市）→ \nounstem{paura} (m.)~~市民
+    \item \nounstem{veda}（知识）→ \nounstem{vaidya} (m.)~~医生
+    \item \nounstem{senā}（军队）→ \nounstem{sainya} (m.)~~士兵
+    \item \nounstem{śūra}（英雄）→ \nounstem{śaurya} (n.)~~英勇、武勇
+    \item \nounstem{mitra}（朋友）→ \nounstem{maitra}/\nounstem{maitrī} (f.)~~友谊
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Vṛddhi 派生词——专有名词}
+  \begin{itemize}
+    \item \textbf{地名} → 该地居民
+    \item \textbf{人名} → 后代、子孙
+    \bigskip
+    \item Niṣadha（地名）→ \nounstem{naiṣadha}~~"来自尼沙达的人"
+    \item Kuru（人名）→ \nounstem{kaurava}~~"俱卢族"
+    \item Pāṇḍu（人名）→ \nounstem{pāṇḍava}~~"般度族"
+    \item Raghu（人名）→ \nounstem{rāghava}~~"拉格胡之后"（即罗摩）
+    \bigskip
+    \item \notsoimportant{《摩诃婆罗多》中 Kaurava 对阵 Pāṇḍava}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{总结}
+  \centering
+  \small
+  \begin{NiceTabular}[hvlines,rules/width=0.3pt,rules/color=gray]{lll}
+    \textbf{后缀} & \textbf{派生来源} & \textbf{结果} \\
+    \wordending{a} & 动词词根（guṇa） & 阳性名词 / 形容词 \\
+    \wordending{ana} & 动词词根（guṇa） & 中性名词 / 形容词 \\
+    \wordending{tra} & 动词词根（guṇa） & 中性工具名词 \\
+    \wordending{tva} & 名词、形容词 & 中性抽象名词 \\
+    \wordending{tā} & 名词、形容词 & 阴性抽象名词 \\
+    Vṛddhi & 词首元音加长（+ \wordending{ya}） & "属于……的" \\
+  \end{NiceTabular}
+\end{frame}
+
+%===================================================
+\section{本节作业}
+
+\begin{frame}{\insertsection}
+  \begin{itemize}
+    \item 第十七章练习1（1--12）
+
+    识别词根/词基，推测词义
+    \bigskip
+    \item 第十七章练习3（1--5）
+
+    译成英语
+  \end{itemize}
+\end{frame}
+
+\end{document}

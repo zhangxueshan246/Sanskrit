@@ -48,13 +48,13 @@ src/content/sutras/
 | `id` | string | ✓ | 经文ID (例: `pan_1.1.1`) |
 | `text` | string | ✓ | 经文原文，支持 `[[id]]` wiki链接、`\n` 强制换行、`\|` 可选换行点、`-` 后自动添加断点 |
 | `translation` | string | ✗ | 中英翻译，同样支持 wiki 链接和换行标记 |
-| `vrtti` | string | ✗ | 注释/讲解 |
+| `vrtti` | string | ✗ | Vṛtti 注释/讲解 |
 | `notes` | string | ✗ | 个人笔记 |
 | `source` | enum | ✓ | `panini` \| `katantra` \| `jkv` \| `dssk` \| `other` |
-| `references` | array | ✓ | 引用ID数组（至少 `[]`） |
-| `parallel` | array | ✗ | 其他文献的对应经文 |
-| `adhikaras` | array | ✗ | 管辖此经的 adhikāra |
-| `sequence` | array | ✗ | 后继经文（自然序列关系） |
+| `references` | array | ✗ | 引用经文 ID 数组 |
+| `parallel` | array | ✗ | 平行文本（其他文献的对应经文）|
+| `adhikaras` | array | ✗ | Adhikāra 领句（管辖此经的）|
+| `sequence` | array | ✗ | 后继经文（自然序列关系）|
 | `updatedAt` | number | ✗ | 时间戳（毫秒），**不要手动填写**，运行 `npm run stamp` 自动补全 |
 
 ### 文本换行与断行
@@ -86,33 +86,41 @@ src/content/sutras/
 { "notes": "参见 [[pan_6.4.1]]", "adhikaras": ["pan_6.4.1"] }
 ```
 
-验证脚本检查：
-- ✓ 所有 `[[id]]` 都在 `references`、`parallel`、`sequence` 或 `adhikaras` 中
-- ✓ `references` 中的 ID 都是存在的经文
-- ✓ `references` 中没有孤立 ID（都要在某个文本字段中提及）
+验证脚本检查（`npm run validate`）：
+
+**Error（`isValid = false`，脚本 `exit(1)`）**：
+- 文本中的 `[[id]]` 不在 `references`、`parallel`、`sequence`、`adhikaras` 任何一个中
+- `references` / `parallel` / `sequence` / `adhikaras` 中包含不存在的经文 ID
+- `references` 中有孤立 ID（没有在文本字段中被 `[[]]` 提及）
+- `translation`、`vrtti`、`notes` 三个字段全为空（内容未完成，不应部署）
+
+**特殊验证规则（类 adhikāra 关系）**：
+- **jkv ↔ pan 关系**：提到 `[[jkv_x.x.x]]` 但 references 中有 `pan_x.x.x` → 有效（因为 jkv 是 pan 的注释，相同编号的 pan 相当于 jkv 的 adhikāra）
+- **parallel 传递引用**：提到 `[[经文B]]` 但 references 中有经文B的某个 parallel → 有效（引用 parallel 相当于引用本体）
+
+**Warning（仅提示，不影响通过）**：
+- `sequence` 字段为空（建议补充，使经文串联）
+- `draft` 字段不为空（可能有内容未编辑完成）
 
 
-## 搜索和排序
+## 界面功能
 
 ### 经文列表页 `/sutras`
-
-- **排序选项**：按来源分组（默认）或按ID自然数字排序
-- **模糊搜索**：搜索范围覆盖经文ID、原文、翻译、注释、笔记；搜索时自动取消分组
+- **排序选项**：按来源分组（默认）或按 ID 自然数字排序
+- **模糊搜索**：搜索范围覆盖经文 ID、原文、翻译、注释、笔记
 
 ### 图谱页 `/atlas`
-
-- 搜索框输入关键词，匹配节点高亮（蓝色阴影），不匹配节点淡化（opacity 0.2）
-- 实时显示结果计数，ESC 或清空按钮清除搜索，D3 交互（拖拽、点击）保留
-
-
-## 图谱中的连线说明
+- **自动适配**：打开时自动缩放到合适比例，显示所有经文节点
+- **交互操作**：拖拽节点调整位置，滚轮缩放，拖动背景平移
+- **搜索高亮**：输入关键词匹配节点高亮，ESC 清除搜索
+- **连线说明**：
 
 | 颜色 | 类型 | 含义 |
 |------|------|------|
-| 深灰实线 | reference | 经文互相引用 |
-| 橙色虚线 | parallel | 多文献对应或注释关系 |
-| 红色实线 | adhikara | 管辖关系 |
-| 青色实线 | sequence | 自然序列（后继关系） |
+| 深灰实线 | reference | 引用经文 |
+| 橙色虚线 | parallel | 平行文本（多文献对应或注释关系）|
+| 红色实线 | adhikara | Adhikāra 领句（管辖关系）|
+| 青色实线 | sequence | 后继经文（自然序列）|
 
 ## 经文来源与颜色
 
@@ -132,40 +140,25 @@ src/content/sutras/
 |------|------|
 | `npm run dev` | 启动本地开发服务器 (http://localhost:4321/Sanskrit/) |
 | `npm run validate` | 检查所有经文的 wiki 链接和 references 一致性 |
-| `npm run stamp` | 给有改动的经文 JSON 更新 `updatedAt`（未改动的跳过） |
+| `npm run stamp` | 给修改过的经文 JSON 更新 `updatedAt` 时间戳（基于文件修改时间） |
 | `npm run build` | 生产构建（生成静态 HTML） |
-| `npm run preview` | 预览构建后的网站 |
 
-### 时间戳机制
-
-`updatedAt` 用于首页"最近添加"排序。stamp 脚本只更新有未提交改动的文件，未改动文件跳过。因此：
-- **本地测试随时可做**，直接 `npm run dev`，无需先 commit
-- stamp 应在 commit **之前**运行，让时间戳和内容在同一次 commit 里
-
-### 添加/修改经文的完整步骤
+### 添加/修改经文
 
 ```bash
-cd GrammarAtlas
-
 # 1. 编辑 src/content/sutras/{source}/{id}.json
 
-# 2. 本地预览（随时可做）
-npm run dev
-
-# 3. 验证引用 + 打时间戳（commit 之前）
+# 2. 验证引用 + 打时间戳
 npm run validate
 npm run stamp
 
-# 4. 提交推送（自动触发 GitHub Pages 部署）
-cd ..
+# 3. 提交推送（自动部署到 GitHub Pages）
 git add GrammarAtlas/src/content/
 git commit -m "Add sutra: pan_1.1.1"
 git push origin master
 ```
 
-### GitHub Pages 部署
-
-推送到 master 后自动部署到 https://zhangxueshan246.github.io/Sanskrit/。工作流配置：`.github/workflows/deploy.yml`。首次需在仓库 Settings → Pages 中选择 GitHub Actions 作为 Source。
+**时间戳说明**：`updatedAt` 记录文件真实修改时间（不是 stamp 运行时间），只更新修改过的文件，不依赖 git 状态。
 
 
 ## 关于本项目
@@ -175,6 +168,14 @@ git push origin master
 **数据说明**：
 - Pāṇini、Kātantra、Kāśikāvṛṭti 基于对应原典的学习笔记
 - 段晴《波你尼语法入门》部分基于同名中文参考书，而非原始梵文文献
+
+
+## 开源协议
+
+- **代码**：[MIT License](LICENSE) - 允许自由使用、修改和分发
+- **数据**：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) - 经文数据可自由使用，需注明出处
+
+详见 [LICENSE](LICENSE) 文件。
 
 
 ## 目录结构

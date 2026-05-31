@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="页面未找到">
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-title">页面未找到</h1>
+
+    <div class="error-message">
+      <p>
+        如同寻找不存在的语法规则，<br/>
+        您所访问的页面似乎也不在此处。
+      </p>
+    </div>
+
+    <div class="error-actions">
+      <button onclick="history.back()" class="btn-primary">
+        ← 返回上一页
+      </button>
+      <a href="/Sanskrit/" class="btn-secondary">
+        返回首页
+      </a>
+      <a href="/Sanskrit/atlas" class="btn-secondary">
+        查看图谱
+      </a>
+      <a href="/Sanskrit/sutras" class="btn-secondary">
+        经文列表
+      </a>
+    </div>
+
+    <div class="error-hint">
+      <p style="color: var(--color-text-muted); font-size: 0.875rem; margin-top: 2rem;">
+        提示：如果您通过链接到达此页面，该经文条目可能尚未收录
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--color-panini);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .error-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+  }
+
+  .error-message {
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    color: var(--color-text);
+    line-height: 1.8;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background: var(--color-panini);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+  }
+
+  .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-bg);
+    border-color: var(--color-panini);
+    color: var(--color-panini);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  button.btn-primary {
+    width: auto;
+  }
+
+  .error-hint {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 640px) {
+    .error-code {
+      font-size: 6rem;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+    }
+
+    .error-actions {
+      flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    button.btn-primary {
+      width: 100%;
+    }
+  }
+</style>

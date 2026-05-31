@@ -1,0 +1,19 @@
+{
+  "id": "dssk_646",
+  "text": "mahārājaḥ. prakāravacane jātīyar. mahāprakāro mahājātīyaḥ.",
+  "source": "dssk",
+  "adhikaras": [
+    "pan_6.3.1"
+  ],
+  "updatedAt": 1780210058447,
+  "translation": "（例如：）mahārājaḥ。jātīya表示种群，（例如：）mahāprakāraḥ， mahājātīyaḥ.",
+  "vrtti": "段书讲解：\n根据《月光疏》，这句经文仍然受[[pan_6.3.1]]领句的影响，其经文如下：\naluguttarapade.\n“于后部字前不消失。”\n但这句领句到[[pan_6.3.24]]时已结束，影响本句的仅是uttarapade（于后部字前）。结合本句经文，意思是mahat在遇到同格的后部字时以及在遇到表示类别的词缀时，ā音替换mahat的末音。\n āt：指长音ā，t是表示其音长短的符号。当这个词与它所修饰的处于同一格的词构成持业释复合词时，根据单个字符替换末音的规则，长音ā替换mahat的末音。例如：mahat + rājan → mahaā + rājan → mahārājaḥ “大王”，末词rājan经历的变化见[[dssk_645]]条等。但mahataḥ sevā就只能构成mahatsevā，“对伟大的人的供养”，mahataḥ是第六格。\njātīyaḥ：词缀，表示种类、种群（prakāra）。在这个词缀前，mahat要变为mahā。例如：mahājātīyaḥ “近似大的”，= mahatsadṛśaḥ。\n 《大疏》还列出了几个词：ghāsa（草、饲料），kara（手；税收），viśiṣṭa（杰出的），当mahat与这些词结合时也须变为 mahā-， 但拆开以后mahat与它们不同格。例如：mahato mahatyā vā ghāsaḥ 构成 mahāghāsaḥ，“大批的草料”。其它几个词相同。",
+  "notes": "段书注158：《大疏》第三卷，第161页。",
+  "references": [
+    "pan_6.3.24",
+    "dssk_645"
+  ],
+  "parallel": [
+    "pan_6.3.46"
+  ]
+}
