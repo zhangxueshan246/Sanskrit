@@ -7,9 +7,14 @@
   "sequence": [
     "pan_2.1.23"
   ],
+  "adhikaras": [
+    "pan_1.4.1",
+    "pan_2.1.3",
+    "pan_2.1.4"
+  ],
   "parallel": [
     "kat_2.5.8",
     "dssk_611"
   ],
-  "updatedAt": 1780118989604
+  "updatedAt": 1780884750625
 }

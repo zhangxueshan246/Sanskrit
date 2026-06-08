@@ -3,103 +3,311 @@ import Layout from '../../layouts/Layout.astro';
 import { getAllSutras } from '../../utils/getSutras';
 import { parseWikiLinks } from '../../utils/parseWikiLinks';
 import { formatSutraId } from '../../utils/formatSutraId';
+import SutraMiniGraph from '../../components/SutraMiniGraph';
+import type { Sutra, GraphEdge } from '../../types/sutra';
 
 export async function getStaticPaths() {
-  const sutras = await getAllSutras();
-  return sutras.map(sutra => ({
-    params: { id: sutra.id },
-    props: { sutra }
-  }));
+  const allSutras = await getAllSutras();
+  const sutraMap = new Map<string, Sutra>(allSutras.map(s => [s.id, s]));
+
+  return allSutras.map(sutra => {
+    const neighborIds = new Set<string>();
+    const miniEdges: GraphEdge[] = [];
+    const parallelPairs = new Set<string>();
+
+    // Adhikara chain — BFS upward to collect all governing levels, not just direct
+    const adhikaraVisited = new Set<string>();
+    const adhikaraQueue: string[] = [];
+
+    for (const adhId of sutra.adhikaras ?? []) {
+      if (sutraMap.has(adhId) && !adhikaraVisited.has(adhId)) {
+        adhikaraVisited.add(adhId);
+        adhikaraQueue.push(adhId);
+        neighborIds.add(adhId);
+        miniEdges.push({ from: adhId, to: sutra.id, type: 'adhikara' });
+      }
+    }
+    while (adhikaraQueue.length > 0) {
+      const adhId = adhikaraQueue.shift()!;
+      const adhSutra = sutraMap.get(adhId)!;
+      for (const parentId of adhSutra.adhikaras ?? []) {
+        if (!sutraMap.has(parentId)) continue;
+        neighborIds.add(parentId);
+        miniEdges.push({ from: parentId, to: adhId, type: 'adhikara' });
+        if (!adhikaraVisited.has(parentId)) {
+          adhikaraVisited.add(parentId);
+          adhikaraQueue.push(parentId);
+        }
+      }
+    }
+
+    // Outgoing references: sutra → refId
+    for (const refId of sutra.references ?? []) {
+      if (sutraMap.has(refId)) {
+        neighborIds.add(refId);
+        miniEdges.push({ from: sutra.id, to: refId, type: 'reference' });
+      }
+    }
+
+    // Parallel (stored bidirectionally; deduplicate by sorted pair key)
+    for (const parId of sutra.parallel ?? []) {
+      if (sutraMap.has(parId)) {
+        const key = [sutra.id, parId].sort().join('|');
+        if (!parallelPairs.has(key)) {
+          parallelPairs.add(key);
+          neighborIds.add(parId);
+          miniEdges.push({ from: sutra.id, to: parId, type: 'parallel' });
+        }
+      }
+    }
+
+    // Reverse relations: scan all sutras for incoming edges
+    for (const other of allSutras) {
+      if (other.id === sutra.id) continue;
+
+      // Reverse reference: other cites this sutra
+      if (other.references?.includes(sutra.id)) {
+        neighborIds.add(other.id);
+        miniEdges.push({ from: other.id, to: sutra.id, type: 'reference' });
+      }
+
+      // Reverse adhikara: this sutra governs other
+      if (other.adhikaras?.includes(sutra.id)) {
+        neighborIds.add(other.id);
+        miniEdges.push({ from: sutra.id, to: other.id, type: 'adhikara' });
+      }
+    }
+
+    const miniNodes: Sutra[] = [
+      sutra,
+      ...Array.from(neighborIds).map(id => sutraMap.get(id)!),
+    ];
+
+    return {
+      params: { id: sutra.id },
+      props: { sutra, miniNodes, miniEdges },
+    };
+  });
 }
 
-const { id } = Astro.params;
-const { sutra } = Astro.props;
+const { sutra, miniNodes, miniEdges } = Astro.props;
 
 const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === 'katantra' ? 'Kātantra' : sutra.source === 'jkv' ? 'Kāśikāvṛṭti' : sutra.source === 'dssk' ? '段晴《波你尼语法入门》' : 'Other';
 ---
 
 <Layout title={sutra.id}>
-  <div class="sutra-page">
-    <div class="sutra-header">
-      <span class={`source-badge ${sutra.source}`}>{sourceLabel}</span>
-      <h1>{formatSutraId(sutra.id)}</h1>
-      <p class="sutra-text" set:html={parseWikiLinks(sutra.text)}></p>
+  <div class="sutra-detail-wrapper">
+    <div class="sutra-main">
+      <div class="sutra-header">
+        <span class={`source-badge ${sutra.source}`}>{sourceLabel}</span>
+        <h1>{formatSutraId(sutra.id)}</h1>
+        <p class="sutra-text" set:html={parseWikiLinks(sutra.text)}></p>
+      </div>
+
+      {sutra.translation && (
+        <div class="sutra-section">
+          <h2>翻译</h2>
+          <p set:html={parseWikiLinks(sutra.translation)} />
+        </div>
+      )}
+
+      {sutra.tibetan && (
+        <div class="sutra-section">
+          <h2>藏译</h2>
+          <p set:html={parseWikiLinks(sutra.tibetan)} />
+        </div>
+      )}
+
+      {sutra.vrtti && (
+        <div class="sutra-section">
+          <h2>Vṛtti 注释</h2>
+          <p set:html={parseWikiLinks(sutra.vrtti)} />
+        </div>
+      )}
+
+      {sutra.notes && (
+        <div class="sutra-section notes">
+          <h2>笔记</h2>
+          <p set:html={parseWikiLinks(sutra.notes)} />
+        </div>
+      )}
+
+      {sutra.adhikaras && sutra.adhikaras.length > 0 && (
+        <div class="sutra-section">
+          <h2>Adhikāra 领句</h2>
+          {sutra.adhikaras.map(adh => (
+            <a href={`/Sanskrit/sutra/${adh}`} class="sutra-link">
+              {formatSutraId(adh)}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {sutra.references && sutra.references.length > 0 && (
+        <div class="sutra-section">
+          <h2>引用经文</h2>
+          {sutra.references.map(ref => (
+            <a href={`/Sanskrit/sutra/${ref}`} class="sutra-link">
+              {formatSutraId(ref)}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {sutra.parallel && sutra.parallel.length > 0 && (
+        <div class="sutra-section">
+          <h2>平行文本</h2>
+          {sutra.parallel.map(par => (
+            <a href={`/Sanskrit/sutra/${par}`} class="sutra-link">
+              {formatSutraId(par)}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {sutra.sequence && sutra.sequence.length > 0 && (
+        <div class="sutra-section">
+          <h2>后继经文</h2>
+          {sutra.sequence.map(seq => (
+            <a href={`/Sanskrit/sutra/${seq}`} class="sutra-link">
+              {formatSutraId(seq)}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div style="margin-top: 2rem;">
+        <a href="/Sanskrit/atlas" class="view-link">← 返回图谱</a>
+      </div>
     </div>
 
-    {sutra.translation && (
-      <div class="sutra-section">
-        <h2>翻译</h2>
-        <p set:html={parseWikiLinks(sutra.translation)} />
+    <aside class="sutra-sidebar">
+      <div class="mini-graph-card">
+        <h3 class="mini-graph-title">关系图</h3>
+        <SutraMiniGraph
+          client:load
+          currentSutraId={sutra.id}
+          nodes={miniNodes}
+          edges={miniEdges}
+          width={280}
+          height={260}
+        />
+        <div class="mini-graph-legend">
+          <div class="legend-row">
+            <span class="legend-dot panini"></span>Pāṇini
+            <span class="legend-dot katantra"></span>Kātantra
+            <span class="legend-dot jkv"></span>JKV
+            <span class="legend-dot dssk"></span>DSSK
+            <span class="legend-dot current"></span>当前经文
+          </div>
+          <div class="legend-row">
+            <span class="legend-line adhikara"></span>Adhikāra 领句
+            <span class="legend-line parallel"></span>平行文本
+            <span class="legend-line reference"></span>引用经文
+          </div>
+        </div>
+        <a href="/Sanskrit/atlas" class="mini-graph-link">查看完整图谱 →</a>
       </div>
-    )}
-
-    {sutra.tibetan && (
-      <div class="sutra-section">
-        <h2>藏译</h2>
-        <p set:html={parseWikiLinks(sutra.tibetan)} />
-      </div>
-    )}
-
-    {sutra.vrtti && (
-      <div class="sutra-section">
-        <h2>Vṛtti 注释</h2>
-        <p set:html={parseWikiLinks(sutra.vrtti)} />
-      </div>
-    )}
-
-    {sutra.notes && (
-      <div class="sutra-section notes">
-        <h2>笔记</h2>
-        <p set:html={parseWikiLinks(sutra.notes)} />
-      </div>
-    )}
-
-    {sutra.adhikaras && sutra.adhikaras.length > 0 && (
-      <div class="sutra-section">
-        <h2>Adhikāra 领句</h2>
-        {sutra.adhikaras.map(adh => (
-          <a href={`/Sanskrit/sutra/${adh}`} class="sutra-link">
-            {formatSutraId(adh)}
-          </a>
-        ))}
-      </div>
-    )}
-
-    {sutra.references && sutra.references.length > 0 && (
-      <div class="sutra-section">
-        <h2>引用经文</h2>
-        {sutra.references.map(ref => (
-          <a href={`/Sanskrit/sutra/${ref}`} class="sutra-link">
-            {formatSutraId(ref)}
-          </a>
-        ))}
-      </div>
-    )}
-
-    {sutra.parallel && sutra.parallel.length > 0 && (
-      <div class="sutra-section">
-        <h2>平行文本</h2>
-        {sutra.parallel.map(par => (
-          <a href={`/Sanskrit/sutra/${par}`} class="sutra-link">
-            {formatSutraId(par)}
-          </a>
-        ))}
-      </div>
-    )}
-
-    {sutra.sequence && sutra.sequence.length > 0 && (
-      <div class="sutra-section">
-        <h2>后继经文</h2>
-        {sutra.sequence.map(seq => (
-          <a href={`/Sanskrit/sutra/${seq}`} class="sutra-link">
-            {formatSutraId(seq)}
-          </a>
-        ))}
-      </div>
-    )}
-
-    <div style="margin-top: 2rem;">
-      <a href="/Sanskrit/atlas" class="view-link">← 返回图谱</a>
-    </div>
+    </aside>
   </div>
 </Layout>
+
+<style>
+  .sutra-detail-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 308px;
+    gap: 2rem;
+    align-items: start;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .sutra-sidebar {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .mini-graph-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+    overflow: hidden;
+  }
+
+  .mini-graph-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .mini-graph-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    color: #64748b;
+  }
+
+  .legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.6rem;
+    align-items: center;
+  }
+
+  .legend-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-dot.panini   { background: #1e3a8a; }
+  .legend-dot.katantra { background: #059669; }
+  .legend-dot.jkv      { background: #3b82f6; }
+  .legend-dot.dssk     { background: #93c5fd; }
+  .legend-dot.current  { background: #e5e7eb; border: 2px solid #fbbf24; width: 7px; height: 7px; }
+
+  .legend-line {
+    display: inline-block;
+    width: 18px;
+    height: 0;
+    border-top: 2px solid transparent;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+
+  .legend-line.adhikara  { border-top-color: #ef4444; }
+  .legend-line.parallel  { border-top: 2px dashed #f59e0b; }
+  .legend-line.reference { border-top-color: #6b7280; }
+
+  .mini-graph-link {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #1e3a8a;
+    text-decoration: none;
+    text-align: right;
+  }
+
+  .mini-graph-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1024px) {
+    .sutra-detail-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .sutra-sidebar {
+      position: static;
+    }
+  }
+</style>

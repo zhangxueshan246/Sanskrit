@@ -144,6 +144,15 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
     ...(sutra.sequence || [])
   ]);
 
+  // Pre-compute all adhikaras of parallel sutras — links mentioning a parallel sutra's
+  // adhikara (e.g. in dssk notes referencing the governing pan rule) are valid
+  const allParallelAdhikaras = new Set<string>();
+  for (const parId of (sutra.parallel || [])) {
+    for (const adhId of getAllAdhikaras(parId, sutrasMap)) {
+      allParallelAdhikaras.add(adhId);
+    }
+  }
+
   for (const link of allLinksInContent) {
     if (!allowedIds.has(link)) {
       // 规则1: 检查 jkv 对应的 pan 是否在 allowedIds 中
@@ -160,6 +169,12 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
         if (hasParallelInAllowed) {
           continue;
         }
+      }
+
+      // 规则3: 被链接的经文是当前经文某平行经文的领句（直接或间接）
+      // 常见于 dssk 的 notes/vrtti 中提到与其平行的 pan 经文的领句
+      if (allParallelAdhikaras.has(link)) {
+        continue;
       }
 
       result.errors.push(`文本中包含 [[${link}]] 但不在 references、parallel、adhikaras 或 sequence 中`);
