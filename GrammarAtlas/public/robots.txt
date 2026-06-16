@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /Sanskrit/
+Sitemap: https://zhangxueshan246.github.io/Sanskrit/sitemap.xml
