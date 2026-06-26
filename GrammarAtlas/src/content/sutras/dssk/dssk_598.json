@@ -1,0 +1,18 @@
+{
+  "id": "dssk_598",
+  "text": "vibhaktyarthādiṣu vartamānamavyayaṃ subandena saha nityaṃ samasyate. avigraho nityasamāsaḥ. asvapadavigraho vā. vibhaktau hari ṅi adhi iti sthite.",
+  "source": "dssk",
+  "references": [
+    "dssk_103"
+  ],
+  "updatedAt": 1782358864161,
+  "translation": "段书：表示词尾等意义的不变词与一个以格尾收尾的词组成必然复合词。不可分的是必然复合词，或者是非本词的拆分。(例如：)hari ṅi adhi。",
+  "vrtti": "段书讲解：\n经文中这一长串复合词由如下的词组成，根据“同样词形的留下一个”[[dssk_103]]的原则，以下这些词分别与复合词尾部的vacana结合：\n(1) vibhaktivacana “词尾的意义”。\n(2) samīpavacana “邻近的意义”。\n(3) samṛddhivacana “好运的意义”。\n(4) vyṛddhivacana “背运的意义”。\n(5) arthābhāvavacana “无实质的意义”。\n(6) atyayavacana “超越的意义”。\n(7) asaṃprativacana “非现时的意义”。\n\n(8) śabdaprādurvacana “突出显示某词的意义”。\n(9) bhāvapaścādvacana “事后的意义”。\n(10) yathāvacana “如的意义”。\n(11) anupūrvyavacana “顺序的意义”。\n(12) yaugapadyavacana “同时发生的意义”。\n(13) sādṛśyavacana “相似的意义”。\n(14) sampattivacana “恰如其分的意义”。\n(15) sākalyavacana “全部的意义”。\n(06) antavacana “结束的意义”。\n一个具有如上词义的不变词可以与另一个携带格尾的词构成复合词，所形成的是一个不变状复合词。\nnityasamāsa “必然复合词”。这样的复合词不可分(avigraha)，或者拆开时不能用构成复合词的本字(asvapada-vigraha)。\n以下注释者将针对以上列出的不变词的16种意义分别举例，演示不变状复合词的构成。第一个要演示的是一个表示格尾意义的不变词如何组成复合词。这里须首先介绍的是复合词的两种拆法：① śāstrīyavigraha “经典式拆法”，又叫做alaukikaḥ vigrahaḥ “非通俗拆法”，例如将 rājapuruṣa(国王的人)拆分为 rājan ṅas puruṣa su，清楚地标出原字和格尾。② laukikavigraha“通俗拆法”。 例如将 rājapuruṣa 拆分为 rājñaḥ puruṣah，拆开后仍然是完整的成分。通俗的拆法还分为本字拆法和非本字拆法。\nhari ṅi adhi 是非通俗拆分法。这里注释者希望演示的是adhihari(关于诃利，或在诃利处)的构成。adhihari = harau，表示加了第七格尾意义的hari。这里用了非通俗拆分法，因为adhihari是必然复合词，而必然复合词是不可拆分的，所以不存在通俗的拆分法。",
+  "draft": "",
+  "parallel": [
+    "pan_2.1.6"
+  ],
+  "sequence": [
+    "dssk_599"
+  ]
+}
