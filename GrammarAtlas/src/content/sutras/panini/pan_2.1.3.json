@@ -1,14 +1,20 @@
 {
   "id": "pan_2.1.3",
-  "text": "[待补充]",
-  "translation": "",
+  "text": "[prāk kaḍārāt samāsaḥ.]",
+  "translation": "段书：到kaḍāra之前是复合词。",
   "vrtti": "",
-  "notes": "",
+  "notes": "从本句到[[pan_2.2.38]]之间都是关于复合词的概念经文。",
   "draft": "",
-  "adhikaras": [],
-  "references": [],
-  "parallel": [],
+  "adhikaras": [
+    "pan_1.4.1"
+  ],
+  "references": [
+    "pan_2.2.38"
+  ],
+  "parallel": [
+    "dssk_594"
+  ],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1782451413698
+  "updatedAt": 1783324790076
 }

@@ -11,5 +11,8 @@
   "parallel": [
     "kat_2.5.14"
   ],
-  "updatedAt": 1780119520648
+  "sequence": [
+    "pan_2.1.6"
+  ],
+  "updatedAt": 1783326671858
 }

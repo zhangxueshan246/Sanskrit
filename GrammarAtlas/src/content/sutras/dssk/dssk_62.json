@@ -1,0 +1,19 @@
+{
+  "id": "dssk_62",
+  "text": "udaḥ parayoḥ sthāstambhoḥ pūrvasavarṇaḥ.",
+  "source": "dssk",
+  "references": [
+    "pan_1.1.70"
+  ],
+  "updatedAt": 1783326530088,
+  "sequence": [
+    "dssk_63"
+  ],
+  "translation": "段书：ud后面的sthā和stambh的首位音发生与前面音同类的变化。",
+  "vrtti": "段书讲解：\nud：动词近置词，在经中是第五格。注意这里的ud不是指短音u，注释中没有用u-varṇa特别加以强调。根据此句经文，将要演示的是ud+√sthā(升起，站起)以及ud+√stambh(支持)之间的音变。",
+  "notes": "udaḥ，肯定是ud的第五格而不是短元音u的第五格，因为后者是utaḥ。参见[[pan_1.1.70]]",
+  "parallel": [
+    "pan_8.4.61"
+  ],
+  "draft": ""
+}
