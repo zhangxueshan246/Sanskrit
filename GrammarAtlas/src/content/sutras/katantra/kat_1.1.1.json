@@ -4,8 +4,14 @@
   "translation": "字母表是现成的。",
   "source": "katantra",
   "references": [],
-  "updatedAt": 1782357157377,
+  "updatedAt": 1784277085105,
+  "parallel": [
+    "dssk_0"
+  ],
+  "sequence": [
+    "kat_1.1.2"
+  ],
   "vrtti": "siddhaḥ khalu varṇānāṃ samāmnāyo veditavyaḥ, na punar anyathopadeṣṭavya ity arthaḥ.\nsiddhaśabdo ’tra nityārtho niṣpannārthaḥ prasiddhārtho vā, yathā siddham ākāśam, siddham annam, kāmpilyaḥ siddha iti.\nvarṇā akārādayaḥ, teṣāṃ samāmnāyaḥ pāṭhakramaḥ.",
-  "notes": "DSV：意思是：应该知道字母的列表已经有了，不需要再变着花样展示了。\n 本句中 “siddha(现成)”一词的意思是恒常、完成或者著称，正如 siddham ākāśam (虚空恒常)、siddham annam (饭已做好)或者kāmpilyaḥ siddhaḥ (剑毕离城很有名)。\n  字母指a字等，字母的排列指读诵的顺序。}\n  Pañjikā: 别的方式，指的是有人（译注：波你尼）放弃过去的老师建立的元音辅音等概念，造出以前没有的ac和hal等概念。本句是为了否定而说的，就像说“右眼看”可以推知左眼没看。",
-  "draft": "Tīkā:  字母列表约定俗成，本句不是概念经文，而是对别的教法的否定。\\candra adhikāro vidhiḥ saṃjñā niṣedho niyamas tathā, paribhāṣā ca śāstrasya lakṣaṇaṃ ṣaḍvidhaṃ viduḥ. \\shi{领句、规则与概念，还有否定和限定，再加释读共六种，属于经文的种类。}但是这句经文六种都不是。）\n\n[术语] kāra：字，用以指示某字或不变词\n\n%\\shuyu{yogavāha}{相对于 \\panini 的 ayogavāha。ayogavāha指ṃ、 ḥ、ẖ 和ḫ ， 他们没有出现在湿婆经中，所以属于 “不和其他字母连着的” 。而这些字母在\\kat 中是和其他字母连着的，所以属于 yogavāha}%anusvāra 、 visarga 、 jihvāmūlīya 和 upadhmānīya ，\n\n\n  %\\ptjz{\\samiksa anusvāra、visarga、jihvāmūlīya和upadhmānīya 在 \\kat 里是yogavāha，在波你尼里是ayogavāha ~\\ps{8.3.5}。字母总数说47、49、51、52、53的都有。} \\ptjz{\\tika siddha是一个吉祥词，开头中间结尾都有吉祥词的经文广为流传。\\kat 的中间用atha\\syy{3.1.1}，结尾用vṛddhi\\syy{3.8.35}。"
+  "notes": "DSV：意思是：应该知道字母表早就有了，不需要再变着花样展示了。\n 本句中 “siddha(现成)”一词的意思是恒常、完成或者著称，正如 siddham ākāśam (虚空恒常)、siddham annam (饭已做好) 或者kāmpilyaḥ siddhaḥ (剑毕离城很有名)。\n  字母指a字等，字母的列表指读诵的顺序。}\n  Tīkā: 字母列表约定俗成，本句不是概念经文，而是对别的教法的否定。\n Pañjikā: 别的方式，指的是有人（译注：波你尼）放弃过去的老师建立的元音辅音等概念，造出以前没有的ac和hal等概念。本句是为了否定而说的，就像说“右眼看”可以推知左眼没看。",
+  "draft": "\\candra adhikāro vidhiḥ saṃjñā niṣedho niyamas tathā, paribhāṣā ca śāstrasya lakṣaṇaṃ ṣaḍvidhaṃ viduḥ. \\shi{领句、规则与概念，还有否定和限定，再加释读共六种，属于经文的种类。}但是这句经文六种都不是。）\n\n[术语] kāra：字，用以指示某字或不变词\n\n%\\shuyu{yogavāha}{相对于 \\panini 的 ayogavāha。ayogavāha指ṃ、 ḥ、ẖ 和ḫ ， 他们没有出现在湿婆经中，所以属于 “不和其他字母连着的” 。而这些字母在\\kat 中是和其他字母连着的，所以属于 yogavāha}%anusvāra 、 visarga 、 jihvāmūlīya 和 upadhmānīya ，\n\n\n  %\\ptjz{\\samiksa anusvāra、visarga、jihvāmūlīya和upadhmānīya 在 \\kat 里是yogavāha，在波你尼里是ayogavāha ~\\ps{8.3.5}。字母总数说47、49、51、52、53的都有。} \\ptjz{\\tika siddha是一个吉祥词，开头中间结尾都有吉祥词的经文广为流传。\\kat 的中间用atha\\syy{3.1.1}，结尾用vṛddhi\\syy{3.8.35}。"
 }
