@@ -1,0 +1,16 @@
+{
+  "id": "kat_1.1.10",
+  "text": "te vargāḥ pañca pañca pañca.",
+  "source": "katantra",
+  "references": [
+    "kat_1.1.11",
+    "pan_1.1.69"
+  ],
+  "sequence": [
+    "kat_1.1.11"
+  ],
+  "updatedAt": 1785553053642,
+  "translation": "他们每五个一组，共五组。",
+  "vrtti": "DSV: te kādayo māvasānā varṇāḥ pañca pañca bhūtvā pañcaiva te vargasaṃjñā bhavanti, ka kha ga gha ṅa, ca cha ja jha ña, ṭa ṭha ḍa ḍha ṇa, ta tha da dha na, pa pha ba bha ma.\nvargapradeśāḥ, vargāṇāṃ prathamadvitīyāḥ śaṣasāś cāghoṣāḥ ity evam ādayaḥ.",
+  "notes": "险狮子注：从ka开始，到ma为止的每五个字母一组，定义为辅音组，共有五组，即：k kh g gh ṅ, c ch j jh ñ, ṭ ṭh ḍ ḍh ṇ, t th d dh n, p ph b bh m是五个组。\n“组”概念用于 [[kat_1.1.11]] 等条：“各组中第一个第二个以及ś ṣ s是清辅音。”\n译注：相当于波尼你系统的ku等，也就是每组第一个音加u符号代表整组。参见[[pan_1.1.69]]。"
+}

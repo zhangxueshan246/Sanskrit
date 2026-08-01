@@ -1,0 +1,18 @@
+{
+  "id": "kat_1.1.5",
+  "text": "pūrvo hrasvaḥ.",
+  "source": "katantra",
+  "references": [
+    "kat_2.4.52"
+  ],
+  "sequence": [
+    "kat_1.1.6"
+  ],
+  "parallel": [
+    "pan_1.2.27"
+  ],
+  "updatedAt": 1785549280074,
+  "translation": "前者是短元音。",
+  "vrtti": "DSV: dvayor dvayoḥ savarṇasaṃjñayor yo yaḥ pūrvo varṇaḥ sa sa hrasvasaṃjño bhavati, a i u ṛ ḷ.\nhrasvapradeśāḥ, svaro hrasvo napuṃsake ity evam ādayaḥ.",
+  "notes": "险狮子注：有同类音概念的每组两个字母之中，前面的一个字母定义为短元音，即a i u ṛ ḷ是短元音。\n“短元音”概念用于 [[kat_2.4.52]] 等条：“中性时用短元音。”"
+}
