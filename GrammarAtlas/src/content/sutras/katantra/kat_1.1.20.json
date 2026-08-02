@@ -1,0 +1,19 @@
+{
+  "id": "kat_1.1.20",
+  "text": "pūrvaparayor arthopalabdhau padam.",
+  "source": "katantra",
+  "references": [
+    "kat_1.2.17"
+  ],
+  "sequence": [
+    "kat_1.1.21"
+  ],
+  "parallel": [
+    "pan_1.4.14",
+    "dssk_15"
+  ],
+  "updatedAt": 1785636039007,
+  "translation": "前部和后部在彰显意义时是词。",
+  "vrtti": "DSV: pūrvaparayoḥ prakṛtivibhaktyor arthopalabdhau satyāṃ samudāyaḥ padasaṃjño bhavati, te 'tra, yajante 'tra, upalabdhigrahaṇaṃ vibhaktyartham.\npadapradeśāḥ, edotparaḥ padānte lopam akāraḥ ity evam ādayaḥ.",
+  "notes": "险狮子注：前部指的是原形，后部指的是词尾，彰显意义时指的是存在时，二者整体定义为词。例如 te 'tra (他们在这儿)、yajante 'tra (他们在这儿祭祀) 都是词。使用“彰显”是为了词尾。\n“词”概念用于 [[kat_1.2.17]] 等条：“e和o之后的a音在词末之前消失。”\n译注：pada一词金克木译为“句”(1999, p. 32)，段晴译为“字”[[dssk_15]]。使用单音节方块字的中国人眼中的梵文“字”，在梵语中的对应是akṣara，大概是音节的概念。“字”有时还对译-kāra，也主要是指单个字符，因此一般多音节的pada不宜同译为“字”。如果译为“句”，在讨论“字内”与“字间”连声时又会出现“字”与“句”差距过大的问题。因此本文折中将pada译为“词”，或者啰嗦一点称为“完成了语法变化的词”，相关连声也改称“词内”与“词间”连声。）"
+}
