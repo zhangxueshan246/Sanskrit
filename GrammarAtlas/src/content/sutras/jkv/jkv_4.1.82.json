@@ -1,0 +1,17 @@
+{
+  "id": "jkv_4.1.82",
+  "text": "trayam apy adhikriyate samarthānām iti ca, prathamād iti ca, veti ca / svārthika-pratyayāvadhiś cāyam adhikāraḥ, prāgdiśo vibhaktiḥ (*5,3.1) iti yāvat / svārthikeṣu hy asyopayogo nāsti, vikalpo 'pi tatrānavasthitaḥ / ke cin nityam eva bhavanti /\nlakṣaṇavākyāni tasya apatyam (*4,1.92), tena raktaṃ rāgāt (*4,2.1) tatra bhavaḥ (*4,3.53) ity evam ādīni bhaviṣyanti / teṣu sāmarthye sati prathama-nirdiṣṭād eva vikalpena pratyayo bhavatīti veditavyam /\nsamarthānām iti nirdhāraṇe ṣaṣṭhī / samarthānāṃ madye prathamaḥ pratyaya-prakṛtitvena nirdhāryate / tasyeti sāmānyaṃ viśeṣalakṣaṇārtham / tadīyaṃ prāthamyaṃ viśeṣāṇāṃ vijñāyate / upagoḥ apatyam aupagavaḥ /\nsamarthānām iti kim ? kambala upagoḥ, apatyaṃ devadattasya / prathamāt iti kim ? ṣaṣṭhyāntād yathā syāt, prathamāntān mā bhūt /\nvāgrahanaṃ kim ? vākyam api yathā syāt, upagor apatyam iti / yady evaṃ. samāsa-vṛttiḥ taddhita-vṛttyā bādhyeta, upagvapatyam iti / naiṣa doṣaḥ / pūrvasūtrād anyatarasyāṃ grahaṇam anuvartate / tenaitad api bhaviṣyati",
+  "translation": "samarthānām（在合意搭配的各个词中）、prathamāt（在第一个词后）、vā（可选地），这三个词都要向下沿用。这个领句的管辖范围到“自义词缀”（svārthika-pratyaya，即不改变词干原本意义的词缀）为止；确切地说，到规则“prāg diśo vibhaktiḥ”（在 diś 的规则之前为词尾，[[pan_5.3.1]])为止。因为在“自义词缀”范围内，这条规则不适用，也不一定两可。有些规则是必然的。\n能适用的有以下例句：“tasya apatyam”[[pan_4.1.92]]、“tena raktaṃ rāgāt”[[pan_4.2.1]]、“tatra bhavaḥ”[[pan_4.3.53]]等。应知在这些规则中，在合意搭配的情况下，词缀加在先说的词后，可加可不加。\n“samarthānām”（在合意搭配的各个词中）是遴选式第六格（表示从群体中挑出一个）。在合意搭配的各个词中，选择第一个词作为要添加词缀的原形。（如在[[pan_4.1.92]]中）“tasya”是为了具体规则而设立的一般性表述。它是第一个词，应理解为适用于各种具体情况。（例如：）upagoḥ apatyam，（在第一个词upagu后面加aṇ词缀）变为aupagavaḥ（，而不是说经文中是tasya就只能加tad后面）。\n为什么要说“samarthānām”（在合意搭配的各个词中）？（因为不合意搭配就不能这样用，例如：）“kambala upagoḥ, apatyaṃ devadattasya”（毯子是优波古的，后代是提婆达多的。此处 upagoḥ 和 apatyam 虽然相邻，但属于两个不同的分句，不属于合意搭配，因此不能加词缀变为aupagavaḥ。）为什么要说“prathamāt”（在第一个词后）？因为（如在上面的例子中）词缀应该添加在以第六格为末的词之后（第一个词“tasya”所代表的upagoḥ），而不能添加在以第一格为末的词（第二个词“apatyam”）之后。（如果想说加在第一格之后应该说prathamāyāḥ，参见[[pan_7.2.88]]。）\n为什么要说“vā”（可选地）？因为用句子表达意思是一样的，比如“upagor apatyam”。如果这样的话，复合词形式upagvapatyam不是应该会被派生词缀形式阻碍吗？这里没有问题。因为“anyatarasyām”（两可）这一词从前一条经文[[pan_4.1.81]]随文至此。因此这样也可以。",
+  "source": "jkv",
+  "references": [
+    "pan_5.3.1",
+    "pan_4.1.92",
+    "pan_4.2.1",
+    "pan_4.3.53",
+    "pan_7.2.88"
+  ],
+  "updatedAt": 1785722240958,
+  "parallel": [
+    "pan_4.1.82"
+  ]
+}

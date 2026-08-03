@@ -5,7 +5,10 @@
   "vrtti": "",
   "notes": "samartha：合义搭配，解释见[[dssk_593]]。",
   "draft": "",
-  "adhikaras": [],
+  "adhikaras": [
+    "pan_4.1.1",
+    "pan_4.1.81"
+  ],
   "references": [
     "dssk_593"
   ],
@@ -17,5 +20,5 @@
     "pan_4.1.83"
   ],
   "source": "panini",
-  "updatedAt": 1783326460759
+  "updatedAt": 1785722288586
 }
