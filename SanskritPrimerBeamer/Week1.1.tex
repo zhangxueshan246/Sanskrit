@@ -35,13 +35,44 @@
 %-----------------------------------------插图表格
 
 \usepackage{hyperref} 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    urlcolor=blue
-}
-\usepackage{bookmark} 
-%------------------------------目录结构
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\definecolor{light-gray}{gray}{0.9}
+%------------------------------颜色
+
+\newcommand{\verbroot}[1]{\textcolor{red}{$\sqrt{}$#1}}
+\newcommand{\sktroot}[1]{{\verbroot{\skt{#1}}}}
+\newcommand{\skttransroot}[1]{{\sktroot{#1}~\textcolor{red}{#1}}}
+
+\newcommand{\nounstem}[1]{\textcolor{red}{#1\nobreakdash-}}
+\newcommand{\sktnounstem}[1]{{\textcolor{red}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransnounstem}[1]{{\sktnounstem{#1}~\nounstem{#1}}}
+
+\newcommand{\verbstem}[1]{\textcolor{blue}{#1\nobreakdash-}}
+\newcommand{\sktverbstem}[1]{{\textcolor{blue}{\skt{#1\nobreakdash-}}}}
+\newcommand{\skttransverbstem}[1]{{\sktverbstem{#1}~\verbstem{#1}}}
+
+\newcommand{\wordending}[1]{\textcolor{Orange}{\nobreakdash-#1}}
+\newcommand{\sktending}[1]{{\textcolor{Orange}{\skt{-#1}}}}
+\newcommand{\skttransending}[1]{{\sktending{#1}~\wordending{#1}}}
+
+\newcommand{\fullpada}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\sktpada}[1]{{\textcolor{OliveGreen}{\skt{#1}}}}
+\newcommand{\skttranspada}[1]{{\sktpada{#1}~\fullpada{#1}}}
+
+\newcommand{\pratyaya}[1]{\textcolor{Plum}{#1}}
+\newcommand{\sktpratyaya}[1]{{\textcolor{Plum}{\skt{#1}}}}
+\newcommand{\skttranspratyaya}[1]{{\sktpratyaya{#1}~\pratyaya{#1}}}
+
+\newcommand{\reconstruction}[1]{\textcolor{gray}{*#1}}
+\newcommand{\fullsentence}[1]{\textcolor{MidnightBlue}{#1}}
+
+\newcommand{\veryimportant}[1]{\textcolor{red}{#1}}
+\newcommand{\important}[1]{\textcolor{blue}{#1}}
+\newcommand{\notsoimportant}[1]{\textcolor{gray}{#1}}
+%-------------------------------------------词根等标颜色
+
+
 
 
 \title{{梵语入门}}
@@ -66,7 +97,7 @@
 
 \section{课程介绍}
 
-\subsection{梵语}
+\subsection{梵语较难学}
 
 \begin{frame}{梵语长啥样？}  
   \centering
@@ -83,7 +114,7 @@
 
 \begin{frame}{\insertsection }
   \footnotesize
-    \hspace*{2em}梵语（Sanskrit）是古印度文化的核心语言，广泛用于吠陀、史诗、佛教文献等经典，是学习印度哲学、文学和宗教的钥匙。本课程为从零开始的入门课，使用广受好评的教材\textit{The Cambridge Introduction to Sanskrit}，英文教材中文讲授，涵盖该书前16章的内容，旨在初步打下语法、词汇和阅读基础。课程从天城体及转写体字母和发音规则开始，概述名词的性、数、格变化，动词的时态、语态及现在时系统变位，并引入复合词、分词等。每周上课两课时，包括语法教学与练习讲解，需要学生课外约两到三小时的预习准备，练习字母书写及短句翻译，尝试阅读《摩诃婆罗多》等经典文本中的句子。结课时学生能掌握基本语法，积累常用词汇，读写简单梵语句子，为“梵语提高”课程做好准备。
+    \hspace*{2em}梵语（Sanskrit）是古印度文化的核心语言，广泛用于吠陀、史诗、佛教文献等经典，是学习印度哲学、文学和宗教的钥匙。本课程为从零开始的入门课，使用广受好评的教材\textit{The Cambridge Introduction to Sanskrit}，英文教材中文讲授，涵盖该书前16章的内容，旨在初步打下语法、词汇和阅读基础。课程从天城体及转写体字母和发音规则开始，概述名词的性、数、格变化，动词的时态、语态及现在时系统变位，并引入复合词、分词等。\important{每周上课两课时，包括语法教学与练习讲解，需要学生课外约两到三小时的预习准备，练习字母书写及短句翻译，} 尝试阅读《摩诃婆罗多》等经典文本中的句子。结课时学生能掌握基本语法，积累常用词汇，读写简单梵语句子，为“梵语提高”课程做好准备。
 \end{frame}
 
 \begin{frame}{期末作业}
@@ -102,6 +133,10 @@
   \end{verse}
 \end{frame}
 
+\begin{frame}{往年成绩}
+    \centering   
+    \includegraphics[width=0.9\textwidth]{Score2526.png}
+\end{frame}
 
 \subsection{课程平台}
 \begin{frame}{\insertsubsection }
@@ -122,7 +157,7 @@
     \item
       中文参考书：《梵文基础读本》
     \item
-      资料：课件、教材勘误表、习题参考答案等， \href{http://yun.sdnu.edu.cn/\#/link/CCAB068CE5DFF94EAACB1A221F2D3B9B}{共享文件夹}查看更多 
+      资料：课件、教材勘误表、习题参考答案等， \href{http://yun.sdnu.edu.cn:80/link/F2F090566734BBBE0DB7CCCE823AEC71}{共享文件夹} 查看更多 
   \end{itemize}
 \end{frame}
 
@@ -134,7 +169,7 @@
     \item
       期中30分：默写字母表\\第八周随堂测试~~现场提交
     \item
-      期末50分：教材第16课练习1\\学习通作业~~截止时间6月30日
+      期末50分：教材第16课练习1\\学习通作业~~截止时间1月10日
   \end{itemize}
 \end{frame}
 
@@ -153,15 +188,25 @@
 
 \begin{frame}{两条轨道}
     \begin{itemize}
-    \item 坚持到底
+    \item 坚持学习选不选课都欢迎
       \begin{itemize}
-        \item 在教务系统选课，按实际情况记分
+        \item 在教务系统选课，按实际成绩记分
         \item 系统不选课，加入学习通，没有学分
+        \item 学一送N，后续想继续学单独联系
       \end{itemize}
-    \item 中途退出
+
+    \item 选课但中途学不下去
     \begin{itemize}
-      \item 期中可选择抄写字母表，记60分
-      \item 期末可抄题干和参考答案，记60分\\用AI完成作业，80-85分
+      \item 期中考试可现场选择抄写字母表
+      \begin{itemize}
+        \item 现场抄写60分，全部抄对加5分
+      \end{itemize}
+      \item 期末可抄答案或让AI完成作业
+      \begin{itemize}
+        \item 抄写天城体和答案英文，最高70分
+        \item 天城体、转写体和意思，最高80分
+        \item 再加连声、语法分析等，最高100分
+      \end{itemize}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -183,7 +228,7 @@
   \begin{tabular}{@{}lll@{}} % 3 columns    
     天城体（Devanagari）& \skt{saṃskṛta} & 中国 \\
     转写（Transliteration）& Saṃskṛta & \pinyin{Zhong1guo2} \\
-    英文（English）& Sanskrit & China \\
+    英语（English）& Sanskrit & China \\
   \end{tabular}
 \end{frame}
 
