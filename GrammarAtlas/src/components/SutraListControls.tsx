@@ -106,9 +106,9 @@ export default function SutraListControls({ initialSutras }: Props) {
                     className="sutra-card"
                   >
                     <h3>{formatSutraId(sutra.id)}</h3>
-                    <p dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.text) }} />
+                    <p className="sutra-text" dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.text) }} />
                     {sutra.translation && (
-                      <small style={{ color: '#64748b' }} dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.translation) }} />
+                      <p className="sutra-translation" dangerouslySetInnerHTML={{ __html: parseWikiLinks(sutra.translation) }} />
                     )}
                   </a>
                 ))}

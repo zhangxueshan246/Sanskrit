@@ -1,12 +1,12 @@
 {
   "id": "pan_2.4.17",
   "text": "sa napuṃsakam.",
-  "translation": "段书：它是中性。(2.4.17)",
+  "translation": "**段书：**它是中性。(2.4.17)",
   "source": "panini",
   "references": [],
   "parallel": [
     "kat_2.5.17",
     "dssk_630"
   ],
-  "updatedAt": 1780205750527
+  "updatedAt": 1785893549562
 }

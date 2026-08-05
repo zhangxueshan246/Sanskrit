@@ -1,7 +1,7 @@
 {
   "id": "pan_1.1.10",
   "text": "nājjhalau.",
-  "translation": "段书注释11：“元音和辅音”不是同类。",
+  "translation": "**段书注释11：**“元音和辅音”不是同类。",
   "vrtti": "",
   "notes": "段书经文原文有误。段书认为[[dssk_12]]是总摄经，本条是特殊规定，是上述总摄经的例外。",
   "draft": "",
@@ -12,5 +12,5 @@
   "parallel": [],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1785724530064
+  "updatedAt": 1785893549553
 }

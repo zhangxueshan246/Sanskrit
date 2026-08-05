@@ -1,12 +1,12 @@
 {
   "id": "dssk_162",
   "text": "vṛddhiḥ. sakhāyau sakhāyaḥ. he sakhe. sakhāyam sakhāyau sakhīn sakhyā sakhye.",
-  "translation": "段书：变化成为三合元音。（例如：）sakhāyau, sakhāyah; he sakhe; sakhāyam, sakhāyau, sakhīn, sakhyā, sakhye. ",
-  "vrtti": "段书讲解：\n ac：元音的对收，在经中是第六格。\n 如果完整地表达对这句经文的注释，应该是这样的：ňiti ṇiti ca pare 'j-antāṅgasya vṛddhiḥ syāt，“其后所遇是ñ和ņ符号时，以元音为末的词干发生三合的变化。根据“以此为末的规则” (tadantaviddhi)，当替换音为单个字符时，它要替换的是位于第六格的音或词的末音。sakhi的前五个格尾如带了ṇ符号，sakhi的末音i于强语干须发生三合元音的变化，i的三合元音是ai，在第一格双数格尾au前，ai变成āy，然后再加上au，如例词所示。复数第一格、单双数第二格也须如此的过程。呼格的变化不照这五个格的规则，其变化如148条所示。从复数第二格起，不再属于代词基的范畴，因此sakhi的末音不再发生三合元音的变化。",
+  "translation": "**段书：**变化成为三合元音。（例如：）sakhāyau, sakhāyah; he sakhe; sakhāyam, sakhāyau, sakhīn, sakhyā, sakhye. ",
+  "vrtti": "**段书讲解：**\n ac：元音的对收，在经中是第六格。\n 如果完整地表达对这句经文的注释，应该是这样的：ňiti ṇiti ca pare 'j-antāṅgasya vṛddhiḥ syāt，“其后所遇是ñ和ņ符号时，以元音为末的词干发生三合的变化。根据“以此为末的规则” (tadantaviddhi)，当替换音为单个字符时，它要替换的是位于第六格的音或词的末音。sakhi的前五个格尾如带了ṇ符号，sakhi的末音i于强语干须发生三合元音的变化，i的三合元音是ai，在第一格双数格尾au前，ai变成āy，然后再加上au，如例词所示。复数第一格、单双数第二格也须如此的过程。呼格的变化不照这五个格的规则，其变化如148条所示。从复数第二格起，不再属于代词基的范畴，因此sakhi的末音不再发生三合元音的变化。",
   "source": "dssk",
   "references": [],
   "parallel": [
     "pan_7.2.115"
   ],
-  "updatedAt": 1777710822469
+  "updatedAt": 1785893893634
 }

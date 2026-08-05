@@ -1,7 +1,7 @@
 {
   "id": "pan_2.1.4",
   "text": "saha supā.",
-  "translation": "段书：与以格尾收尾的词结合。",
+  "translation": "**段书：**与以格尾收尾的词结合。",
   "source": "panini",
   "references": [],
   "parallel": [
@@ -11,5 +11,5 @@
   "sequence": [
     "pan_2.1.5"
   ],
-  "updatedAt": 1780215265138
+  "updatedAt": 1785893549558
 }

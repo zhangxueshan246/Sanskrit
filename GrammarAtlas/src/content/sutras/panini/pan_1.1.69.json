@@ -1,7 +1,7 @@
 {
   "id": "pan_1.1.69",
   "text": "aṇudit savarṇasya cāpratyayaḥ.",
-  "translation": "段书：非后缀的aṇ和以短音u为符号的也代表它们的同类。",
+  "translation": "**段书：**非后缀的aṇ和以短音u为符号的也代表它们的同类。",
   "vrtti": "",
   "notes": "",
   "draft": "",
@@ -12,5 +12,5 @@
   ],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1785637060553
+  "updatedAt": 1785893549555
 }

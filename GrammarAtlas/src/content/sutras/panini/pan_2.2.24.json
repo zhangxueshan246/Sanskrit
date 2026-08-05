@@ -2,7 +2,7 @@
   "id": "pan_2.2.24",
   "text": "anekam anyapadārthe.",
   "source": "panini",
-  "translation": "段书：两个以上的词，表达另一个词的意义。",
+  "translation": "**段书：**两个以上的词，表达另一个词的意义。",
   "notes": "是多财释复合词。",
   "references": [],
   "adhikaras": [
@@ -12,5 +12,5 @@
     "kat_2.5.9",
     "dssk_650"
   ],
-  "updatedAt": 1780129976488
+  "updatedAt": 1785893549561
 }

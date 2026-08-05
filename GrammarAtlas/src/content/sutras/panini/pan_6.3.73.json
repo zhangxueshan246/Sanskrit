@@ -1,7 +1,7 @@
 {
   "id": "pan_6.3.73",
   "text": "nalopo nañaḥ.",
-  "translation": "段书：nañ的n失落。",
+  "translation": "**段书：**nañ的n失落。",
   "source": "panini",
   "references": [],
   "parallel": [
@@ -11,5 +11,5 @@
   "sequence": [
     "pan_6.3.74"
   ],
-  "updatedAt": 1780215332151
+  "updatedAt": 1785893549568
 }

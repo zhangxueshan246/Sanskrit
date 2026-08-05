@@ -1,8 +1,8 @@
 {
   "id": "pan_4.1.21",
   "text": "dvigoḥ.",
-  "translation": "段书：于双牛释后。",
-  "vrtti": "段书注释147：双牛释表示阴性时根据本经文加ṅip（=ī）：dvigoḥ.（Boehtlingk）“于双牛释之后”阴性时加ṅip。",
+  "translation": "**段书：**于双牛释后。",
+  "vrtti": "**段书注释147：**双牛释表示阴性时根据本经文加ṅip（=ī）：dvigoḥ.（Boehtlingk）“于双牛释之后”阴性时加ṅip。",
   "notes": "",
   "draft": "",
   "adhikaras": [],
@@ -10,5 +10,5 @@
   "parallel": [],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1780122008709
+  "updatedAt": 1785893549564
 }

@@ -1,7 +1,7 @@
 {
   "id": "pan_2.1.22",
   "text": "tatpuruṣaḥ.",
-  "translation": "段书：依主释。",
+  "translation": "**段书：**依主释。",
   "source": "panini",
   "references": [],
   "sequence": [
@@ -16,5 +16,5 @@
     "kat_2.5.8",
     "dssk_611"
   ],
-  "updatedAt": 1780884750625
+  "updatedAt": 1785893549557
 }

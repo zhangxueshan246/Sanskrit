@@ -1,11 +1,11 @@
 {
   "id": "pan_5.3.53",
   "text": "bhūtapūrve caraṭ.",
-  "translation": "段书：caraṭ词缀表示从前发生过的。",
+  "translation": "**段书：**caraṭ词缀表示从前发生过的。",
   "notes": "[[dssk_595]]引用了此经文，作为圣言量，以确定bhūtapūrva这个复合词谁是前词谁是后词。",
   "references": [
     "dssk_595"
   ],
   "source": "panini",
-  "updatedAt": 1780206245237
+  "updatedAt": 1785893549567
 }

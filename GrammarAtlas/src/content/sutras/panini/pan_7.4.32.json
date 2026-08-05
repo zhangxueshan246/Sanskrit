@@ -1,8 +1,8 @@
 {
   "id": "pan_7.4.32",
   "text": "asya cvau.",
-  "translation": "段书：遇后缀cvi时，(ī)替换a和ā。",
-  "vrtti": "段书注释10：cvi=v，零词缀。cvi是使形容词变为副词的词缀，在这个词缀之前，原词的末音a或ā音应变成长音ī。例如：śuklī karoti, śuklī bhavati，“使变白”，“成为白色的”。",
+  "translation": "**段书：**遇后缀cvi时，(ī)替换a和ā。",
+  "vrtti": "**段书注释10：**cvi=v，零词缀。cvi是使形容词变为副词的词缀，在这个词缀之前，原词的末音a或ā音应变成长音ī。例如：śuklī karoti, śuklī bhavati，“使变白”，“成为白色的”。",
   "notes": "[[dssk_12]]以本条经文为例解释经文中出现的短元音一般是指包含短长引等的所有同类音，即总摄音。",
   "draft": "",
   "adhikaras": [],
@@ -12,5 +12,5 @@
   "parallel": [],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1785712407650
+  "updatedAt": 1785893549570
 }

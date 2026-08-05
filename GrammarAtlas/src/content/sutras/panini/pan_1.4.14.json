@@ -1,12 +1,12 @@
 {
   "id": "pan_1.4.14",
   "text": "sup-tiṅ-antaṃ padam.",
-  "translation": "段书：以格尾、语尾为末的是字。",
+  "translation": "**段书：**以格尾、语尾为末的是字。",
   "notes": "anta在段书[[dssk_15]]有解释，需再查。",
   "source": "panini",
   "references": [],
   "parallel": [
     "dssk_15"
   ],
-  "updatedAt": 1777710822475
+  "updatedAt": 1785893549557
 }

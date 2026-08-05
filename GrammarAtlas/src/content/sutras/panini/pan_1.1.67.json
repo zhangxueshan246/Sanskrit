@@ -1,7 +1,7 @@
 {
   "id": "pan_1.1.67",
   "text": "tasmād ity uttarasya.",
-  "translation": "段书：“于其后”表示下一个音要发生变化。",
+  "translation": "**段书：**“于其后”表示下一个音要发生变化。",
   "vrtti": "",
   "notes": "",
   "draft": "",
@@ -12,5 +12,5 @@
   ],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1783318733534
+  "updatedAt": 1785893549554
 }

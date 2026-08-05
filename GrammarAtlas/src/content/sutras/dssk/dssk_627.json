@@ -2,7 +2,7 @@
   "id": "dssk_627",
   "text": "",
   "translation": "",
-  "vrtti": "段书讲解：samāna-adhikaraṇa “一致的语法关系”。在经文中作为多财释修饰 tatpuruṣa。《迦湿伽》对这个词的解释是：samāna-abhidheyam， “被一致表达的”。当组成依主释的两个词具有相同的性、数、格时，这样的两个词所构成的复合词是持业释，持业释是依主释下的复合词类别。",
+  "vrtti": "**段书讲解：**samāna-adhikaraṇa “一致的语法关系”。在经文中作为多财释修饰 tatpuruṣa。《迦湿伽》对这个词的解释是：samāna-abhidheyam， “被一致表达的”。当组成依主释的两个词具有相同的性、数、格时，这样的两个词所构成的复合词是持业释，持业释是依主释下的复合词类别。",
   "notes": "dssk没有额外注释，只是引用？",
   "source": "dssk",
   "references": [],
@@ -12,5 +12,5 @@
   "sequence": [
     "dssk_628"
   ],
-  "updatedAt": 1785547186772
+  "updatedAt": 1785893893645
 }

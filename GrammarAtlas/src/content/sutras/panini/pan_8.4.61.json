@@ -1,7 +1,7 @@
 {
   "id": "pan_8.4.61",
   "text": "udaḥ sthāstambhoḥ pūrvasya.",
-  "translation": "段书：ud之后，sthā和stambh的首位音发生与前面音(同类)的变化。",
+  "translation": "**段书：**ud之后，sthā和stambh的首位音发生与前面音(同类)的变化。",
   "vrtti": "",
   "notes": "",
   "draft": "",
@@ -12,5 +12,5 @@
   ],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1783319559231
+  "updatedAt": 1785893549570
 }

@@ -36,7 +36,10 @@ const recentSutras = sutraList
     {recentSutras.map(sutra => (
       <a href={`/Sanskrit/sutra/${sutra.id}`} class="sutra-card">
         <h3>{formatSutraId(sutra.id)}</h3>
-        <p set:html={parseWikiLinks(sutra.text)}></p>
+        <p class="sutra-text" set:html={parseWikiLinks(sutra.text)}></p>
+        {sutra.translation && (
+          <p class="sutra-translation" set:html={parseWikiLinks(sutra.translation)}></p>
+        )}
       </a>
     ))}
   </div>

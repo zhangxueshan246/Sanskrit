@@ -1,11 +1,11 @@
 {
   "id": "pan_1.1.72",
   "text": "yena vidhis tad-antasya.",
-  "translation": "段书：以此为规则，以此为末音。",
+  "translation": "**段书：**以此为规则，以此为末音。",
   "notes": "参见[[dssk_15]] 讲解后半部分。",
   "source": "panini",
   "references": [
     "dssk_15"
   ],
-  "updatedAt": 1777710822475
+  "updatedAt": 1785893549555
 }

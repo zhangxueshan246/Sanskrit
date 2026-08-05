@@ -11,8 +11,8 @@ function addCJKSpacing(text: string): string {
 }
 
 /**
- * 解析文本中的 Wiki 式链接 [[id]] 并处理换行符
- * 将 \n 转换为 <br/> 标签，将 wiki 链接转换为可点击的 HTML 链接
+ * 解析文本中的 Wiki 式链接 [[id]]、Markdown 格式（**加粗**、[链接](url)）并处理换行符
+ * 将 \n 转换为 <br/> 标签，将 wiki 链接和 markdown 链接转换为可点击的 HTML 链接
  * 为长的梵文词汇插入软连字符（软断字符），使浏览器在自动换行时显示连字符
  */
 export function parseWikiLinks(text: string): string {
@@ -30,7 +30,13 @@ export function parseWikiLinks(text: string): string {
   // 步骤 3：将 \n 转换为 <br/> 标签（强制换行）
   result = result.replace(/\n/g, '<br/>');
 
-  // 步骤 4：正则表达式匹配 [[sutra_id]] 格式
+  // 步骤 4：处理加粗 **文本** → <strong>文本</strong>
+  result = result.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+
+  // 步骤 5：处理外部链接 [文本](url) → <a href="url" target="_blank">文本</a>
+  result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="external-link">$1</a>');
+
+  // 步骤 6：正则表达式匹配 [[sutra_id]] 格式（Wiki 链接）
   const wikiLinkRegex = /\[\[([^\]]+)\]\]/g;
 
   result = result.replace(wikiLinkRegex, (match, sutraId) => {

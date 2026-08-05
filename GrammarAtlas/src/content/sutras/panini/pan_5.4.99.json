@@ -1,8 +1,8 @@
 {
   "id": "pan_5.4.99",
   "text": "nāvo dvigoḥ.",
-  "translation": "段书：在以nau收尾的双牛释后。",
-  "vrtti": "段书注释146：nāvo dvigoḥ.（Boehtlingk）“在以nau收尾的双牛释后”加ac词缀。ac=a，复合词后缀。",
+  "translation": "**段书：**在以nau收尾的双牛释后。",
+  "vrtti": "**段书注释146：**nāvo dvigoḥ.（Boehtlingk）“在以nau收尾的双牛释后”加ac词缀。ac=a，复合词后缀。",
   "notes": "",
   "draft": "",
   "adhikaras": [],
@@ -10,5 +10,5 @@
   "parallel": [],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1780122183375
+  "updatedAt": 1785893549567
 }

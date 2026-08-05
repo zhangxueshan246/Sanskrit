@@ -1,8 +1,8 @@
 {
   "id": "dssk_600",
   "text": "samāse. iti adheḥ prākprayogaḥ.",
-  "translation": "段书：指于复合词中。根据此条，先使用adhi。",
-  "vrtti": "段书讲解：\n acheḥ是adhi的单数第六格。根据此条经文，凡是附属词应位于复合词的前部。adhi是投词，属于不变词的范畴。根据[[dssk_598]]，不变词在构成复合词时属于附属词，因此应位于复合词的前部。这样，hari ṅi adhi进一步演化为adhi+hari ṅi.",
+  "translation": "**段书：**指于复合词中。根据此条，先使用adhi。",
+  "vrtti": "**段书讲解：**\n acheḥ是adhi的单数第六格。根据此条经文，凡是附属词应位于复合词的前部。adhi是投词，属于不变词的范畴。根据[[dssk_598]]，不变词在构成复合词时属于附属词，因此应位于复合词的前部。这样，hari ṅi adhi进一步演化为adhi+hari ṅi.",
   "source": "dssk",
   "parallel": [
     "pan_2.2.30"
@@ -10,5 +10,5 @@
   "references": [
     "dssk_598"
   ],
-  "updatedAt": 1780109892378
+  "updatedAt": 1785893893641
 }
