@@ -1,0 +1,21 @@
+{
+  "id": "kat_1.1.23",
+  "text": "lokopacārād grahaṇasiddhiḥ.",
+  "source": "katantra",
+  "references": [
+    "pan_4.2.82",
+    "pan_1.2.53",
+    "pan_1.2.52"
+  ],
+  "sequence": [
+    "kat_1.2.1"
+  ],
+  "parallel": [
+    "pan_6.3.109"
+  ],
+  "updatedAt": 1785978243791,
+  "translation": "来自世俗语言的用法成立。",
+  "vrtti": "**DSV: **lokānām upacāro vyavahāraḥ, tasmād anuktasyāpi grahaṇasya siddhir veditavyeti, nipātāvyayopasargakārakakālasaṃkhyālopādayaḥ.\ntathā Varaṇā iti nagarasyāpi saṃjñā, Pañcālā（Eggeling 为Pañcālā Varaṇā，根据 Dwivedi 改。）iti janapadasyāpi, Pañcālā Varaṇā iti yogo na dṛśyate, saṃjñāśabdatvāt.\nharītakyaḥ phalānīti, phaleṣv api striyāṃ vṛttiḥ.\nevam anye 'pi saṃjñāśabdā iva taddhitā lokataḥ siddhāḥ, khalatikaṃ vanānīti, teṣāṃ vanānām ekavacanāntam eva nāma.\nśabdānām ekārthe 'pi liṅgavacanabhedaḥ, yathā, āpo jalam, dārāḥ kalatraṃ bhāryeti.\nvaidikā laukikajñaiś ca ye yathoktās tathaiva ca, nirṇītārthās tu vijñeyā lokāt teṣām asaṃgrahaḥ.",
+  "notes": "**险狮子注：**世俗的语言就是约定俗成的习惯用法，来自世俗语言的未经定义的用法也成立。例如nipāta (投词，指ca等不表示实物意义的词。)、avyaya (不变词，指svar等一部分投词。)、upasarga (近置词，指与动词前缀pra等词。)、kāraka (造者，指与动作相关的句法成分。)、kāla (时间，指nimeṣa (瞬间) 等。)、saṃkhyā (数词，指eka (一) 等。)、lopa (消失)等。\n比如Varaṇāḥ也是城市名（[[pan_4.2.82]] [[pan_1.2.53]]），Pañcālāḥ 也是村子名，Pañcālāḥ和Varaṇāḥ会见到主谓不一致，因为它们是专有名词。\n又比如harītakyaḥ phalāni (诃子果)，虽然属于果 (phala, n.)，还是按阴性(harītakī, f.)变化。\n同样，就像其他专有名词一样，加间接词缀的词也是约定俗成的，比如khalatikaṃ vanāni太阳林，森林是复数，但名字khalatikaṃ是单数结尾的[[pan_1.2.52]]\n虽然词语是同一个意思，但是性和数有区别，比如āpo  (ap, f. pl.)和jalam (n. sg.)都表示水。dārāḥ (m. pl.)、kalatraṃ (n. sg.)和 bhāryā (f. sg.)都表示妻子。\n吠陀的段落是了解世俗的人传承的，他们怎么说就应该怎样固定下来，吠陀用法不约束世俗。\n**译注：**有关约定俗成的用法， [[pan_6.3.109]] “pṛṣodarādīni yathopadiṣṭam. pṛṣodara (腹部带花斑的)等词，依所传授。”讨论的是实际的词。本条注释第一句举的例子都是语法概念，有些是《八章书》中有定义的，有些是更早的或者约定俗成的。后几句讨论的也是实际的词，但由于省略了《八章书》中的大量经文，此处“实际的词”范围比波你尼系统更广，或者说由于要背的语法少，要背的词汇量更多了。是不是可以说波你尼是rule-based，迦丹多罗是data-driven？\n 例如根据Ṭīkā和Pañjikā的解说，Varaṇāḥ不仅是树名(钝叶鱼木)，也是城市名，说的是其中有钝叶鱼木的城市，或者离这种树不远的城市。以前的老师说这里是间接词缀消失[[pan_4.2.82]]，但是根据世俗用法Varaṇā一词已经不仅是树名还是城市名，干嘛还说间接词缀消失呢？",
+  "draft": "（**Ṭīkā: ** Pañcālāḥ不仅是刹帝利族名，也是村子名，说的是Pañcāla族刹帝利居住或者离得不远的地方，或者是有Pañcāla族刹帝利的地方，或者是他们起源的那个村子。有人说这四种意思都要加aṇ，然后在janapada (村子)这个词前消失 ([[pan_4.2.8]]kaler ḍhak.)。不应该这么说，根据世俗用法Pañcāla不仅是刹帝利族名也是村子名。那些傻瓜从Pañcāla一词得到janapada，没有分析变化原形和词缀的知识，说了四条经[[pan_4.2.67]]到[[pan_4.2.70]]，其实都不用说。未见构词变化，说的是Varaṇāḥ (m.  pl.)和nagaram (n.  sg. 城)以及Pañcālāḥ (m.  pl.)和janapadaḥ (m.  sg. 村子)的性数不一致。），%**Pañjikā: ** yuktavat什么的没看懂[[pan_1.2.51, 53, 54]]? 提到了Jayāditya (迦湿伽作者之一)。**Kalāpacandra: ** vyaktir liṅgam, vacanaṃ saṃkhyā. 解释性和数？%\\ptjz{**Ṭīkā: ** 同类有harītakī (诃子)、bhallātakī (腰果、印果)、koṣātakī (棱角丝瓜)、śallakī (乳香？)、drākṣā (葡萄)、kaṇṭakārikā (牛茄子)、śephālikā (夜花)等。**Pañjikā: ** 一大堆经文都不用讲[[pan_4.2.70, 4.3.64, 163, 167, 5.3.52, 5.4.39, 40]]。} 照片197 %植物名主要来自\\cite{zhiwu}后面还有二十多种花草树木未查。\n"
+}
