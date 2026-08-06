@@ -112,9 +112,9 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
       )}
 
       {sutra.tibetan && (
-        <div class="sutra-section">
+        <div class="sutra-section tibetan-section">
           <h2>藏译</h2>
-          <p set:html={parseWikiLinks(sutra.tibetan)} />
+          <p class="tibetan-text" set:html={parseWikiLinks(sutra.tibetan)} />
         </div>
       )}
 
@@ -301,7 +301,16 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
     text-decoration: underline;
   }
 
-  @media (max-width: 1024px) {
+  .tibetan-section .tibetan-text {
+    font-size: 1.5rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .tibetan-section .tibetan-text {
+      font-size: 1.1rem;
+    }
+  }
     .sutra-detail-wrapper {
       grid-template-columns: 1fr;
     }
