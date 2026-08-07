@@ -23,10 +23,13 @@ interface Link extends d3.SimulationLinkDatum<Node> {
 }
 
 export default function SutraGraph({ width = 800, height = 600, sutras, edges }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const autoZoomedRef = useRef(false);
   const [selectedSutra, setSelectedSutra] = useState<Sutra | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Set<string>>(new Set());
+  const [containerWidth, setContainerWidth] = useState(width);
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -35,7 +38,7 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
     d3.select(svgRef.current).selectAll("*").remove();
 
     const svg = d3.select(svgRef.current)
-      .attr("viewBox", [0, 0, width, height]);
+      .attr("viewBox", [0, 0, containerWidth, height]);
 
     // 创建一个 group 用于缩放/平移
     const g = svg.append("g");
@@ -107,7 +110,7 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
     const simulation = d3.forceSimulation(nodes)
       .force("link", d3.forceLink<Node, Link>(links).id(d => d.id).distance(100))
       .force("charge", d3.forceManyBody().strength(-300))
-      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("center", d3.forceCenter(containerWidth / 2, height / 2))
       .force("collision", d3.forceCollide().radius(40))
       // 添加边界力，阻止节点跑出显示范围
       .force("boundary", () => {
@@ -116,7 +119,7 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
           // 只约束未被拖动的节点（拖动时 fx/fy 不为 null）
           if (node.fx === null && node.fy === null) {
             if (node.x! < padding) node.x = padding;
-            if (node.x! > width - padding) node.x = width - padding;
+            if (node.x! > containerWidth - padding) node.x = containerWidth - padding;
             if (node.y! < padding) node.y = padding;
             if (node.y! > height - padding) node.y = height - padding;
           }
@@ -196,9 +199,10 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
 
       node.attr("transform", d => `translate(${d.x},${d.y})`);
 
-      // 在第 50 次 tick 后自动缩放到合适大小
+      // 在第 50 次 tick 后自动缩放到合适大小（仅第一次）
       tickCount++;
-      if (tickCount === 50) {
+      if (tickCount === 50 && !autoZoomedRef.current) {
+        autoZoomedRef.current = true;
         // 计算所有节点的边界框
         let minX = Infinity, maxX = -Infinity;
         let minY = Infinity, maxY = -Infinity;
@@ -219,21 +223,24 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
         // 计算缩放比例（留 10% 边距）
         const padding = 0.9;
         const scale = Math.min(
-          (width * padding) / boundingWidth,
+          (containerWidth * padding) / boundingWidth,
           (height * padding) / boundingHeight
         );
 
         // 计算平移量，使边界框中心对齐 SVG 中心
-        const translateX = width / 2 - centerX * scale;
+        // 先把边界框中心平移到原点，再缩放，最后平移到 SVG 中心
+        const translateX = containerWidth / 2 - centerX * scale;
         const translateY = height / 2 - centerY * scale;
 
-        // 应用初始缩放（加快动画速度）
+        // 应用初始缩放（先缩放再平移）
         svg.transition()
           .duration(400)
           .call(
             zoom.transform as any,
-            d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+            d3.zoomIdentity.scale(scale).translate(translateX / scale, translateY / scale)
           );
+      } else if (tickCount > 50) {
+        tickCount = 51; // 防止数字过大
       }
     });
 
@@ -251,27 +258,51 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
     }
 
     // 拖拽函数
+    let dragStartX: number, dragStartY: number;
+    let isDragging = false;
+
     function dragstarted(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
+      dragStartX = event.subject.x!;
+      dragStartY = event.subject.y!;
+      isDragging = false;
+      // 重启 simulation，准备好动作
       if (!event.active) simulation.alphaTarget(0.3).restart();
+      // 锁定节点
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
     }
 
     function dragged(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
-      event.subject.fx = event.subject.x + event.dx;
-      event.subject.fy = event.subject.y + event.dy;
+      const currentX = event.subject.x! + event.dx;
+      const currentY = event.subject.y! + event.dy;
+      const distance = Math.sqrt(
+        Math.pow(currentX - dragStartX, 2) +
+        Math.pow(currentY - dragStartY, 2)
+      );
+
+      // 标记是否真正拖拽（距离 > 5px）
+      if (distance > 5) {
+        isDragging = true;
+      }
+
+      // 更新节点位置
+      event.subject.fx = currentX;
+      event.subject.fy = currentY;
     }
 
     function dragended(event: d3.D3DragEvent<SVGGElement, Node, Node>) {
+      // 不释放 fx 和 fy，节点保持在新位置
+      event.subject.vx = 0;
+      event.subject.vy = 0;
+
+      // 停止 simulation
       if (!event.active) simulation.alphaTarget(0);
-      event.subject.fx = null;
-      event.subject.fy = null;
     }
 
     return () => {
       simulation.stop();
     };
-  }, [width, height, searchResults, sutras, edges]);
+  }, [sutras, edges, height, searchResults]);
 
   // 处理搜索查询变化
   useEffect(() => {
@@ -282,6 +313,26 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
       setSearchResults(new Set());
     }
   }, [searchQuery]);
+
+  // 监听容器宽度变化
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setContainerWidth(entry.contentRect.width);
+      }
+    });
+
+    resizeObserver.observe(containerRef.current);
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  // 当宽度改变时，更新SVG的viewBox（但不重新初始化图）
+  useEffect(() => {
+    if (!svgRef.current) return;
+    d3.select(svgRef.current).attr("viewBox", [0, 0, containerWidth, height]);
+  }, [containerWidth, height]);
 
   return (
     <>
@@ -320,8 +371,8 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
       </div>
 
       {/* 图表容器 */}
-      <div className="graph-container">
-        <svg ref={svgRef} width={width} height={height} />
+      <div ref={containerRef} className="graph-container" style={{ width: '100%' }}>
+        <svg ref={svgRef} width="100%" height={height} preserveAspectRatio="xMidYMid slice" />
 
         {/* 图例 */}
         <div className="legend">
@@ -362,7 +413,11 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
         {selectedSutra && (
           <div className="sutra-panel">
             <button className="close-btn" onClick={() => setSelectedSutra(null)}>×</button>
-            <h3>{formatSutraId(selectedSutra.id)}</h3>
+            <h3>
+              <a href={`/Sanskrit/sutra/${selectedSutra.id}`} className="sutra-panel-link">
+                {formatSutraId(selectedSutra.id)} →
+              </a>
+            </h3>
             <p className="sutra-text" dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.text) }} />
             {selectedSutra.translation && (
               <p className="translation" dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.translation) }} />
@@ -392,9 +447,6 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
                 <strong>后继经文:</strong> {selectedSutra.sequence.map(seq => formatSutraId(seq)).join(', ')}
               </p>
             )}
-            <a href={`/Sanskrit/sutra/${selectedSutra.id}`} className="view-link">
-              查看详情 →
-            </a>
           </div>
         )}
       </div>

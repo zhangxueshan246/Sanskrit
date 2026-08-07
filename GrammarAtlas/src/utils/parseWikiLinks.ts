@@ -27,8 +27,8 @@ export function parseWikiLinks(text: string): string {
   // 步骤 2：将手动断点标记 | 转换为 <wbr> 标签
   result = result.replace(/\|/g, '<wbr>');
 
-  // 步骤 3：将 \n 转换为 <br/> 标签（强制换行）
-  result = result.replace(/\n/g, '<br/>');
+  // 步骤 3：将 \n 转换为 <br/> 标签（强制换行）并添加段落间距
+  result = result.replace(/\n/g, '<div class="paragraph-break"></div>');
 
   // 步骤 4：处理加粗 **文本** → <strong>文本</strong>
   result = result.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');

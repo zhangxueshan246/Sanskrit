@@ -134,12 +134,23 @@ main {
   top: 1rem;
   right: 1rem;
   width: 300px;
+  max-height: 700px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  overflow-y: auto;
+}
+
+.sutra-panel-link {
+  color: var(--color-panini);
+  text-decoration: none;
+}
+
+.sutra-panel-link:hover {
+  text-decoration: underline;
 }
 
 .sutra-panel h3 {
@@ -150,7 +161,6 @@ main {
 
 .sutra-panel .sutra-text {
   font-size: 1.125rem;
-  font-style: italic;
   margin-bottom: 0.75rem;
   word-break: normal;
   overflow-wrap: break-word;
@@ -255,7 +265,6 @@ main {
 
 .sutra-header .sutra-text {
   font-size: 1.5rem;
-  font-style: italic;
   word-break: normal;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -294,6 +303,8 @@ main {
   color: var(--color-text);
   text-decoration: none;
   margin: 0.25rem;
+  vertical-align: baseline;
+  line-height: 1;
 }
 
 .sutra-link:hover {
@@ -308,6 +319,10 @@ main {
 
 .external-link:hover {
   text-decoration: underline;
+}
+
+.paragraph-break {
+  height: 0.75rem;
 }
 
 /* Index Page */
@@ -363,7 +378,6 @@ main {
 }
 
 .sutra-card .sutra-text {
-  font-style: italic;
   color: var(--color-text);
   word-break: normal;
   overflow-wrap: break-word;
@@ -398,7 +412,6 @@ main {
 }
 
 .sutra-card p {
-  font-style: italic;
   color: var(--color-text-muted);
   word-break: normal;
   overflow-wrap: break-word;

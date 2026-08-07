@@ -12,11 +12,12 @@ const edges = await generateEdges();
   <p style="color: #94a3b8; margin-bottom: 1.5rem;">
     拖拽节点调整位置，点击查看经文详情。
   </p>
-  <SutraGraph
-    client:load
-    width={1000}
-    height={700}
-    sutras={sutras}
-    edges={edges}
-  />
+  <div style="width: 100%;">
+    <SutraGraph
+      client:load
+      height={700}
+      sutras={sutras}
+      edges={edges}
+    />
+  </div>
 </Layout>
