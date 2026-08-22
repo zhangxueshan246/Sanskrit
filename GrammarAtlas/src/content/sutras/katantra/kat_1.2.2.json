@@ -1,0 +1,21 @@
+{
+  "id": "kat_1.2.2",
+  "text": "avarṇa ivarṇe e.",
+  "source": "katantra",
+  "references": [
+    "kat_1.2.1",
+    "dssk_39"
+  ],
+  "sequence": [
+    "kat_1.2.3"
+  ],
+  "parallel": [
+    "pan_6.1.87"
+  ],
+  "updatedAt": 1787360214443,
+  "translation": "在i字母前，a字母变为e。",
+  "vrtti": "**DSV: **avarṇa ivarṇe pare er bhavati paraś ca lopam āpadyate, varṇagrahaṇe savarṇagrahaṇam, tavehā, seyam.\ncakārādhikāro 'nuktasamuccayārthaḥ, tena kva cit pūrvo 'pi lupyate, halīṣā, lāṅgalīṣā, manasa īṣā, manīṣā.",
+  "notes": "**险狮子注：**后面遇到i字母时，a字母变为e，而且后者消失。使用“字母(varṇa)”的时候，也包括了同类音。例如，tavehā (tava+īhā, 你的努力)，seyam (sā+iyam, 正是这个)。\nca字母的领句（指[[kat_1.2.1]]后半句“而且后者消失”）包含未表达的含义。所以有时前面的字母（a）才消失，例如halīṣā (hala-īṣā, 犁柄)，lāṅgalīṣā (lāṅgala-īṣā, 犁柄)，manīṣā (manas-īṣā, 拆开是manasa īṣā，心之柄，指思想)（**Ṭīkā: ** 此处s也消失，因为约定俗成。）。\n\n**译注：**前面的字母a消失的情况在波你尼系统是一条释补，参见[[dssk_39]]。",
+  "draft": "**Kalāpacandra: ** 因为倒数第二音(ṣ?)是腭音，此时前面的字母必然消失。",
+  "tibetan": "**ཡར་འགྱུར།** ཨ་ཡིག་དང་ཨི་ཡིག་ལ་ཨེའོ།།\n**དཔང་འགྱུར།** ཨའི་ཡི་གེ་ཨིའི་ཡི་གེ་ལ་ཨེའོ།།\n**ས་འགྱུར།** ཨའི་ཡི་གེ་ཨིའི་ཡི་གེ་ལ་ཨེའོ།།"
+}

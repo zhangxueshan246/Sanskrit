@@ -1,0 +1,17 @@
+{
+  "id": "kat_1.2.3",
+  "text": "uvarṇe o.",
+  "source": "katantra",
+  "references": [],
+  "sequence": [
+    "kat_1.2.4"
+  ],
+  "parallel": [
+    "pan_6.1.87"
+  ],
+  "updatedAt": 1787363548137,
+  "translation": "在u字母前变为o。",
+  "vrtti": "**DSV: **avarṇa uvarṇe pare or bhavati paraś ca lopam āpadyate, tavohanam, gaṅgodakam.",
+  "notes": "**险狮子注：**后面遇到u字母时，a字母变为o，而且后者消失。例如 tavohanam (tava+ūhanam, 你的改变)，gaṅgodakam (gaṅgā-udaka, 恒河水)。",
+  "tibetan": "**ཡར་འགྱུར།** ཨུ་ཡིག་ལ་ཨོའོ།།\n**དཔང་འགྱུར།** ཨུའི་ཡི་གེ་ལ་ཨོའོ།།\n**ས་འགྱུར།** ཨུའི་ཡི་གེ་ལ་ཨོའོ།།"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "kat_1.2.4",
+  "text": "ṛvarṇe ar.",
+  "source": "katantra",
+  "references": [
+    "pan_6.1.89",
+    "pan_6.1.91",
+    "pan_6.1.92"
+  ],
+  "sequence": [
+    "kat_1.2.5"
+  ],
+  "parallel": [
+    "pan_1.1.51"
+  ],
+  "updatedAt": 1787364119772,
+  "translation": "在ṛ字母前变为ar。",
+  "vrtti": "**DSV: **avarṇa ṛvarṇe pare ar bhavati paraś ca lopam āpadyate, tavarkāraḥ, sarkāreṇa.\nṛṇapravasanavatsatarakambaladaśānām ṛṇe kva cid aro 'pi dīrghatā, ṛṇārṇam, prārṇam ity evam ādayaḥ.\nṛte ca tṛtīyāsamāse, śītena ṛtaḥ, śītārtaḥ.\nṛti dhātor upasargasya, prārchati.\nnāmadhator vā, prārṣabhīyati, prarṣabhīyati.",
+  "notes": "**险狮子注：**后面遇到ṛ字母时，a字母变为ar，而且后者消失。例如 tavarkāraḥ (tava+ṛkāraḥ, 你的ṛ字母)，markāreṇa (mā+ṛkāreṇa, 禁止用ṛ字母)。\nṛṇa (债)、pra、vasana (衣服)、vatsatara (小牛)、kambala (毛毯、上衣)、daśa (十) 等词，在ṛṇa (债、水) 前，有时ar还变长，例如ṛṇārṇam (ṛṇa-ṛṇa，为还债而借的新债)，prārṇam (pra-ṛṇa，主要的债)，等等。[[pan_6.1.89]]\n在ṛta (遇上) 一词前形成第三格复合词时ar也变长，例如 śītārtaḥ (śītena ṛtaḥ, 遭受寒冷)。\n动词词根的ṛ字母前，近置词变成的ar也变长，例如prārchati  (pra-ṛch, 前进)。[[pan_6.1.91]]\n名动词词根前两可。例如 prārṣabhīyati =  prarṣabhīyati  (pra-rṣabhīya, 变牛)。[[pan_6.1.92]]",
+  "tibetan": "**ཡར་འགྱུར།** རི་ཡིག་ལ་ཨརའོ།།\n**དཔང་འགྱུར།** རྀའི་ཡི་གེ་ལ་ཨརའོ།།\n**ས་འགྱུར།** རྀའི་ཡི་གེ་ལ་ཨརའོ།།"
+}

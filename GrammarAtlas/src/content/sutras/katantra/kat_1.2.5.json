@@ -1,0 +1,17 @@
+{
+  "id": "kat_1.2.5",
+  "text": "ḷvarṇe al.",
+  "source": "katantra",
+  "references": [],
+  "sequence": [
+    "kat_1.2.6"
+  ],
+  "parallel": [
+    "dssk_29"
+  ],
+  "updatedAt": 1787364924620,
+  "translation": "在ḷ字母前变为al。",
+  "vrtti": "**DSV: **avarṇa ḷvarṇe pare al bhavati paraś ca lopam āpadyate, tavalkāraḥ, salkāreṇa. upasargasya vā ḷti dhātor alo dīrghaḥ, upālkārīyati, upalkārīyati.",
+  "notes": "**险狮子注：**后面遇到ḷ字母时，a字母变为al，而且后者消失。例如 tavalkāraḥ (tava+ḷkāraḥ, 你的ḷ字母)，salkāreṇa (sā+ḷkāreṇa, 她用ḷ字母)。\n动词词根的ḷ字母前，近置词变成的al可以变长。例如 upālkārīyati = upalkārīyati (靠近ḷ字母)。\n\n**译注：**月光疏将其并入ṛ的变化中，参见[[dssk_29]]。",
+  "tibetan": "**ཡར་འགྱུར།** ལི་ཡིག་ལ་ཨ་ལའོ།།\n**དཔང་འགྱུར།** ལྀའི་ཡི་གེ་ལ་ཨ་ལའོ།།\n**ས་འགྱུར།** ལྀའི་ཡི་གེ་ལ་ཨལ་འོ།།"
+}

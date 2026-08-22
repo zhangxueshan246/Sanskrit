@@ -1,0 +1,21 @@
+{
+  "id": "kat_1.2.1",
+  "text": "samānaḥ savarṇe dīrghībhavati paraś ca lopam.",
+  "source": "katantra",
+  "references": [
+    "kat_2.1.15",
+    "jkv_6.1.101"
+  ],
+  "sequence": [
+    "kat_1.2.2"
+  ],
+  "parallel": [
+    "pan_6.1.101"
+  ],
+  "updatedAt": 1787363409707,
+  "translation": "在同类音前，简单元音变长，而且后者消失。",
+  "vrtti": "**DSV: **samānasaṃjñako varṇaḥ savarṇe pare dīrghībhavati paraś ca lopam āpadyate, daṇḍāgram, sāgatā, dadhīdam, nadīhate（Eggeling 为nadīha te，根据 Dwivedi及Samīkṣā改。）, madhūdakam, vadhūḍham, pitṝṣabhaḥ, kṝkāraḥ, kḹkāreṇa.\nhotṝkāra iti vaktavyam.\nsamānagrahaṇam aśrutād api dīrghāt samānāt savarṇasya lopārtham, tena vṛkṣāḥ.",
+  "notes": "**险狮子注：**简单元音概念范畴内的字母，当后面遇到同类音时，前者变长，且后者消失。例如： daṇḍāgram (daṇḍa-agra, 棍子一头)，sāgatā (sā+āgatā, 她来了)，dadhīdam (dadhi+idam, 这是酸奶)，nadīhate (nadī+īhate, 河想要)，madhūdakam (madhu-udaka, 蜂蜜水)。vadhūḍham (vadhū-ūḍha, 娶妻)，pitṝṣabhaḥ (pitṛ-ṛṣabha, 公牛般的父亲)，kṝkāraḥ (kṛ-ṛkāra, kṛ中的ṛ字母)，kḹkāreṇa (kḷ-ḷkāra, kḷ中的ḷ字母)。\n还应该说hotṝkāra (hotṛ-ḷkāra, hotṛ和ḷ字母)，（因为世俗用法中ṛ和ḷ也是同类音。）。\n使用“简单元音”这个词，是为了强调在还没有讲过的简单元音变长的情况下，后面的同类音还是要消失，因此有vṛkṣāḥ [[kat_2.1.15]]。\n**Samīkṣā: ** 迦丹中本位音(sthānin)用第一格，替换音(ādeśa)用第二格。波你尼的本位音用第六格，替换音用第一格。迦丹与过去的老师一致。\n\n**译注：**本条DSV中的例子，都是词间连声（译文用+分隔）或者复合词内部的连声（译文用-分隔），不包括[[kat_2.1.15]]中名词词基和词尾之间的连声。也就是说，注释者有意区分了词间连声和词内连声，而复合词内部的连声属于词间连声。\n有关hotṝkāra的讨论详见[[jkv_6.1.101]]。",
+  "draft": "%[[pan_6.1.100]]\n \\ptjz{**Ṭīkā: ** [[pan_1.1.50]]。dīrghībhavati加了cvi词缀[[pan_5.4.50, 7.4.26,32]]，表示前一种性质(短)停止，后一种性质(长)产生。ādeśavādin用第六格不对，短的时候怎么能有长的性质呢？**Samīkṣā: ** 波你尼说前后两个被一个长音取代[[pan_6.1.74, 101]]。{**Kalāpacandra: ** ca表示“后者消失”是一个附属动作，就像bho Vaṭo! bhikṣām aṭa, yadi paśyasi gāṃ cānaya. (孩子啊，你去化缘吧，要是看见牛就牵回来。)中一样。}\n。\n%波你尼的例子是daityāri, śrīśa, viṣṇūdaya",
+  "tibetan": "**ཡར་འགྱུར།** མཐུན་པའི་ཡི་གེ་ནི་འདྲ་བ་ལ་རིང་པོར་འགྱུར་ཞིང་ཕྱི་མ་ཡང་དབྱིའོ།།\n**དཔང་འགྱུར།** མཚུངས་པ་འདྲ་བའི་ཡི་གེ་ལ་རིང་པོར་འགྱུར་ཏེ་ཕ་རོལའང་དབྱིའོ།།\n**ས་འགྱུར།** མཚུངས་པ་འདྲ་བའི་ཡི་གེ་ལ་རིང་པོར་འགྱུར་ཏེ་ཕ་རོལ་ཡང་དབྱིའོ།།"
+}
