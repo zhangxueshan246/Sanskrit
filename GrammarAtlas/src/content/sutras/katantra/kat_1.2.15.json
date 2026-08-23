@@ -1,0 +1,18 @@
+{
+  "id": "kat_1.2.15",
+  "text": "au āv.",
+  "source": "katantra",
+  "references": [],
+  "sequence": [
+    "kat_1.2.16"
+  ],
+  "parallel": [
+    "pan_6.1.78"
+  ],
+  "updatedAt": 1777702583193,
+  "translation": "au变为āv。",
+  "vrtti": "**DSV: **aukāra āv bhavati na ca paro lopyaḥ, gāvau, gāvaḥ.\neteṣu visandhiḥ pṛthagyogaś ca spaṣṭārthaḥ, vivakṣitaś ca sandhir bhavati, gavājinam, go 'jinam iti svare vibhāṣā, gavākṣaḥ, gavendra iti nityam akāravarṇāgamaḥ.",
+  "notes": "**险狮子注：**au字变为āv，后者不应消失。例如 gāvau (go>gau-au, 两头牛)、gāvaḥ (go>gau-jas, 很多牛)。\n以上经文中都没有连声，各部分独立，这是为了表达清楚，实际还是应该连声的。gavājinam = go'jinam (go-ajinam, 牛皮)，因为在元音前两可，gavākṣaḥ (go-akṣa, 牛眼窗) [[pan_6.1.123]] 、gavendraḥ (go-indra，牛王) [[pan_6.1.124]] ，则必须插入a字母。",
+  "draft": "%%\\ptjz{**Pañjikā: ** 强语干前go变成au\\syy{2.2.33}。}。%\\ptjz{**Pañjikā: ** \\syy{2.6.73, 24, 44} [[pan_6.1.123]]}\n",
+  "tibetan": "**ཡར་འགྱུར།** ཨཽ་ནི་ཨཱ་བའོ།།\n**དཔང་འགྱུར།** ཨཽ་ཨཱ་ཝའོ།།\n**ས་འགྱུར།** ཨཽ་ཨཱ་ཝའོ།།"
+}

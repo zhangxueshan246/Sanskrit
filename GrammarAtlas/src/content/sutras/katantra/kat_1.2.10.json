@@ -1,0 +1,17 @@
+{
+  "id": "kat_1.2.10",
+  "text": "ram ṛvarṇaḥ.",
+  "source": "katantra",
+  "references": [],
+  "updatedAt": 1777702583193,
+  "translation": "ṛ字母变为r。",
+  "sequence": [
+    "kat_1.2.11"
+  ],
+  "parallel": [
+    "pan_6.1.77"
+  ],
+  "vrtti": "**DSV: **ṛvarṇo ram āpadyate 'savarṇe na ca paro lopyaḥ, pitrarthaḥ, krarthaḥ.",
+  "notes": "**险狮子注：**在非同类音前，ṛ字母变为r，后者不应消失。例如 pitrarthaḥ (pitṛ-artha, 为了父亲)，krarthaḥ (kṝ-artha, kṝ的意义)。",
+  "tibetan": "**ཡར་འགྱུར།** རྀ་ཡིག་ནི་རའོ།།\n**དཔང་འགྱུར།** རྀའི་ཡི་གེ་རའོ།།\n**ས་འགྱུར།** རྀའི་ཡི་གེ་རའོ།།"
+}

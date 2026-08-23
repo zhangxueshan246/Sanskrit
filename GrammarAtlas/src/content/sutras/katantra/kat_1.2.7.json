@@ -1,0 +1,22 @@
+{
+  "id": "kat_1.2.7",
+  "text": "okāre au aukāre ca.",
+  "source": "katantra",
+  "references": [
+    "pan_6.1.94",
+    "pan_6.1.95",
+    "pan_6.1.89"
+  ],
+  "sequence": [
+    "kat_1.2.8"
+  ],
+  "parallel": [
+    "pan_6.1.88"
+  ],
+  "updatedAt": 1777702583193,
+  "translation": "在o字和au字前变为au。",
+  "vrtti": "**DSV: **avarṇa okāre aukāre ca pare aur bhavati paraś ca lopam āpadyate, tavaudanam, saupagavī.\ncakārādhikārād upasargāvarṇalopo dhātor edotoḥ, prelayati, parokhati.\niṇedhatyor na, upaiti, upaidhate.\nnāmadhātor vā, upekīyati, upaikīyati, proṣadhīyati, prauṣadhīyati.\noṣṭhotvoḥ samāse vā, bimboṣṭhaḥ, bimbauṣṭhaḥ, sthūlotuḥ, sthūlautuḥ.\nsamāsa iti kim, he chāttrauṣṭhaṃ paśya, adyautuṃ paśya.\nomi ca nityam, adyom, som ity avocat.\nakṣasyautvam ūhinyām, akṣauhiṇī senā.\nprasyoḍhoḍhyoś ca, prauḍhaḥ, prauḍhiḥ.\neṣaiṣyayor aitvam lopasyāpavādaḥ, praiṣaḥ, praiṣyaḥ, īṣes tu preṣaḥ, preṣyaḥ.",
+  "notes": "**险狮子注：**后面是o字和au字时，a字母变为au，而且后者消失。例如 tavaudanam (tava+odanam, 你的饭)， saupagavī (sā+aupagavī, 她是Upagu的后代)。\n因为ca字的领句，动词词根的e字和o字前的近置词的a字母失去，例如 prelayati (pra-elāya, 欢乐)，parokhati (para-okh, 拒绝)。[[pan_6.1.94]]\niṇ和edhat前的a字母不消失，例如 upaiti (upa-ā-i, 达到)， upaidhate (upa-edh, 发展)。\n名动词前两可，例如 upekīyati = upaikīyati (upa-ekīya, 属于、参加)， proṣadhīyati = prausadhīyati  (pra-oṣadhīya, 斋戒) 。\n在复合词中oṣṭha (嘴唇)和otu (纬线)前两可，例如  bimvoṣṭhaḥ = bimbauṣṭhaḥ (bimba-oṣṭha, 红嘴唇的)，sthūlotuḥ = sthūlautuḥ (sthūla-otu, 有结实的纬线的)。\n为什么说“在复合词中”？[因为在字间连声时并不两可，]例如 he chāttrauṣṭhaṃ paśya (chāttra+oṣṭhaṃ, 同学，你看嘴唇)， adyautuṃ paśya  (adya+otuṃ, 现在看纬线)。\n在om前a一定失去，例如adyom (adya+om)， som (sā+om)。[[pan_6.1.95]]\nakṣa (色子、车) 的a在ūhinī (<vāhinī, 军队)前变为au，例如 akṣauhiṇī senā (大军)。\npra在oḍha和oḍhi前一定变为au，例如prauḍhaḥ, prauḍhiḥ (成年)。\n在eṣa和eṣya前变为ai，这是pra的a在词根的e和o前消失的例外，例如 praiṣaḥ (命令)，praiṣyaḥ (奴隶)。而preṣaḥ (派出)，preṣyaḥ (奴隶)是从 īṣ 来的。[[pan_6.1.89]]\n\n**译注：**... iti kim (为什么说…) 句式常用于说明经文或注释中词语的必要性，后面一般不解释而直接举反例，意思是如果经文或注释中不用这个词，就会与后面的例子冲突。翻译时为使文意连贯，在此句式的反例前用中括号补充原因。",
+  "draft": "iṇ和edhat前的a字母不消失，例如 upaiti (upa-ā-i, 达到)， upaidhate (upa-edh, 发展)。%\\ptjz{界读2.36 iṇ, I.2 edha。edhat？}",
+  "tibetan": "**ཡར་འགྱུར།** ཨོ་ཡིག་ལ་ཨཽ་སྟེ་ཨཽ་ཡིག་ལ་ཡང་ངོ་།།\n**དཔང་འགྱུར།** ཨོ་ཡིག་ལ་ཨཽ་སྟེ་ཨཽ་ཡིག་ལའང་ངོ་།།\n**ས་འགྱུར།** ཨོ་ཡིག་ལ་ཨཽ་ཏེ་ཨཽ་ཡིག་ལའང་ངོ་།།"
+}

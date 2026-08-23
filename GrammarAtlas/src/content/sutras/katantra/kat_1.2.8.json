@@ -1,0 +1,17 @@
+{
+  "id": "kat_1.2.8",
+  "text": "ivarṇo yam asavarṇe na ca paro lopyaḥ.",
+  "source": "katantra",
+  "references": [],
+  "sequence": [
+    "kat_1.2.9"
+  ],
+  "parallel": [
+    "pan_6.1.77"
+  ],
+  "updatedAt": 1777702583193,
+  "translation": "在非同类音前，i字母变为y，后者不应消失。",
+  "vrtti": "**DSV: **ivarṇo yam āpadyate 'savarṇe na ca paro lopyaḥ, dadhy atra, nady eṣā.\nivarṇa iti kim? pacati.\nasavarṇa iti kim? dadhi.",
+  "notes": "**险狮子注：**在非同类音前，i字母变为y，后者不应消失。例如 dadhy atra (dadhi+atra, 酸奶在这儿)，nady eṣā (nadī+eṣā, 这条河)。\n为什么说“i字母”？[因为其他字母不变y，]例如 pacati (pac, 煮) （c在a前不变y。）。\n为什么说“在非同类音前”？[因为不在非同类音前i不变y，]例如 dadhi（单独出现时i不变y。）。\n\n**译注：**pacati这个例子成了词内连声了？后面两个iti kim感觉举例都很牵强。",
+  "tibetan": "**ཡར་འགྱུར།** ཨི་ཡིག་ནི་ཡ་སྟེ་ཡི་གེ་མི་འདྲ་བ་ལ་ཕྱི་མ་ཡང་མི་ཕྱིའོ།།\n**དཔང་འགྱུར།** ཨིའི་ཡི་གེ་འདྲ་བའི་ཡི་གེ་མ་ཡིན་པ་ལ་ཡ་སྟེ་ཕ་རོལ་དབྱི་བའང་མ་ཡིན་ནོ།།\n**ས་འགྱུར།** ཨིའི་ཡི་གེ་འདྲ་བའི་ཡི་གེ་མ་ཡིན་པ་ལ་ཡ་སྟེ་ཕ་རོལ་དབྱི་བའང་མ་ཡིན་ནོ།།"
+}
