@@ -1,0 +1,18 @@
+{
+  "id": "kat_1.2.16",
+  "text": "ayādīnāṃ yavalopaḥ padānte na vā lope tu prakṛtiḥ.",
+  "source": "katantra",
+  "references": [],
+  "sequence": [
+    "kat_1.2.17"
+  ],
+  "parallel": [
+    "pan_8.3.19"
+  ],
+  "updatedAt": 1787534300898,
+  "translation": "ay等在词尾时，y和v消失，也可以不消失，而消失时用原形。",
+  "vrtti": "**DSV: **ay ity evam ādīnāṃ padānte vartamānānāṃ yavayor lopo bhavati na vā, lope tu prakṛtiḥ svabhāvo bhavati, ta āhuḥ, tay āhuḥ, tasmā āsanam, tasmāy āsanam, paṭa iha, paṭav iha, asā induḥ, asāv induḥ.\nayādīnām iti kim? dadhy atra, madhv atra.\npadānta iti kim? nayanam, nāyakaḥ.",
+  "notes": "**险狮子注：**ay为首的这些出现在词尾时，y和v消失，也可以不消失，而消失时用原形。例如 ta āhuḥ = tay āhuḥ (te+āhuḥ, 他们说)，tasmā āsanam = tasmāy āsanam (tasmai+āsanam, 给他座位)，paṭa iha = paṭav iha (paṭo+iha, 这是毯子)，asā induḥ = asāv induḥ (asau+induḥ, 那是月亮)。\n为什么说“ay等”？[因为其他的y或v不能随便消失，]例如 dadhy atra (<dadhi+atra, 酸奶在这儿)，madhv atra (<madhu+atra, 蜂蜜在这儿)。\n为什么说“在词尾”？[因为词内的y或v不能失去，]例如 nayanam (眼睛)，nāyakaḥ (丈夫)。\n\n**译注：**用原形，指的是发生元音连续（hiatus），而不进一步连声。",
+  "draft": "%\\ptjz{**Samīkṣā: ** [[pan_8.3.19, 17]]}\n",
+  "tibetan": "**ཡར་འགྱུར།** ཨཡ་ལ་སོགས་པ་རྣམས་ཀྱི་ཡ་དང་བ་དབྱི་བ་ཚིག་གི་མཐའ་ལའོ། །ཡང་ན་རང་བཞིན་དུ་ཡང་རུང་ངོ་། །\n**དཔང་འགྱུར།** ཨ་ཡ་ལ་སོགས་པ་རྣམས་ཀྱི་ཡ་ཝ་དབྱི་བ་ཚིག་མཐའ་ལ་སྟེ་ཡང་ན་མ་ཡིན་ཞིང་ཕྱིས་པ་ལ་ནི་རང་བཞིན་ནོ།།\n**ས་འགྱུར།** ཚིག་མཐར་ཨ་ཡ་ལ་སོགས་པ་རྣམས་ཀྱི་ཡ་ཝ་དབྱི་སྟེ་ཡང་ན་མ་ཡིན་ཞིང་ཕྱིས་པ་ལ་ནི་རང་བཞིན་ནོ།།"
+}

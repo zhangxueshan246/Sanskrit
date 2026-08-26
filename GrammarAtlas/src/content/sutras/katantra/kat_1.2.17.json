@@ -1,0 +1,22 @@
+{
+  "id": "kat_1.2.17",
+  "text": "edotparaḥ padānte lopam akāraḥ.",
+  "source": "katantra",
+  "references": [
+    "kat_1.2.16",
+    "kat_1.2.18",
+    "kat_1.2.8"
+  ],
+  "sequence": [
+    "kat_1.2.18"
+  ],
+  "parallel": [
+    "pan_6.1.109"
+  ],
+  "updatedAt": 1787546500910,
+  "translation": "词尾的e和o后的a字消失。",
+  "vrtti": "**DSV: **edodbhyāṃ paro 'kāraḥ padānte vartamāno lopam āpadyate, te 'tra, paṭo 'tra.\nedodbhyām iti kim? tāv atra.\npadāntagrahaṇaṃ padāntādhikāranivṛttyartham, tena citam, stutam.",
+  "notes": "**险狮子注：**出现在词尾的e和o之后的a字消失。例如 te 'tra (te+atra, 他们在这儿)，paṭo 'tra (paṭo+atra, 毯子在这儿)。\n为什么说“e和o后”？[因为其他字母后a不消失，]例如 tāv atra (tau+atra, 他俩在这儿)。\n用“词尾”是为了停止“词尾[[kat_1.2.16]]”这个领句，因此有 citam (堆积)，stutam (赞歌)。\n**Ṭīkā: ** 如果这句不停止“词尾”，那么下一句[[kat_1.2.18]]就变成“词尾的元音在辅音前不应连声”，在ci-ta和stu-ta中间的i和u应该变成y和v ([[kat_1.2.8]], [[kat_1.2.9]])。但实际不是这样，词中的元音在辅音前也不连声。",
+  "draft": "**Kalāpacandra: ** [[pan_6.1.17]] \n",
+  "tibetan": "**ཡར་འགྱུར།** ཨེ་ཨོའི་ཕ་རོལ་གྱི་ཚིག་གི་མཐའ་ལ་ཨ་ཡིག་དབྱིའོ།།\n**དཔང་འགྱུར།** ཚིག་མཐར་ཨེཏ་ཨོཏ་ལས་ཕ་རོལ་གྱི་ཨ་ཡིག་དབྱིའོ།།\n**ས་འགྱུར།** ཚིག་མཐར་ཨེ་ཨོཏ་ལས་ཕ་རོལ་གྱི་ཨ་ཡིག་དབྱིའོ།།"
+}
