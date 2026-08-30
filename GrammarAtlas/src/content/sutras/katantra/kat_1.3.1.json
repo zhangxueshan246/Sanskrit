@@ -1,0 +1,17 @@
+{
+  "id": "kat_1.3.1",
+  "text": "odantā a i u ā nipātāḥ svare prakṛtyā.",
+  "source": "katantra",
+  "references": [],
+  "updatedAt": 1787793416769,
+  "sequence": [
+    "kat_1.3.2"
+  ],
+  "parallel": [
+    "pan_6.1.125"
+  ],
+  "translation": "以o结尾的和a i u ā这些投词在元音前用原形。",
+  "vrtti": "**DSV: **odantā nipātā a i u āś ca kevalāḥ svare pare prakṛtyā tiṣṭhanti, no atra, aho āścaryam, atho evam, a apehi, i indraṃ paśya, u uttiṣṭha, ā evaṃ kiṃ manyase, ā evaṃ nu tat.\nevam iti kim? na vā u.\nantagrahaṇam akārādīnāṃ kevalārtham, tena cetītīha nanv iti veti.\nnipātā iti kim? paṭa iha, paṭav iha, īṣatuḥ, ūṣatuḥ, āṭatuḥ.",
+  "notes": "**险狮子注：**以o结尾的投词和a i u ā每一个在后面是元音时以原形出现。例如，no atra (不在这儿)，aho āścaryam (哎哟，真神奇)，atho evam (然后这样)，a apehi (啊，滚)，i indraṃ paśya (咦，你看因陀罗)，u uttiṣṭha (喂，起来)，ā evaṃ kiṃ manyase (哎，你怎么这样想？)，ā evaṃ nu tat (啊，就这样呗)。[[pan_1.1.14]]\n为什么这样说呢？[因为其他投词不这样变，]例如na vā u (na vai+u)。\n用“结尾”是因为a等字母是单独的。因此有ceti (ca+iti)，itīha (iti+iha)，nanv iti (nanu+iti)，veti (vā+iti)。\n为什么说“投词”？[因为不是投词的不这样变，]例如paṭa iha = paṭav iha (paṭo+iha, 毯子在这儿)，īṣatuḥ (i-iṣ, iṣ, 希望, perf. 3rd. du., 后两例同，都是完成时重复语干。)，ūṣatuḥ (uṣ, 惩罚)，āṭatuḥ (aṭ, 漫游)。\n\n**Samīkṣā: ** 八章书的处理方式是先定义一个概念pragṛhya[[pan_1.1.11]]-[[pan_1.1.15]]，然后规定它的变化[[pan_6.1.125]]。\n\n**Ṭīkā: ** ā这个词分两种情况：表示一点的意思(oṣṇa，<ā-uṣṇa，有点热)、与动词连用(ehi，<ā-ihi，你来)以及表示界限(odakāntāt，<ā-udakāntāt，从水边)和范围(āhicchatrāt，<ā-ahicchatrāt，直到Ahicchatra国)时要连声；表示语气和回忆(杜注中两例分别表语气和回忆)时用原形。\n\n**译注：** nipāta：投词，指ca等不表示实物意义的词。",
+  "tibetan": "**ཡར་འགྱུར།** ཨོའི་མཐའ་ཅན་རྣམས་དང་ཨ་ཨི་ཨུ་ཨཱའི་སོར་བཞག་རྣམས་ལ་དབྱངས་རྣམས་རང་བཞིན་ཉིད་དོ།།\n**དཔང་འགྱུར།** ཨོཏ་མཐའ་རྣམས་དང་ཨ་ཨི་ཨུ་ཨཱ་ནི་པཱ་ཏ་རྣམས་དབྱངས་ལ་རང་བཞིན་གྱིས་སོ།།\n**ས་འགྱུར།** ཨོཏ་མཐའ་ཅན་དང་། ཨ་ཨི་ཨུ་ཨཱ་ནི་པཱ་ཏ་རྣམས་དབྱངས་ལ་རང་བཞིན་གྱིས་སོ།།"
+}
