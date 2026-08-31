@@ -1,0 +1,20 @@
+{
+  "id": "pan_6.1.77",
+  "text": "iko yaṇ aci.",
+  "translation": "**段书：**遇到单元音及其长音时，半元音替代单元音。",
+  "vrtti": "",
+  "notes": "",
+  "draft": "",
+  "adhikaras": [],
+  "references": [],
+  "parallel": [
+    "dssk_16",
+    "kat_1.2.10",
+    "kat_1.2.11"
+  ],
+  "sequence": [
+    "pan_6.1.78"
+  ],
+  "source": "panini",
+  "updatedAt": 1790860800000
+}
