@@ -136,13 +136,88 @@
   \includegraphics[width=\textwidth]{longiudeclension.png} %
 \end{frame}
 
+\begin{frame}{复合词}
+  \small
+  传统上，梵语复合词分为三大类：
+  \begin{itemize}
+    \item 并列复合词 (相违释 / Dvandva)
+    \item 限定复合词 (依主释 / Tatpuruṣa)
+    \begin{itemize}
+      \item 同位复合词\\ (持业释 / Karmadhāraya)
+    \end{itemize}
+    \item 定语复合词 (多财释 / Bahuvrīhi)
+  \end{itemize}
+\end{frame}
+
 \subsection{动词}
-%待补充
+\begin{frame}{\insertsubsection ~~主动语态语尾}
+  \small
+  \centering
+  \begin{itemize} 
+      \item 原始语尾：用于现在时
+  \end{itemize}
+  \begin{tabular}{@{}llll@{}} % 4 columns
+      & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{mi} & \wordending{vaḥ}  & \wordending{maḥ}  \\
+    第二人称 & \wordending{si} & \wordending{thaḥ} & \wordending{tha}   \\
+    第三人称 & \wordending{ti} & \wordending{taḥ} & \wordending{nti}  \\
+  \end{tabular}
+  \begin{itemize} 
+      \item 派生语尾：用于未完成时和祈愿语气
+  \end{itemize}
+  \begin{tabular}{@{}llll@{}} % 4 columns
+      & 单数  & 双数  & 复数 \\
+    第一人称 & \wordending{(a)m} & \wordending{va}  & \wordending{ma}  \\
+    第二人称 & \wordending{ḥ} & \wordending{tam} & \wordending{ta}   \\
+    第三人称 & \wordending{t} & \wordending{tām} & \wordending{(a)n/\nobreakdash-uḥ}  \\
+  \end{tabular}
+    
+\end{frame}
+
+\begin{frame}{\insertsubsection ~~现在时语干}
+  \small
+  \centering
+  \begin{itemize} 
+      \item 现在时：
+  \end{itemize}
+
+  \begin{tabular}{@{}llll@{}} % 4 columns
+    词根 & 词干  & 词尾  & 最终形式 \\
+    \verbroot{bhū (1)} & \verbstem{bhava} & \wordending{ti}  & \fullpada{bhavati}  \\
+    \verbroot{hṛṣ (4)} & \verbstem{hṛṣya} & \wordending{ti}  & \fullpada{hṛṣyati}  \\
+    \verbroot{muc (6)} & \verbstem{muñca} & \wordending{ti}  & \fullpada{muñcati}  \\
+    \verbroot{kath (10)} & \verbstem{kathaya} & \wordending{ti}  & \fullpada{kathayati}  \\
+  \end{tabular} 
+
+    \begin{itemize} 
+      \item 未完成时：现在时语干前加 \pratyaya{a\nobreakdash-}，
+        称为前加元音 (Augment)。
+      \item 祈愿语气：语尾前加 \pratyaya{\nobreakdash-ī\nobreakdash-}，
+        在元音前加 \pratyaya{\nobreakdash-īy\nobreakdash-}，
+        和语干的 \pratyaya{\nobreakdash-a\nobreakdash-} 融合成 \pratyaya{\nobreakdash-e\nobreakdash-}(\pratyaya{\nobreakdash-ey\nobreakdash-})。
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{非谓语形式}
+  \begin{itemize}
+    \item 独立式
+    
+    词根零级 + \pratyaya{\nobreakdash-tvā/-ya} 
+    \item 过去分词
+    
+    词根零级 + \pratyaya{\nobreakdash-ta\nobreakdash-} \veryimportant{(按名词变格)}
+    \item 不定式  
+    
+    词根二合 + \pratyaya{\nobreakdash-tum}
+  \end{itemize}
+\end{frame}
+
 \section{连声复习}
 \subsection{连声总则}
 
 \begin{frame}{\insertsubsection }
-  \small
+  %\small
   \begin{itemize}
     \item 词间连声
     
@@ -177,9 +252,9 @@
     \item 送气浊音之后，t和th变成dh
     \item 浊辅音之前的辅音变成浊不送气
     \begin{itemize}
-      \item \verbroot{}budh + ta = buddha
-      \item \verbroot{}duh + ta = dugdha
-      \item 反例：\verbroot{}dhā + thas(p2d) = dhatthaḥ
+      \item \verbroot{budh} + \pratyaya{ta} = \nounstem{buddha}
+      \item \verbroot{duh} + \pratyaya{ta} = \nounstem{dugdha}
+      \item 反例：\verbroot{dhā} + \wordending{thas}(p2d) =  \fullpada{dhatthaḥ}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -189,9 +264,9 @@
     \item 前音是非a/ā元音、半元音、h或者喉音时，s变成ṣ
     \item 前音和s中间插入了ṃ、ḥ或者咝音仍要变化
     \begin{itemize}
-      \item agni + su = agniṣu
-      \item yajuḥ + su = yajuḥṣu
-      \item 反例：词尾不变 agnis tatra 
+      \item \nounstem{agni} + \wordending{su} = \fullpada{agniṣu}
+      \item \nounstem{yajuḥ} + \wordending{su} = \fullpada{yajuḥṣu}
+      \item 反例：词尾不变 \fullsentence{agnis tatra}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -201,21 +276,21 @@
     \item 词内前方有ṛ、r或ṣ时，n变成ṇ
     \item 中间有元音、y、v、ṃ、ḥ、喉音和唇音仍要变化
     \begin{itemize}
-      \item mitra(G.pl.) = mitrāṇām
-      \item 反例：词尾不变 brahman, brahmaṇā
-      \item 反例：ratha(I.sg.) = rathena 
+      \item \nounstem{mitra}(G.pl.) = \fullpada{mitrāṇām}
+      \item 反例：词尾不变 \fullpada{brahman}, \fullpada{brahmaṇā}
+      \item 反例：\nounstem{ratha}(I.sg.) = \fullpada{rathena}
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 
 
-\section{下节预告}
+\section{本节作业}
 
 \begin{frame}{\insertsection }
   \begin{itemize}
     \item
-      第十八章复习
+      找找第十六章练习4
     
   \end{itemize}
 \end{frame}  
