@@ -6,7 +6,6 @@ import { formatSutraId } from '../utils/formatSutraId';
 import { searchSutras } from '../utils/searchSutras';
 
 interface Props {
-  width?: number;
   height?: number;
   sutras: Sutra[];
   edges: GraphEdge[];
@@ -22,17 +21,19 @@ interface Link extends d3.SimulationLinkDatum<Node> {
   type: string;
 }
 
-export default function SutraGraph({ width = 800, height = 600, sutras, edges }: Props) {
+export default function SutraGraph({ height = 600, sutras, edges }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const autoZoomedRef = useRef(false);
+  const jitterRef = useRef(new Map<string, [number, number]>());
   const [selectedSutra, setSelectedSutra] = useState<Sutra | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Set<string>>(new Set());
-  const [containerWidth, setContainerWidth] = useState(width);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+  const isMeasured = containerWidth !== null;
 
   useEffect(() => {
-    if (!svgRef.current) return;
+    if (!svgRef.current || containerWidth === null) return;
 
     // 清除之前的内容
     d3.select(svgRef.current).selectAll("*").remove();
@@ -73,11 +74,20 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
     });
 
     // 准备数据
-    const nodes: Node[] = sutras.map(s => ({
-      id: s.id,
-      text: s.text,
-      source: s.source
-    }));
+    const nodes: Node[] = sutras.map(s => {
+      let jitter = jitterRef.current.get(s.id);
+      if (!jitter) {
+        jitter = [Math.random() * 2 - 1, Math.random() * 2 - 1];
+        jitterRef.current.set(s.id, jitter);
+      }
+      return {
+        id: s.id,
+        text: s.text,
+        source: s.source,
+        x: containerWidth / 2 + jitter[0] * containerWidth * 0.3,
+        y: height / 2 + jitter[1] * height * 0.3
+      };
+    });
 
     const links: Link[] = edges.map(e => ({
       source: e.from,
@@ -302,7 +312,7 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
     return () => {
       simulation.stop();
     };
-  }, [sutras, edges, height, searchResults]);
+  }, [sutras, edges, height, searchResults, isMeasured]);
 
   // 处理搜索查询变化
   useEffect(() => {
@@ -330,7 +340,7 @@ export default function SutraGraph({ width = 800, height = 600, sutras, edges }:
 
   // 当宽度改变时，更新SVG的viewBox（但不重新初始化图）
   useEffect(() => {
-    if (!svgRef.current) return;
+    if (!svgRef.current || containerWidth === null) return;
     d3.select(svgRef.current).attr("viewBox", [0, 0, containerWidth, height]);
   }, [containerWidth, height]);
 
