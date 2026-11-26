@@ -2,15 +2,16 @@
   "id": "pan_4.1.1",
   "text": "ṅyāpprātipadikāt.",
   "translation": "**段书：**在以ṅī和āp为末的词后，在名词词基后。",
-  "vrtti": "",
   "notes": "",
   "draft": "",
   "adhikaras": [],
   "references": [],
-  "parallel": [
-    "dssk_99"
-  ],
+  "parallel": [],
   "sequence": [],
+  "scope": {
+    "from": "4.1.1",
+    "to": "5.4.160"
+  },
   "source": "panini",
-  "updatedAt": 1785893549564
+  "updatedAt": 1795661455692
 }

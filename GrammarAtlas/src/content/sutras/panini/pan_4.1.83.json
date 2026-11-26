@@ -2,13 +2,16 @@
   "id": "pan_4.1.83",
   "text": "prāg dīvyato 'ṇ",
   "translation": "**段书：**直到dīvyata之前是aṇ。",
-  "vrtti": "",
   "notes": "",
   "draft": "",
   "adhikaras": [],
   "references": [],
   "parallel": [],
   "sequence": [],
+  "scope": {
+    "from": "4.1.83",
+    "to": "4.4.1"
+  },
   "source": "panini",
-  "updatedAt": 1785893549565
+  "updatedAt": 1795661455693
 }

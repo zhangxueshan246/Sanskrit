@@ -1,9 +1,14 @@
 {
   "id": "pan_2.2.23",
   "text": "śeṣo bahuvrīhiḥ.",
+  "scope": {
+    "from": "2.2.23",
+    "to": "2.2.28"
+  },
   "source": "panini",
   "translation": "**段书：**其余的是多财释。",
-  "vrtti": "**段书讲解：**\n 意思是，在介绍以上复合词时没有包括进去的格尾，是余下的。",
+  "duanExplain": "意思是，在介绍以上复合词时没有包括进去的格尾，是余下的。",
+  "notes": "",
   "references": [],
   "parallel": [
     "kat_2.5.9"
@@ -11,5 +16,5 @@
   "sequence": [
     "pan_2.2.24"
   ],
-  "updatedAt": 1785893893661
+  "updatedAt": 1795663345426
 }

@@ -2,15 +2,16 @@
   "id": "pan_1.4.1",
   "text": "ā kaḍārād ekā saṃjñā.",
   "translation": "**段书：**到kaḍāra为止，是唯一的术语。",
-  "vrtti": "",
   "notes": "",
   "draft": "",
   "adhikaras": [],
   "references": [],
-  "parallel": [
-    "dssk_145"
-  ],
+  "parallel": [],
   "sequence": [],
+  "scope": {
+    "from": "1.4.1",
+    "to": "2.2.38"
+  },
   "source": "panini",
-  "updatedAt": 1785893549557
+  "updatedAt": 1795661455682
 }

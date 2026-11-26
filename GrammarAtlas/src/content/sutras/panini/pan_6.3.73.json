@@ -2,14 +2,14 @@
   "id": "pan_6.3.73",
   "text": "nalopo nañaḥ.",
   "translation": "**段书：**nañ的n失落。",
+  "notes": "",
   "source": "panini",
   "references": [],
   "parallel": [
-    "kat_2.5.22",
-    "dssk_637"
+    "kat_2.5.22"
   ],
   "sequence": [
     "pan_6.3.74"
   ],
-  "updatedAt": 1785893549568
+  "updatedAt": 1795661455698
 }

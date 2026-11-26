@@ -1,9 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import type { Sutra, GraphEdge } from '../types/sutra';
 import { parseWikiLinks } from '../utils/parseWikiLinks';
 import { formatSutraId } from '../utils/formatSutraId';
 import { searchSutras } from '../utils/searchSutras';
+import { getScopeGroups } from '../utils/adhikara';
+
+// 注释条目默认不进主图，由开关控制；经文条目（panini / katantra / dssk）始终显示
+const COMMENTARY_SOURCES = ['jkv', 'dsv'];
 
 interface Props {
   height?: number;
@@ -29,8 +33,18 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
   const [selectedSutra, setSelectedSutra] = useState<Sutra | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Set<string>>(new Set());
+  const [showCommentary, setShowCommentary] = useState(false);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
   const isMeasured = containerWidth !== null;
+
+  const visibleSutras = useMemo(
+    () => sutras.filter(s => showCommentary || !COMMENTARY_SOURCES.includes(s.source)),
+    [sutras, showCommentary]
+  );
+  const visibleEdges = useMemo(() => {
+    const ids = new Set(visibleSutras.map(s => s.id));
+    return edges.filter(e => ids.has(e.from) && ids.has(e.to));
+  }, [visibleSutras, edges]);
 
   useEffect(() => {
     if (!svgRef.current || containerWidth === null) return;
@@ -74,7 +88,7 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
     });
 
     // 准备数据
-    const nodes: Node[] = sutras.map(s => {
+    const nodes: Node[] = visibleSutras.map(s => {
       let jitter = jitterRef.current.get(s.id);
       if (!jitter) {
         jitter = [Math.random() * 2 - 1, Math.random() * 2 - 1];
@@ -89,7 +103,7 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
       };
     });
 
-    const links: Link[] = edges.map(e => ({
+    const links: Link[] = visibleEdges.map(e => ({
       source: e.from,
       target: e.to,
       type: e.type
@@ -106,15 +120,26 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
       jkv: "#3b82f6",       // 中等蓝（略浅）
       dssk: "#93c5fd",      // 浅蓝（最浅）
       katantra: "#059669",  // 绿色
+      dsv: "#34d399",       // 浅绿（Kātantra 注释）
       other: "#6b7280"      // 灰色
     };
 
     const edgeColors: Record<string, string> = {
       reference: "#6b7280",  // 深灰
       parallel: "#f59e0b",   // 橙色
+      commentary: "#8b5cf6", // 紫色（注释）
       adhikara: "#ef4444",   // 红色
       sequence: "#06b6d4"    // 青色
     };
+
+    // 领句范围组（嵌套的区间各自成组），大的先画，小的叠在上面
+    const scopeGroups = getScopeGroups(visibleSutras)
+      .map(gr => ({ ...gr, members: gr.members.filter(id => nodes.some(n => n.id === id)) }))
+      .sort((a, b) => b.members.length - a.members.length);
+    const nodeById = new Map(nodes.map(n => [n.id, n]));
+    // 颜色按领句编号排序后固定分配，同一领句颜色不会因为大小排序变化
+    const scopeIdOrder = scopeGroups.map(gr => gr.id).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    const scopeColor = (id: string) => d3.schemeTableau10[scopeIdOrder.indexOf(id) % 10];
 
     // 创建力导向模拟
     const simulation = d3.forceSimulation(nodes)
@@ -122,6 +147,18 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
       .force("charge", d3.forceManyBody().strength(-300))
       .force("center", d3.forceCenter(containerWidth / 2, height / 2))
       .force("collision", d3.forceCollide().radius(40))
+      // 同一领句管辖的节点轻轻聚拢，范围包络才不会铺得太散
+      .force("scope", (alpha: number) => {
+        for (const gr of scopeGroups) {
+          const ms = gr.members.map(id => nodeById.get(id)!);
+          const cx = d3.mean(ms, m => m.x!)!;
+          const cy = d3.mean(ms, m => m.y!)!;
+          for (const m of ms) {
+            m.vx = (m.vx ?? 0) + (cx - m.x!) * 0.08 * alpha;
+            m.vy = (m.vy ?? 0) + (cy - m.y!) * 0.08 * alpha;
+          }
+        }
+      })
       // 添加边界力，阻止节点跑出显示范围
       .force("boundary", () => {
         const padding = 50;
@@ -136,6 +173,34 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
         }
       });
 
+    // 绘制领句范围包络（在边和节点下面）
+    const hullLayer = g.append("g");
+    const hullPaths = hullLayer.selectAll("path")
+      .data(scopeGroups)
+      .join("path")
+      .attr("fill", d => scopeColor(d.id))
+      .attr("fill-opacity", 0.1)
+      .attr("stroke", d => scopeColor(d.id))
+      .attr("stroke-opacity", 0.6)
+      .attr("stroke-width", 1.5)
+      .attr("stroke-dasharray", "6,4")
+      .style("pointer-events", "none");
+    hullPaths.append("title").text(d => `${formatSutraId(d.id)} 管辖 ${d.scope.from}–${d.scope.to}`);
+    // 标签固定在领句节点正上方（节点半径 25，再留 10 px），白色描边保证压在阴影上也清楚
+    const hullLabels = hullLayer.selectAll("text")
+      .data(scopeGroups.filter(gr => nodeById.has(gr.id)))
+      .join("text")
+      .text(d => `${formatSutraId(d.id)} 管辖 ${d.scope.from}–${d.scope.to}`)
+      .attr("fill", d => scopeColor(d.id))
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 3)
+      .attr("paint-order", "stroke")
+      .attr("font-size", "11px")
+      .attr("text-anchor", "middle")
+      .style("pointer-events", "none");
+    const hullLine = d3.line<[number, number]>().curve(d3.curveCatmullRomClosed.alpha(0.5));
+    const HULL_PAD = 38;
+
     // 绘制边
     const link = g.append("g")
       .selectAll("line")
@@ -143,8 +208,9 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
       .join("line")
       .attr("stroke", d => edgeColors[d.type] || "#ccc")
       .attr("stroke-width", 1.5)  // 统一线宽
-      .attr("stroke-dasharray", d => d.type === 'parallel' ? "5,5" : "none")
-      .attr("marker-end", d => d.type === 'parallel' ? null : `url(#arrow-${d.type})`);  // parallel 不显示箭头
+      .attr("stroke-dasharray", d => d.type === 'parallel' ? "5,5" : d.type === 'commentary' ? "2,3" : "none")
+      // parallel 与 commentary 不显示箭头
+      .attr("marker-end", d => d.type === 'parallel' || d.type === 'commentary' ? null : `url(#arrow-${d.type})`);
 
     // 绘制节点
     const node = g.append("g")
@@ -208,6 +274,23 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
       });
 
       node.attr("transform", d => `translate(${d.x},${d.y})`);
+
+      // 范围包络：每个成员周围取一圈点，求凸包后平滑
+      hullPaths.attr("d", d => {
+        const pts: [number, number][] = [];
+        for (const id of d.members) {
+          const n = nodeById.get(id)!;
+          for (let k = 0; k < 8; k++) {
+            const a = (k * Math.PI) / 4;
+            pts.push([n.x! + HULL_PAD * Math.cos(a), n.y! + HULL_PAD * Math.sin(a)]);
+          }
+        }
+        const hull = d3.polygonHull(pts);
+        return hull ? hullLine(hull) : null;
+      });
+      hullLabels
+        .attr("x", d => nodeById.get(d.id)!.x!)
+        .attr("y", d => nodeById.get(d.id)!.y! - 25 - 10);
 
       // 在第 50 次 tick 后自动缩放到合适大小（仅第一次）
       tickCount++;
@@ -312,17 +395,17 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
     return () => {
       simulation.stop();
     };
-  }, [sutras, edges, height, searchResults, isMeasured]);
+  }, [visibleSutras, visibleEdges, height, searchResults, isMeasured]);
 
   // 处理搜索查询变化
   useEffect(() => {
     if (searchQuery.trim()) {
-      const results = searchSutras(searchQuery, sutras);
+      const results = searchSutras(searchQuery, visibleSutras);
       setSearchResults(new Set(results.map(s => s.id)));
     } else {
       setSearchResults(new Set());
     }
-  }, [searchQuery]);
+  }, [searchQuery, visibleSutras]);
 
   // 监听容器宽度变化
   useEffect(() => {
@@ -375,9 +458,17 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
         )}
         {searchQuery && (
           <span className="graph-search-count">
-            {searchResults.size} / {sutras.length}
+            {searchResults.size} / {visibleSutras.length}
           </span>
         )}
+        <label className="graph-commentary-toggle">
+          <input
+            type="checkbox"
+            checked={showCommentary}
+            onChange={(e) => setShowCommentary(e.target.checked)}
+          />
+          显示注释（Kāśikāvṛṭti · DSV）
+        </label>
       </div>
 
       {/* 图表容器 */}
@@ -394,6 +485,9 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
             <span className="dot katantra"></span> Kātantra
           </div>
           <div className="legend-item">
+            <span className="dot dsv"></span> Durgasiṃhavṛtti
+          </div>
+          <div className="legend-item">
             <span className="dot jkv"></span> Kāśikāvṛṭti
           </div>
           <div className="legend-item">
@@ -406,10 +500,16 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
             <span className="line parallel"></span> 平行文本
           </div>
           <div className="legend-item">
-            <span className="line adhikara"></span> Adhikāra 领句
+            <span className="line commentary"></span> 注释
+          </div>
+          <div className="legend-item">
+            <span className="line adhikara"></span> Adhikāra 领句（手写）
           </div>
           <div className="legend-item">
             <span className="line sequence"></span> 后继经文
+          </div>
+          <div className="legend-item">
+            <span style={{ display: 'inline-block', width: 20, height: 12, border: '1.5px dashed #94a3b8', background: 'rgba(148,163,184,0.12)', borderRadius: 4, marginRight: 8, verticalAlign: 'middle' }}></span> 领句管辖范围
           </div>
           <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0', fontSize: '0.875rem', color: '#64748b' }}>
             <p style={{ margin: '0.5rem 0', lineHeight: '1.4' }}>💡 交互提示：</p>
@@ -432,14 +532,14 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
             {selectedSutra.translation && (
               <p className="translation" dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.translation) }} />
             )}
-            {selectedSutra.vrtti && (
-              <div className="vrtti">
-                <strong>Vṛtti:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.vrtti) }} />
+            {selectedSutra.duanExplain && (
+              <div className="duan-explain">
+                <strong>段书讲解:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.duanExplain) }} />
               </div>
             )}
             {selectedSutra.notes && (
               <div className="notes">
-                <strong>笔记:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.notes) }} />
+                <strong>按语:</strong> <span dangerouslySetInnerHTML={{ __html: parseWikiLinks(selectedSutra.notes) }} />
               </div>
             )}
             {selectedSutra.adhikaras && selectedSutra.adhikaras.length > 0 && (
@@ -450,6 +550,11 @@ export default function SutraGraph({ height = 600, sutras, edges }: Props) {
             {selectedSutra.parallel && selectedSutra.parallel.length > 0 && (
               <p className="parallel">
                 <strong>平行文本:</strong> {selectedSutra.parallel.map(par => formatSutraId(par)).join(', ')}
+              </p>
+            )}
+            {selectedSutra.commentaryOn && selectedSutra.commentaryOn.length > 0 && (
+              <p className="commentary">
+                <strong>注释于:</strong> {selectedSutra.commentaryOn.map(com => formatSutraId(com)).join(', ')}
               </p>
             )}
             {selectedSutra.sequence && selectedSutra.sequence.length > 0 && (

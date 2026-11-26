@@ -28,7 +28,8 @@ export function parseWikiLinks(text: string): string {
   result = result.replace(/\|/g, '<wbr>');
 
   // 步骤 3：将 \n 转换为 <br/> 标签（强制换行）并添加段落间距
-  result = result.replace(/\n/g, '<div class="paragraph-break"></div>');
+  // 用 span 而非 div：这些内容常放在 <p> 里，div 会让浏览器提前关闭 <p>，后续段落掉出样式
+  result = result.replace(/\n/g, '<span class="paragraph-break"></span>');
 
   // 步骤 4：处理加粗 **文本** → <strong>文本</strong>
   result = result.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');

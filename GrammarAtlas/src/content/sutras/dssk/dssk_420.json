@@ -5,12 +5,13 @@
   "sequence": [
     "dssk_421"
   ],
-  "updatedAt": 1788135108309,
+  "updatedAt": 1795663345383,
   "translation": "",
-  "vrtti": "**段书讲解：**\n这句经文解释术语laghu (轻)的概念。短元音即轻，指轻音节。",
+  "duanExplain": "这句经文解释术语laghu (轻)的概念。短元音即轻，指轻音节。",
   "notes": "**译注：**《月光疏精粹》无额外注释。",
   "draft": "",
-  "parallel": [
+  "commentaryOn": [
     "pan_1.4.10"
-  ]
+  ],
+  "parallel": []
 }

@@ -3,11 +3,13 @@
   "text": "guru.",
   "source": "dssk",
   "references": [],
-  "updatedAt": 1788135223429,
+  "updatedAt": 1795663345384,
   "translation": "**段书：**重音节。",
-  "vrtti": "**段书讲解：**\n明确长音是重音节。",
+  "duanExplain": "明确长音是重音节。",
+  "notes": "",
   "draft": "",
-  "parallel": [
+  "commentaryOn": [
     "pan_1.4.12"
-  ]
+  ],
+  "parallel": []
 }

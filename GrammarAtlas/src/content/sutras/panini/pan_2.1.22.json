@@ -2,19 +2,17 @@
   "id": "pan_2.1.22",
   "text": "tatpuruṣaḥ.",
   "translation": "**段书：**依主释。",
+  "notes": "",
   "source": "panini",
   "references": [],
   "sequence": [
     "pan_2.1.23"
   ],
   "adhikaras": [
-    "pan_1.4.1",
-    "pan_2.1.3",
     "pan_2.1.4"
   ],
   "parallel": [
-    "kat_2.5.8",
-    "dssk_611"
+    "kat_2.5.8"
   ],
-  "updatedAt": 1785893549557
+  "updatedAt": 1795661455685
 }

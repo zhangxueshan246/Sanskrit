@@ -5,12 +5,15 @@
   "source": "panini",
   "notes": "也是依主释[[pan_2.1.22]]。",
   "references": [],
-  "adhikaras": [
-    "pan_2.1.22"
+  "adhikaras": [],
+  "anuvrtti": [
+    {
+      "from": "pan_2.1.22",
+      "term": "tatpuruṣaḥ"
+    }
   ],
   "parallel": [
-    "dssk_612",
     "kat_2.5.7"
   ],
-  "updatedAt": 1785893549558
+  "updatedAt": 1795661455685
 }

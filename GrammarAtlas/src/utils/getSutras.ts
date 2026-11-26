@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import type { Sutra, GraphEdge } from '../types/sutra';
+import { applyScopes } from './adhikara';
 
 async function loadAllSutras(): Promise<Sutra[]> {
   try {
@@ -36,7 +37,7 @@ async function loadAllSutras(): Promise<Sutra[]> {
     readDir(sutraDir);
 
     // Sort by source order, then by ID
-    const sourceOrder = { panini: 0, katantra: 1, jkv: 2, dssk: 3, other: 4 };
+    const sourceOrder = { panini: 0, katantra: 1, dsv: 2, jkv: 3, dssk: 4, other: 5 };
     sutras.sort((a, b) => {
       if (a.source !== b.source) {
         return sourceOrder[a.source] - sourceOrder[b.source];
@@ -45,7 +46,7 @@ async function loadAllSutras(): Promise<Sutra[]> {
     });
 
     console.log('[getSutras] Loaded', sutras.length, 'sutras');
-    return sutras;
+    return applyScopes(sutras);
   } catch (error) {
     console.error('[getSutras] Error:', error);
     return [];
@@ -89,8 +90,19 @@ export async function generateEdges(): Promise<GraphEdge[]> {
     // Adhikara edges (governance relationships)
     if (sutra.adhikaras) {
       for (const adh of sutra.adhikaras) {
+        // 区间算出的边（成员 → 领句、领句嵌套）不进主图，主图用范围包络表示；只画手写项
+        if (adh === sutra.computedAdhikara) continue;
         if (sutraMap.has(adh)) {
           edges.push({ from: adh, to: sutra.id, type: 'adhikara' });
+        }
+      }
+    }
+
+    // Commentary edges: 注释 → 被注释的经文（只存在注释方，这里从注释方出发）
+    if (sutra.commentaryOn) {
+      for (const root of sutra.commentaryOn) {
+        if (sutraMap.has(root)) {
+          edges.push({ from: sutra.id, to: root, type: 'commentary' });
         }
       }
     }

@@ -3,6 +3,7 @@
   --color-katantra: #059669;
   --color-jkv: #3b82f6;
   --color-dssk: #93c5fd;
+  --color-dsv: #34d399;
   --color-bg: #f8fafc;
   --color-surface: #ffffff;
   --color-text: #1e293b;
@@ -117,6 +118,7 @@ main {
 .dot.katantra { background: var(--color-katantra); }
 .dot.jkv { background: var(--color-jkv); }
 .dot.dssk { background: var(--color-dssk); }
+.dot.dsv { background: var(--color-dsv); }
 
 .line {
   width: 20px;
@@ -127,6 +129,7 @@ main {
 .line.parallel { background: #f59e0b; }
 .line.adhikara { background: #ef4444; }
 .line.sequence { background: #06b6d4; }
+.line.commentary { background: #8b5cf6; }
 
 /* Sutra Panel */
 .sutra-panel {
@@ -175,9 +178,10 @@ main {
   hyphens: auto;
 }
 
-.sutra-panel .vrtti,
+.sutra-panel .duan-explain,
 .sutra-panel .adhikara,
 .sutra-panel .parallel,
+.sutra-panel .commentary,
 .sutra-panel .sequence,
 .sutra-panel .notes {
   font-size: 0.875rem;
@@ -189,6 +193,19 @@ main {
   hyphens: auto;
 }
 
+.mini-graph-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #1e3a8a;
+  text-decoration: none;
+  text-align: right;
+}
+
+.mini-graph-link:hover {
+  text-decoration: underline;
+}
+
 .close-btn {
   position: absolute;
   top: 0.5rem;
@@ -198,6 +215,31 @@ main {
   color: var(--color-text-muted);
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+/* 经文页关系小图下方的预览：不再浮在图上，跟随文档流 */
+.sutra-panel.sutra-panel-inline {
+  position: relative;
+  top: auto;
+  right: auto;
+  width: auto;
+  max-height: none;
+  box-shadow: none;
+  border: none;
+  border-top: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: 0.75rem 0 0;
+  margin-top: 0.75rem;
+  z-index: auto;
+}
+
+.sutra-panel.sutra-panel-inline h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.sutra-panel.sutra-panel-inline .sutra-text {
+  font-size: 1rem;
 }
 
 .close-btn:hover {
@@ -255,6 +297,11 @@ main {
 
 .sutra-header .source-badge.dssk {
   background: var(--color-dssk);
+  color: #1e293b;
+}
+
+.sutra-header .source-badge.dsv {
+  background: var(--color-dsv);
   color: #1e293b;
 }
 
@@ -322,6 +369,7 @@ main {
 }
 
 .paragraph-break {
+  display: block;
   height: 0.75rem;
 }
 
@@ -583,6 +631,16 @@ main {
   color: #1e40af;
   white-space: nowrap;
   font-weight: 500;
+}
+
+.graph-commentary-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 /* Graph Node Styles */

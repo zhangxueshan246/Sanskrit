@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getAllSutras } from '../../utils/getSutras';
 import { parseWikiLinks } from '../../utils/parseWikiLinks';
 import { formatSutraId } from '../../utils/formatSutraId';
-import SutraMiniGraph from '../../components/SutraMiniGraph';
+import SutraMiniGraphPanel from '../../components/SutraMiniGraphPanel';
 import type { Sutra, GraphEdge } from '../../types/sutra';
 
 export async function getStaticPaths() {
@@ -61,6 +61,14 @@ export async function getStaticPaths() {
       }
     }
 
+    // Commentary: this sutra is a commentary on these (stored only on the commentator side)
+    for (const rootId of sutra.commentaryOn ?? []) {
+      if (sutraMap.has(rootId)) {
+        neighborIds.add(rootId);
+        miniEdges.push({ from: sutra.id, to: rootId, type: 'commentary' });
+      }
+    }
+
     // Reverse relations: scan all sutras for incoming edges
     for (const other of allSutras) {
       if (other.id === sutra.id) continue;
@@ -71,8 +79,15 @@ export async function getStaticPaths() {
         miniEdges.push({ from: other.id, to: sutra.id, type: 'reference' });
       }
 
+      // Reverse commentary: other comments on this sutra
+      if (other.commentaryOn?.includes(sutra.id)) {
+        neighborIds.add(other.id);
+        miniEdges.push({ from: other.id, to: sutra.id, type: 'commentary' });
+      }
+
       // Reverse adhikara: this sutra governs other
-      if (other.adhikaras?.includes(sutra.id)) {
+      // 区间算出的成员不逐条画进小图，只画领句自身的嵌套和手写项
+      if (other.adhikaras?.includes(sutra.id) && !(other.computedAdhikara === sutra.id && !other.scope)) {
         neighborIds.add(other.id);
         miniEdges.push({ from: sutra.id, to: other.id, type: 'adhikara' });
       }
@@ -92,7 +107,8 @@ export async function getStaticPaths() {
 
 const { sutra, miniNodes, miniEdges } = Astro.props;
 
-const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === 'katantra' ? 'Kātantra' : sutra.source === 'jkv' ? 'Kāśikāvṛṭti' : sutra.source === 'dssk' ? '段晴《波你尼语法入门》' : 'Other';
+const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === 'katantra' ? 'Kātantra' : sutra.source === 'jkv' ? 'Kāśikāvṛṭti' : sutra.source === 'dssk' ? '段晴《波你尼语法入门》' : sutra.source === 'dsv' ? 'Durgasiṃhavṛtti' : 'Other';
+const commentators = miniEdges.filter(e => e.type === 'commentary' && e.to === sutra.id).map(e => e.from);
 ---
 
 <Layout title={sutra.id}>
@@ -118,27 +134,48 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
         </div>
       )}
 
-      {sutra.vrtti && (
+      {sutra.duanExplain && (
         <div class="sutra-section">
-          <h2>Vṛtti 注释</h2>
-          <p set:html={parseWikiLinks(sutra.vrtti)} />
+          <h2>段书讲解</h2>
+          <p set:html={parseWikiLinks(sutra.duanExplain)} />
         </div>
       )}
 
       {sutra.notes && (
         <div class="sutra-section notes">
-          <h2>笔记</h2>
+          <h2>按语</h2>
           <p set:html={parseWikiLinks(sutra.notes)} />
+        </div>
+      )}
+
+      {sutra.scope && (
+        <div class="sutra-section">
+          <h2>本句是领句，管辖范围</h2>
+          <p>{sutra.scope.from} – {sutra.scope.to}</p>
         </div>
       )}
 
       {sutra.adhikaras && sutra.adhikaras.length > 0 && (
         <div class="sutra-section">
-          <h2>Adhikāra 领句</h2>
+          <h2>被以下领句管辖</h2>
           {sutra.adhikaras.map(adh => (
             <a href={`/Sanskrit/sutra/${adh}`} class="sutra-link">
               {formatSutraId(adh)}
             </a>
+          ))}
+        </div>
+      )}
+
+      {sutra.anuvrtti && sutra.anuvrtti.length > 0 && (
+        <div class="sutra-section">
+          <h2>Anuvṛtti 承袭</h2>
+          {sutra.anuvrtti.map(anu => (
+            <p>
+              <a href={`/Sanskrit/sutra/${anu.from}`} class="sutra-link">
+                {formatSutraId(anu.from)}
+              </a>
+              {anu.term && <span class="anuvrtti-term"> {anu.term}</span>}
+            </p>
           ))}
         </div>
       )}
@@ -165,6 +202,28 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
         </div>
       )}
 
+      {sutra.commentaryOn && sutra.commentaryOn.length > 0 && (
+        <div class="sutra-section">
+          <h2>注释于</h2>
+          {sutra.commentaryOn.map(com => (
+            <a href={`/Sanskrit/sutra/${com}`} class="sutra-link">
+              {formatSutraId(com)}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {commentators.length > 0 && (
+        <div class="sutra-section">
+          <h2>注释</h2>
+          {commentators.map(com => (
+            <a href={`/Sanskrit/sutra/${com}`} class="sutra-link">
+              {formatSutraId(com)}
+            </a>
+          ))}
+        </div>
+      )}
+
       {sutra.sequence && sutra.sequence.length > 0 && (
         <div class="sutra-section">
           <h2>后继经文</h2>
@@ -184,18 +243,11 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
     <aside class="sutra-sidebar">
       <div class="mini-graph-card">
         <h3 class="mini-graph-title">关系图</h3>
-        <SutraMiniGraph
-          client:load
-          currentSutraId={sutra.id}
-          nodes={miniNodes}
-          edges={miniEdges}
-          width={280}
-          height={260}
-        />
         <div class="mini-graph-legend">
           <div class="legend-row">
             <span class="legend-dot panini"></span>Pāṇini
             <span class="legend-dot katantra"></span>Kātantra
+            <span class="legend-dot dsv"></span>DSV
             <span class="legend-dot jkv"></span>JKV
             <span class="legend-dot dssk"></span>DSSK
             <span class="legend-dot current"></span>当前经文
@@ -203,10 +255,18 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
           <div class="legend-row">
             <span class="legend-line adhikara"></span>Adhikāra 领句
             <span class="legend-line parallel"></span>平行文本
+            <span class="legend-line commentary"></span>注释
             <span class="legend-line reference"></span>引用经文
           </div>
         </div>
-        <a href="/Sanskrit/atlas" class="mini-graph-link">查看完整图谱 →</a>
+        <SutraMiniGraphPanel
+          client:load
+          currentSutraId={sutra.id}
+          nodes={miniNodes}
+          edges={miniEdges}
+          width={280}
+          height={260}
+        />
       </div>
     </aside>
   </div>
@@ -271,6 +331,7 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
 
   .legend-dot.panini   { background: #1e3a8a; }
   .legend-dot.katantra { background: #059669; }
+  .legend-dot.dsv      { background: #34d399; }
   .legend-dot.jkv      { background: #3b82f6; }
   .legend-dot.dssk     { background: #93c5fd; }
   .legend-dot.current  { background: #e5e7eb; border: 2px solid #fbbf24; width: 7px; height: 7px; }
@@ -286,20 +347,8 @@ const sourceLabel = sutra.source === 'panini' ? 'Pāṇini' : sutra.source === '
 
   .legend-line.adhikara  { border-top-color: #ef4444; }
   .legend-line.parallel  { border-top: 2px dashed #f59e0b; }
+  .legend-line.commentary { border-top: 2px dotted #8b5cf6; }
   .legend-line.reference { border-top-color: #6b7280; }
-
-  .mini-graph-link {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.75rem;
-    color: #1e3a8a;
-    text-decoration: none;
-    text-align: right;
-  }
-
-  .mini-graph-link:hover {
-    text-decoration: underline;
-  }
 
   .tibetan-section .tibetan-text {
     font-size: 1.5rem;

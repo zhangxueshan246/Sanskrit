@@ -4,12 +4,14 @@
   "translation": "**段书：**遇到果时，也是。",
   "notes": "也要加ṇic，继承自[[pan_3.1.25]]。",
   "source": "panini",
-  "adhikaras": [
-    "pan_3.1.25"
+  "adhikaras": [],
+  "anuvrtti": [
+    {
+      "from": "pan_3.1.25",
+      "term": "ṇic"
+    }
   ],
   "references": [],
-  "parallel": [
-    "dssk_525"
-  ],
-  "updatedAt": 1785893549563
+  "parallel": [],
+  "updatedAt": 1795661455691
 }

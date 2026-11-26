@@ -4,12 +4,16 @@
   "translation": "在词根kṣi后。",
   "notes": " [[pan_6.4.58]] 中的dīrghas代入这一句。",
   "source": "panini",
-  "adhikaras": [
-    "pan_6.4.58"
+  "adhikaras": [],
+  "anuvrtti": [
+    {
+      "from": "pan_6.4.58",
+      "term": "dīrghaḥ"
+    }
   ],
   "references": [],
   "sequence": [
     "pan_6.4.60"
   ],
-  "updatedAt": 1777710822479
+  "updatedAt": 1795221277673
 }

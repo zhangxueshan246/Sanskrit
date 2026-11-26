@@ -2,23 +2,26 @@
   "id": "pan_4.1.82",
   "text": "samarthānāṃ prathamād vā.",
   "translation": "**段书：**加在合义搭配的第一个词后，可加可不加。",
-  "vrtti": "",
   "notes": "samartha：合义搭配，解释见[[dssk_593]]。",
   "draft": "",
-  "adhikaras": [
-    "pan_4.1.1",
-    "pan_4.1.81"
+  "adhikaras": [],
+  "anuvrtti": [
+    {
+      "from": "pan_4.1.81",
+      "term": "daivayajñi-śaucivṛkṣi-sātyamugri-kāṇṭheviddhibhyaḥ"
+    }
   ],
   "references": [
     "dssk_593"
   ],
-  "parallel": [
-    "dssk_668",
-    "jkv_4.1.82"
-  ],
+  "parallel": [],
   "sequence": [
     "pan_4.1.83"
   ],
+  "scope": {
+    "from": "4.1.82",
+    "to": "5.3.1"
+  },
   "source": "panini",
-  "updatedAt": 1785893549564
+  "updatedAt": 1795672520454
 }

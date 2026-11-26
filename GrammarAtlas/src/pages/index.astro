@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getAllSutras } from '../utils/getSutras';
 import { formatSutraId } from '../utils/formatSutraId';
-import { parseWikiLinks } from '../utils/parseWikiLinks';
+import { previewText } from '../utils/previewText';
 
 const sutraList = await getAllSutras();
 
@@ -10,6 +10,7 @@ const paniniCount = sutraList.filter(s => s.source === 'panini').length;
 const katantraCount = sutraList.filter(s => s.source === 'katantra').length;
 const jkvCount = sutraList.filter(s => s.source === 'jkv').length;
 const dsskCount = sutraList.filter(s => s.source === 'dssk').length;
+const dsvCount = sutraList.filter(s => s.source === 'dsv').length;
 const totalCount = sutraList.length;
 
 const recentSutras = sutraList
@@ -24,7 +25,9 @@ const recentSutras = sutraList
       个人梵语语法笔记，用可视化图谱方式展示梵语语法经文之间的关系网络。
     </p>
     <p style="color: #64748b; font-size: 0.875rem;">
-      当前收录: Pāṇini {paniniCount} 条 | Kātantra {katantraCount} 条 | Kāśikāvṛṭti {jkvCount} 条 | 段晴《波你尼语法入门》{dsskCount} 条 | 共 {totalCount} 条
+      当前收录: Pāṇini {paniniCount} 条 | 段晴《波你尼语法入门》{dsskCount} 条 | Kātantra {katantraCount} 条
+      <br />
+      Kāśikāvṛṭti {jkvCount} 条 | Durgasiṃhavṛtti {dsvCount} 条 | 共 {totalCount} 条
     </p>
     <a href="/Sanskrit/atlas" class="view-link" style="font-size: 1.25rem;">
       进入图谱视图 →
@@ -36,9 +39,9 @@ const recentSutras = sutraList
     {recentSutras.map(sutra => (
       <a href={`/Sanskrit/sutra/${sutra.id}`} class="sutra-card">
         <h3>{formatSutraId(sutra.id)}</h3>
-        <p class="sutra-text" set:html={parseWikiLinks(sutra.text)}></p>
+        <p class="sutra-text">{previewText(sutra.text)}</p>
         {sutra.translation && (
-          <p class="sutra-translation" set:html={parseWikiLinks(sutra.translation)}></p>
+          <p class="sutra-translation">{previewText(sutra.translation)}</p>
         )}
       </a>
     ))}

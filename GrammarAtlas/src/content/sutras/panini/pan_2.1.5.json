@@ -2,17 +2,15 @@
   "id": "pan_2.1.5",
   "text": "avyayībhavaḥ.",
   "translation": "**段书：**不变状。",
+  "notes": "",
   "source": "panini",
   "references": [],
-  "adhikaras": [
-    "pan_1.4.1",
-    "pan_2.1.3"
-  ],
+  "adhikaras": [],
   "parallel": [
     "kat_2.5.14"
   ],
   "sequence": [
     "pan_2.1.6"
   ],
-  "updatedAt": 1785893549559
+  "updatedAt": 1795661455687
 }

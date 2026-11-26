@@ -10,6 +10,7 @@ export function formatSutraId(id: string): string {
     'kat': 'Kāt',     // Kātantra
     'jkv': 'JKv',     // Kāśikāvṛṭti
     'dssk': 'DSSK',   // 段晴《波你尼语法入门》
+    'dsv': 'DSV',     // Durgasiṃhavṛtti（Kātantra 注释）
   };
 
   // 找到第一个下划线

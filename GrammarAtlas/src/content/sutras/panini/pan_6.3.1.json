@@ -2,13 +2,16 @@
   "id": "pan_6.3.1",
   "text": "alug uttarapade.",
   "translation": "**段书：**于后部字前不消失。",
-  "vrtti": "",
   "notes": "",
   "draft": "",
   "adhikaras": [],
   "references": [],
   "parallel": [],
   "sequence": [],
+  "scope": {
+    "from": "6.3.1",
+    "to": "6.3.24"
+  },
   "source": "panini",
-  "updatedAt": 1785893549567
+  "updatedAt": 1795661455697
 }

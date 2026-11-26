@@ -1,14 +1,16 @@
 /**
  * 验证经文数据中的引用一致性
  * 严格模式检查：
- * 1. text、translation、vrtti、notes 中的所有 [[id]] 必须在 references、parallel、adhikaras 或 sequence 中至少出现一次
+ * 1. text、translation、duanExplain、notes 中的所有 [[id]] 必须在 references、parallel、commentaryOn、adhikaras、anuvrtti 或 sequence 中至少出现一次
  * 2. references 中的所有 id 必须是存在的经文
  * 3. references 中的所有 id 必须在文本字段中被提及（无孤立引用）
+ * 警告（不影响通过）：parallel 中出现非 Pāṇini/Kātantra 的经文（应改为 commentaryOn，或确认为 dssk–kat 对应）
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
 import type { Sutra } from '../types/sutra';
+import { applyScopes, compareNumbers, parseSutraNumber } from './adhikara';
 
 interface ValidationResult {
   sutraId: string;
@@ -113,7 +115,11 @@ function getCorrespondingPanId(jkvId: string): string | null {
 /**
  * 验证单个经文的引用一致性
  */
-function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationResult {
+function validateSutra(
+  sutra: Sutra,
+  sutrasMap: Map<string, Sutra>,
+  commentatorsOf: Map<string, string[]>
+): ValidationResult {
   const result: ValidationResult = {
     sutraId: sutra.id,
     isValid: true,
@@ -123,13 +129,13 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
 
   const linksInText = extractWikiLinks(sutra.text);
   const linksInTranslation = extractWikiLinks(sutra.translation);
-  const linksInVrtti = extractWikiLinks(sutra.vrtti);
+  const linksInDuanExplain = extractWikiLinks(sutra.duanExplain);
   const linksInNotes = extractWikiLinks(sutra.notes);
 
   const allLinksInContent = new Set([
     ...linksInText,
     ...linksInTranslation,
-    ...linksInVrtti,
+    ...linksInDuanExplain,
     ...linksInNotes
   ]);
 
@@ -137,19 +143,32 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
   const existingSutraIds = Array.from(sutrasMap.keys());
   const allAdhikaras = getAllAdhikaras(sutra.id, sutrasMap);
 
+  // 平行与注释关系：parallel（双向）、commentaryOn（只写在注释方）、以及反向的注释者
+  const relatedOf = (id: string): string[] => [
+    ...(sutrasMap.get(id)?.parallel || []),
+    ...(sutrasMap.get(id)?.commentaryOn || []),
+    ...(commentatorsOf.get(id) || []),
+  ];
+
   const allowedIds = new Set([
     ...referencesArray,
     ...allAdhikaras,
-    ...(sutra.parallel || []),
-    ...(sutra.sequence || [])
+    ...relatedOf(sutra.id),
+    ...(sutra.sequence || []),
+    ...(sutra.anuvrtti || []).map(a => a.from)
   ]);
 
-  // Pre-compute all adhikaras of parallel sutras — links mentioning a parallel sutra's
+  // Pre-compute all adhikaras (and anuvrtti sources) of related sutras — links mentioning a related sutra's
   // adhikara (e.g. in dssk notes referencing the governing pan rule) are valid
   const allParallelAdhikaras = new Set<string>();
-  for (const parId of (sutra.parallel || [])) {
-    for (const adhId of getAllAdhikaras(parId, sutrasMap)) {
-      allParallelAdhikaras.add(adhId);
+  for (const parId of relatedOf(sutra.id)) {
+    const chain = [parId, ...getAllAdhikaras(parId, sutrasMap)];
+    for (const id of chain) {
+      if (id !== parId) allParallelAdhikaras.add(id);
+      // 平行经文（及其领句链）的 anuvṛtti 来源同样视为可引用
+      for (const anu of sutrasMap.get(id)?.anuvrtti ?? []) {
+        allParallelAdhikaras.add(anu.from);
+      }
     }
   }
 
@@ -161,23 +180,19 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
         continue;
       }
 
-      // 规则2: 检查被引用经文的 parallel 是否有任何一个在 allowedIds 中
-      // 如果引用了某经文的 parallel，就相当于引用了该经文本身
-      const linkedSutra = sutrasMap.get(link);
-      if (linkedSutra && linkedSutra.parallel && linkedSutra.parallel.length > 0) {
-        const hasParallelInAllowed = linkedSutra.parallel.some(p => allowedIds.has(p));
-        if (hasParallelInAllowed) {
-          continue;
-        }
+      // 规则2: 检查被引用经文的 parallel / commentaryOn / 注释者是否有任何一个在 allowedIds 中
+      // 如果引用了某经文的平行或注释，就相当于引用了该经文本身
+      if (relatedOf(link).some(p => allowedIds.has(p))) {
+        continue;
       }
 
-      // 规则3: 被链接的经文是当前经文某平行经文的领句（直接或间接）
-      // 常见于 dssk 的 notes/vrtti 中提到与其平行的 pan 经文的领句
+      // 规则3: 被链接的经文是当前经文某平行/注释经文的领句（直接或间接）
+      // 常见于 dssk 的 notes/duanExplain 中提到与其注释的 pan 经文的领句
       if (allParallelAdhikaras.has(link)) {
         continue;
       }
 
-      result.errors.push(`文本中包含 [[${link}]] 但不在 references、parallel、adhikaras 或 sequence 中`);
+      result.errors.push(`文本中包含 [[${link}]] 但不在 references、parallel、commentaryOn、adhikaras、anuvrtti 或 sequence 中`);
       result.isValid = false;
     }
   }
@@ -192,6 +207,18 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
   for (const parId of (sutra.parallel || [])) {
     if (!existingSutraIds.includes(parId)) {
       result.errors.push(`parallel 包含不存在的经文 [[${parId}]]`);
+      result.isValid = false;
+    }
+    const parSource = sutrasMap.get(parId)?.source;
+    const bothMainSystems = ['panini', 'katantra'].includes(sutra.source) && ['panini', 'katantra'].includes(parSource ?? '');
+    if (parSource && !bothMainSystems) {
+      result.warnings.push(`parallel 指向 [[${parId}]]（${parSource}）：平行文本应只连接 Pāṇini 与 Kātantra，请确认是否应改为 commentaryOn，或保留为对应`);
+    }
+  }
+
+  for (const comId of (sutra.commentaryOn || [])) {
+    if (!existingSutraIds.includes(comId)) {
+      result.errors.push(`commentaryOn 包含不存在的经文 [[${comId}]]`);
       result.isValid = false;
     }
   }
@@ -210,6 +237,35 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
     }
   }
 
+  if (sutra.scope) {
+    const from = parseSutraNumber(sutra.scope.from);
+    const to = parseSutraNumber(sutra.scope.to);
+    const ownNumber = sutra.id.split('_').slice(1).join('_');
+    if (!from || !to) {
+      result.errors.push(`scope 的 from/to 必须是形如 6.3.1 的编号`);
+      result.isValid = false;
+    } else {
+      if (sutra.scope.from !== ownNumber) {
+        result.errors.push(`scope.from (${sutra.scope.from}) 必须等于本条自身编号 (${ownNumber})`);
+        result.isValid = false;
+      }
+      if (compareNumbers(from, to) > 0) {
+        result.errors.push(`scope.from (${sutra.scope.from}) 不能大于 scope.to (${sutra.scope.to})`);
+        result.isValid = false;
+      }
+    }
+  }
+
+  for (const anu of (sutra.anuvrtti || [])) {
+    if (!existingSutraIds.includes(anu.from)) {
+      result.errors.push(`anuvrtti 包含不存在的经文 [[${anu.from}]]`);
+      result.isValid = false;
+    }
+    if (!anu.term?.trim()) {
+      result.warnings.push(`anuvrtti 来自 ${anu.from} 的条目缺少 term（沿用的词）`);
+    }
+  }
+
   for (const refId of referencesArray) {
     if (!allLinksInContent.has(refId)) {
       result.errors.push(`references 中的 [[${refId}]] 没有在文本任何字段中提及（孤立引用）`);
@@ -217,9 +273,9 @@ function validateSutra(sutra: Sutra, sutrasMap: Map<string, Sutra>): ValidationR
     }
   }
 
-  const hasContent = !!(sutra.translation?.trim() || sutra.vrtti?.trim() || sutra.notes?.trim());
+  const hasContent = !!(sutra.translation?.trim() || sutra.duanExplain?.trim() || sutra.notes?.trim());
   if (!hasContent) {
-    result.errors.push(`translation、vrtti、notes 三个字段均为空，经文内容未完成`);
+    result.errors.push(`translation、duanExplain、notes 三个字段均为空，经文内容未完成`);
     result.isValid = false;
   }
 
@@ -243,14 +299,23 @@ async function validateAllSutras(): Promise<void> {
   console.log('🔍 开始验证经文引用...\n');
 
   const sutras = await loadAllSutras();
-  const sutrasMap = new Map(sutras.map(s => [s.id, s]));
+  // sutrasMap 用于白名单/祖先计算，需包含 scope 自动算出的领句；逐条校验仍针对原始手写数据
+  const sutrasMap = new Map(applyScopes(sutras).map(s => [s.id, s]));
+
+  // commentaryOn 只写在注释方，这里反向算出每条经文的注释者
+  const commentatorsOf = new Map<string, string[]>();
+  for (const s of sutras) {
+    for (const root of s.commentaryOn || []) {
+      commentatorsOf.set(root, [...(commentatorsOf.get(root) || []), s.id]);
+    }
+  }
 
   const allResults: ValidationResult[] = [];
   let totalValid = 0;
   let totalInvalid = 0;
 
   for (const sutra of sutras) {
-    const result = validateSutra(sutra, sutrasMap);
+    const result = validateSutra(sutra, sutrasMap, commentatorsOf);
     allResults.push(result);
 
     if (result.isValid) {

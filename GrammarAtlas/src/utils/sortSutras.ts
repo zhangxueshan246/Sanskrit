@@ -44,7 +44,7 @@ export function sortByIdNatural(sutras: Sutra[]): Sutra[] {
  * 返回的是按source分组的分组结果
  */
 export function sortBySource(sutras: Sutra[]): { source: string; items: Sutra[] }[] {
-  const sourceOrder = ['panini', 'katantra', 'jkv', 'dssk', 'other'];
+  const sourceOrder = ['panini', 'katantra', 'dsv', 'jkv', 'dssk', 'other'];
   const grouped = new Map<string, Sutra[]>();
 
   // 按source分组

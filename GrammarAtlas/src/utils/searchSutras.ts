@@ -17,7 +17,7 @@ export function searchSutras(query: string, sutras: Sutra[]): Sutra[] {
       { name: 'id', weight: 0.8 },
       { name: 'text', weight: 0.6 },
       { name: 'translation', weight: 0.7 },
-      { name: 'vrtti', weight: 0.5 },
+      { name: 'duanExplain', weight: 0.5 },
       { name: 'notes', weight: 0.5 }
     ],
     threshold: 0.3,

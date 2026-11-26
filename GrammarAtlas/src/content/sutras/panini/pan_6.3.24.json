@@ -2,17 +2,22 @@
   "id": "pan_6.3.24",
   "text": "vibhāṣā svasṛ-patyoḥ.",
   "translation": "svasṛ和pati前两可。",
-  "vrtti": "",
   "notes": "svasṛ-patyoḥ，双数第七格。",
   "draft": "",
-  "adhikaras": [
-    "pan_6.3.1",
-    "pan_6.3.21",
-    "pan_6.3.23"
+  "adhikaras": [],
+  "anuvrtti": [
+    {
+      "from": "pan_6.3.21",
+      "term": "ṣaṣṭhyāḥ"
+    },
+    {
+      "from": "pan_6.3.23",
+      "term": "ṛtaḥ"
+    }
   ],
   "references": [],
   "parallel": [],
   "sequence": [],
   "source": "panini",
-  "updatedAt": 1782461471749
+  "updatedAt": 1795661455698
 }

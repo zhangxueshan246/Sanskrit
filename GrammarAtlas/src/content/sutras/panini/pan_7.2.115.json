@@ -2,14 +2,13 @@
   "id": "pan_7.2.115",
   "text": "aco ñṇiti.",
   "translation": "**段书：**遇到ñ和ṇ符号时，元音发生变化。",
-  "vrtti": "段书补全句：其后所遇是ñ和ņ符号时，以元音为末的词干发生三合的变化。",
+  "duanExplain": "段书补全句：其后所遇是ñ和ņ符号时，以元音为末的词干发生三合的变化。",
+  "notes": "",
   "source": "panini",
   "references": [],
-  "parallel": [
-    "dssk_162"
-  ],
+  "parallel": [],
   "sequence": [
     "pan_7.2.116"
   ],
-  "updatedAt": 1785893549569
+  "updatedAt": 1795661455699
 }

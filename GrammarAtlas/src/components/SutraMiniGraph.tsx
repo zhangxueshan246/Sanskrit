@@ -9,6 +9,7 @@ interface Props {
   edges: GraphEdge[];
   width?: number;
   height?: number;
+  onSelect?: (id: string) => void;
 }
 
 interface SimNode extends d3.SimulationNodeDatum {
@@ -24,6 +25,7 @@ interface SimLink extends d3.SimulationLinkDatum<SimNode> {
 const edgeColors: Record<string, string> = {
   reference: '#6b7280',
   parallel:  '#f59e0b',
+  commentary: '#8b5cf6',
   adhikara:  '#ef4444',
 };
 
@@ -33,6 +35,7 @@ const sourceColors: Record<string, string> = {
   jkv:      '#3b82f6',
   dssk:     '#93c5fd',
   katantra: '#059669',
+  dsv:      '#34d399',
   other:    '#6b7280',
 };
 
@@ -42,6 +45,7 @@ export default function SutraMiniGraph({
   edges,
   width = 280,
   height = 260,
+  onSelect,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -101,8 +105,8 @@ export default function SutraMiniGraph({
       .join('line')
       .attr('stroke', d => edgeColors[d.type] || '#ccc')
       .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', d => d.type === 'parallel' ? '5,5' : 'none')
-      .attr('marker-end', d => d.type === 'parallel' ? null : `url(#mini-arrow-${d.type})`);
+      .attr('stroke-dasharray', d => d.type === 'parallel' ? '5,5' : d.type === 'commentary' ? '2,3' : 'none')
+      .attr('marker-end', d => d.type === 'parallel' || d.type === 'commentary' ? null : `url(#mini-arrow-${d.type})`);
 
     const nodeG = svg.append('g')
       .selectAll<SVGGElement, SimNode>('g')
@@ -111,7 +115,7 @@ export default function SutraMiniGraph({
       .style('cursor', d => d.id !== currentSutraId ? 'pointer' : 'default')
       .on('click', (_, d) => {
         if (d.id !== currentSutraId) {
-          window.location.href = `/Sanskrit/sutra/${d.id}`;
+          onSelect?.(d.id);
         }
       });
 
@@ -152,7 +156,7 @@ export default function SutraMiniGraph({
     });
 
     return () => { simulation.stop(); };
-  }, [currentSutraId, nodes, edges, width, height]);
+  }, [currentSutraId, nodes, edges, width, height, onSelect]);
 
   if (nodes.length <= 1) {
     return (
