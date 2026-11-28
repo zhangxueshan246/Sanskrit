@@ -2,7 +2,7 @@
   "id": "dsv_1.1.18",
   "text": "pakāra ihoccāraṇārthaḥ, iti gajakumbhākṛtir varṇa upadhmānīyasaṃjño bhavati.\nupadhmānīyapradeśāḥ, paphayor upadhmānīyaṃ na vā [[kat_1.5.5]] ity evam ādayaḥ.",
   "translation": "**险狮子注：**pa字母是为了发音，形如大象脑门(ᳶ)的那个字母定义为吹气音。\n“吹气音”概念用于 [[kat_1.5.5]] 等条：“在p和ph前用吹气音，也可以不用。”",
-  "notes": "**译注：**段书译吹气音，古译吸气音。《大般涅槃经》卷8《如来性品》：“吸气舌根随鼻之声，长短超声随音解义。(CBETA, T12, no. 374, p. 414, a23)",
+  "notes": "段书译吹气音，古译吸气音。《大般涅槃经》卷8《如来性品》：“吸气舌根随鼻之声，长短超声随音解义。(CBETA, T12, no. 374, p. 414, a23)",
   "source": "dsv",
   "references": [
     "kat_1.5.5"
@@ -10,5 +10,5 @@
   "commentaryOn": [
     "kat_1.1.18"
   ],
-  "updatedAt": 1795669242700
+  "updatedAt": 1795853996208
 }

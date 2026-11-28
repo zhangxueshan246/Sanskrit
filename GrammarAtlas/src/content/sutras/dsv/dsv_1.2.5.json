@@ -2,7 +2,7 @@
   "id": "dsv_1.2.5",
   "text": "avarṇa ḷvarṇe pare al bhavati paraś ca lopam āpadyate, tavalkāraḥ, salkāreṇa. upasargasya vā ḷti dhātor alo dīrghaḥ, upālkārīyati, upalkārīyati.",
   "translation": "**险狮子注：**后面遇到ḷ字母时，a字母变为al，而且后者消失。例如 tavalkāraḥ (tava+ḷkāraḥ, 你的ḷ字母)，salkāreṇa (sā+ḷkāreṇa, 她用ḷ字母)。\n动词词根的ḷ字母前，近置词变成的al可以变长。例如 upālkārīyati = upalkārīyati (靠近ḷ字母)。",
-  "notes": "**译注：**月光疏将其并入ṛ的变化中，参见[[dssk_29]]。",
+  "notes": "月光疏将其并入ṛ的变化中，参见[[dssk_29]]。",
   "source": "dsv",
   "references": [
     "dssk_29"
@@ -10,5 +10,5 @@
   "commentaryOn": [
     "kat_1.2.5"
   ],
-  "updatedAt": 1795669242955
+  "updatedAt": 1795853996197
 }
